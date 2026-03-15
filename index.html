@@ -522,7 +522,6 @@
                 <h2 class="section-title-frame">معرض الإبداع الفني</h2>
             </div>
             
-            <!-- تم تحديث أزرار الفلترة -->
             <div class="filter-container">
                 <button class="filter-btn active" onclick="filterWorks('all', this)">عرض الكل</button>
                 <button class="filter-btn" onclick="filterWorks('audio', this)">الإنتاج الصوتي</button>
@@ -536,31 +535,78 @@
             </div>
 
             <div class="works-grid" id="works-grid">
-                <!-- ====== بطاقة المونتاج (الفيديو) ====== -->
+                <!-- ====== بطاقة المونتاج (الفيديو الأول) ====== -->
                 <div class="work-card video-card">
                     <div class="video-frame">
                         <iframe 
+                            loading="lazy"
                             src="https://www.youtube.com/embed/KDWzyJSBjgc?rel=0" 
-                            title="مرحبا سيد الشهور - أثير ساوند"
+                            title="مرحبا سيد الشهور - المنشد علي المراني"
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                             allowfullscreen>
                         </iframe>
                     </div>
                     <div class="work-overlay">
-                        مرحباً سيد الشهور | أثير ساوند
+                        مرحباً سيد الشهور | المنشد علي المراني
                     </div>
                 </div>
-                
+
+                <!-- ====== بطاقة المونتاج (الفيديو الثاني) ====== -->
+                <div class="work-card video-card">
+                    <div class="video-frame">
+                        <iframe 
+                            loading="lazy"
+                            src="https://www.youtube.com/embed/M7UTysvdJn0?rel=0" 
+                            title="ورجع رمضان - مدارس أزهار العلا الأهلية"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="work-overlay">
+                        ورجع رمضان - مدارس أزهار العلا الأهلية
+                    </div>
+                </div>
+                  <!-- ====== بطاقة المونتاج (الفيديو الثالث) ====== -->
+                <div class="work-card video-card">
+                    <div class="video-frame">
+                        <iframe 
+                            loading="lazy"
+                            src="https://www.youtube.com/embed/ Z1DrrotLpso?si==0" 
+                            title="يا طيور الفرح طيري. .لمدارس الثلاثين"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="work-overlay">
+                        يا طيور الفرح طيري. .لمدارس الثلاثين
+                    </div>
+                </div>
+  <!-- ====== بطاقة المونتاج (الفيديو الرابع) ====== -->
+                <div class="work-card video-card">
+                    <div class="video-frame">
+                        <iframe 
+                            loading="lazy"
+                            src="https://www.youtube.com/embed NBYWoZaEzNM?si=0" 
+                            title="مونتاج لمؤسسة التدريبات العقلية"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="work-overlay">
+                        مونتاج لمؤسسة التدريبات العقلية
+                    </div>
+                </div>
+
                 <!-- ====== بطاقة مثال للإنتاج الصوتي ====== -->
                 <div class="work-card audio-card">
                     <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500" alt="صورة عمل صوتي">
                     <div class="work-overlay">أغنية وطنية</div>
                 </div>
 
-                <!-- يمكنك إضافة المزيد من الأعمال هنا بنفس الطريقة -->
-                <!-- فقط تأكد من إضافة الكلاس الصحيح مثل (audio-card, video-card, graphic-card) -->
-                
             </div>
         </div>
 
@@ -916,21 +962,17 @@
             const items = document.querySelectorAll('.work-card');
             const btns = document.querySelectorAll('.filter-btn');
 
-            // تحديث الزر النشط بطريقة مباشرة
             btns.forEach(btn => btn.classList.remove('active'));
             if (buttonElement) {
                 buttonElement.classList.add('active');
             }
 
-            // إظهار/إخفاء العناصر بناءً على الفئة
             items.forEach(item => {
-                // إخفاء جميع العناصر أولاً
                 item.style.display = 'none'; 
                 item.classList.add('hidden');
 
-                // إذا كانت الفئة "all" أو إذا كان العنصر يحتوي على الكلاس المطلوب، قم بإظهاره
                 if (category === 'all' || item.classList.contains(category + '-card')) {
-                    item.style.display = 'block'; // إعادته إلى الشبكة
+                    item.style.display = 'block';
                     item.classList.remove('hidden');
                 }
             });
