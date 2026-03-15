@@ -156,10 +156,12 @@
         .filter-btn:hover, .filter-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.15); }
         
         .works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-        .work-card { aspect-ratio: 16 / 9; border-radius: 15px; overflow: hidden; border: 1px solid #333; position: relative; transition: 0.4s; cursor: pointer; }
+        .work-card { aspect-ratio: 16 / 9; border-radius: 15px; overflow: hidden; border: 1px solid #333; position: relative; transition: 0.4s; cursor: pointer; background: #1a1a1a;}
         .work-card.hidden { display: none; }
         .work-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .work-overlay { position: absolute; bottom: 0; width: 100%; padding: 15px; background: rgba(0,0,0,0.85); color: var(--gold); text-align: center; font-weight: bold; border-top: 1px solid var(--gold); }
+        .work-card .video-frame { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .work-card .video-frame iframe { width: 100%; height: 100%; border: none; }
 
         /* --- الركن الأدبي --- */
         .literary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
@@ -319,7 +321,7 @@
                 <i class="fas fa-feather-pointed"></i>
                 <div class="academic-text">
                     <h3>بصمة الإتقان اللغوي والأكاديمي</h3>
-                    <p>بإشراف مباشر نخبة من الأكاديميين، نضمن لجميع أعمالكم سلامة النحو، ودقة الصرف، وجمال البيان الأدبي.</p>
+                    <p>بإشراف مباشر من نخبة الأكاديميين، نضمن لجميع أعمالكم سلامة النحو، ودقة الصرف، وجمال البيان الأدبي.</p>
                 </div>
             </div>
 
@@ -327,7 +329,7 @@
                 <i class="fas fa-sliders"></i>
                 <div class="academic-text">
                     <h3>بصمة الإتقان الفني</h3>
-                    <p>بإشراف نخبة من المهندسين، نضمن لكم أعلى معايير الجودة في الهندسة الصوتية، التوزيع الموسيقي، والمونتاج الاحترافي.</p>
+                    <p>بإشراف من نخبة المهندسين، نضمن لكم أعلى معايير الجودة في الهندسة الصوتية، التوزيع الموسيقي، والمونتاج الاحترافي.</p>
                 </div>
             </div>
 
@@ -519,24 +521,46 @@
             <div class="section-title-wrapper" style="margin-top: 10px;">
                 <h2 class="section-title-frame">معرض الإبداع الفني</h2>
             </div>
+            
+            <!-- تم تحديث أزرار الفلترة -->
             <div class="filter-container">
-                <button class="filter-btn active" onclick="filterWorks('audio')">الإنتاج الصوتي</button>
-                <button class="filter-btn" onclick="filterWorks('events')">المناسبات</button>
-                <button class="filter-btn" onclick="filterWorks('video')">المونتاج</button>
-                <button class="filter-btn" onclick="filterWorks('graphic')">التصميم</button>
-                <button class="filter-btn" onclick="filterWorks('voice')">التعليق</button>
-                <button class="filter-btn" onclick="filterWorks('literary')">الأدبية</button>
-                <button class="filter-btn" onclick="filterWorks('academic')">الأكاديمية</button>
-                <button class="filter-btn" onclick="filterWorks('web')">تطوير الويب</button>
+                <button class="filter-btn active" onclick="filterWorks('all', this)">عرض الكل</button>
+                <button class="filter-btn" onclick="filterWorks('audio', this)">الإنتاج الصوتي</button>
+                <button class="filter-btn" onclick="filterWorks('events', this)">المناسبات</button>
+                <button class="filter-btn" onclick="filterWorks('video', this)">المونتاج</button>
+                <button class="filter-btn" onclick="filterWorks('graphic', this)">التصميم</button>
+                <button class="filter-btn" onclick="filterWorks('voice', this)">التعليق</button>
+                <button class="filter-btn" onclick="filterWorks('literary', this)">الأدبية</button>
+                <button class="filter-btn" onclick="filterWorks('academic', this)">الأكاديمية</button>
+                <button class="filter-btn" onclick="filterWorks('web', this)">تطوير الويب</button>
             </div>
+
             <div class="works-grid" id="works-grid">
-<div class="work-card video" onclick="openVideo('https://www.youtube.com/embed/KDWzyJSBjgc')">
-    <img src="https://img.youtube.com/vi/KDWzyJSBjgc/maxresdefault.jpg" alt="أثير ساوند">
-    <div class="work-overlay">
-        <i class="fas fa-play-circle" style="font-size: 50px;"></i>
-    </div>
-    <div class="work-info-bar  ">مرحبا سيد الشهور- المنشد علي المراني- أثير ساوند</div>
-</div>
+                <!-- ====== بطاقة المونتاج (الفيديو) ====== -->
+                <div class="work-card video-card">
+                    <div class="video-frame">
+                        <iframe 
+                            src="https://www.youtube.com/embed/KDWzyJSBjgc?rel=0" 
+                            title="مرحبا سيد الشهور - أثير ساوند"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="work-overlay">
+                        مرحباً سيد الشهور | أثير ساوند
+                    </div>
+                </div>
+                
+                <!-- ====== بطاقة مثال للإنتاج الصوتي ====== -->
+                <div class="work-card audio-card">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500" alt="صورة عمل صوتي">
+                    <div class="work-overlay">أغنية وطنية</div>
+                </div>
+
+                <!-- يمكنك إضافة المزيد من الأعمال هنا بنفس الطريقة -->
+                <!-- فقط تأكد من إضافة الكلاس الصحيح مثل (audio-card, video-card, graphic-card) -->
+                
             </div>
         </div>
 
@@ -849,7 +873,7 @@
             ["أجمعوا على أن", "أجمعوا على"], ["اعتمد على", "اعتمد عليه"], ["أذن له بـ", "أذن له"],
             ["حذّره من الأمر", "حذّره الأمر"], ["خبير في", "خبير بـ"], ["أجاب السؤال", "أجاب على السؤال"],
             ["دُهش له", "دُهش منه"], ["عرّفه به", "عرّفه عليه"], ["نَفِد", "نَفَذ"],
-            ["اختصاصي", "أخصائي"], ["نيات", "نوايا"], ["غير المكتمل", "الالغير مكتمل"],
+            ["اختصاصي", "أخصائي"], ["نيات", "نوايا"], ["غير المكتمل", "الغير مكتمل"],
             ["لا يزال", "لازال"], ["قطّ", "أبداً"], ["كلما زاد.. زاد", "كلما زاد.. كلما زاد"],
             ["مَهْرجان", "مِهرجان"], ["وَفَيَات", "وَفَيّات"], ["بئر عميقة", "بئر عميق"],
             ["مئة", "مائة"]
@@ -888,17 +912,27 @@
             }, 600);
         }
 
-        function filterWorks(category) {
+        function filterWorks(category, buttonElement) {
             const items = document.querySelectorAll('.work-card');
             const btns = document.querySelectorAll('.filter-btn');
+
+            // تحديث الزر النشط بطريقة مباشرة
             btns.forEach(btn => btn.classList.remove('active'));
-            if(event) event.target.classList.add('active');
+            if (buttonElement) {
+                buttonElement.classList.add('active');
+            }
+
+            // إظهار/إخفاء العناصر بناءً على الفئة
             items.forEach(item => {
-                item.style.opacity = '0';
-                setTimeout(() => {
-                    if (item.classList.contains(category)) { item.classList.remove('hidden'); item.style.opacity = '1'; }
-                    else { item.classList.add('hidden'); }
-                }, 300);
+                // إخفاء جميع العناصر أولاً
+                item.style.display = 'none'; 
+                item.classList.add('hidden');
+
+                // إذا كانت الفئة "all" أو إذا كان العنصر يحتوي على الكلاس المطلوب، قم بإظهاره
+                if (category === 'all' || item.classList.contains(category + '-card')) {
+                    item.style.display = 'block'; // إعادته إلى الشبكة
+                    item.classList.remove('hidden');
+                }
             });
         }
 
