@@ -7,6 +7,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         :root {
@@ -35,7 +36,7 @@
         @keyframes loader-wave { from { height: 10px; } to { height: 50px; } }
         .preloader-hidden { opacity: 0; visibility: hidden; }
 
-        /* --- التنسيق العام والنافبار المطور --- */
+        /* --- التنسيق العام والنافبار --- */
         .header { background: #151515; border-bottom: 4px solid var(--gold); line-height: 0; position: relative; z-index: 2; }
         .header-banner { width: 100%; height: auto; }
         
@@ -61,12 +62,13 @@
         .academic-text h3 { color: var(--gold); margin: 0 0 5px 0; font-size: 20px; font-weight: 700; }
         .academic-text p { margin: 0; color: #ccc; line-height: 1.6; font-size: 15px; }
 
-        /* --- قسم الإحصائيات --- */
-        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin: 30px 0 50px; }
+        /* --- قسم الإحصائيات والتشارت --- */
+        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin: 30px 0; }
         .stat-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.1); border-radius: 15px; padding: 25px 15px; text-align: center; transition: 0.4s; }
         .stat-box:hover { border-color: var(--gold); background: rgba(212,175,55,0.05); transform: translateY(-5px); }
         .stat-val { font-size: 32px; font-weight: 900; color: var(--gold); display: block; margin-bottom: 5px; text-shadow: 0 0 10px rgba(212,175,55,0.3); }
         .stat-tit { font-size: 14px; color: #888; font-weight: bold; }
+        .chart-wrapper { width: 100%; max-width: 900px; margin: 30px auto 50px; background: rgba(25, 25, 25, 0.4); padding: 20px; border-radius: 15px; border: 1px solid #333; }
 
         /* --- بيت الشعر --- */
         .literary-quote { text-align: center; margin: 40px 0; padding: 30px; border-right: 5px solid var(--gold); border-left: 5px solid var(--gold); background: rgba(212,175,55,0.03); border-radius: 15px; opacity: 0; transform: translateY(30px); transition: 1s; }
@@ -82,7 +84,7 @@
         .section-title-frame:hover::before { top: -10px; right: -10px; }
         .section-title-frame:hover::after { bottom: -10px; left: -10px; }
 
-        /* --- بطاقات الخدمات المستطيلة --- */
+        /* --- بطاقات الخدمات --- */
         .grid-services { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; }
         .service-box { background: var(--card); border-radius: 12px; border: 1px solid #333; position: relative; overflow: hidden; padding: 20px; transition: 0.4s; display: flex; flex-direction: row; align-items: center; cursor: pointer; min-height: 85px; justify-content: flex-start; gap: 15px; z-index: 1; }
         .service-box::after { content: ""; position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.12; transition: 0.6s ease; z-index: -1; filter: brightness(0.7); }
@@ -112,79 +114,52 @@
         .package-card ul li i { font-size: 14px; margin-left: 10px; color: var(--gold); }
         .btn-order { background: var(--gold); color: #000; border: none; padding: 12px 30px; border-radius: 30px; font-weight: 900; cursor: pointer; transition: 0.3s; width: 100%; margin-top: 10px; font-family: 'Cairo'; }
 
-        /* --- آراء العملاء والأسئلة الشائعة --- */
-        .testimonials-carousel { display: flex; overflow-x: auto; gap: 20px; padding: 10px 10px 30px; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--gold) #222; }
-        .testimonials-carousel::-webkit-scrollbar { height: 8px; }
-        .testimonials-carousel::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
-        .testimonial-card { flex: 0 0 320px; scroll-snap-align: start; background: rgba(255,255,255,0.03); padding: 25px; border-radius: 15px; border: 1px solid #222; transition: 0.4s; backdrop-filter: blur(5px); }
-        .testimonial-card:hover { border-color: var(--gold); transform: translateY(-5px); background: rgba(212,175,55,0.05); }
-        .testimonial-card h6 { color: var(--gold); margin: 0 0 5px 0; font-size: 18px; }
-        .testimonial-stars { color: var(--gold); margin-bottom: 12px; font-size: 13px; }
-        .testimonial-card p { font-size: 14px; line-height: 1.8; color: #ccc; font-style: italic; margin: 0; }
-        .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-        .faq-item { background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid #222; overflow: hidden; backdrop-filter: blur(5px); transition: 0.3s; }
-        .faq-item.active { border-color: var(--gold); box-shadow: 0 5px 15px rgba(212,175,55,0.1); }
-        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #eee; font-size: 16px; }
-        .faq-question .toggle-icon { color: var(--gold); transition: 0.3s; }
-        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: 0.4s ease; color: #aaa; font-size: 15px; line-height: 1.8; }
-        .faq-item.active .faq-answer { padding-bottom: 20px; max-height: 300px; border-top: 1px solid #222; padding-top: 15px; }
+        /* =========================================
+           شركاء النجاح (المطور التفاعلي)
+           ========================================= */
+        .partners-marquee-container { width: 100%; overflow: hidden; white-space: nowrap; position: relative; padding: 15px 0; margin-bottom: 15px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.05) 15%, rgba(212,175,55,0.05) 85%, transparent); border-top: 1px solid rgba(212,175,55,0.1); border-bottom: 1px solid rgba(212,175,55,0.1); }
+        .partners-track { display: inline-flex; gap: 50px; animation: marquee 30s linear infinite; padding-right: 50px; }
+        .partner-item { font-size: 16px; font-weight: bold; color: #888; display: flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; }
+        .partner-item i { color: var(--gold); font-size: 20px; }
+        .partner-item:hover { color: #fff; transform: scale(1.05); text-shadow: 0 0 10px rgba(212,175,55,0.5); }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
+
+        .testimonials-carousel { display: flex; overflow-x: auto; gap: 15px; padding: 10px 5px 30px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .testimonials-carousel::-webkit-scrollbar { display: none; }
+        .testimonial-card { flex: 0 0 320px; scroll-snap-align: center; background: linear-gradient(145deg, #181818, #111); padding: 25px; border-radius: 20px; border: 1px solid #2a2a2a; box-shadow: 0 10px 20px rgba(0,0,0,0.3); position: relative; transition: 0.4s; }
+        .testimonial-card::before { content: "\f10d"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; top: 15px; left: 20px; font-size: 35px; color: rgba(212,175,55,0.05); z-index: 0; }
+        .testimonial-card:hover { border-color: var(--gold); transform: translateY(-5px); background: linear-gradient(145deg, #1f1a0f, #111); }
+        .testimonial-card h6 { color: var(--gold); margin: 0 0 5px 0; font-size: 17px; position: relative; z-index: 1; }
+        .testimonial-stars { color: var(--gold); margin-bottom: 12px; font-size: 11px; position: relative; z-index: 1; }
+        .testimonial-card p { font-size: 14px; line-height: 1.8; color: #bbb; font-style: italic; margin: 0; position: relative; z-index: 1; }
 
         /* =========================================
-           أزرار الفلترة (التبويبات) المحدثة 
+           الأسئلة الشائعة
            ========================================= */
+        .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 15px; max-width: 1000px; margin: auto; }
+        .faq-item { background: #121212; border-radius: 12px; border: 1px solid #222; overflow: hidden; transition: 0.3s; }
+        .faq-item:hover { border-color: #444; }
+        .faq-item.active { background: linear-gradient(145deg, #1a1a1a, #111); border-color: var(--gold); box-shadow: 0 5px 15px rgba(212,175,55,0.15); }
+        .faq-question { padding: 18px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #eee; font-size: 15px; }
+        .faq-q-content { display: flex; align-items: center; gap: 12px; }
+        .faq-q-content i { color: var(--gold); font-size: 18px; width: 20px; text-align: center; }
+        .faq-question .toggle-icon { color: #666; transition: 0.3s; font-size: 14px; }
+        .faq-item.active .toggle-icon { color: var(--gold); transform: rotate(180deg); }
+        .faq-answer { padding: 0 20px 0 40px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; color: #aaa; font-size: 14px; line-height: 1.8; }
+        .faq-item.active .faq-answer { padding-bottom: 20px; max-height: 200px; border-top: 1px solid #222; margin-top: 10px; padding-top: 15px; }
+        .faq-brand-note { text-align: center; margin-top: 30px; font-size: 13px; color: #666; font-weight: bold; }
+        .faq-brand-note span { color: var(--gold); }
 
-        /* 1. التبويبات الرئيسية (تصميم 3D بارز) */
+        /* =========================================
+           أزرار الفلترة (التبويبات) 
+           ========================================= */
         .filter-container { text-align: center; margin-bottom: 25px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding-bottom: 10px; }
-        .filter-btn {
-            background: linear-gradient(145deg, #2a2a2a, #151515);
-            border: 1px solid #444;
-            color: #ccc;
-            padding: 10px 24px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 900;
-            font-size: 14px;
-            box-shadow: 0 5px 0 #000, 0 8px 15px rgba(0,0,0,0.4);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-            position: relative;
-            top: 0;
-            outline: none;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: linear-gradient(145deg, var(--gold), #b8860b);
-            color: #000;
-            border-color: #ffe066;
-            box-shadow: 0 2px 0 #7a5900, 0 4px 10px rgba(212,175,55,0.4);
-            top: 3px;
-            text-shadow: none;
-        }
+        .filter-btn { background: linear-gradient(145deg, #2a2a2a, #151515); border: 1px solid #444; color: #ccc; padding: 10px 24px; border-radius: 12px; cursor: pointer; transition: all 0.2s ease; font-family: 'Cairo', sans-serif; font-weight: 900; font-size: 14px; box-shadow: 0 5px 0 #000, 0 8px 15px rgba(0,0,0,0.4); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); position: relative; top: 0; outline: none; }
+        .filter-btn:hover, .filter-btn.active { background: linear-gradient(145deg, var(--gold), #b8860b); color: #000; border-color: #ffe066; box-shadow: 0 2px 0 #7a5900, 0 4px 10px rgba(212,175,55,0.4); top: 3px; text-shadow: none; }
 
-        /* 2. التبويبات الفرعية (تصميم Glassmorphism مميز للإنتاج الصوتي) */
         .sub-filter-container { text-align: center; margin-bottom: 35px; display: none; flex-wrap: wrap; justify-content: center; gap: 10px; animation: fadeIn 0.4s ease; }
-        .sub-filter-btn {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            color: var(--gold);
-            padding: 8px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Cairo', sans-serif;
-            font-weight: bold;
-            font-size: 13px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-            outline: none;
-        }
-        .sub-filter-btn:hover, .sub-filter-btn.active {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: var(--gold);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(212, 175, 55, 0.2);
-            transform: scale(1.05);
-        }
+        .sub-filter-btn { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px); border: 1px solid rgba(212, 175, 55, 0.3); color: var(--gold); padding: 8px 20px; border-radius: 30px; cursor: pointer; transition: all 0.3s; font-family: 'Cairo', sans-serif; font-weight: bold; font-size: 13px; box-shadow: inset 0 0 10px rgba(0,0,0,0.3); outline: none; }
+        .sub-filter-btn:hover, .sub-filter-btn.active { background: rgba(212, 175, 55, 0.15); border-color: var(--gold); color: #fff; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(212, 175, 55, 0.2); transform: scale(1.05); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- معرض الأعمال (البطاقات) --- */
@@ -208,7 +183,7 @@
         .atheer-audio-card audio::-webkit-media-controls-panel { background-color: var(--gold-light); }
         .atheer-audio-card audio::-webkit-media-controls-current-time-display, .atheer-audio-card audio::-webkit-media-controls-time-remaining-display { font-family: 'Cairo', sans-serif; color: #000; }
 
-        /* --- الركن الأدبي (منطقة القراءة) --- */
+        /* --- الركن الأدبي --- */
         .literary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
         .literary-card { background: rgba(255,255,255,0.03); border: 1px solid #333; border-radius: 15px; padding: 25px; transition: 0.4s; text-align: right; }
         .literary-card:hover { border-color: var(--gold); transform: translateY(-5px); background: rgba(212,175,55,0.05); }
@@ -285,7 +260,8 @@
 
         .page-section { display: none; }
         .page-section.active { display: block; }
-        .btn-back { margin-top: 20px; background: transparent; color: var(--gold); border: 2px solid var(--gold); padding: 12px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Cairo', sans-serif; }
+        .btn-back { margin-top: 20px; background: transparent; color: var(--gold); border: 2px solid var(--gold); padding: 12px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Cairo', sans-serif; display: inline-block; text-decoration: none;}
+        .btn-back:hover { background: var(--gold); color: #000;}
     </style>
 </head>
 <body>
@@ -435,8 +411,148 @@
                 <div class="stat-box"><span class="stat-val">+300</span><span class="stat-tit">عمل فني منتج</span></div>
                 <div class="stat-box"><span class="stat-val">+100</span><span class="stat-tit">مدرسة ومؤسسة تعليمية</span></div>
                 <div class="stat-box"><span class="stat-val">+50</span><span class="stat-tit">أوبريت وزفة حصرية</span></div>
-                <div class="stat-box"><span class="stat-val">+3</span><span class="stat-tit">سنوات من التميز (منذ 2023)</span></div>
+                <div class="stat-box"><span class="stat-val">+3</span><span class="stat-tit">سنوات من التميز</span></div>
             </div>
+            
+            <div class="chart-wrapper">
+                <canvas id="statsChart" height="250"></canvas>
+            </div>
+
+            <div class="section-title-wrapper" id="partners-section">
+                <h2 class="section-title-frame">آراء شركاء النجاح</h2>
+            </div>
+            
+            <div class="partners-marquee-container">
+                <div class="partners-track">
+                    <div class="partner-item" onclick="scrollToTestim('testim-1')"><i class="fas fa-graduation-cap"></i> مدارس يمن الصمود</div>
+                    <div class="partner-item" onclick="scrollToTestim('testim-2')"><i class="fas fa-school"></i> مدارس روابي حدة</div>
+                    <div class="partner-item" onclick="scrollToTestim('testim-3')"><i class="fas fa-book"></i> مدارس علماء آزال</div>
+                    <div class="partner-item" onclick="scrollToTestim('testim-4')"><i class="fas fa-graduation-cap"></i> مدارس نابلس</div>
+                    <div class="partner-item" onclick="scrollToTestim('testim-5')"><i class="fas fa-user-tie"></i> البروفيسور أحمد الدغشي</div>
+                    <div class="partner-item" onclick="scrollToTestim('testim-6')"><i class="fas fa-chalkboard-teacher"></i> مدارس تنمية الأجيال</div>
+                    <div class="partner-item" onclick="scrollToTestim('testim-7')"><i class="fas fa-school"></i> مدارس الرواد</div>
+                    <div class="partner-item" onclick="scrollToTestim('testim-8')"><i class="fas fa-book-reader"></i> مدارس النخبة النموذجية</div>
+                    <div class="partner-item" onclick="scrollToTestim('testim-1')"><i class="fas fa-graduation-cap"></i> مدارس يمن الصمود</div>
+                    <div class="partner-item" onclick="scrollToTestim('testim-2')"><i class="fas fa-school"></i> مدارس روابي حدة</div>
+                    <div class="partner-item" onclick="scrollToTestim('testim-3')"><i class="fas fa-book"></i> مدارس علماء آزال</div>
+                    <div class="partner-item" onclick="scrollToTestim('testim-4')"><i class="fas fa-graduation-cap"></i> مدارس نابلس</div>
+                    <div class="partner-item" onclick="scrollToTestim('testim-5')"><i class="fas fa-user-tie"></i> البروفيسور أحمد الدغشي</div>
+                </div>
+            </div>
+
+            <div class="testimonials-carousel" id="testim-container">
+                <div class="testimonial-card" id="testim-1">
+                    <h6>مدارس يمن الصمود</h6>
+                    <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"أوبريت وطني في قمة الفخامة، تميز في الأداء وسرعة في التسليم."</p>
+                </div>
+                <div class="testimonial-card" id="testim-2">
+                    <h6>مدارس روابي حدة</h6>
+                    <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"الأنشودة المدرسية كانت لوحة فنية، تميز في الألحان وحسن تعامل."</p>
+                </div>
+                <div class="testimonial-card" id="testim-3">
+                    <h6>مدارس علماء آزال</h6>
+                    <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"إبداع حقيقي في العمل الفني المتكامل."</p>
+                </div>
+                <div class="testimonial-card" id="testim-4">
+                    <h6>مدارس نابلس</h6>
+                    <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"تعامل احترافي، الأنشودة نالت إعجاب الجميع."</p>
+                </div>
+                <div class="testimonial-card" id="testim-5">
+                    <h6>البروفيسور أحمد الدغشي</h6>
+                    <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"تنسيق الكتاب يعكس ذوقاً رفيعاً واحترافية تليق بالنشر الأكاديمي."</p>
+                </div>
+                <div class="testimonial-card" id="testim-6">
+                    <h6>مدارس تنمية الأجيال</h6>
+                    <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"الهوية البصرية التي صمموها لنا عصرية وجذابة جداً."</p>
+                </div>
+                <div class="testimonial-card" id="testim-7">
+                    <h6>مدارس الرواد</h6>
+                    <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"فيديو الموشن جرافيك ساعدنا في التسويق باحترافية."</p>
+                </div>
+                <div class="testimonial-card" id="testim-8">
+                    <h6>مدارس النخبة النموذجية</h6>
+                    <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"الإنتاج الصوتي يجمع بين الذوق الرفيع والتقنية الحديثة باحترافية."</p>
+                </div>
+            </div>
+
+            <div class="section-title-wrapper" id="faq-section" style="margin-top: 50px;">
+                <h2 class="section-title-frame">الأسئلة الشائعة</h2>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        <div class="faq-q-content"><i class="fas fa-stopwatch"></i> مدة تسليم الأعمال؟</div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="faq-answer">يتم تسليم معظم الأعمال خلال 2 إلى 5 أيام عمل، مع توفر خيار التسليم العاجل للمستعجلين.</div>
+                </div>
+                
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        <div class="faq-q-content"><i class="fas fa-pen-nib"></i> هل يمكن التعديل؟</div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="faq-answer">نوفر خدمة التعديلات الطفيفة مجاناً لضمان رضاكم التام عن العمل النهائي قبل الاعتماد.</div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        <div class="faq-q-content"><i class="fas fa-gem"></i> هل العمل حصري؟</div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="faq-answer">نعم بالتأكيد، نوفر خيار الإنتاج الحصري بكلمات وألحان خاصة لا تتكرر وتُصنع خصيصاً لك.</div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        <div class="faq-q-content"><i class="fas fa-child"></i> لديكم أصوات أطفال؟</div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="faq-answer">نعم، نوفر تشكيلة من أصوات الأطفال المتميزة التي تناسب الأناشيد والفعاليات المدرسية بقوة.</div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        <div class="faq-q-content"><i class="fas fa-ring"></i> زفات بالأسماء؟</div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="faq-answer">بكل تأكيد، ننفذ زفات التخرج والأعراس بكلمات مخصصة تذكر الأسماء والصفات بشكل أدبي راقٍ.</div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        <div class="faq-q-content"><i class="fas fa-spell-check"></i> توفرون التدقيق اللغوي؟</div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="faq-answer">نعم، فنحن نتميز بوجود متخصصين أكاديميين في التدقيق اللغوي والنحوي لضمان خلو أي عمل من الأخطاء.</div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        <div class="faq-q-content"><i class="fas fa-wallet"></i> ما هي طرق الدفع؟</div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="faq-answer">في اليمن عبر (الكريمي، النجم، الحزمي)، وفي السعودية وباقي الدول عبر (التحويل البنكي المباشر).</div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        <div class="faq-q-content"><i class="fas fa-cloud-download-alt"></i> كيف أستلم ملفاتي؟</div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="faq-answer">يتم تسليم الملفات بجودتها الأصلية العالية (WAV أو MP4) عبر روابط مؤمنة مثل Dropbox أو تليجرام.</div>
+                </div>
+            </div>
+            <div class="faq-brand-note">أثير ساوند <span>|</span> اليمن: 770080131 <span>-</span> السعودية: 557172941</div>
         </div>
 
         <div id="works-page" class="page-section">
@@ -579,11 +695,13 @@
 
         <div id="service-detail-view" class="page-section">
             <div class="section-title-wrapper" style="margin-top: 10px;"><h2 id="current-service-title" class="section-title-frame">عنوان الخدمة</h2></div>
-            <div style="text-align: center; padding: 20px 40px; background: #111; border-radius: 25px; border: 1px solid var(--gold);">
-                <div style="width: 100%; aspect-ratio: 16/9; background: #080808; border: 1px dashed #333; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 30px 0; color: #555;">
-                    <p><i class="fas fa-play-circle" style="font-size: 50px; color: var(--gold); opacity: 0.4;"></i><br>سيتم إضافة النماذج لاحقاً بمقاس 16:9...</p>
+            <div style="text-align: right; padding: 40px; background: linear-gradient(145deg, #151515, #0a0a0a); border-radius: 25px; border: 1px solid var(--gold); max-width: 900px; margin: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                <p id="service-desc-text" style="color: #ccc; font-size: 18px; line-height: 2.2; font-family: 'Cairo', sans-serif;"></p>
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="btn-order" onclick="orderCurrentService()" style="width: auto; padding: 12px 40px; font-size: 18px;">طلب هذه الخدمة الآن <i class="fab fa-whatsapp"></i></button>
+                    <br>
+                    <button class="btn-back" onclick="cinematicSection('home-page')">العودة للرئيسية</button>
                 </div>
-                <button class="btn-back" onclick="cinematicSection('home-page')">رجوع</button>
             </div>
         </div>
     </div>
@@ -624,7 +742,81 @@
     </div>
 
     <script>
-        // إيقاف أي صوت شغال عند تشغيل صوت جديد
+        // إعداد الرسم البياني (Chart.js) للإحصائيات
+        window.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('statsChart');
+            if(ctx) {
+                new Chart(ctx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['أعمال فنية منتجة', 'مدارس ومؤسسات', 'أوبريت وزفة حصرية', 'سنوات التميز'],
+                        datasets: [{
+                            label: 'إحصائيات أثير ساوند',
+                            data: [300, 100, 50, 3],
+                            backgroundColor: 'rgba(212, 175, 55, 0.7)',
+                            borderColor: '#d4af37',
+                            borderWidth: 2,
+                            borderRadius: 8,
+                            hoverBackgroundColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#ccc', font: {family: 'Cairo'} } },
+                            x: { grid: { display: false }, ticks: { color: '#d4af37', font: {family: 'Cairo', weight: 'bold', size: 14} } }
+                        },
+                        animation: { duration: 2000, easing: 'easeOutQuart' }
+                    }
+                });
+            }
+        });
+
+        // دالة التمرير لبطاقات التقييم عند الضغط على الشريط المتحرك
+        function scrollToTestim(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                // إضافة تأثير وميض ذهبي مؤقت للبطاقة
+                el.style.transition = '0.5s';
+                el.style.borderColor = 'var(--gold)';
+                el.style.boxShadow = '0 0 25px rgba(212,175,55,0.6)';
+                el.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    el.style.borderColor = '#2a2a2a';
+                    el.style.boxShadow = '0 10px 20px rgba(0,0,0,0.3)';
+                    el.style.transform = 'scale(1)';
+                }, 2000);
+            }
+        }
+
+        // نصوص تفصيل الخدمات الثمان
+        const serviceDetails = {
+            'الإنتاج الصوتي والموسيقي': 'نقدم خدمات إنتاج صوتي متكاملة تشمل التلحين، التوزيع الموسيقي، الهندسة الصوتية، والمكساج والماسترينغ. نضمن لك جودة صوتية تضاهي الاستوديوهات العالمية لإنتاج الأغاني والأناشيد والمؤثرات الصوتية بمقاييس احترافية.',
+            'المناسبات والإهداءات': 'نوثق أجمل لحظاتكم من خلال زفات التخرج، زفات الأعراس، والأغاني الخاصة بأعياد الميلاد والمناسبات السعيدة. نصنع لك عملاً فنياً حصرياً يعبر عن مشاعرك بكلمات وألحان تصمم خصيصاً لك أو لمن تحب.',
+            'المونتاج وتصميم الفيديو': 'نحول أفكارك إلى مشاهد بصرية مبهرة. نقدم خدمات المونتاج السينمائي، الموشن جرافيك، وتصميم الفيديوهات الترويجية للمؤسسات والشركات مع مزامنة احترافية للصوت والصورة تضمن إيصال رسالتك بقوة.',
+            'التصميم والهوية البصرية': 'نبني لك علامة تجارية لا تُنسى. نصمم الشعارات (اللوجو)، المطبوعات، بطاقات العمل، وملفات السوشيال ميديا بشكل يعكس احترافية مؤسستك ويجذب جمهورك المستهدف من النظرة الأولى.',
+            'التعليق الصوتي المتقدم': 'أصوات رخيمة ومعبرة لتسجيل الإعلانات التجارية، الأفلام الوثائقية، الرد الآلي، والكتب الصوتية. نوفر معلقين محترفين بعدة لهجات ولغات لضمان وصول رسالتك بأفضل أداء ونطق سليم.',
+            'الخدمات الأدبية واللغوية': 'نكتب لك القصائد، الأناشيد، والكلمات المعبرة بأسلوب أدبي رصين. كما نقدم خدمات التدقيق اللغوي والنحوي للنصوص لضمان خلوها من الأخطاء وتقديمها بأبهى حلة فصيحة.',
+            'الخدمات الأكاديمية والنشر': 'ندعم الباحثين والأكاديميين بتنسيق الرسائل العلمية، الكتب، والمجلات وفق المعايير الأكاديمية المعتمدة. إشراف دقيق يضمن لك عملاً جاهزاً للطباعة والنشر باحترافية وبدون أي عناء.',
+            'تطوير الويب والتطبيقات': 'نبرمج ونصمم مواقع إلكترونية عصرية سريعة التجاوب، بالإضافة إلى تطبيقات الهواتف الذكية. نربطك بالعالم الرقمي بواجهات مستخدم جذابة وتجربة تصفح سلسة وآمنة تخدم أهدافك.'
+        };
+
+        let currentServiceToOrder = '';
+        function showService(title) {
+            document.getElementById('current-service-title').textContent = title;
+            document.getElementById('service-desc-text').textContent = serviceDetails[title] || 'تفاصيل الخدمة غير متوفرة حالياً.';
+            currentServiceToOrder = title;
+            cinematicSection('service-detail-view');
+        }
+
+        function orderCurrentService() {
+            window.open(`https://wa.me/967770080131?text=السلام عليكم، أرغب في طلب خدمة: ${currentServiceToOrder}`, '_blank');
+        }
+
+        // إيقاف الصوت
         document.addEventListener('play', function(e){
             var audios = document.getElementsByTagName('audio');
             for(var i = 0, len = audios.length; i < len;i++){
@@ -644,13 +836,12 @@
             });
         });
 
-        // حركة الإضاءة الساحرة للماوس
+        // حركة الإضاءة
         document.addEventListener('mousemove', e => {
             document.body.style.setProperty('--x', e.clientX + 'px');
             document.body.style.setProperty('--y', e.clientY + 'px');
         });
 
-        // موجات الصوت العشوائية أسفل النافبار
         const waveBar = document.getElementById('waveBar');
         if(waveBar) {
             for(let i=0; i<100; i++) {
@@ -660,7 +851,6 @@
             }
         }
 
-        /* ====== دالة القفز الذكية ====== */
         function scrollToHomeSection(elementId, navId) {
             const container = document.getElementById('main-container');
             if (!document.getElementById('home-page').classList.contains('active')) {
@@ -692,32 +882,17 @@
             if(navId && document.getElementById(navId)) document.getElementById(navId).classList.add('active-link');
         }
 
-        /* ====== دالة مودال التواصل للأعلام ====== */
         function openContactModal(country) {
             const body = document.getElementById('contact-modal-body');
             if(country === 'yemen') {
-                body.innerHTML = `
-                    <h3 style="color: var(--gold); font-size: 24px; margin-bottom: 25px; font-family: 'Cairo', sans-serif;">تواصل معنا 🇾🇪</h3>
-                    <a href="https://wa.me/967770080131" target="_blank" class="btn-order" style="display: block; text-decoration: none; font-size: 18px; padding: 12px; background: #cc0000; color: #fff; width: 100%; box-sizing: border-box;">
-                        واتس: 770080131 <i class="fab fa-whatsapp" style="margin-right:8px;"></i>
-                    </a>
-                `;
+                body.innerHTML = `<h3 style="color: var(--gold); font-size: 24px; margin-bottom: 25px; font-family: 'Cairo', sans-serif;">تواصل معنا 🇾🇪</h3><a href="https://wa.me/967770080131" target="_blank" class="btn-order" style="display: block; text-decoration: none; font-size: 18px; padding: 12px; background: #cc0000; color: #fff; width: 100%; box-sizing: border-box;">واتس: 770080131 <i class="fab fa-whatsapp" style="margin-right:8px;"></i></a>`;
             } else if(country === 'saudi') {
-                body.innerHTML = `
-                    <h3 style="color: var(--gold); font-size: 24px; margin-bottom: 25px; font-family: 'Cairo', sans-serif;">تواصل معنا 🇸🇦</h3>
-                    <a href="tel:0557172941" class="btn-order" style="display: block; text-decoration: none; font-size: 18px; padding: 12px; margin-bottom: 15px; background: #333; color: #fff; border: 1px solid var(--gold); width: 100%; box-sizing: border-box;">
-                        الاتصال الدولي : 0557172941 <i class="fas fa-phone" style="margin-right:8px;"></i>
-                    </a>
-                    <a href="https://wa.me/966557172941" target="_blank" class="btn-order" style="display: block; text-decoration: none; font-size: 18px; padding: 12px; background: #25d366; color: #fff; width: 100%; box-sizing: border-box;">
-                        واتس: 0557172941 <i class="fab fa-whatsapp" style="margin-right:8px;"></i>
-                    </a>
-                `;
+                body.innerHTML = `<h3 style="color: var(--gold); font-size: 24px; margin-bottom: 25px; font-family: 'Cairo', sans-serif;">تواصل معنا 🇸🇦</h3><a href="tel:0557172941" class="btn-order" style="display: block; text-decoration: none; font-size: 18px; padding: 12px; margin-bottom: 15px; background: #333; color: #fff; border: 1px solid var(--gold); width: 100%; box-sizing: border-box;">الاتصال الدولي : 0557172941 <i class="fas fa-phone" style="margin-right:8px;"></i></a><a href="https://wa.me/966557172941" target="_blank" class="btn-order" style="display: block; text-decoration: none; font-size: 18px; padding: 12px; background: #25d366; color: #fff; width: 100%; box-sizing: border-box;">واتس: 0557172941 <i class="fab fa-whatsapp" style="margin-right:8px;"></i></a>`;
             }
             document.getElementById('contactModal').style.display = 'flex';
         }
         function closeContactModal() { document.getElementById('contactModal').style.display = 'none'; }
 
-        /* ====== بنك الأفكار الإبداعية ====== */
         const inspirationIdeas = [
             "ما رأيك بإنتاج أوبريت مدرسي يدمج بين اللغة العربية الفصحى البليغة والألحان التراثية الخالدة؟",
             "فكرة لزفة تخرج: قصيدة خاصة تُكتب باسم الخريج وتُلقى بتعليق صوتي فخم قبل الزفة الموسيقية.",
@@ -736,22 +911,15 @@
             document.getElementById('inspireModal').style.display = 'flex';
         }
         function closeInspire() { document.getElementById('inspireModal').style.display = 'none'; }
-        function orderInspire() {
-            const waText = `السلام عليكم دكتور بكيل، أعجبتني هذه الفكرة من موقعكم، وأريد تنفيذها: "${currentIdeaText}"`;
-            window.open(`https://wa.me/967770080131?text=${encodeURIComponent(waText)}`, '_blank');
-            closeInspire();
-        }
+        function orderInspire() { window.open(`https://wa.me/967770080131?text=${encodeURIComponent(`السلام عليكم دكتور بكيل، أعجبتني هذه الفكرة من موقعكم، وأريد تنفيذها: "${currentIdeaText}"`)}`, '_blank'); closeInspire(); }
 
-        /* ====== إرسال قصيدة للتقييم ====== */
         function sendPoem(e) {
             e.preventDefault();
             const name = document.getElementById('clinic-name').value;
             const poem = document.getElementById('clinic-poem').value;
-            const waText = `السلام عليكم دكتور بكيل، أود تقييم هذه القصيدة/الكلمات عروضياً ولغوياً من عيادة أثير اللغوية:%0A%0Aالاسم: ${name}%0Aالقصيدة:%0A${poem}`;
-            window.open(`https://wa.me/967770080131?text=${waText}`, '_blank');
+            window.open(`https://wa.me/967770080131?text=السلام عليكم دكتور بكيل، أود تقييم هذه القصيدة/الكلمات عروضياً ولغوياً من عيادة أثير اللغوية:%0A%0Aالاسم: ${name}%0Aالقصيدة:%0A${poem}`, '_blank');
         }
 
-        /* ====== الركن الأدبي ====== */
         const articles = {
             'art1': { title: 'كيف تختار كلمات زفتك؟', body: 'الزفة ليست مجرد إيقاع وموسيقى، بل هي توثيق للحظة العمر. نكتب لك القصيدة لتكون بصمتك الخاصة.' },
             'art2': { title: 'أخطاء شائعة في التعليق الصوتي', body: 'التعليق الصوتي هو فن إيصال المعنى، وأكثر ما يفسد هذا الفن هو الأخطاء اللغوية والأدائية.' },
@@ -765,67 +933,8 @@
         }
         function closeArticle() { document.getElementById('articleModal').style.display = 'none'; }
 
-        /* ====== الـ 99 كبسولة لغوية التفاعلية ====== */
-        const linguisticCapsules = [
-            ["تَجْرِبَة", "تَجْرَبَة"], ["مُديرون", "مُدراء"], ["تَخرّج في الجامعة", "تَخرّج من الجامعة"],
-            ["مُبارَك", "مَبْروك"], ["حاز الشيءَ", "حاز على الشيء"], ["الشيء نفسه", "نفس الشيء"],
-            ["ساهم في", "أسهم في"], ["اعتذر إليه", "اعتذر منه"], ["توفِّيَ", "توفَّى"],
-            ["أثّر فيه", "أثّر عليه"], ["مُصادفة", "صُدفة"], ["أجاب عن السؤال", "أجاب على السؤال"],
-            ["بِمَ", "بما"], ["إلامَ", "إلى ما"], ["مُهمّ", "هامّ"],
-            ["التقى به", "التقى معه"], ["سار برفقته", "سار مع رفقته"], ["بقي في مكانه", "بقى في مكانه"],
-            ["نرجو", "نرجوا"], ["فشِل في الامتحان", "فشِل بالامتحان"], ["آنفاً", "سابقاً"],
-            ["إمضاء", "توقيع"], ["كفء", "كفئ"], ["حاجات", "احتياجات"],
-            ["طوال الوقت", "طيلة الوقت"], ["عازب", "أعزب"], ["مُنصرم", "ماضي"],
-            ["مُعدّات", "تجهيزات"], ["ملحوظة", "ملاحظة"], ["لا سيما", "لاسيما"],
-            ["شؤون", "شئون"], ["مسؤول", "مسئول"], ["هيئة", "هيئه"],
-            ["أكفاء (كسر الهمزة)", "أكفاء (فتح الهمزة)"], ["استبدل القديم بالجديد", "استبدل الجديد بالقديم"], ["كافة الناس", "الناس كافة"],
-            ["حتى مَ", "حتى ما"], ["تساؤل", "تساؤلات"], ["فترة", "برهة"],
-            ["أراد به السوء", "أراد له السوء"], ["شغوف بـ", "شغوف في"], ["نقطة ضعف", "نقطة من ضعف"],
-            ["موجود", "مُتواجد"], ["ترأس الجلسة", "رئيس الجلسة"], ["أصغى إليه", "أصغى له"],
-            ["اعتاد الأمر", "اعتاد على الأمر"], ["لم يعبأ به", "لم يبالي به"], ["تحرّى الأمر", "تحرّى عن الأمر"],
-            ["سواء أكان.. أم..", "سواء أكان.. أو.."], ["مِن ثَمّ", "مِن ثُمّ"], ["بالرغم من", "رغماً عن"],
-            ["تأكد الخبر", "تأكد من الخبر"], ["علاوة على", "بالإضافة إلى"], ["ناهيك بـ", "ناهيك عن"],
-            ["وُولد", "خُلق"], ["هنيئاً", "هنيأً"], ["استوعب الدرس", "استوعب على الدرس"],
-            ["أصابه المرض", "انصاب بالمرض"], ["اشتغل بـ", "اشتغل في"], ["بإقرار الجميع", "باعتراف الجميع"],
-            ["لا محالة", "لا مفرّ"], ["كشف الطبيب المريض", "فحص الطبيب المريض"], ["شكا الأمر إليه", "اشتكى منه إليه"],
-            ["ضحك منه", "ضحك عليه"], ["سخر منه", "سخر عليه"], ["هزأ به", "استهزأ منه"],
-            ["أقفل الباب", "سكر الباب"], ["كتب التقرير", "أعدّ التقرير"], ["أنجز المهمة", "خلّص المهمة"],
-            ["جاءني خبر", "وصلني خبر"], ["على الرحب والسعة", "أهلاً بك"], ["أخبرني بكذا", "أخبرني بكذا"],
-            ["أطلعني على كذا", "ورّاني كذا"], ["جامعة صنعاء", "جامعه صنعاء"],
-            ["فصيح", "بليغ"], ["رصين", "قوي"], ["موزون", "معدّل"],
-            ["حاز إعجابه", "حاز على إعجابه"], ["مُصنّف", "مُصنّف تحت"], ["يَنبغي أن", "يَنبغي عليه أن"],
-            ["أجمعوا على أن", "أجمعوا على"], ["اعتمد على", "اعتمد عليه"], ["أذن له بـ", "أذن له"],
-            ["حذّره من الأمر", "حذّره الأمر"], ["خبير في", "خبير بـ"], ["أجاب السؤال", "أجاب على السؤال"],
-            ["دُهش له", "دُهش منه"], ["عرّفه به", "عرّفه عليه"], ["نَفِد", "نَفَذ"],
-            ["اختصاصي", "أخصائي"], ["نيات", "نوايا"], ["غير المكتمل", "الغير مكتمل"],
-            ["لا يزال", "لازال"], ["قطّ", "أبداً"], ["كلما زاد.. زاد", "كلما زاد.. كلما زاد"],
-            ["مَهْرجان", "مِهرجان"], ["وَفَيَات", "وَفَيّات"], ["بئر عميقة", "بئر عميق"],
-            ["مئة", "مائة"]
-        ];
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('capsules-container');
-            if (container) {
-                linguisticCapsules.forEach(capsule => {
-                    const div = document.createElement('div');
-                    div.className = 'capsule-card';
-                    div.innerHTML = `
-                        <div class="capsule-front"><i class="fas fa-times" style="margin-left:5px;"></i> لا تقل: ${capsule[1]}</div>
-                        <div class="capsule-back"><i class="fas fa-check" style="margin-left:5px;"></i> قـل: ${capsule[0]}</div>
-                    `;
-                    container.appendChild(div);
-                });
-            }
-        });
-
-        function openVideo(url) {
-            document.getElementById('videoFrame').src = url;
-            document.getElementById('videoModal').style.display = 'flex';
-        }
-        function closeVideo() {
-            document.getElementById('videoFrame').src = '';
-            document.getElementById('videoModal').style.display = 'none';
-        }
+        function openVideo(url) { document.getElementById('videoFrame').src = url; document.getElementById('videoModal').style.display = 'flex'; }
+        function closeVideo() { document.getElementById('videoFrame').src = ''; document.getElementById('videoModal').style.display = 'none'; }
 
         function cinematicSection(id) {
             const container = document.getElementById('main-container');
@@ -836,30 +945,24 @@
             }, 600);
         }
 
-        /* ====== دالة الفلترة المطورة لمعرض الأعمال ====== */
+        /* ====== الفلترة المطورة ====== */
         function filterWorks(category, buttonElement) {
             const items = document.querySelectorAll('.work-card');
             const btns = document.querySelectorAll('.filter-btn');
             const subFilterContainer = document.getElementById('audio-sub-filters');
 
-            // تفعيل الزر الرئيسي
             btns.forEach(btn => btn.classList.remove('active'));
             if (buttonElement) buttonElement.classList.add('active');
 
-            // إظهار أو إخفاء التبويبات الفرعية للإنتاج الصوتي
             if (category === 'audio') {
                 subFilterContainer.style.display = 'flex';
-                // تفعيل التبويب الفرعي النشط حالياً تلقائياً
                 const activeSubBtn = document.querySelector('.sub-filter-btn.active');
                 if(activeSubBtn) activeSubBtn.click();
             } else {
                 subFilterContainer.style.display = 'none';
-                
-                // عرض العناصر حسب الفلتر الرئيسي إذا لم يكن "الإنتاج الصوتي"
                 items.forEach(item => {
                     item.style.display = 'none'; 
                     item.classList.add('hidden');
-
                     if (category === 'all' || item.classList.contains(category + '-card')) {
                         item.style.display = 'block';
                         item.classList.remove('hidden');
@@ -868,30 +971,19 @@
             }
         }
 
-        /* ====== دالة فلترة التبويبات الفرعية للإنتاج الصوتي ====== */
         function filterSubWorks(subCategory, buttonElement) {
             const items = document.querySelectorAll('.audio-card');
             const btns = document.querySelectorAll('.sub-filter-btn');
-
-            // تفعيل الزر الفرعي
             btns.forEach(btn => btn.classList.remove('active'));
             if (buttonElement) buttonElement.classList.add('active');
-
-            // فلترة بطاقات الصوت حسب الفئة
             items.forEach(item => {
                 item.style.display = 'none';
                 item.classList.add('hidden');
-
                 if (item.classList.contains(subCategory)) {
                     item.style.display = 'block';
                     item.classList.remove('hidden');
                 }
             });
-        }
-
-        function showService(title) {
-            document.getElementById('current-service-title').textContent = title;
-            cinematicSection('service-detail-view');
         }
 
         const phrases = ["زفاتكم الفاخرة", "أناشيدكم المدرسية", "مونتاجكم الاحترافي", "هويتكم البصرية"];
@@ -914,13 +1006,9 @@
             document.querySelectorAll('.faq-item').forEach(el => {
                 el.classList.remove('active');
                 const icon = el.querySelector('.toggle-icon');
-                if(icon) icon.className = 'fas fa-plus toggle-icon';
+                if(icon) icon.className = 'fas fa-chevron-down toggle-icon';
             });
-            if (!isActive) { 
-                item.classList.add('active'); 
-                const icon = item.querySelector('.toggle-icon');
-                if(icon) icon.className = 'fas fa-minus toggle-icon';
-            }
+            if (!isActive) { item.classList.add('active'); }
         }
 
         function showSection(id) {
@@ -929,16 +1017,11 @@
             
             document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active-link'));
             const navMap = {
-                'home-page':'nav-home',
-                'works-page':'nav-works',
-                'contact-us-page':'nav-contact',
-                'about-page':'nav-about',
-                'literary-page':'nav-literary',
-                'service-detail-view':'nav-home',
+                'home-page':'nav-home', 'works-page':'nav-works', 'contact-us-page':'nav-contact',
+                'about-page':'nav-about', 'literary-page':'nav-literary', 'service-detail-view':'nav-home',
                 'privacy-page':'nav-home'
             };
             if(navMap[id]) document.getElementById(navMap[id]).classList.add('active-link');
-            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
