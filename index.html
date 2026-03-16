@@ -73,7 +73,7 @@
         /* --- بيت الشعر --- */
         .literary-quote { text-align: center; margin: 40px 0; padding: 30px; border-right: 5px solid var(--gold); border-left: 5px solid var(--gold); background: rgba(212,175,55,0.03); border-radius: 15px; opacity: 0; transform: translateY(30px); transition: 1s; }
         .literary-quote.active { opacity: 1; transform: translateY(0); }
-        .literary-quote p { font-family: 'Cairo', sans-serif; font-size: 28px; font-weight: 700; font-style: italic; }
+        .literary-quote p { font-family: 'Cairo', sans-serif; font-size: 28px; font-weight: 700; font-style: normal; }
 
         /* --- الإطارات الذهبية للعناوين الرئيسية --- */
         .section-title-wrapper { text-align: center; margin: 60px 0 40px; scroll-margin-top: 100px; }
@@ -334,7 +334,7 @@
             </div>
 
             <div class="literary-quote" id="quote-section">
-                <p>"أثيرٌ يسكبُ الألحانَ فجراً.. ليُروي مسمعَ الدنيا جمالا"</p>
+                <p>"أثيرٌ يسكبُ الألحانَ سحراً.. ليُروي مسمعَ الدنيا جمالا"</p>
                 <span>د. بكيل علي المراني</span>
             </div>
 
@@ -403,7 +403,7 @@
                 <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><div class="faq-q-content"><i class="fas fa-child"></i> لديكم أصوات أطفال؟</div><i class="fas fa-chevron-down toggle-icon"></i></div><div class="faq-answer">نعم، نوفر تشكيلة من أصوات الأطفال المتميزة التي تناسب الأناشيد والفعاليات المدرسية بقوة.</div></div>
                 <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><div class="faq-q-content"><i class="fas fa-ring"></i> زفات بالأسماء؟</div><i class="fas fa-chevron-down toggle-icon"></i></div><div class="faq-answer">بكل تأكيد، ننفذ زفات التخرج والأعراس بكلمات مخصصة تذكر الأسماء والصفات بشكل أدبي راقٍ.</div></div>
                 <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><div class="faq-q-content"><i class="fas fa-spell-check"></i> توفرون التدقيق اللغوي؟</div><i class="fas fa-chevron-down toggle-icon"></i></div><div class="faq-answer">نعم، فنحن نتميز بوجود متخصصين أكاديميين في التدقيق اللغوي والنحوي لضمان خلو أي عمل من الأخطاء.</div></div>
-                <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><div class="faq-q-content"><i class="fas fa-wallet"></i> ما هي طرق الدفع؟</div><i class="fas fa-chevron-down toggle-icon"></i></div><div class="faq-answer">في اليمن عبر (الكريمي، النجم، الحزمي)، وفي السعودية وباقي الدول عبر (التحويل البنكي المباشر).</div></div>
+                <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><div class="faq-q-content"><i class="fas fa-wallet"></i> ما هي طرق الدفع؟</div><i class="fas fa-chevron-down toggle-icon"></i></div><div class="faq-answer">في اليمن عبر (الكريمي، النجم، الحزمي)، وفي السعودية وباقي الدول عبر (التحويل البنكي المباشر) أو التطبيق المناسب، كما يمكن الدفع عبر المحافظ الإلكترونية.</div></div>
                 <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><div class="faq-q-content"><i class="fas fa-cloud-download-alt"></i> كيف أستلم ملفاتي؟</div><i class="fas fa-chevron-down toggle-icon"></i></div><div class="faq-answer">يتم تسليم الملفات بجودتها الأصلية العالية (WAV أو MP4) عبر روابط مؤمنة مثل Dropbox أو تليجرام.</div></div>
             </div>
             <div class="faq-brand-note">أثير ساوند <span>|</span> اليمن: 770080131 <span>-</span> السعودية: 557172941</div>
@@ -429,6 +429,14 @@
                 <button class="sub-filter-btn" onclick="filterSubWorks('audio-zaffa', this)">زفات</button>
                 <button class="sub-filter-btn" onclick="filterSubWorks('audio-event', this)">مناسبات</button>
                 <button class="sub-filter-btn" onclick="filterSubWorks('audio-voiceover', this)">تعليق صوتي</button>
+            </div>
+
+            <div class="sub-filter-container" id="graphic-sub-filters">
+                <button class="sub-filter-btn active" onclick="filterSubWorks('graphic-id', this)">الهويات والشعارات</button>
+                <button class="sub-filter-btn" onclick="filterSubWorks('graphic-info', this)">الإنفوجرافيك التعليمي</button>
+                <button class="sub-filter-btn" onclick="filterSubWorks('graphic-poster', this)">البوسترات والإعلانات</button>
+                <button class="sub-filter-btn" onclick="filterSubWorks('graphic-seal', this)">الأختام الإلكترونية</button>
+                <button class="sub-filter-btn" onclick="filterSubWorks('graphic-typo', this)">المخطوطات والتايبوجرافي</button>
             </div>
 
             <div class="works-grid" id="works-grid">
@@ -537,7 +545,7 @@
                     <div class="literary-card"><h4>أخطاء شائعة في التعليق الصوتي</h4><p>إضاءات لغوية حول أبرز الأخطاء النحوية والصرفية التي يقع فيها المعلقون وكيفية تجنبها.</p><a onclick="openArticle('art2')" class="read-more">قراءة المزيد <i class="fas fa-angle-left"></i></a></div>
                     <div class="literary-card"><h4>جماليات القصيدة المغناة</h4><p>نظرة نقدية وأدبية حول كيفية تحويل الكلمة الصماء إلى نغمة خالدة تأسر الأرواح.</p><a onclick="openArticle('art3')" class="read-more">قراءة المزيد <i class="fas fa-angle-left"></i></a></div>
                 </div>
-                <div class="section-title-wrapper" style="margin-top: 70px;"><h2 class="section-title-frame" style="font-size: 22px; padding: 8px 30px;">سلسلة "قل ولا تقل" للإعلاميين (99 إضاءة)</h2></div>
+                <div class="section-title-wrapper" style="margin-top: 70px;"><h2 class="section-title-frame" style="font-size: 22px; padding: 8px 30px;">سلسلة "قل ولا تقل" للإعلاميين (50 إضاءة)</h2></div>
                 <div class="capsule-grid" id="capsules-container"></div>
                 <div class="poem-clinic">
                     <h3>⚖️ عيادة "أثير" اللغوية (زن قصيدتك)</h3>
@@ -554,15 +562,19 @@
         <div id="about-page" class="page-section">
             <div class="section-title-wrapper" style="margin-top: 10px;"><h2 class="section-title-frame">من نحن</h2></div>
             <div style="text-align: center; padding: 20px 60px; max-width: 800px; margin: auto;">
-                <p style="line-height: 2; color: #ccc; font-size: 18px;">مؤسسة أثير ساوند للخدمات الإعلامية والفنية، منصة إبداعية متكاملة تأسست عام 2023م لتكون جسراً بين الفن والأكاديمية.</p>
+                <p style="line-height: 2.2; color: #ccc; font-size: 18px; text-align: justify;">
+                    مؤسسة أثير ساوند للخدمات الإعلامية والفنية، منصة إبداعية متكاملة تأسست عام 2023م لتكون جسراً بين الفن والأكاديمية. نجمع بين سحر الإبداع الفني ودقة المعايير العلمية لنقدم أعمالاً نوعية تلبي تطلعات الأفراد والمؤسسات والمدارس. يضم فريقنا نخبة مختارة من الأكاديميين المتخصصين، والمهندسين الصوتيين، والمصممين، والمبرمجين المحترفين؛ والذين يعملون بشغف وتناغم لتحويل أفكاركم إلى واقع ملموس يحمل طابع الفخامة والإتقان.
+                </p>
                 <button class="btn-back" onclick="cinematicSection('home-page')">رجوع</button>
             </div>
         </div>
 
         <div id="privacy-page" class="page-section">
             <div class="section-title-wrapper" style="margin-top: 10px;"><h2 class="section-title-frame">سياسة الخصوصية</h2></div>
-            <div style="text-align: right; padding: 20px 60px; max-width: 900px; margin: auto; line-height: 2;">
-                <p>نلتزم في أثير ساوند بحماية بيانات عملائنا وملفاتهم الحصرية لأغراض الإنتاج الفني فقط.</p>
+            <div style="text-align: right; padding: 20px 60px; max-width: 900px; margin: auto; line-height: 2.2;">
+                <p style="color: #ccc; font-size: 17px;">
+                    نلتزم في أثير ساوند بحماية بيانات عملائنا وملفاتهم الحصرية لأغراض الإنتاج الفني فقط. ندرك تماماً قيمة الثقة التي تمنحونها لنا، لذا فإننا نضمن السرية التامة لكافة المواد المسلمة إلينا (سواء كانت نصوصاً أدبية، أو تسجيلات صوتية، أو بيانات شخصية وحسابات). كما نتعهد بعدم مشاركة أو إعادة استخدام أي عمل مخصص لكم في مشاريع أخرى دون الحصول على إذن كتابي مسبق. خصوصيتكم وأمان معلوماتكم يمثلان أولوية قصوى وجزءاً لا يتجزأ من قيمنا المهنية.
+                </p>
                 <button class="btn-back" onclick="cinematicSection('home-page')">رجوع</button>
             </div>
         </div>
@@ -678,11 +690,11 @@
             'الإنتاج الصوتي والموسيقي': 'نقدم خدمات إنتاج صوتي متكاملة تشمل التلحين، التوزيع الموسيقي، الهندسة الصوتية، والمكساج والماسترينغ. نضمن لك جودة صوتية تضاهي الاستوديوهات العالمية لإنتاج الأغاني والأناشيد والمؤثرات الصوتية بمقاييس احترافية.',
             'المناسبات والإهداءات': 'نوثق أجمل لحظاتكم من خلال زفات التخرج، زفات الأعراس، والأغاني الخاصة بأعياد الميلاد والمناسبات السعيدة. نصنع لك عملاً فنياً حصرياً يعبر عن مشاعرك بكلمات وألحان تصمم خصيصاً لك أو لمن تحب.',
             'المونتاج وتصميم الفيديو': 'نحول أفكارك إلى مشاهد بصرية مبهرة. نقدم خدمات المونتاج السينمائي، الموشن جرافيك، وتصميم الفيديوهات الترويجية للمؤسسات والشركات مع مزامنة احترافية للصوت والصورة تضمن إيصال رسالتك بقوة.',
-            'التصميم والهوية البصرية': 'نبني لك علامة تجارية لا تُنسى. نصمم الشعارات (اللوجو)، المطبوعات، بطاقات العمل، وملفات السوشيال ميديا بشكل يعكس احترافية مؤسستك ويجذب جمهورك المستهدف من النظرة الأولى.',
-            'التعليق الصوتي المتقدم': 'أصوات رخيمة ومعبرة لتسجيل الإعلانات التجارية، الأفلام الوثائقية، الرد الآلي، والكتب الصوتية. نوفر معلقين محترفين بعدة لهجات ولغات لضمان وصول رسالتك بأفضل أداء ونطق سليم.',
+            'التصميم والهوية البصرية': 'نبني لك علامة تجارية لا تُنسى. نصمم الشعارات (اللوجو)، المطبوعات، بطاقات العمل، البوسترات، الإنفوجرافيك، وملفات السوشيال ميديا بشكل يعكس احترافية مؤسستك ويجذب جمهورك المستهدف من النظرة الأولى.',
+            'التعليق الصوتي المتقدم': 'أصوات رخيمة ومعبرة لتسجيل الإعلانات التجارية، الأفلام الوثائقية، الرد الآلي، والكتب الصوتية. نوفر أصوات محترفين بعدة لهجات ولغات لضمان وصول رسالتك بأفضل أداء ونطق سليم.',
             'الخدمات الأدبية واللغوية': 'نكتب لك القصائد، الأناشيد، والكلمات المعبرة بأسلوب أدبي رصين. كما نقدم خدمات التدقيق اللغوي والنحوي للنصوص لضمان خلوها من الأخطاء وتقديمها بأبهى حلة فصيحة.',
-            'الخدمات الأكاديمية والنشر': 'ندعم الباحثين والأكاديميين بتنسيق الرسائل العلمية، الكتب، والمجلات وفق المعايير الأكاديمية المعتمدة. إشراف دقيق يضمن لك عملاً جاهزاً للطباعة والنشر باحترافية وبدون أي عناء.',
-            'تطوير الويب والتطبيقات': 'نبرمج ونصمم مواقع إلكترونية عصرية سريعة التجاوب، بالإضافة إلى تطبيقات الهواتف الذكية. نربطك بالعالم الرقمي بواجهات مستخدم جذابة وتجربة تصفح سلسة وآمنة تخدم أهدافك.'
+            'الخدمات الأكاديمية والنشر': 'ندعم الباحثين والأكاديميين بتنسيق الرسائل العلمية، الكتب، والمجلات وفق المعايير الأكاديمية المعتمدة. إشراف دقيق يضمن لك عملاً جاهزاً للطباعة والنشر باحترافية وبدون أي عناء. بالإضافة إلى تنسيق وتصميم الكتب باستخدام برنامج النشر المكتبي الشهير Adobe Indesign',
+            'تطوير الويب والتطبيقات': 'نبرمج ونصمم مواقع إلكترونية عصرية سريعة التجاوب، بالإضافة إلى تطبيقات كمبيوتر عملية. نربطك بالعالم الرقمي بواجهات مستخدم جذابة وتجربة تصفح سلسة وآمنة تخدم أهدافك.'
         };
 
         let currentServiceToOrder = '';
@@ -799,7 +811,7 @@
         const articles = {
             'art1': { title: 'كيف تختار كلمات زفتك؟', body: 'الزفة ليست مجرد إيقاع وموسيقى، بل هي توثيق للحظة العمر. نكتب لك القصيدة لتكون بصمتك الخاصة.' },
             'art2': { title: 'أخطاء شائعة في التعليق الصوتي', body: 'التعليق الصوتي هو فن إيصال المعنى، وأكثر ما يفسد هذا الفن هو الأخطاء اللغوية والأدائية.' },
-            'art3': { title: 'جماليات القصيدة المغناة', body: 'كيف تتحول الكلمة الصماء إلى نغمة تسري في الأرواح؟ إن سر القصيدة المغناة يكمن في التزاوج التام.' }
+            'art3': { title: 'جماليات القصيدة المغناة', body: 'كيف تتحول الكلمة الصماء إلى نغمة خالدة تأسر الأرواح؟ إن سر القصيدة المغناة يكمن في التزاوج التام.' }
         };
 
         function openArticle(id) {
@@ -821,27 +833,34 @@
             }, 600);
         }
 
-        /* ====== الفلترة المطورة لعزل الفيديوهات عن الصوت تماماً ====== */
+        /* ====== الفلترة المطورة المحدثة ====== */
         function filterWorks(category, buttonElement) {
             const items = document.querySelectorAll('.work-card');
             const btns = document.querySelectorAll('.filter-btn');
-            const subFilterContainer = document.getElementById('audio-sub-filters');
+            const audioSub = document.getElementById('audio-sub-filters');
+            const graphicSub = document.getElementById('graphic-sub-filters');
 
             btns.forEach(btn => btn.classList.remove('active'));
             if (buttonElement) buttonElement.classList.add('active');
 
+            // إخفاء كافة القوائم الفرعية أولاً
+            audioSub.style.display = 'none';
+            graphicSub.style.display = 'none';
+
             if (category === 'audio') {
-                subFilterContainer.style.display = 'flex';
-                items.forEach(item => {
-                    if(!item.classList.contains('audio-card')) {
-                        item.style.display = 'none';
-                        item.classList.add('hidden');
-                    }
-                });
-                const activeSubBtn = document.querySelector('.sub-filter-btn.active');
-                if(activeSubBtn) activeSubBtn.click();
-            } else {
-                subFilterContainer.style.display = 'none';
+                audioSub.style.display = 'flex';
+                // تفعيل أول فئة فرعية تلقائياً للصوت
+                const activeSub = audioSub.querySelector('.sub-filter-btn.active') || audioSub.querySelector('.sub-filter-btn');
+                activeSub.click();
+            } 
+            else if (category === 'graphic') {
+                graphicSub.style.display = 'flex';
+                // تفعيل أول فئة فرعية تلقائياً للجرافيك
+                const activeSub = graphicSub.querySelector('.sub-filter-btn.active') || graphicSub.querySelector('.sub-filter-btn');
+                activeSub.click();
+            }
+            else {
+                // الفلترة العامة للأقسام التي ليس لها فئات فرعية
                 items.forEach(item => {
                     item.style.display = 'none'; 
                     item.classList.add('hidden');
@@ -855,21 +874,57 @@
 
         function filterSubWorks(subCategory, buttonElement) {
             const allItems = document.querySelectorAll('.work-card');
-            const btns = document.querySelectorAll('.sub-filter-btn');
-            
-            btns.forEach(btn => btn.classList.remove('active'));
+            // تحديد الحاوية الأب للزر لتغيير حالة الأزرار داخلها فقط
+            const parent = buttonElement.parentElement;
+            parent.querySelectorAll('.sub-filter-btn').forEach(btn => btn.classList.remove('active'));
             if (buttonElement) buttonElement.classList.add('active');
 
             allItems.forEach(item => {
                 item.style.display = 'none';
                 item.classList.add('hidden');
                 
-                if (item.classList.contains('audio-card') && item.classList.contains(subCategory)) {
+                if (item.classList.contains(subCategory)) {
                     item.style.display = 'block';
                     item.classList.remove('hidden');
                 }
             });
         }
+
+        /* ====== كبسولات قل ولا تقل ====== */
+        const linguisticCapsules = [
+            ["تَجْرِبَة", "تَجْرَبَة"], ["مُديرون", "مُدراء"], ["تَخرّج في الجامعة", "تَخرّج من الجامعة"],
+            ["مُبارَك", "مَبْروك"], ["حاز الشيءَ", "حاز على الشيء"], ["الشيء نفسه", "نفس الشيء"],
+            ["ساهم في", "أسهم في"], ["اعتذر إليه", "اعتذر منه"], ["توفِّيَ", "توفَّى"],
+            ["أثّر فيه", "أثّر عليه"], ["مُصادفة", "صُدفة"], ["أجاب عن السؤال", "أجاب على السؤال"],
+            ["بِمَ", "بما"], ["إلامَ", "إلى ما"], ["مُهمّ", "هامّ"],
+            ["التقى به", "التقى معه"], ["سار برفقته", "سار مع رفقته"], ["بقي في مكانه", "بقى في مكانه"],
+            ["نرجو", "نرجوا"], ["فشِل في الامتحان", "فشِل بالامتحان"], ["آنفاً", "سابقاً"],
+            ["إمضاء", "توقيع"], ["كفء", "كفئ"], ["حاجات", "احتياجات"],
+            ["طوال الوقت", "طيلة الوقت"], ["عازب", "أعزب"], ["مُنصرم", "ماضي"],
+            ["مُعدّات", "تجهيزات"], ["ملحوظة", "ملاحظة"], ["لا سيما", "لاسيما"],
+            ["شؤون", "شئون"], ["مسؤول", "مسئول"], ["هيئة", "هيئه"],
+            ["أكفاء (كسر الهمزة)", "أكفاء (فتح الهمزة)"], ["استبدل القديم بالجديد", "استبدل الجديد بالقديم"], ["كافة الناس", "الناس كافة"],
+            ["حتى مَ", "حتى ما"], ["تساؤل", "تساؤلات"], ["فترة", "برهة"],
+            ["أراد به السوء", "أراد له السوء"], ["شغوف بـ", "شغوف في"], ["نقطة ضعف", "نقطة من ضعف"],
+            ["موجود", "مُتواجد"], ["ترأس الجلسة", "رئيس الجلسة"], ["أصغى إليه", "أصغى له"],
+            ["اعتاد الأمر", "اعتاد على الأمر"], ["لم يعبأ به", "لم يبالي به"], ["تحرّى الأمر", "تحرّى عن الأمر"],
+            ["سواء أكان.. أم..", "سواء أكان.. أو.."], ["مِن ثَمّ", "مِن ثُمّ"]
+        ];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('capsules-container');
+            if (container) {
+                linguisticCapsules.forEach(capsule => {
+                    const div = document.createElement('div');
+                    div.className = 'capsule-card';
+                    div.innerHTML = `
+                        <div class="capsule-front"><i class="fas fa-times" style="margin-left:5px;"></i> لا تقل: ${capsule[1]}</div>
+                        <div class="capsule-back"><i class="fas fa-check" style="margin-left:5px;"></i> قـل: ${capsule[0]}</div>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        });
 
         const phrases = ["زفاتكم الفاخرة", "أناشيدكم المدرسية", "مونتاجكم الاحترافي", "هويتكم البصرية"];
         let pIdx = 0, cIdx = 0, isDeleting = false;
