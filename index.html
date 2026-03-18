@@ -45,8 +45,9 @@
         .preloader-hidden { opacity: 0; visibility: hidden; }
 
         /* --- التنسيق العام والنافبار المطور --- */
-        .header { background: #151515; border-bottom: 4px solid var(--gold); line-height: 0; position: relative; z-index: 2; }
-        .header-banner { width: 100%; height: auto; }
+        .header { background: #151515; border-bottom: 4px solid var(--gold); line-height: 0; position: relative; z-index: 2; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        .header-banner { width: 100%; height: auto; max-height: 180px; object-fit: cover; object-position: center; opacity: 0.9; transition: 0.4s ease; }
+        .header:hover .header-banner { opacity: 1; transform: scale(1.01); }
         
         .nav { background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(15px); padding: 15px 5px; text-align: center; position: sticky; top: 0; z-index: 999; border-bottom: 1px solid #333; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
         .nav a { color: white; text-decoration: none; padding: 6px 18px; font-weight: bold; cursor: pointer; transition: 0.4s; font-size: 15px; border: 1px solid var(--gold); border-radius: 12px; background: rgba(0,0,0,0.4); }
@@ -352,61 +353,58 @@
         .light-theme .ticker-item a { color: var(--gold); }
         .light-theme .ticker-item a:hover { color: #fff; text-shadow: 0 0 8px rgba(212,175,55,0.8); }
 
-        /* --- الثيم الفني (Artistic Theme) --- */
+        /* --- الثيم الفني (Artistic Theme - Deep Navy & Teal) --- */
         .artistic-theme body {
-            background: url('https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1920&q=80') no-repeat center fixed;
-            background-size: cover;
-            color: #222;
+            background: linear-gradient(135deg, #091522 0%, #153243 50%, #193845 100%);
+            background-attachment: fixed;
+            color: #e2e8f0;
         }
-        .artistic-theme body::before {
-            content: ''; position: fixed; inset: 0; background: rgba(255,255,255,0.75); backdrop-filter: blur(25px); z-index: -1;
-        }
+        .artistic-theme body::before { display: none; }
         .artistic-theme {
-            --gold: #e91e63; /* وردي/أرجواني مبهج وفني */
-            --gold-light: #f48fb1;
+            --gold: #00d2ff; /* حيوي وأنيق متناسق مع الكحلي */
+            --gold-light: #3a7bd5;
             --bg: transparent;
         }
-        .artistic-theme .header { background: rgba(255,255,255,0.4); border-bottom-color: var(--gold); }
-        .artistic-theme .nav { background: rgba(255, 255, 255, 0.6) !important; backdrop-filter: blur(15px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); border-bottom: 2px solid rgba(255, 255, 255, 0.5); }
-        .artistic-theme .nav a { color: #333; background: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.8); border-radius: 20px; font-weight: 900; }
-        .artistic-theme .nav a:hover, .artistic-theme .nav a.active-link { background: var(--gold); color: #fff; border-color: var(--gold); box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4); }
-        .artistic-theme .nav a.btn-nav-contact { background: linear-gradient(45deg, #e91e63, #ff9a9e); border: none; }
+        .artistic-theme .header { background: rgba(9, 26, 40, 0.3); border-bottom-color: var(--gold); }
+        .artistic-theme .nav { background: rgba(9, 26, 40, 0.8) !important; backdrop-filter: blur(15px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); border-bottom: 2px solid rgba(255, 255, 255, 0.05); }
+        .artistic-theme .nav a { color: #b0bec5; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; font-weight: 900; }
+        .artistic-theme .nav a:hover, .artistic-theme .nav a.active-link { background: var(--gold); color: #000; border-color: var(--gold); box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3); }
+        .artistic-theme .nav a.btn-nav-contact { background: linear-gradient(45deg, #3a7bd5, #00d2ff); border: none; color: #fff; }
         .artistic-theme .stat-box, .artistic-theme .service-box, .artistic-theme .package-card,
         .artistic-theme .testimonial-card, .artistic-theme .faq-item, .artistic-theme .work-card,
         .artistic-theme .atheer-audio-card, .artistic-theme .literary-card, .artistic-theme .poem-clinic,
         .artistic-theme .article-card, .artistic-theme .inspire-card, .artistic-theme .capsule-card,
         .artistic-theme #contact-us-page > div, .artistic-theme #service-detail-view > div,
         .artistic-theme .academic-authority {
-            background: rgba(255, 255, 255, 0.6) !important;
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.8) !important;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05) !important;
+            background: rgba(20, 40, 60, 0.4) !important;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
             border-radius: 20px;
         }
-        .artistic-theme .section-title-frame { background: rgba(255,255,255,0.7); color: var(--gold); border: 2px solid var(--gold); border-radius: 30px; box-shadow: 0 8px 32px rgba(233, 30, 99, 0.15); text-shadow: none; }
+        .artistic-theme .section-title-frame { background: rgba(15, 30, 45, 0.6); color: var(--gold); border: 2px solid var(--gold); border-radius: 30px; box-shadow: 0 8px 32px rgba(0, 210, 255, 0.1); text-shadow: none; }
         .artistic-theme .section-title-frame::before, .artistic-theme .section-title-frame::after { border-color: var(--gold); border-radius: 5px; }
-        .artistic-theme .chart-wrapper, .artistic-theme .main-footer { background: rgba(255,255,255,0.5); backdrop-filter: blur(10px); border-top-color: var(--gold); }
-        .artistic-theme .news-ticker { background: linear-gradient(90deg, #ff9a9e, #fecfef); color: #222; border-bottom: none; box-shadow: 0 2px 15px rgba(0,0,0,0.1); }
-        .artistic-theme .ticker-item a { color: #222; }
-        .artistic-theme .ticker-item a:hover { color: var(--gold); text-shadow: none; }
-        .artistic-theme .service-box::after, .artistic-theme .package-card::after { opacity: 0.1; filter: sepia(1) hue-rotate(-50deg) saturate(3); }
-        .artistic-theme .academic-text p, .artistic-theme .faq-answer, .artistic-theme .literary-card p, .artistic-theme .poem-clinic p, .artistic-theme .footer-col p, .artistic-theme .footer-col a { color: #555; }
-        .artistic-theme h2, .artistic-theme h3, .artistic-theme h4, .artistic-theme h6, .artistic-theme .stat-tit, .artistic-theme .faq-question { color: #222; text-shadow: none; }
-        .artistic-theme .stat-val { color: var(--gold); text-shadow: 0 2px 10px rgba(233, 30, 99, 0.2); }
-        .artistic-theme #preloader { background: #fff; }
+        .artistic-theme .chart-wrapper, .artistic-theme .main-footer { background: rgba(9, 26, 40, 0.5); backdrop-filter: blur(10px); border-top-color: var(--gold); }
+        .artistic-theme .news-ticker { background: linear-gradient(90deg, #3a7bd5, #00d2ff); color: #fff; border-bottom: none; box-shadow: 0 2px 15px rgba(0,0,0,0.3); }
+        .artistic-theme .ticker-item a { color: #fff; }
+        .artistic-theme .ticker-item a:hover { color: #000; text-shadow: none; }
+        .artistic-theme .service-box::after, .artistic-theme .package-card::after { opacity: 0.1; filter: drop-shadow(0 0 10px #00d2ff); }
+        .artistic-theme .academic-text p, .artistic-theme .faq-answer, .artistic-theme .literary-card p, .artistic-theme .poem-clinic p, .artistic-theme .footer-col p, .artistic-theme .footer-col a { color: #90a4ae; }
+        .artistic-theme h2, .artistic-theme h3, .artistic-theme h4, .artistic-theme h6, .artistic-theme .stat-tit, .artistic-theme .faq-question { color: #fff; text-shadow: none; }
+        .artistic-theme .stat-val { color: var(--gold); text-shadow: 0 2px 10px rgba(0, 210, 255, 0.3); }
+        .artistic-theme #preloader { background: #091a28; }
         .artistic-theme .loader-text { color: var(--gold); }
-        .artistic-theme .typing-container { color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .artistic-theme .home-hero { border-color: rgba(255,255,255,0.5); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .artistic-theme .filter-btn { background: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.8); color: #444; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-shadow: none; }
-        .artistic-theme .sub-filter-btn { background: rgba(255,255,255,0.5); color: var(--gold); border-color: var(--gold); }
-        .artistic-theme #about-page p, .artistic-theme #privacy-page p { color: #444 !important; }
-        .artistic-theme .btn-order { background: linear-gradient(45deg, var(--gold), #ff9a9e); color: #fff; box-shadow: 0 4px 15px rgba(233,30,99,0.3); border: none; }
-        .artistic-theme .btn-order:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(233,30,99,0.4); color:#fff; }
-        .artistic-theme .partner-item { color: #444; }
+        .artistic-theme .typing-container { color: #e2e8f0; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+        .artistic-theme .home-hero { border-color: rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .artistic-theme .filter-btn { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: #b0bec5; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-shadow: none; }
+        .artistic-theme .sub-filter-btn { background: rgba(0, 210, 255, 0.1); color: var(--gold); border-color: var(--gold); }
+        .artistic-theme #about-page p, .artistic-theme #privacy-page p { color: #b0bec5 !important; }
+        .artistic-theme .btn-order { background: linear-gradient(45deg, #3a7bd5, #00d2ff); color: #fff; box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2); border: none; }
+        .artistic-theme .btn-order:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 210, 255, 0.4); color:#fff; }
+        .artistic-theme .partner-item { color: #b0bec5; }
         .artistic-theme .partner-item:hover { color: var(--gold); }
-        .artistic-theme .floating-inspire, .artistic-theme .floating-whatsapp { box-shadow: 0 0 15px rgba(233,30,99,0.3); }
-        .artistic-theme .floating-inspire:hover { background: var(--gold); box-shadow: 0 0 25px rgba(233,30,99,0.6); }
-        .artistic-theme .floating-inspire:hover { background: var(--gold); box-shadow: 0 0 25px rgba(233,30,99,0.6); }
+        .artistic-theme .floating-inspire, .artistic-theme .floating-whatsapp { box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
+        .artistic-theme .floating-inspire:hover { background: var(--gold); box-shadow: 0 0 25px rgba(0, 210, 255, 0.5); color:#000; }
 
         /* --- تصميم الهويات والشعارات --- */
         .graphic-id-card {
@@ -436,7 +434,7 @@
         .graphic-id-card:hover img {
             transform: scale(1.08);
         }
-        .artistic-theme .graphic-id-card { background: rgba(255,255,255,0.7) !important; }
+        .artistic-theme .graphic-id-card { background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.2); }
         .light-theme .graphic-id-card { background: #fff !important; }
     </style>
 </head>
@@ -499,7 +497,9 @@
         </div>
     </div>
 
-    <header class="header"><img src="header.png" class="header-banner" onerror="this.style.display='none'"></header>
+    <header class="header" onclick="cinematicSection('home-page')" style="cursor: pointer;" title="الصفحة الرئيسية">
+        <img src="header_with_logo.png" class="header-banner" alt="أثير ساوند" onerror="this.src='header.png'; this.onerror=null;">
+    </header>
 
     <nav class="nav">
         <a onclick="cinematicSection('home-page')" class="active-link" id="nav-home">الرئيسية</a>
@@ -1243,7 +1243,7 @@
                     toggleIcon.style.color = '#f39c12';
                 } else if(theme === 'artistic-theme') {
                     toggleIcon.className = 'fas fa-palette';
-                    toggleIcon.style.color = '#e91e63';
+                    toggleIcon.style.color = '#00d2ff';
                 } else {
                     toggleIcon.className = 'fas fa-moon';
                     toggleIcon.style.color = 'inherit';
