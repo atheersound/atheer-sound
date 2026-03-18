@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const savedThemeTop = localStorage.getItem('theme');
+        if (savedThemeTop === 'light-theme' || savedThemeTop === 'light') {
+            document.documentElement.classList.add('light-theme');
+        } else if (savedThemeTop === 'artistic-theme') {
+            document.documentElement.classList.add('artistic-theme');
+        }
+    </script>
 
     <style>
         :root {
@@ -248,6 +256,188 @@
         .page-section.active { display: block; }
         .btn-back { margin-top: 20px; background: transparent; color: var(--gold); border: 2px solid var(--gold); padding: 12px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Cairo', sans-serif; display: inline-block; text-decoration: none;}
         .btn-back:hover { background: var(--gold); color: #000;}
+
+        /* --- الثيم الفاتح --- */
+        .light-theme body { background-color: #f4f6f9; color: #222; }
+        .light-theme .header { background: #fff; }
+        .light-theme .nav { background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid #ddd; }
+        .light-theme .nav a { color: #222; background: rgba(0,0,0,0.05); border: 1px solid #ccc; }
+        .light-theme .nav a:hover, .light-theme .nav a.active-link { background: var(--gold); color: #000; border-color: var(--gold); }
+        .light-theme .nav a.btn-nav-contact { background: linear-gradient(45deg, var(--gold), #b8860b); color: #000; border: none; }
+        .light-theme .academic-authority { background: linear-gradient(135deg, rgba(212,175,55,0.1), #fff); border-color: #ddd; }
+        .light-theme .academic-text p { color: #555; }
+        .light-theme .stat-box { background: #fff; border-color: #ddd; }
+        .light-theme .stat-tit { color: #666; }
+        .light-theme .chart-wrapper { background: #fff; border-color: #ddd; }
+        .light-theme .section-title-frame { background: #fff; color: var(--gold); border-color: var(--gold); text-shadow: none; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .light-theme .service-box { background: #fff; border-color: #ddd; }
+        .light-theme .service-box h4 { color: #222; }
+        .light-theme .package-card { background: #fff; border-color: #ddd; }
+        .light-theme .package-card ul li { color: #555; }
+        .light-theme .partner-item { color: #555; }
+        .light-theme .partner-item:hover { color: #000; }
+        .light-theme .testimonial-card { background: #fff; border-color: #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .light-theme .testimonial-card p { color: #444; }
+        .light-theme .faq-item { background: #fff; border-color: #ddd; }
+        .light-theme .faq-item.active { background: #fafafa; border-color: var(--gold); }
+        .light-theme .faq-question { color: #222; }
+        .light-theme .faq-answer { color: #555; border-top-color: #eee; }
+        .light-theme .filter-btn { background: #fff; border-color: #ddd; color: #444; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-shadow: none; }
+        .light-theme .sub-filter-btn { background: #f9f9f9; color: var(--gold); border-color: rgba(212, 175, 55, 0.5); }
+        .light-theme .work-card { background: #eee; border-color: #ddd; }
+        .light-theme .atheer-audio-card { background: #fff; border-color: #ddd; }
+        .light-theme .atheer-audio-card h4 { color: #444; }
+        .light-theme .literary-card { background: #fff; border-color: #ddd; }
+        .light-theme .literary-card p { color: #555; }
+        .light-theme .poem-clinic { background: #fff; border-color: var(--gold); border-style: solid; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .light-theme .poem-clinic p { color: #555; }
+        .light-theme .clinic-form input, .light-theme .clinic-form textarea { background: #f9f9f9; border-color: #ddd; color: #222; }
+        .light-theme .article-card, .light-theme .inspire-card { background: #fff; border-color: var(--gold); box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .light-theme #article-body, .light-theme #inspire-text { color: #444; }
+        .light-theme .main-footer { background: #f9f9f9; border-top: 2px solid var(--gold); }
+        .light-theme .footer-col p, .light-theme .footer-col a { color: #555; }
+        .light-theme .footer-content center, .light-theme footer center { color: #777 !important; }
+        .light-theme .social-icons a { background: #fff; border-color: #ddd; color: #333; }
+        .light-theme .capsule-card { background: #fff; border-color: #ddd; }
+        .light-theme .capsule-front { color: #d32f2f; }
+        .light-theme #wa-name, .light-theme #wa-message { background: #f9f9f9 !important; border-color: #ddd !important; color: #222 !important; }
+        .light-theme #contact-us-page > div, 
+        .light-theme #service-detail-view > div { background: #fff !important; border-color: #ddd !important; }
+        .light-theme #service-desc-text { color: #444 !important; }
+        .light-theme .typing-container { color: #eee; }
+        .light-theme .literary-quote { background: #fff; border-color: var(--gold); }
+        .light-theme .literary-quote p { color: #222; }
+        .light-theme .close-article, .light-theme .close-inspire { color: #444; }
+        .light-theme #preloader { background: #f4f6f9; }
+        .light-theme .loader-text { color: #222; }
+        .light-theme #about-page p, .light-theme #privacy-page p { color: #444 !important; }
+
+        /* --- الشريط المتحرك للأخبار --- */
+        .news-ticker {
+            background: linear-gradient(90deg, #d4af37, #b8860b);
+            color: #000;
+            padding: 8px 0;
+            font-size: 15px;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-bottom: 1px solid #000;
+            direction: rtl;
+        }
+        .ticker-track {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100vw;
+            animation: news-ticker-anim 35s linear infinite;
+        }
+        .news-ticker:hover .ticker-track {
+            animation-play-state: paused;
+        }
+        .ticker-item {
+            display: inline-block;
+            padding: 0 40px;
+        }
+        .ticker-item a { color: #000; text-decoration: none; transition: 0.3s; cursor: pointer; }
+        .ticker-item a:hover { color: #fff; text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+        .ticker-item i { margin-left: 8px; color: #111; }
+        @keyframes news-ticker-anim {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100%); }
+        }
+        .light-theme .news-ticker { background: #111; color: var(--gold); border-bottom: 2px solid var(--gold); }
+        .light-theme .ticker-item i { color: var(--gold); }
+        .light-theme .ticker-item a { color: var(--gold); }
+        .light-theme .ticker-item a:hover { color: #fff; text-shadow: 0 0 8px rgba(212,175,55,0.8); }
+
+        /* --- الثيم الفني (Artistic Theme) --- */
+        .artistic-theme body {
+            background: url('https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1920&q=80') no-repeat center fixed;
+            background-size: cover;
+            color: #222;
+        }
+        .artistic-theme body::before {
+            content: ''; position: fixed; inset: 0; background: rgba(255,255,255,0.75); backdrop-filter: blur(25px); z-index: -1;
+        }
+        .artistic-theme {
+            --gold: #e91e63; /* وردي/أرجواني مبهج وفني */
+            --gold-light: #f48fb1;
+            --bg: transparent;
+        }
+        .artistic-theme .header { background: rgba(255,255,255,0.4); border-bottom-color: var(--gold); }
+        .artistic-theme .nav { background: rgba(255, 255, 255, 0.6) !important; backdrop-filter: blur(15px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); border-bottom: 2px solid rgba(255, 255, 255, 0.5); }
+        .artistic-theme .nav a { color: #333; background: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.8); border-radius: 20px; font-weight: 900; }
+        .artistic-theme .nav a:hover, .artistic-theme .nav a.active-link { background: var(--gold); color: #fff; border-color: var(--gold); box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4); }
+        .artistic-theme .nav a.btn-nav-contact { background: linear-gradient(45deg, #e91e63, #ff9a9e); border: none; }
+        .artistic-theme .stat-box, .artistic-theme .service-box, .artistic-theme .package-card,
+        .artistic-theme .testimonial-card, .artistic-theme .faq-item, .artistic-theme .work-card,
+        .artistic-theme .atheer-audio-card, .artistic-theme .literary-card, .artistic-theme .poem-clinic,
+        .artistic-theme .article-card, .artistic-theme .inspire-card, .artistic-theme .capsule-card,
+        .artistic-theme #contact-us-page > div, .artistic-theme #service-detail-view > div,
+        .artistic-theme .academic-authority {
+            background: rgba(255, 255, 255, 0.6) !important;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05) !important;
+            border-radius: 20px;
+        }
+        .artistic-theme .section-title-frame { background: rgba(255,255,255,0.7); color: var(--gold); border: 2px solid var(--gold); border-radius: 30px; box-shadow: 0 8px 32px rgba(233, 30, 99, 0.15); text-shadow: none; }
+        .artistic-theme .section-title-frame::before, .artistic-theme .section-title-frame::after { border-color: var(--gold); border-radius: 5px; }
+        .artistic-theme .chart-wrapper, .artistic-theme .main-footer { background: rgba(255,255,255,0.5); backdrop-filter: blur(10px); border-top-color: var(--gold); }
+        .artistic-theme .news-ticker { background: linear-gradient(90deg, #ff9a9e, #fecfef); color: #222; border-bottom: none; box-shadow: 0 2px 15px rgba(0,0,0,0.1); }
+        .artistic-theme .ticker-item a { color: #222; }
+        .artistic-theme .ticker-item a:hover { color: var(--gold); text-shadow: none; }
+        .artistic-theme .service-box::after, .artistic-theme .package-card::after { opacity: 0.1; filter: sepia(1) hue-rotate(-50deg) saturate(3); }
+        .artistic-theme .academic-text p, .artistic-theme .faq-answer, .artistic-theme .literary-card p, .artistic-theme .poem-clinic p, .artistic-theme .footer-col p, .artistic-theme .footer-col a { color: #555; }
+        .artistic-theme h2, .artistic-theme h3, .artistic-theme h4, .artistic-theme h6, .artistic-theme .stat-tit, .artistic-theme .faq-question { color: #222; text-shadow: none; }
+        .artistic-theme .stat-val { color: var(--gold); text-shadow: 0 2px 10px rgba(233, 30, 99, 0.2); }
+        .artistic-theme #preloader { background: #fff; }
+        .artistic-theme .loader-text { color: var(--gold); }
+        .artistic-theme .typing-container { color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .artistic-theme .home-hero { border-color: rgba(255,255,255,0.5); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .artistic-theme .filter-btn { background: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.8); color: #444; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-shadow: none; }
+        .artistic-theme .sub-filter-btn { background: rgba(255,255,255,0.5); color: var(--gold); border-color: var(--gold); }
+        .artistic-theme #about-page p, .artistic-theme #privacy-page p { color: #444 !important; }
+        .artistic-theme .btn-order { background: linear-gradient(45deg, var(--gold), #ff9a9e); color: #fff; box-shadow: 0 4px 15px rgba(233,30,99,0.3); border: none; }
+        .artistic-theme .btn-order:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(233,30,99,0.4); color:#fff; }
+        .artistic-theme .partner-item { color: #444; }
+        .artistic-theme .partner-item:hover { color: var(--gold); }
+        .artistic-theme .floating-inspire, .artistic-theme .floating-whatsapp { box-shadow: 0 0 15px rgba(233,30,99,0.3); }
+        .artistic-theme .floating-inspire:hover { background: var(--gold); box-shadow: 0 0 25px rgba(233,30,99,0.6); }
+        .artistic-theme .floating-inspire:hover { background: var(--gold); box-shadow: 0 0 25px rgba(233,30,99,0.6); }
+
+        /* --- تصميم الهويات والشعارات --- */
+        .graphic-id-card {
+            background: #fff;
+            padding: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(212,175,55,0.1);
+            transition: 0.3s;
+        }
+        .graphic-id-card:hover {
+            box-shadow: 0 8px 25px rgba(212,175,55,0.3);
+            border-color: #000;
+        }
+        .graphic-id-card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+        .graphic-id-card:hover img {
+            transform: scale(1.08);
+        }
+        .artistic-theme .graphic-id-card { background: rgba(255,255,255,0.7) !important; }
+        .light-theme .graphic-id-card { background: #fff !important; }
     </style>
 </head>
 <body>
@@ -295,6 +485,20 @@
         </div>
     </div>
 
+    <div class="video-modal" id="imageModal" style="display: none; z-index: 25000; flex-direction: column;" onclick="if(event.target === this) closeImageModal()">
+        <img id="modalImage" src="" style="max-width: 90%; max-height: 85vh; border-radius: 15px; border: 3px solid var(--gold); object-fit: contain; background: #fff;">
+        <button onclick="closeImageModal()" style="margin-top: 20px; background: var(--gold); color: #000; border: none; padding: 10px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; font-family: 'Cairo';">إغلاق <i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="news-ticker">
+        <div class="ticker-track">
+            <div class="ticker-item"><i class="fas fa-bullhorn"></i> أهلاً بكم في الموقع الرسمي لأثير ساوند.. منصتكم الأولى للإنتاج الفني والأكاديمي.</div>
+            <div class="ticker-item"><i class="fas fa-star"></i> <a onclick="scrollToHomeSection('packages-section', 'nav-packages')">جديدنا: تعرف على باقاتنا الحصرية بأسعار تنافسية!</a></div>
+            <div class="ticker-item"><i class="fas fa-music"></i> <a onclick="cinematicSection('works-page')">استمع الآن لأحدث أعمالنا الفنية في معرض الأعمال.</a></div>
+            <div class="ticker-item"><i class="fas fa-feather-pointed"></i> أضفنا سلسلة "قل ولا تقل" للإعلاميين في الركن الأدبي لتعزيز مهاراتكم اللغوية.</div>
+        </div>
+    </div>
+
     <header class="header"><img src="header.png" class="header-banner" onerror="this.style.display='none'"></header>
 
     <nav class="nav">
@@ -305,6 +509,7 @@
         <a onclick="cinematicSection('works-page')" id="nav-works">معرض الأعمال</a>
         <a onclick="cinematicSection('literary-page')" id="nav-literary">الركن الأدبي</a>
         <a onclick="cinematicSection('about-page')" id="nav-about">من نحن</a>
+        <a id="theme-toggle" onclick="toggleTheme()" style="padding: 6px 15px; font-size: 18px;"><i class="fas fa-moon"></i></a>
         <a onclick="cinematicSection('contact-us-page')" id="nav-contact" class="btn-nav-contact">اطلب خدمتك <i class="fab fa-whatsapp"></i></a>
     </nav>
 
@@ -533,6 +738,38 @@
                 <div class="work-card audio-card audio-voiceover atheer-audio-card"><div class="audio-content"><i class="fas fa-microphone-lines main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>تعليق صوتي 3</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/ir24pkufd22ezdaxijon0/.mp3?rlkey=a6m37tcuvgc2wgdl935b9p1hp&st=8lqy6d5t&raw=1" type="audio/mpeg"></audio></div></div>
                 <div class="work-card audio-card audio-voiceover atheer-audio-card"><div class="audio-content"><i class="fas fa-microphone-lines main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>تعليق صوتي 4</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/0q5xxo4k0i5t9b67i9nc7/.mp3?rlkey=tfl4cj5zgdrnng6dira5h55is&st=ncpqgx56&raw=1" type="audio/mpeg"></audio></div></div>
 
+                <!-- الهويات والشعارات -->
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/18.webp')"><img src="images/18.webp" loading="lazy" alt="تصميم هوية 18"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/Dental-care.webp')"><img src="images/Dental-care.webp" loading="lazy" alt="تصميم هوية Dental care"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/Israa.webp')"><img src="images/Israa.webp" loading="lazy" alt="تصميم هوية Israa"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/alamal-bank.webp')"><img src="images/alamal-bank.webp" loading="lazy" alt="تصميم هوية alamal bank"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/alihsan.webp')"><img src="images/alihsan.webp" loading="lazy" alt="تصميم هوية alihsan"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/althawaq.webp')"><img src="images/althawaq.webp" loading="lazy" alt="تصميم هوية althawaq"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/amohasan.webp')"><img src="images/amohasan.webp" loading="lazy" alt="تصميم هوية amohasan"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/as_result.webp')"><img src="images/as_result.webp" loading="lazy" alt="تصميم هوية as result"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/atheeraladab.webp')"><img src="images/atheeraladab.webp" loading="lazy" alt="تصميم هوية atheeraladab"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/awj.webp')"><img src="images/awj.webp" loading="lazy" alt="تصميم هوية awj"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/binOmar.webp')"><img src="images/binOmar.webp" loading="lazy" alt="تصميم هوية binOmar"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/bright.webp')"><img src="images/bright.webp" loading="lazy" alt="تصميم هوية bright"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/farabi.webp')"><img src="images/farabi.webp" loading="lazy" alt="تصميم هوية farabi"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/forsan.webp')"><img src="images/forsan.webp" loading="lazy" alt="تصميم هوية forsan"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/iconic.webp')"><img src="images/iconic.webp" loading="lazy" alt="تصميم هوية iconic"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/joman.webp')"><img src="images/joman.webp" loading="lazy" alt="تصميم هوية joman"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/lam7.webp')"><img src="images/lam7.webp" loading="lazy" alt="تصميم هوية lam7"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/manar.webp')"><img src="images/manar.webp" loading="lazy" alt="تصميم هوية manar"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/manarat_alfikr.webp')"><img src="images/manarat_alfikr.webp" loading="lazy" alt="تصميم هوية manarat alfikr"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/manarat_amaarifa.webp')"><img src="images/manarat_amaarifa.webp" loading="lazy" alt="تصميم هوية manarat amaarifa"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/motasaim.webp')"><img src="images/motasaim.webp" loading="lazy" alt="تصميم هوية motasaim"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/najaz.webp')"><img src="images/najaz.webp" loading="lazy" alt="تصميم هوية najaz"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/namaa.webp')"><img src="images/namaa.webp" loading="lazy" alt="تصميم هوية namaa"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/nor.webp')"><img src="images/nor.webp" loading="lazy" alt="تصميم هوية nor"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/rakaez.webp')"><img src="images/rakaez.webp" loading="lazy" alt="تصميم هوية rakaez"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/rikaz.webp')"><img src="images/rikaz.webp" loading="lazy" alt="تصميم هوية rikaz"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/salah_uni.webp')"><img src="images/salah_uni.webp" loading="lazy" alt="تصميم هوية salah uni"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/shomos_school.webp')"><img src="images/shomos_school.webp" loading="lazy" alt="تصميم هوية shomos school"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/somoo.webp')"><img src="images/somoo.webp" loading="lazy" alt="تصميم هوية somoo"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/sory_cloths.webp')"><img src="images/sory_cloths.webp" loading="lazy" alt="تصميم هوية sory cloths"></div>
+                <div class="work-card graphic-card graphic-id graphic-id-card" onclick="openImageModal('images/thaman.webp')"><img src="images/thaman.webp" loading="lazy" alt="تصميم هوية thaman"></div>
             </div>
         </div>
 
@@ -966,6 +1203,64 @@
         }
 
         function sendToWhatsApp(e) { e.preventDefault(); window.open(`https://wa.me/967770080131?text=المرسل: ${document.getElementById('wa-name').value}%0Aالرسالة: ${document.getElementById('wa-message').value}`, '_blank'); }
+
+        function openImageModal(src) {
+            document.getElementById('modalImage').src = src;
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+            document.getElementById('modalImage').src = '';
+            document.body.style.overflow = '';
+        }
+
+        // Theme Toggle Logic
+        const themes = ['dark-theme', 'light-theme', 'artistic-theme'];
+        let currentThemeIndex = 0;
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.remove('light-theme', 'artistic-theme');
+            
+            currentThemeIndex = (currentThemeIndex + 1) % 3;
+            const newTheme = themes[currentThemeIndex];
+            
+            if(newTheme !== 'dark-theme') {
+                html.classList.add(newTheme);
+            }
+            
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const toggleIcon = document.querySelector('#theme-toggle i');
+            if(toggleIcon) {
+                if(theme === 'light-theme' || theme === 'light') {
+                    toggleIcon.className = 'fas fa-sun';
+                    toggleIcon.style.color = '#f39c12';
+                } else if(theme === 'artistic-theme') {
+                    toggleIcon.className = 'fas fa-palette';
+                    toggleIcon.style.color = '#e91e63';
+                } else {
+                    toggleIcon.className = 'fas fa-moon';
+                    toggleIcon.style.color = 'inherit';
+                }
+            }
+        }
+
+        // Initialize theme on load
+        window.addEventListener('DOMContentLoaded', () => {
+            let savedTheme = localStorage.getItem('theme') || 'dark-theme';
+            if (savedTheme === 'light') savedTheme = 'light-theme';
+            
+            currentThemeIndex = themes.indexOf(savedTheme);
+            if(currentThemeIndex === -1) currentThemeIndex = 0;
+            
+            updateThemeIcon(savedTheme);
+        });
     </script>
 </body>
 </html>
