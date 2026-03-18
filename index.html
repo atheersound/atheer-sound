@@ -10,9 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const savedThemeTop = localStorage.getItem('theme');
-        if (savedThemeTop === 'light-theme' || savedThemeTop === 'light') {
-            document.documentElement.classList.add('light-theme');
-        } else if (savedThemeTop === 'artistic-theme') {
+        if (savedThemeTop === 'artistic-theme') {
             document.documentElement.classList.add('artistic-theme');
         }
     </script>
@@ -258,60 +256,6 @@
         .btn-back { margin-top: 20px; background: transparent; color: var(--gold); border: 2px solid var(--gold); padding: 12px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Cairo', sans-serif; display: inline-block; text-decoration: none;}
         .btn-back:hover { background: var(--gold); color: #000;}
 
-        /* --- الثيم الفاتح --- */
-        .light-theme body { background-color: #f4f6f9; color: #222; }
-        .light-theme .header { background: #fff; }
-        .light-theme .nav { background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid #ddd; }
-        .light-theme .nav a { color: #222; background: rgba(0,0,0,0.05); border: 1px solid #ccc; }
-        .light-theme .nav a:hover, .light-theme .nav a.active-link { background: var(--gold); color: #000; border-color: var(--gold); }
-        .light-theme .nav a.btn-nav-contact { background: linear-gradient(45deg, var(--gold), #b8860b); color: #000; border: none; }
-        .light-theme .academic-authority { background: linear-gradient(135deg, rgba(212,175,55,0.1), #fff); border-color: #ddd; }
-        .light-theme .academic-text p { color: #555; }
-        .light-theme .stat-box { background: #fff; border-color: #ddd; }
-        .light-theme .stat-tit { color: #666; }
-        .light-theme .chart-wrapper { background: #fff; border-color: #ddd; }
-        .light-theme .section-title-frame { background: #fff; color: var(--gold); border-color: var(--gold); text-shadow: none; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .light-theme .service-box { background: #fff; border-color: #ddd; }
-        .light-theme .service-box h4 { color: #222; }
-        .light-theme .package-card { background: #fff; border-color: #ddd; }
-        .light-theme .package-card ul li { color: #555; }
-        .light-theme .partner-item { color: #555; }
-        .light-theme .partner-item:hover { color: #000; }
-        .light-theme .testimonial-card { background: #fff; border-color: #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .light-theme .testimonial-card p { color: #444; }
-        .light-theme .faq-item { background: #fff; border-color: #ddd; }
-        .light-theme .faq-item.active { background: #fafafa; border-color: var(--gold); }
-        .light-theme .faq-question { color: #222; }
-        .light-theme .faq-answer { color: #555; border-top-color: #eee; }
-        .light-theme .filter-btn { background: #fff; border-color: #ddd; color: #444; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-shadow: none; }
-        .light-theme .sub-filter-btn { background: #f9f9f9; color: var(--gold); border-color: rgba(212, 175, 55, 0.5); }
-        .light-theme .work-card { background: #eee; border-color: #ddd; }
-        .light-theme .atheer-audio-card { background: #fff; border-color: #ddd; }
-        .light-theme .atheer-audio-card h4 { color: #444; }
-        .light-theme .literary-card { background: #fff; border-color: #ddd; }
-        .light-theme .literary-card p { color: #555; }
-        .light-theme .poem-clinic { background: #fff; border-color: var(--gold); border-style: solid; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .light-theme .poem-clinic p { color: #555; }
-        .light-theme .clinic-form input, .light-theme .clinic-form textarea { background: #f9f9f9; border-color: #ddd; color: #222; }
-        .light-theme .article-card, .light-theme .inspire-card { background: #fff; border-color: var(--gold); box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
-        .light-theme #article-body, .light-theme #inspire-text { color: #444; }
-        .light-theme .main-footer { background: #f9f9f9; border-top: 2px solid var(--gold); }
-        .light-theme .footer-col p, .light-theme .footer-col a { color: #555; }
-        .light-theme .footer-content center, .light-theme footer center { color: #777 !important; }
-        .light-theme .social-icons a { background: #fff; border-color: #ddd; color: #333; }
-        .light-theme .capsule-card { background: #fff; border-color: #ddd; }
-        .light-theme .capsule-front { color: #d32f2f; }
-        .light-theme #wa-name, .light-theme #wa-message { background: #f9f9f9 !important; border-color: #ddd !important; color: #222 !important; }
-        .light-theme #contact-us-page > div, 
-        .light-theme #service-detail-view > div { background: #fff !important; border-color: #ddd !important; }
-        .light-theme #service-desc-text { color: #444 !important; }
-        .light-theme .typing-container { color: #eee; }
-        .light-theme .literary-quote { background: #fff; border-color: var(--gold); }
-        .light-theme .literary-quote p { color: #222; }
-        .light-theme .close-article, .light-theme .close-inspire { color: #444; }
-        .light-theme #preloader { background: #f4f6f9; }
-        .light-theme .loader-text { color: #222; }
-        .light-theme #about-page p, .light-theme #privacy-page p { color: #444 !important; }
 
         /* --- الشريط المتحرك للأخبار --- */
         .news-ticker {
@@ -348,10 +292,7 @@
             0% { transform: translateX(0); }
             100% { transform: translateX(100%); }
         }
-        .light-theme .news-ticker { background: #111; color: var(--gold); border-bottom: 2px solid var(--gold); }
-        .light-theme .ticker-item i { color: var(--gold); }
-        .light-theme .ticker-item a { color: var(--gold); }
-        .light-theme .ticker-item a:hover { color: #fff; text-shadow: 0 0 8px rgba(212,175,55,0.8); }
+
 
         /* --- الثيم الفني (Artistic Theme - Deep Navy & Teal) --- */
         .artistic-theme body {
@@ -435,7 +376,6 @@
             transform: scale(1.08);
         }
         .artistic-theme .graphic-id-card { background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.2); }
-        .light-theme .graphic-id-card { background: #fff !important; }
     </style>
 </head>
 <body>
@@ -1217,17 +1157,17 @@
         }
 
         // Theme Toggle Logic
-        const themes = ['dark-theme', 'light-theme', 'artistic-theme'];
+        const themes = ['dark-theme', 'artistic-theme'];
         let currentThemeIndex = 0;
 
         function toggleTheme() {
             const html = document.documentElement;
-            html.classList.remove('light-theme', 'artistic-theme');
+            html.classList.remove('artistic-theme');
             
-            currentThemeIndex = (currentThemeIndex + 1) % 3;
+            currentThemeIndex = (currentThemeIndex + 1) % 2;
             const newTheme = themes[currentThemeIndex];
             
-            if(newTheme !== 'dark-theme') {
+            if(newTheme === 'artistic-theme') {
                 html.classList.add(newTheme);
             }
             
@@ -1238,10 +1178,7 @@
         function updateThemeIcon(theme) {
             const toggleIcon = document.querySelector('#theme-toggle i');
             if(toggleIcon) {
-                if(theme === 'light-theme' || theme === 'light') {
-                    toggleIcon.className = 'fas fa-sun';
-                    toggleIcon.style.color = '#f39c12';
-                } else if(theme === 'artistic-theme') {
+                if(theme === 'artistic-theme') {
                     toggleIcon.className = 'fas fa-palette';
                     toggleIcon.style.color = '#00d2ff';
                 } else {
@@ -1254,7 +1191,7 @@
         // Initialize theme on load
         window.addEventListener('DOMContentLoaded', () => {
             let savedTheme = localStorage.getItem('theme') || 'dark-theme';
-            if (savedTheme === 'light') savedTheme = 'light-theme';
+            if (savedTheme === 'light-theme' || savedTheme === 'light') savedTheme = 'dark-theme';
             
             currentThemeIndex = themes.indexOf(savedTheme);
             if(currentThemeIndex === -1) currentThemeIndex = 0;
