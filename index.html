@@ -460,6 +460,31 @@
             transform: scale(1.08);
         }
         .artistic-theme .graphic-id-card { background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.2); }
+
+        /* --- القائمة الجانبية المضافة --- */
+        .main-layout-container { display: flex; gap: 30px; align-items: flex-start; max-width: 1400px; }
+        .side-menu { width: 250px; flex-shrink: 0; position: sticky; top: 90px; max-height: calc(100vh - 120px); overflow-y: auto; background: rgba(15, 15, 15, 0.95); border: 1px solid #333; border-radius: 15px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-left: 3px solid var(--gold); }
+        .side-menu::-webkit-scrollbar { width: 6px; }
+        .side-menu::-webkit-scrollbar-track { background: transparent; }
+        .side-menu::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 10px; }
+        .side-menu::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+        .artistic-theme .side-menu { background: rgba(20, 40, 60, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3px solid var(--gold); }
+        .side-menu-title { color: var(--gold); margin-top: 0; margin-bottom: 20px; font-size: 18px; text-align: center; font-weight: 900; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .side-menu-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+        .side-menu-list a { color: #ddd; text-decoration: none; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; background: rgba(255,255,255,0.02); }
+        .side-menu-list a:hover, .side-menu-list a.active-link { background: rgba(212,175,55,0.1); color: var(--gold); transform: translateX(-5px); }
+        .artistic-theme .side-menu-list a:hover, .artistic-theme .side-menu-list a.active-link { background: rgba(0,210,255,0.1); color: var(--gold); }
+        .side-menu-list i { width: 20px; text-align: center; color: var(--gold); font-size: 16px; }
+        .side-btn-contact { background: linear-gradient(45deg, var(--gold), #b8860b) !important; color: #000 !important; justify-content: center; margin-top: 10px; animation: pulse-nav 2s infinite; }
+        .side-btn-contact i { color: #000 !important; }
+        .side-btn-contact:hover { transform: scale(1.05) !important; background: #fff !important; animation: none; }
+        .artistic-theme .side-btn-contact { background: linear-gradient(45deg, #3a7bd5, #00d2ff) !important; color: #fff !important; }
+        .artistic-theme .side-btn-contact i { color: #fff !important; }
+        .page-content-wrapper { flex: 1; min-width: 0; width: 100%; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @media (max-width: 900px) {
+            .main-layout-container { flex-direction: column; }
+            .side-menu { width: 100%; position: static; border-left: none; border-bottom: 3px solid var(--gold); }
+        }
     </style>
 </head>
 <body>
@@ -540,9 +565,6 @@
 
     <nav class="nav">
         <a onclick="cinematicSection('home-page')" class="active-link" id="nav-home">الرئيسية</a>
-        <a onclick="scrollToHomeSection('packages-section', 'nav-packages')" id="nav-packages">باقاتنا</a>
-        <a onclick="scrollToHomeSection('partners-section', 'nav-partners')" id="nav-partners">شركاء النجاح</a>
-        <a onclick="scrollToHomeSection('faq-section', 'nav-faq')" id="nav-faq">الأسئلة الشائعة</a>
         <a onclick="cinematicSection('works-page')" id="nav-works">معرض الأعمال</a>
         <a onclick="cinematicSection('literary-page')" id="nav-literary">الركن الأدبي</a>
         <a onclick="cinematicSection('about-page')" id="nav-about">من نحن</a>
@@ -552,7 +574,26 @@
 
     <div class="live-audio-waves" id="waveBar"></div>
 
-    <div class="container" id="main-container">
+    <div class="container main-layout-container" id="main-layout-container">
+        
+        <!-- القائمة الجانبية -->
+        <aside class="side-menu">
+            <h3 class="side-menu-title">روابط سريعة</h3>
+            <ul class="side-menu-list">
+                <li><a onclick="cinematicSection('home-page')" id="side-home" class="active-link"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a onclick="scrollToHomeSection('packages-section', 'nav-packages')" id="side-packages"><i class="fas fa-crown"></i> باقاتنا</a></li>
+                <li><a onclick="scrollToHomeSection('partners-section', 'nav-partners')" id="side-partners"><i class="fas fa-handshake"></i> شركاء النجاح</a></li>
+                <li><a onclick="cinematicSection('faq-page')" id="side-faq"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a></li>
+                <li><a onclick="cinematicSection('works-page')" id="side-works"><i class="fas fa-photo-video"></i> معرض الأعمال</a></li>
+                <li><a onclick="cinematicSection('literary-page')" id="side-literary"><i class="fas fa-book"></i> الركن الأدبي</a></li>
+                <li><a onclick="cinematicSection('about-page')" id="side-about"><i class="fas fa-info-circle"></i> من نحن</a></li>
+                <li><a onclick="cinematicSection('privacy-page')" id="side-privacy"><i class="fas fa-shield-alt"></i> سياسة الخصوصية</a></li>
+                <li><a onclick="cinematicSection('contact-us-page')" id="side-contact" class="side-btn-contact"><i class="fab fa-whatsapp"></i> اطلب خدمتك</a></li>
+            </ul>
+        </aside>
+
+        <!-- محتوى الصفحة -->
+        <div class="page-content-wrapper" id="main-container">
         <div id="home-page" class="page-section active">
             <div class="home-hero">
                 <h2>أثير ساوند للإنتاج الفني</h2>
@@ -637,7 +678,10 @@
                 <div class="testimonial-card" id="testim-8"><h6>مدارس النخبة النموذجية</h6><div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"الإنتاج الصوتي يجمع بين الذوق الرفيع والتقنية الحديثة باحترافية."</p></div>
             </div>
 
-            <div class="section-title-wrapper" id="faq-section" style="margin-top: 50px;"><h2 class="section-title-frame">الأسئلة الشائعة</h2></div>
+        </div>
+
+        <div id="faq-page" class="page-section">
+            <div class="section-title-wrapper" id="faq-section" style="margin-top: 10px;"><h2 class="section-title-frame">الأسئلة الشائعة</h2></div>
             
             <div class="faq-grid">
                 <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><div class="faq-q-content"><i class="fas fa-stopwatch"></i> مدة تسليم الأعمال؟</div><i class="fas fa-chevron-down toggle-icon"></i></div><div class="faq-answer">يتم تسليم معظم الأعمال خلال 2 إلى 5 أيام عمل، مع توفر خيار التسليم العاجل للمستعجلين.</div></div>
@@ -659,7 +703,7 @@
                 <button class="filter-btn active" onclick="filterWorks('all', this)">الكل</button>
                 <button class="filter-btn" onclick="filterWorks('audio', this)">الإنتاج الصوتي</button>
                 <button class="filter-btn" onclick="filterWorks('video', this)">المونتاج المرئي</button>
-                <button class="filter-btn" onclick="filterWorks('graphic', this)">التصميم والجرافيكس</button>
+                <button class="filter-btn" onclick="filterWorks('graphic', this)">الجرافيكس</button>
                 <button class="filter-btn" onclick="filterWorks('lit-acad', this)">الأدبية والأكاديمية</button>
                 <button class="filter-btn" onclick="filterWorks('web-app', this)">ويب وتطبيقات</button>
                 <button class="filter-btn" onclick="filterWorks('other', this)">أخرى</button>
@@ -927,6 +971,7 @@
             </div>
         </div>
     </div>
+    </div>
 
     <footer class="main-footer">
         <div class="footer-content">
@@ -978,18 +1023,23 @@
     </div>
 
     <script>
+        let statsChartInstance = null;
         window.addEventListener('DOMContentLoaded', () => {
             const ctx = document.getElementById('statsChart');
             if(ctx) {
-                new Chart(ctx.getContext('2d'), {
+                const isArtistic = document.documentElement.classList.contains('artistic-theme');
+                const bgColor = isArtistic ? 'rgba(0, 210, 255, 0.7)' : 'rgba(212, 175, 55, 0.7)';
+                const brColor = isArtistic ? '#00d2ff' : '#d4af37';
+
+                statsChartInstance = new Chart(ctx.getContext('2d'), {
                     type: 'bar',
                     data: {
                         labels: ['أعمال فنية منتجة', 'مدارس ومؤسسات', 'أوبريت وزفة حصرية', 'سنوات التميز'],
                         datasets: [{
                             label: 'إحصائيات أثير ساوند',
                             data: [300, 100, 50, 3],
-                            backgroundColor: 'rgba(212, 175, 55, 0.7)',
-                            borderColor: '#d4af37',
+                            backgroundColor: bgColor,
+                            borderColor: brColor,
                             borderWidth: 2,
                             borderRadius: 8,
                             hoverBackgroundColor: '#fff'
@@ -1001,7 +1051,7 @@
                         plugins: { legend: { display: false } },
                         scales: {
                             y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#ccc', font: {family: 'Cairo'} } },
-                            x: { grid: { display: false }, ticks: { color: '#d4af37', font: {family: 'Cairo', weight: 'bold', size: 14} } }
+                            x: { grid: { display: false }, ticks: { color: brColor, font: {family: 'Cairo', weight: 'bold', size: 14} } }
                         },
                         animation: { duration: 2000, easing: 'easeOutQuart' }
                     }
@@ -1249,6 +1299,11 @@
         function updateNav(navId) {
             document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active-link'));
             if(navId && document.getElementById(navId)) document.getElementById(navId).classList.add('active-link');
+            document.querySelectorAll('.side-menu-list a').forEach(a => a.classList.remove('active-link'));
+            if(navId) {
+                const sideId = navId.replace('nav-', 'side-');
+                if(document.getElementById(sideId)) document.getElementById(sideId).classList.add('active-link');
+            }
         }
 
         function openContactModal(country) {
@@ -1442,12 +1497,18 @@
             document.getElementById(id).classList.add('active');
             
             document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active-link'));
+            document.querySelectorAll('.side-menu-list a').forEach(a => a.classList.remove('active-link'));
+            
             const navMap = {
                 'home-page':'nav-home', 'works-page':'nav-works', 'contact-us-page':'nav-contact',
                 'about-page':'nav-about', 'literary-page':'nav-literary', 'service-detail-view':'nav-home',
-                'privacy-page':'nav-home'
+                'privacy-page':'nav-privacy', 'faq-page':'nav-faq'
             };
-            if(navMap[id]) document.getElementById(navMap[id]).classList.add('active-link');
+            if(navMap[id]) {
+                if(document.getElementById(navMap[id])) document.getElementById(navMap[id]).classList.add('active-link');
+                const sideId = navMap[id].replace('nav-', 'side-');
+                if(document.getElementById(sideId)) document.getElementById(sideId).classList.add('active-link');
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -1482,6 +1543,16 @@
             
             localStorage.setItem('theme', newTheme);
             updateThemeIcon(newTheme);
+
+            if (statsChartInstance) {
+                const isArtistic = newTheme === 'artistic-theme';
+                const bgColor = isArtistic ? 'rgba(0, 210, 255, 0.7)' : 'rgba(212, 175, 55, 0.7)';
+                const brColor = isArtistic ? '#00d2ff' : '#d4af37';
+                statsChartInstance.data.datasets[0].backgroundColor = bgColor;
+                statsChartInstance.data.datasets[0].borderColor = brColor;
+                statsChartInstance.options.scales.x.ticks.color = brColor;
+                statsChartInstance.update();
+            }
         }
 
         function updateThemeIcon(theme) {
