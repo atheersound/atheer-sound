@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
@@ -258,17 +259,56 @@
         .close-video { top: -50px; left: 0; color: #fff; font-size: 30px; }
         .close-article:hover, .close-inspire:hover, .close-video:hover { color: #ff4d4d; }
 
-        .main-footer { background: #080808; padding: 80px 20px 40px; border-top: 2px solid var(--gold); margin-top: 80px; position: relative; z-index: 2; }
-        .footer-content { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
-        .footer-col h3 { color: var(--gold); border-right: 4px solid var(--gold); padding-right: 15px; margin-bottom: 25px; font-weight: 900; }
-        .footer-col p, .footer-col a { color: #aaa; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.3s; cursor: pointer; }
-        .footer-col a:hover { color: var(--gold); }
-        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
-        .social-icons a { width: 40px; height: 40px; background: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 19px; transition: 0.4s ease; border: 1px solid #333; }
-        .social-icons a.fa-whatsapp-btn:hover { background: #25D366; }
-        .social-icons a.fa-youtube-btn:hover { background: #FF0000; }
-        .social-icons a.fa-telegram-btn:hover { background: #0088cc; }
-        .social-icons a.fa-envelope-btn:hover { background: #EA4335; }
+        .main-footer { background: #080808; padding: 80px 20px 0; border-top: 2px solid var(--gold); margin-top: 80px; position: relative; z-index: 2; }
+
+        /* ====== Footer Redesign ====== */
+        .footer-wave { line-height: 0; margin-bottom: -2px; display: none; }
+        .footer-inner { max-width: 1300px; margin: auto; display: grid; grid-template-columns: 2fr 1.5fr 1fr 1.5fr; gap: 40px; padding: 60px 20px 50px; }
+        @media (max-width: 1100px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px)  { .footer-inner { grid-template-columns: 1fr; gap: 30px; padding: 40px 20px; } }
+
+        .footer-logo-text { display: flex; flex-direction: column; margin-bottom: 18px; }
+        .footer-logo-ar { font-size: 32px; font-weight: 900; color: var(--gold); line-height: 1; letter-spacing: 2px; text-shadow: 0 0 20px rgba(212,175,55,0.4); }
+        .footer-logo-en { font-size: 11px; letter-spacing: 6px; color: #555; font-weight: bold; margin-top: 4px; }
+        .footer-tagline { color: #666; font-size: 14px; line-height: 1.9; margin-bottom: 25px; max-width: 280px; }
+        .footer-social { display: flex; gap: 10px; flex-wrap: wrap; }
+        .fsoc-btn { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: 0.3s; border: 1px solid #222; color: #888; background: #111; text-decoration: none; }
+        .fsoc-btn:hover { transform: translateY(-4px); }
+        .fsoc-wa:hover  { background: #25D366; color: #fff; border-color: #25D366; box-shadow: 0 5px 15px rgba(37,211,102,0.4); }
+        .fsoc-wa2:hover { background: #128C7E; color: #fff; border-color: #128C7E; box-shadow: 0 5px 15px rgba(18,140,126,0.4); }
+        .fsoc-yt:hover  { background: #FF0000; color: #fff; border-color: #FF0000; box-shadow: 0 5px 15px rgba(255,0,0,0.4); }
+        .fsoc-tg:hover  { background: #0088cc; color: #fff; border-color: #0088cc; box-shadow: 0 5px 15px rgba(0,136,204,0.4); }
+        .fsoc-mail:hover{ background: #EA4335; color: #fff; border-color: #EA4335; box-shadow: 0 5px 15px rgba(234,67,53,0.4); }
+
+        .footer-col-title { color: var(--gold); font-size: 15px; font-weight: 900; margin: 0 0 20px 0; padding-bottom: 10px; border-bottom: 1px solid rgba(212,175,55,0.15); display: flex; align-items: center; gap: 8px; }
+        .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links li { color: #666; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .footer-links li i { color: var(--gold); font-size: 11px; }
+        .footer-links li:hover { color: var(--gold); transform: translateX(-5px); }
+
+        .footer-contact-item { display: flex; align-items: center; gap: 15px; padding: 12px 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.08); border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: 0.3s; }
+        .footer-contact-item:hover { background: rgba(212,175,55,0.06); border-color: rgba(212,175,55,0.25); transform: translateX(-3px); }
+        .footer-flag-wrap { flex-shrink: 0; }
+        .footer-country { display: block; color: var(--gold); font-size: 13px; font-weight: 900; }
+        .footer-phone { display: block; color: #888; font-size: 15px; font-weight: bold; direction: ltr; }
+        .footer-email-btn { display: flex; align-items: center; padding: 10px 15px; background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.15); border-radius: 10px; color: #888; font-size: 13px; font-weight: bold; text-decoration: none; transition: 0.3s; margin-top: 5px; }
+        .footer-email-btn:hover { background: rgba(212,175,55,0.1); color: var(--gold); border-color: var(--gold); }
+
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.04); margin-top: 20px; }
+        .footer-bottom-inner { max-width: 1300px; margin: auto; padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .footer-copy { color: #3a3a3a; font-size: 13px; }
+        .footer-made { color: #3a3a3a; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+
+        /* Navy theme footer */
+        .navy-theme .main-footer { background: #030810; border-top-color: rgba(30,90,180,0.4); }
+        .navy-theme .footer-tagline { color: #4a6a90; }
+        .navy-theme .fsoc-btn { background: #0a1628; border-color: rgba(30,90,180,0.2); color: #4a6a90; }
+        .navy-theme .footer-links li { color: #4a6a90; }
+        .navy-theme .footer-contact-item { background: rgba(30,90,180,0.05); border-color: rgba(30,90,180,0.1); }
+        .navy-theme .footer-contact-item:hover { background: rgba(30,90,180,0.1); border-color: rgba(30,90,180,0.3); }
+        .navy-theme .footer-phone, .navy-theme .footer-email-btn { color: #4a6a90; }
+        .navy-theme .footer-email-btn { background: rgba(30,90,180,0.05); border-color: rgba(30,90,180,0.15); }
+        .navy-theme .footer-copy, .navy-theme .footer-made { color: #1a2f50; }
 
         .css-flag { width: 50px; height: 35px; display: inline-flex; flex-direction: column; cursor: pointer; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.5); margin-left: 15px; margin-bottom: 15px; border-radius: 4px; overflow: hidden; border: 1px solid #333; vertical-align: middle; }
         .css-flag:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px rgba(212,175,55,0.8)); }
@@ -360,77 +400,128 @@
         .close-announcement:hover { color: #ff4d4d; transform: rotate(90deg); }
 
 
-        /* --- الثيم الفني (Artistic Theme - Deep Navy & Teal) --- */
-        .artistic-theme body {
-            background: linear-gradient(135deg, #091522 0%, #153243 50%, #193845 100%);
-            background-attachment: fixed;
-            color: #e2e8f0;
-        }
-        .artistic-theme body::before { display: none; }
-        .artistic-theme {
-            --gold: #00d2ff; /* حيوي وأنيق متناسق مع الكحلي */
-            --gold-light: #3a7bd5;
-            --bg: transparent;
-        }
-        .artistic-theme .header { background: rgba(9, 26, 40, 0.3); border-bottom-color: var(--gold); }
-        .artistic-theme .nav { background: rgba(9, 26, 40, 0.8) !important; backdrop-filter: blur(15px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); border-bottom: 2px solid rgba(255, 255, 255, 0.05); }
-        .artistic-theme .nav a { color: #b0bec5; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; font-weight: 900; }
-        .artistic-theme .nav a:hover, .artistic-theme .nav a.active-link { background: var(--gold); color: #000; border-color: var(--gold); box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3); }
-        .artistic-theme .nav a.btn-nav-contact { background: linear-gradient(45deg, #3a7bd5, #00d2ff); border: none; color: #fff; }
-        .artistic-theme .stat-box, .artistic-theme .service-box, .artistic-theme .package-card,
-        .artistic-theme .testimonial-card, .artistic-theme .faq-item, .artistic-theme .work-card,
-        .artistic-theme .atheer-audio-card, .artistic-theme .literary-card, .artistic-theme .poem-clinic,
-        .artistic-theme .article-card, .artistic-theme .inspire-card, .artistic-theme .capsule-card,
-        .artistic-theme #contact-us-page > div, .artistic-theme #service-detail-view > div,
-        .artistic-theme .academic-authority {
-            background: rgba(20, 40, 60, 0.4) !important;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
-            border-radius: 20px;
-        }
-        .artistic-theme .section-title-frame { background: rgba(15, 30, 45, 0.6); color: var(--gold); border: 2px solid var(--gold); border-radius: 30px; box-shadow: 0 8px 32px rgba(0, 210, 255, 0.1); text-shadow: none; }
-        .artistic-theme .section-title-frame::before, .artistic-theme .section-title-frame::after { border-color: var(--gold); border-radius: 5px; }
-        .artistic-theme .chart-wrapper, .artistic-theme .main-footer { background: rgba(9, 26, 40, 0.5); backdrop-filter: blur(10px); border-top-color: var(--gold); }
-        .artistic-theme .announcement-bar { background: linear-gradient(90deg, #091a28, #153243); border-bottom-color: var(--gold); box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2); }
-        .artistic-theme .announce-badge { box-shadow: 0 0 10px rgba(0, 210, 255, 0.4); }
-        .artistic-theme .announce-link:hover { text-shadow: 0 0 10px rgba(0, 210, 255, 0.8); }
-        .artistic-theme .service-box::after, .artistic-theme .package-card::after { opacity: 0.1; filter: drop-shadow(0 0 10px #00d2ff); }
-        .artistic-theme .service-box:hover::after { opacity: 0.65; filter: drop-shadow(0 0 10px #00d2ff) brightness(1.5); }
-        .artistic-theme .package-card:hover::after { opacity: 0.3; filter: drop-shadow(0 0 10px #00d2ff) grayscale(0) brightness(1.3); }
-        .artistic-theme .academic-text p, .artistic-theme .faq-answer, .artistic-theme .literary-card p, .artistic-theme .poem-clinic p, .artistic-theme .footer-col p, .artistic-theme .footer-col a { color: #90a4ae; }
-        .artistic-theme h2, .artistic-theme h3, .artistic-theme h4, .artistic-theme h6, .artistic-theme .stat-tit, .artistic-theme .faq-question { color: #fff; text-shadow: none; }
-        .artistic-theme .stat-val { color: var(--gold); text-shadow: 0 2px 10px rgba(0, 210, 255, 0.3); }
-        .artistic-theme #preloader { background: #091a28; }
-        .artistic-theme .loader-text { color: var(--gold); }
-        .artistic-theme .typing-container { color: #e2e8f0; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-        .artistic-theme .home-hero { border-color: rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
-        .artistic-theme .filter-btn { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: #b0bec5; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-shadow: none; }
-        .artistic-theme .filter-btn.active, .artistic-theme .filter-btn:hover { background: linear-gradient(145deg, #3a7bd5, #00d2ff); color: #fff; border-color: #00d2ff; box-shadow: 0 4px 10px rgba(0, 210, 255, 0.3); }
-        .artistic-theme .sub-filter-btn { background: rgba(0, 210, 255, 0.1); color: var(--gold); border-color: var(--gold); }
-        .artistic-theme .sub-filter-btn.active, .artistic-theme .sub-filter-btn:hover { background: var(--gold); color: #000; box-shadow: 0 0 15px rgba(0, 210, 255, 0.4); transform: scale(1.05); }
-        .artistic-theme #about-page p, .artistic-theme #privacy-page p { color: #b0bec5 !important; }
-        .artistic-theme .btn-order { background: linear-gradient(45deg, #3a7bd5, #00d2ff); color: #fff; box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2); border: none; }
-        .artistic-theme .btn-order:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 210, 255, 0.4); color:#fff; }
-        .artistic-theme .partner-item { color: #b0bec5; }
-        .artistic-theme .partner-item:hover { color: var(--gold); }
-        .artistic-theme .custom-audio-player { background: rgba(0, 210, 255, 0.05); border-color: rgba(0, 210, 255, 0.2); }
-        .artistic-theme .play-pause-btn { background: linear-gradient(135deg, #3a7bd5, #00d2ff); box-shadow: 0 0 10px rgba(0, 210, 255, 0.4); color: #fff; }
-        .artistic-theme .waveform-anim span { background: #00d2ff; }
-        .artistic-theme .seek-bar::-webkit-slider-thumb { background: #00d2ff; box-shadow: 0 0 5px rgba(0, 210, 255, 0.8); }
-        .artistic-theme .fab-main { box-shadow: 0 5px 25px rgba(0, 210, 255, 0.3); }
-        .artistic-theme .academic-authority { background: radial-gradient(circle, rgba(15,25,35,0.95), rgba(5,10,15,1)); border-color: rgba(0, 210, 255, 0.5); box-shadow: 0 10px 30px rgba(0,210,255,0.2); }
-        .artistic-theme .academic-authority::before { border-color: rgba(0, 210, 255, 0.3); }
-        .artistic-theme .academic-authority:hover { border-color: #00d2ff; box-shadow: 0 15px 40px rgba(0,210,255,0.4); }
-        .artistic-theme .academic-authority:hover::before { border-color: #00d2ff; box-shadow: inset 0 0 20px rgba(0,210,255,0.3); }
-        .artistic-theme .academic-authority i { color: #00d2ff; filter: drop-shadow(0 0 8px rgba(0,210,255,0.5)); }
-        .artistic-theme .academic-text h3 { color: #00d2ff; filter: drop-shadow(0 0 5px rgba(0,210,255,0.3)); }
-        .artistic-theme .literary-quote { border-color: rgba(0, 210, 255, 0.5); background: rgba(0, 210, 255, 0.03); }
-        .artistic-theme .literary-quote::before { background: radial-gradient(circle at center, rgba(0,210,255,0.1) 0%, transparent 70%); }
-        .artistic-theme .literary-quote:hover { background: rgba(0, 210, 255, 0.08); box-shadow: 0 10px 40px rgba(0, 210, 255, 0.2); border-color: #00d2ff; }
-        .artistic-theme .literary-quote:hover p { color: #fff; text-shadow: 0 0 20px rgba(0, 210, 255, 0.8); }
-        .artistic-theme #cursor-spotlight { background: radial-gradient(circle 80px at var(--x) var(--y), rgba(0, 210, 255, 0.4), transparent 80%); }
 
+
+        /* ============================================================ */
+        /* --- الثيم الأزرق الليلي (Navy Night Theme) --- */
+        /* ============================================================ */
+        .navy-theme { --gold: #d4af37; --gold-light: #ffe066; --bg: #050d1a; --card: #0a1628; --navy-accent: #1a3a6b; --navy-glow: rgba(30, 90, 180, 0.4); }
+        .navy-theme body { background: #050d1a; color: #e0eaf8; background-image: radial-gradient(ellipse at 20% 10%, rgba(10, 30, 80, 0.8) 0%, transparent 60%), radial-gradient(ellipse at 80% 90%, rgba(10, 15, 40, 0.9) 0%, transparent 60%); }
+        .navy-theme body::before { display: none; }
+
+        .navy-theme .header { background: #030a18; border-bottom: 3px solid #1e3a6e; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8); }
+        .navy-theme .nav { background: rgba(5, 13, 35, 0.95) !important; backdrop-filter: blur(20px); border-bottom: 1px solid rgba(30, 90, 180, 0.3); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); }
+        .navy-theme .nav a { color: #a0bce0; background: rgba(255,255,255,0.03); border: 1px solid rgba(30, 90, 180, 0.2); border-radius: 12px; }
+        .navy-theme .nav a:hover, .navy-theme .nav a.active-link { background: linear-gradient(135deg, #1a3a6b, #0e2147); color: var(--gold); border-color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.3); transform: translateY(-2px); }
+        .navy-theme .nav a.btn-nav-contact { background: linear-gradient(45deg, var(--gold), #b8860b); color: #000; border: none; box-shadow: 0 0 20px rgba(212,175,55,0.4); }
+        .navy-theme .nav a.btn-nav-contact:hover { background: #fff; color: #000; }
+
+        .navy-theme .announcement-bar { background: linear-gradient(90deg, #030a18, #060f22); border-bottom: 1px solid rgba(30,90,180,0.4); color: #a0bce0; }
+        .navy-theme .announce-link { color: var(--gold); }
+
+        .navy-theme .stat-box { background: rgba(10, 22, 50, 0.8); border: 1px solid rgba(30,90,180,0.25); box-shadow: 0 5px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03); }
+        .navy-theme .stat-box:hover { border-color: var(--gold); background: rgba(15, 30, 70, 0.9); box-shadow: 0 8px 30px rgba(212,175,55,0.15); }
+        .navy-theme .stat-val { color: var(--gold); text-shadow: 0 0 15px rgba(212,175,55,0.5); }
+        .navy-theme .stat-tit { color: #6a8ab0; }
+
+        .navy-theme .service-box { background: linear-gradient(135deg, #0a1628, #060d1f); border: 1px solid rgba(30,90,180,0.2); }
+        .navy-theme .service-box:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(212,175,55,0.15); }
+        .navy-theme .service-box h4 { color: #c8daf0; }
+
+        .navy-theme .package-card { background: linear-gradient(145deg, rgba(10,22,50,0.9), rgba(5,13,26,0.95)); border: 1px solid rgba(30,90,180,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .navy-theme .package-card:hover { border-color: var(--gold); box-shadow: 0 15px 40px rgba(212,175,55,0.2); }
+        .navy-theme .package-card h3, .navy-theme .package-card ul li { color: #c8daf0; }
+        .navy-theme .package-card ul li i { color: var(--gold); }
+
+        .navy-theme .section-title-frame { background: linear-gradient(135deg, #0a1628, #0e204a); border: 2px solid var(--gold); color: var(--gold); box-shadow: 0 0 25px rgba(212,175,55,0.15), inset 0 0 20px rgba(30,90,180,0.1); text-shadow: 0 0 10px rgba(212,175,55,0.4); }
+        .navy-theme .section-title-frame::before, .navy-theme .section-title-frame::after { border-color: var(--gold); }
+
+        .navy-theme .work-card { background: #0a1628; border: 1px solid rgba(30,90,180,0.2); }
+        .navy-theme .work-card:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(212,175,55,0.15); }
+        .navy-theme .work-overlay { background: rgba(5,13,26,0.9); color: var(--gold); border-top-color: var(--gold); }
+
+        .navy-theme .atheer-audio-card { background: linear-gradient(135deg, #0a1628, #060f22); border: 1px solid rgba(30,90,180,0.25); }
+        .navy-theme .atheer-audio-card:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(212,175,55,0.15); background: rgba(15,30,70,0.9); }
+        .navy-theme .atheer-audio-card h4 { color: #a0bce0; }
+
+        .navy-theme .testimonial-card { background: linear-gradient(145deg, #0a1628, #060d1f); border: 1px solid rgba(30,90,180,0.2); }
+        .navy-theme .testimonial-card:hover { border-color: var(--gold); background: linear-gradient(145deg, #0e1f47, #0a1628); }
+        .navy-theme .testimonial-card h6 { color: var(--gold); }
+        .navy-theme .testimonial-card p { color: #7a9dc0; }
+
+        .navy-theme .faq-item { background: #0a1628; border-color: rgba(30,90,180,0.2); }
+        .navy-theme .faq-item:hover { border-color: rgba(30,90,180,0.5); }
+        .navy-theme .faq-item.active { background: linear-gradient(145deg, #0e1f47, #0a1628); border-color: var(--gold); box-shadow: 0 5px 20px rgba(212,175,55,0.1); }
+        .navy-theme .faq-question { color: #c8daf0; }
+        .navy-theme .faq-answer { color: #6a8ab0; }
+        .navy-theme .faq-item.active .toggle-icon { color: var(--gold); }
+
+        .navy-theme .literary-card { background: rgba(10,22,50,0.8); border-color: rgba(30,90,180,0.2); }
+        .navy-theme .literary-card:hover { border-color: var(--gold); background: rgba(15,30,70,0.9); }
+        .navy-theme .literary-card h4 { color: var(--gold); }
+        .navy-theme .literary-card p { color: #6a8ab0; }
+
+        .navy-theme .home-hero { border-color: rgba(30,90,180,0.4); box-shadow: 0 0 40px rgba(30,90,180,0.2); }
+        .navy-theme .home-hero h2 { color: var(--gold); }
+
+        .navy-theme .filter-btn { background: linear-gradient(145deg, #0e1f47, #0a1628); border-color: rgba(30,90,180,0.3); color: #a0bce0; box-shadow: 0 5px 0 #020710, 0 8px 15px rgba(0,0,0,0.4); text-shadow: none; }
+        .navy-theme .filter-btn:hover, .navy-theme .filter-btn.active { background: linear-gradient(145deg, var(--gold), #b8860b); color: #000; border-color: var(--gold); box-shadow: 0 2px 0 #7a5900, 0 4px 10px rgba(212,175,55,0.4); }
+        .navy-theme .sub-filter-btn { background: rgba(30,90,180,0.08); border-color: rgba(30,90,180,0.4); color: #a0bce0; }
+        .navy-theme .sub-filter-btn:hover, .navy-theme .sub-filter-btn.active { background: rgba(212,175,55,0.15); border-color: var(--gold); color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.2); }
+
+        .navy-theme .academic-authority { background: radial-gradient(circle, #0e1f47, #050d1a); border-color: rgba(30,90,180,0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
+        .navy-theme .academic-authority:hover { border-color: var(--gold); box-shadow: 0 15px 40px rgba(212,175,55,0.2); }
+        .navy-theme .academic-authority i { color: var(--gold); }
+        .navy-theme .academic-text h3 { color: var(--gold); }
+        .navy-theme .academic-text p { color: #6a8ab0; }
+
+        .navy-theme .literary-quote { border-color: rgba(30,90,180,0.5); background: rgba(10,22,50,0.5); }
+        .navy-theme .literary-quote:hover { background: rgba(15,30,70,0.8); border-color: var(--gold); box-shadow: 0 10px 40px rgba(212,175,55,0.15); }
+        .navy-theme .literary-quote p { color: #c8daf0; }
+        .navy-theme .literary-quote:hover p { color: var(--gold); }
+
+        .navy-theme .main-footer { background: #030810; border-top-color: rgba(30,90,180,0.4); }
+        .navy-theme .footer-col p, .navy-theme .footer-col a { color: #4a6a90; }
+        .navy-theme .footer-col a:hover { color: var(--gold); }
+        .navy-theme .footer-col h3 { color: var(--gold); border-right-color: var(--gold); }
+        .navy-theme .social-icons a { background: #0a1628; border-color: rgba(30,90,180,0.3); }
+
+        .navy-theme .chart-wrapper { background: rgba(10,22,50,0.6); border-color: rgba(30,90,180,0.25); }
+
+        .navy-theme .side-menu { background: rgba(5,13,35,0.97); border-color: rgba(30,90,180,0.2); border-left-color: var(--gold); }
+        .navy-theme .side-menu-title { color: var(--gold); border-bottom-color: rgba(30,90,180,0.3); }
+        .navy-theme .side-menu-list a { color: #7a9dc0; background: rgba(255,255,255,0.01); }
+        .navy-theme .side-menu-list a:hover, .navy-theme .side-menu-list a.active-link { background: rgba(30,90,180,0.1); color: var(--gold); }
+
+        .navy-theme .custom-audio-player { background: rgba(5,13,35,0.8); border-color: rgba(30,90,180,0.3); }
+        .navy-theme .play-pause-btn { background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; }
+        .navy-theme .waveform-anim span { background: var(--gold); }
+        .navy-theme .seek-bar::-webkit-slider-thumb { background: var(--gold); }
+
+        .navy-theme .fab-main { background: linear-gradient(135deg, #1a3a6b, #0e2147); box-shadow: 0 5px 25px rgba(30,90,180,0.5); }
+        .navy-theme .fab-main .fa-comment-dots { color: var(--gold); }
+
+        .navy-theme .search-modal { background: rgba(3, 8, 20, 0.97); }
+        .navy-theme .search-header { border-bottom-color: rgba(30,90,180,0.5); }
+        .navy-theme .search-header input { color: #c8daf0; }
+        .navy-theme .search-header input::placeholder { color: #3a5a80; }
+        .navy-theme .close-search { color: #6a8ab0; }
+        .navy-theme .search-result-item { background: rgba(10,22,50,0.8); border-color: rgba(30,90,180,0.2); }
+        .navy-theme .search-result-item:hover { background: rgba(15,35,80,0.9); border-color: var(--gold); }
+        .navy-theme .search-result-text p { color: #6a8ab0; }
+
+        .navy-theme .btn-order { background: linear-gradient(45deg, var(--gold), #b8860b); color: #000; }
+        .navy-theme .btn-back { color: var(--gold); border-color: var(--gold); }
+        .navy-theme .partner-item { color: #4a6a90; }
+        .navy-theme .partner-item:hover { color: var(--gold); }
+        .navy-theme .capsule-card { background: #0a1628; border-color: rgba(30,90,180,0.2); }
+        .navy-theme .poem-clinic { background: rgba(30,90,180,0.05); border-color: rgba(30,90,180,0.3); }
+        .navy-theme #preloader { background: #050d1a; }
+        .navy-theme .loader-text { color: var(--gold); }
+        .navy-theme #cursor-spotlight { background: radial-gradient(circle 80px at var(--x) var(--y), rgba(30, 90, 180, 0.3), transparent 80%); }
+        .navy-theme .graphic-id-card { background: #0a1628 !important; border-color: rgba(30,90,180,0.3); }
+
+        /* ============================================================ */
         /* --- تصميم الهويات والشعارات --- */
         .graphic-id-card {
             background: #fff;
@@ -459,7 +550,7 @@
         .graphic-id-card:hover img {
             transform: scale(1.08);
         }
-        .artistic-theme .graphic-id-card { background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.2); }
+        .artistic-theme .graphic-id-card { background: #fff !important; border-color: rgba(0,0,0,0.08); box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
 
         /* --- القائمة الجانبية المضافة --- */
         .main-layout-container { display: flex; gap: 30px; align-items: flex-start; max-width: 1400px; }
@@ -468,17 +559,17 @@
         .side-menu::-webkit-scrollbar-track { background: transparent; }
         .side-menu::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 10px; }
         .side-menu::-webkit-scrollbar-thumb:hover { background: var(--gold); }
-        .artistic-theme .side-menu { background: rgba(20, 40, 60, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-left: 3px solid var(--gold); }
+        .artistic-theme .side-menu { background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(0, 0, 0, 0.05); border-left: 3px solid var(--gold); }
         .side-menu-title { color: var(--gold); margin-top: 0; margin-bottom: 20px; font-size: 18px; text-align: center; font-weight: 900; border-bottom: 1px solid #333; padding-bottom: 10px; }
         .side-menu-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
         .side-menu-list a { color: #ddd; text-decoration: none; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; background: rgba(255,255,255,0.02); }
         .side-menu-list a:hover, .side-menu-list a.active-link { background: rgba(212,175,55,0.1); color: var(--gold); transform: translateX(-5px); }
-        .artistic-theme .side-menu-list a:hover, .artistic-theme .side-menu-list a.active-link { background: rgba(0,210,255,0.1); color: var(--gold); }
+        .artistic-theme .side-menu-list a:hover, .artistic-theme .side-menu-list a.active-link { background: rgba(123, 150, 139, 0.1); color: var(--gold); }
         .side-menu-list i { width: 20px; text-align: center; color: var(--gold); font-size: 16px; }
         .side-btn-contact { background: linear-gradient(45deg, var(--gold), #b8860b) !important; color: #000 !important; justify-content: center; margin-top: 10px; animation: pulse-nav 2s infinite; }
         .side-btn-contact i { color: #000 !important; }
         .side-btn-contact:hover { transform: scale(1.05) !important; background: #fff !important; animation: none; }
-        .artistic-theme .side-btn-contact { background: linear-gradient(45deg, #3a7bd5, #00d2ff) !important; color: #fff !important; }
+        .artistic-theme .side-btn-contact { background: linear-gradient(45deg, #A3B9AD, #7B968B) !important; color: #fff !important; }
         .artistic-theme .side-btn-contact i { color: #fff !important; }
         .page-content-wrapper { flex: 1; min-width: 0; width: 100%; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         @media (max-width: 900px) {
@@ -488,7 +579,30 @@
         /* --- تأثيرات إضافية --- */
         #theme-transition-overlay { position: fixed; inset: 0; background: var(--bg-color, #050505); z-index: 999999; opacity: 0; pointer-events: none; transition: opacity 0.5s ease-in-out; }
         #theme-transition-overlay.active { opacity: 1; pointer-events: all; }
-    </style>
+    
+        /* --- Search Modal --- */
+        .search-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 30000; display: none; flex-direction: column; align-items: center; padding-top: 80px; backdrop-filter: blur(15px); }
+        .search-modal.active { display: flex; animation: fadeInSearch 0.3s ease; }
+        .search-header { width: 90%; max-width: 800px; position: relative; display: flex; align-items: center; gap: 15px; border-bottom: 2px solid var(--gold); }
+        .search-header input { flex: 1; background: transparent; border: none; color: #fff; font-size: 22px; padding: 15px 10px; font-family: 'Cairo', sans-serif; outline: none; }
+        .search-header input::placeholder { color: #888; font-size: 18px; }
+        .close-search { color: #fff; font-size: 28px; cursor: pointer; transition: 0.3s; padding: 10px; }
+        .close-search:hover { color: #ff4d4d; transform: rotate(90deg); }
+        .search-results { width: 90%; max-width: 800px; margin-top: 20px; max-height: calc(100vh - 200px); overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-bottom: 30px; }
+        .search-results::-webkit-scrollbar { width: 5px; }
+        .search-results::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 5px; }
+        .search-result-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.2); padding: 15px 20px; border-radius: 12px; cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 15px; text-align: right; }
+        .search-result-item:hover { background: rgba(212,175,55,0.1); border-color: var(--gold); transform: translateX(-5px); box-shadow: 0 5px 15px rgba(212,175,55,0.15); }
+        .search-result-item i { color: var(--gold); font-size: 26px; width: 30px; text-align: center; }
+        .search-result-text { flex: 1; display:flex; flex-direction: column; gap: 5px;}
+        .search-result-text h4 { margin: 0; font-size: 16px; color: var(--gold); font-weight: 900; }
+        .search-result-text p { margin: 0; font-size: 13px; color: #ccc; font-weight: bold; }
+        .no-results { color: #888; font-size: 16px; text-align: center; margin-top: 50px; font-weight: bold; }
+        
+        .artistic-theme .search-result-text p { color: #666; }
+        @keyframes fadeInSearch { from { opacity: 0; transform: translateY(-20px); filter: blur(5px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+
+</style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 </head>
 <body>
@@ -573,6 +687,7 @@
         <a onclick="cinematicSection('works-page')" id="nav-works">معرض الأعمال</a>
         <a onclick="cinematicSection('literary-page')" id="nav-literary">الركن الأدبي</a>
         <a onclick="cinematicSection('about-page')" id="nav-about">من نحن</a>
+        <a onclick="openSearchModal()" style="padding: 6px 15px; font-size: 18px; cursor: pointer;" title="بحث شامل"><i class="fas fa-search"></i></a>
         <a id="theme-toggle" onclick="toggleTheme()" style="padding: 6px 15px; font-size: 18px;"><i class="fas fa-moon"></i></a>
         <a onclick="cinematicSection('contact-us-page')" id="nav-contact" class="btn-nav-contact">اطلب خدمتك <i class="fab fa-whatsapp"></i></a>
     </nav>
@@ -585,6 +700,7 @@
         <aside class="side-menu">
             <h3 class="side-menu-title">روابط سريعة</h3>
             <ul class="side-menu-list">
+                <li><a onclick="openSearchModal()" id="side-search"><i class="fas fa-search"></i> بحث شامل</a></li>
                 <li><a onclick="cinematicSection('home-page')" id="side-home" class="active-link"><i class="fas fa-home"></i> الرئيسية</a></li>
                 <li><a onclick="scrollToHomeSection('packages-section', 'nav-packages')" id="side-packages"><i class="fas fa-crown"></i> باقاتنا</a></li>
                 <li><a onclick="scrollToHomeSection('partners-section', 'nav-partners')" id="side-partners"><i class="fas fa-handshake"></i> شركاء النجاح</a></li>
@@ -897,11 +1013,11 @@
         <div id="about-page" class="page-section">
             <div class="section-title-wrapper" style="margin-top: 10px;"><h2 class="section-title-frame">من نحن</h2></div>
             <div class="about-container">
-                <div class="about-intro">
-                    <p>مؤسسة أثير ساوند للخدمات الإعلامية والفنية، منصة إبداعية متكاملة تأسست عام 2023م لتكون جسراً بين <span>الفن والأكاديمية</span>. نجمع بين سحر الإبداع الفني ودقة المعايير العلمية لنقدم أعمالاً نوعية تلبي تطلعات الأفراد والمؤسسات والمدارس.</p>
+                <div class="about-intro reveal">
+                    <p>مؤسسة أثير ساوند للخدمات الإعلامية والفنية، منصة إبداعية متكاملة تأسست عام 2023م لتكون جسراً بين <span style="color:var(--gold);font-weight:900;">الفن والأكاديمية</span>. نجمع بين سحر الإبداع الفني ودقة المعايير العلمية لنقدم أعمالاً نوعية تلبي تطلعات الأفراد والمؤسسات والمدارس.</p>
                 </div>
                 
-                <div class="about-grid">
+                <div class="about-grid reveal">
                     <div class="about-card">
                         <i class="fas fa-eye"></i>
                         <h3>رؤيتنا</h3>
@@ -919,8 +1035,39 @@
                     </div>
                 </div>
 
-                <div class="about-timeline">
-                    <h3>رحلة الإبداع والتطور</h3>
+                <!-- شريط المهارات الاحترافي -->
+                <div class="skills-section reveal">
+                    <h3><i class="fas fa-chart-bar" style="margin-left:10px;"></i> مستوى إتقاننا في الخدمات</h3>
+                    <div style="max-width: 700px; margin: auto;">
+                        <div class="skill-item">
+                            <div class="skill-label"><span><i class="fas fa-headphones" style="margin-left:8px;color:var(--gold);"></i>الهندسة الصوتية والإنتاج</span><span class="skill-pct" data-val="96">0%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-target="96"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-label"><span><i class="fas fa-feather-pointed" style="margin-left:8px;color:var(--gold);"></i>الخدمات الأدبية واللغوية</span><span class="skill-pct" data-val="99">0%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-target="99"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-label"><span><i class="fas fa-microphone-lines" style="margin-left:8px;color:var(--gold);"></i>التعليق الصوتي المتقدم</span><span class="skill-pct" data-val="94">0%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-target="94"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-label"><span><i class="fas fa-clapperboard" style="margin-left:8px;color:var(--gold);"></i>المونتاج وتصميم الفيديو</span><span class="skill-pct" data-val="90">0%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-target="90"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-label"><span><i class="fas fa-object-group" style="margin-left:8px;color:var(--gold);"></i>التصميم والهوية البصرية</span><span class="skill-pct" data-val="88">0%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-target="88"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-label"><span><i class="fas fa-laptop-code" style="margin-left:8px;color:var(--gold);"></i>تطوير الويب والتطبيقات</span><span class="skill-pct" data-val="85">0%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-target="85"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-timeline reveal">
+                    <h3 style="color:var(--gold);text-align:center;font-size:20px;margin-bottom:25px;"><i class="fas fa-road" style="margin-left:10px;"></i>رحلة الإبداع والتطور</h3>
                     <div class="timeline-items">
                         <div class="time-item"><h4>2023</h4><p>انطلاق البداية وتأسيس النواة الأولى لمؤسسة أثير ساوند للإنتاج الفني والأكاديمي.</p></div>
                         <div class="time-item"><h4>2024</h4><p>توسيع نطاق العمل وإنجاز المئات من المشاريع الحصرية لصالح أبرز مدارس وجهات الجمهورية.</p></div>
@@ -979,32 +1126,83 @@
     </div>
 
     <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-col">
-                <h3>أثير ساوند</h3>
-                <div class="social-icons">
-                    <a href="https://wa.me/967770080131" target="_blank" class="fa-whatsapp-btn" title="واتساب اليمن"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://wa.me/966557172941" target="_blank" class="fa-whatsapp-btn" title="واتساب السعودية"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.youtube.com/@AtheerSound" target="_blank" class="fa-youtube-btn" title="يوتيوب"><i class="fab fa-youtube"></i></a>
-                    <a href="https://t.me/atheersound" target="_blank" class="fa-telegram-btn" title="تليجرام"><i class="fab fa-telegram-plane"></i></a>
-                    <a href="mailto:atheersound@gmail.com" class="fa-envelope-btn" title="بريد إلكتروني"><i class="fas fa-envelope"></i></a>
+        <div class="footer-inner">
+            <!-- العمود 1: الهوية -->
+            <div class="footer-brand">
+                <div class="footer-logo-text">
+                    <span class="footer-logo-ar">أثير</span>
+                    <span class="footer-logo-en">ATHEER SOUND</span>
+                </div>
+                <p class="footer-tagline">منصة الإبداع الفني والأكاديمي — نجمع بين سحر الفن ودقة العلم، لنخلد أجمل لحظاتك بأعمال تليق بك.</p>
+                <div class="footer-social">
+                    <a href="https://wa.me/967770080131" target="_blank" class="fsoc-btn fsoc-wa" title="واتساب اليمن"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/966557172941" target="_blank" class="fsoc-btn fsoc-wa2" title="واتساب السعودية"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.youtube.com/@AtheerSound" target="_blank" class="fsoc-btn fsoc-yt" title="يوتيوب"><i class="fab fa-youtube"></i></a>
+                    <a href="https://t.me/atheersound" target="_blank" class="fsoc-btn fsoc-tg" title="تليجرام"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="mailto:atheersound@gmail.com" class="fsoc-btn fsoc-mail" title="بريد إلكتروني"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
-            <div class="footer-col">
-                <h3>روابط سريعة</h3>
-                <p onclick="cinematicSection('home-page')">الرئيسية / الخدمات</p>
-                <p onclick="cinematicSection('literary-page')">الركن الأدبي</p>
-                <p onclick="cinematicSection('about-page')">من نحن</p>
-                <p onclick="cinematicSection('privacy-page')" style="color: var(--gold-light);">سياسة الخصوصية</p>
+
+            <!-- العمود 2: خدماتنا -->
+            <div class="footer-col-new">
+                <h4 class="footer-col-title"><i class="fas fa-headphones"></i> خدماتنا</h4>
+                <ul class="footer-links">
+                    <li><i class="fas fa-angle-left"></i> إنتاج صوتي وموسيقى</li>
+                    <li><i class="fas fa-angle-left"></i> زفات وأناشيد المناسبات</li>
+                    <li><i class="fas fa-angle-left"></i> مونتاج وموشن جرافيك</li>
+                    <li><i class="fas fa-angle-left"></i> تعليق صوتي احترافي</li>
+                    <li><i class="fas fa-angle-left"></i> خدمات أدبية ولغوية</li>
+                    <li><i class="fas fa-angle-left"></i> تصميم هوية بصرية</li>
+                </ul>
             </div>
-            <div class="footer-col">
-                <h3>تواصل مباشر</h3>
-                <div class="css-flag" onclick="openContactModal('yemen')" title="اليمن"><div class="ye-red"></div><div class="ye-white"></div><div class="ye-black"></div></div>
-                <div class="css-flag sa-flag" onclick="openContactModal('saudi')" title="السعودية"><div class="sa-text">لا إله إلا الله<br>محمد رسول الله</div><div class="sa-sword"></div></div>
+
+            <!-- العمود 3: روابط -->
+            <div class="footer-col-new">
+                <h4 class="footer-col-title"><i class="fas fa-sitemap"></i> روابط سريعة</h4>
+                <ul class="footer-links">
+                    <li onclick="cinematicSection('home-page')"><i class="fas fa-angle-left"></i> الصفحة الرئيسية</li>
+                    <li onclick="cinematicSection('works-page')"><i class="fas fa-angle-left"></i> معرض الأعمال</li>
+                    <li onclick="cinematicSection('literary-page')"><i class="fas fa-angle-left"></i> الركن الأدبي</li>
+                    <li onclick="cinematicSection('faq-page')"><i class="fas fa-angle-left"></i> الأسئلة الشائعة</li>
+                    <li onclick="cinematicSection('about-page')"><i class="fas fa-angle-left"></i> من نحن</li>
+                    <li onclick="cinematicSection('privacy-page')"><i class="fas fa-angle-left"></i> سياسة الخصوصية</li>
+                </ul>
+            </div>
+
+            <!-- العمود 4: التواصل -->
+            <div class="footer-col-new">
+                <h4 class="footer-col-title"><i class="fas fa-phone-volume"></i> تواصل معنا</h4>
+                <div class="footer-contact-item" onclick="openContactModal('yemen')">
+                    <div class="footer-flag-wrap">
+                        <div class="css-flag" style="margin:0;"><div class="ye-red"></div><div class="ye-white"></div><div class="ye-black"></div></div>
+                    </div>
+                    <div>
+                        <span class="footer-country">اليمن</span>
+                        <span class="footer-phone" dir="ltr">+967 770080131</span>
+                    </div>
+                </div>
+                <div class="footer-contact-item" onclick="openContactModal('saudi')">
+                    <div class="footer-flag-wrap">
+                        <div class="css-flag sa-flag" style="margin:0;"><div class="sa-text">لا إله إلا الله<br>محمد رسول الله</div><div class="sa-sword"></div></div>
+                    </div>
+                    <div>
+                        <span class="footer-country">السعودية</span>
+                        <span class="footer-phone" dir="ltr">+966 557172941</span>
+                    </div>
+                </div>
+                <a href="mailto:atheersound@gmail.com" class="footer-email-btn"><i class="fas fa-envelope" style="margin-left:8px;"></i>atheersound@gmail.com</a>
             </div>
         </div>
-        <center style="margin-top: 50px; color: #555; font-size: 13px;">&copy; 2026 مؤسسة أثير ساوند - جميع الحقوق محفوظة</center>
+
+        <!-- الشريط السفلي -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-inner">
+                <span class="footer-copy">&copy; 2026 مؤسسة أثير ساوند &mdash; جميع الحقوق محفوظة</span>
+                <span class="footer-made"><i class="fas fa-heart" style="color:#c0392b;"></i> صُنع بشغف في اليمن والسعودية</span>
+            </div>
+        </div>
     </footer>
+
 
     <div class="fab-container" id="fab-container">
         <div class="fab-menu">
@@ -1566,8 +1764,8 @@
             document.body.style.overflow = '';
         }
 
-        // Theme Toggle Logic
-        const themes = ['dark-theme', 'artistic-theme'];
+        // Theme Toggle Logic — 2 Themes: Dark ↔ Navy Night
+        const themes = ['dark-theme', 'navy-theme'];
         let currentThemeIndex = 0;
 
         function toggleTheme() {
@@ -1576,48 +1774,61 @@
             
             setTimeout(() => {
                 const html = document.documentElement;
-                html.classList.remove('artistic-theme');
+                html.classList.remove('navy-theme');
                 
                 currentThemeIndex = (currentThemeIndex + 1) % 2;
                 const newTheme = themes[currentThemeIndex];
                 
-                if(newTheme === 'artistic-theme') {
+                if(newTheme === 'navy-theme') {
                     html.classList.add(newTheme);
                 }
                 
                 localStorage.setItem('theme', newTheme);
                 updateThemeIcon(newTheme);
-
-                if (statsChartInstance) {
-                    const isArtistic = newTheme === 'artistic-theme';
-                    const bgColor = isArtistic ? 'rgba(0, 210, 255, 0.7)' : 'rgba(212, 175, 55, 0.7)';
-                    const brColor = isArtistic ? '#00d2ff' : '#d4af37';
-                    statsChartInstance.data.datasets[0].backgroundColor = bgColor;
-                    statsChartInstance.data.datasets[0].borderColor = brColor;
-                    statsChartInstance.options.scales.x.ticks.color = brColor;
-                    statsChartInstance.update();
-                }
+                updateChartTheme(newTheme);
+                
                 setTimeout(() => { if(overlay) overlay.classList.remove('active'); }, 50);
-            }, 500); // Wait for overlay to cover screen
+            }, 500);
+        }
+
+        function updateChartTheme(theme) {
+            if (!statsChartInstance) return;
+            const colors = {
+                'artistic-theme': { bg: 'rgba(123, 150, 139, 0.7)', br: '#7B968B' },
+                'navy-theme':     { bg: 'rgba(30, 90, 180, 0.7)',   br: '#5a8ee0' },
+                'dark-theme':     { bg: 'rgba(212, 175, 55, 0.7)',  br: '#d4af37' }
+            };
+            const c = colors[theme] || colors['dark-theme'];
+            statsChartInstance.data.datasets[0].backgroundColor = c.bg;
+            statsChartInstance.data.datasets[0].borderColor = c.br;
+            statsChartInstance.options.scales.x.ticks.color = c.br;
+            statsChartInstance.update();
         }
 
         function updateThemeIcon(theme) {
             const toggleIcon = document.querySelector('#theme-toggle i');
-            if(toggleIcon) {
-                if(theme === 'artistic-theme') {
-                    toggleIcon.className = 'fas fa-palette';
-                    toggleIcon.style.color = '#00d2ff';
-                } else {
-                    toggleIcon.className = 'fas fa-moon';
-                    toggleIcon.style.color = 'inherit';
-                }
+            if(!toggleIcon) return;
+            if(theme === 'navy-theme') {
+                toggleIcon.className = 'fas fa-star';
+                toggleIcon.style.color = '#5a8ee0';
+                toggleIcon.title = 'الثيم الأزرق الليلي — انقر للتبديل';
+            } else {
+                toggleIcon.className = 'fas fa-moon';
+                toggleIcon.style.color = 'var(--gold)';
+                toggleIcon.title = 'الثيم الداكن الذهبي — انقر للتبديل';
             }
         }
 
         // Initialize theme on load
         window.addEventListener('DOMContentLoaded', () => {
             let savedTheme = localStorage.getItem('theme') || 'dark-theme';
-            if (savedTheme === 'light-theme' || savedTheme === 'light') savedTheme = 'dark-theme';
+            if (savedTheme === 'light-theme' || savedTheme === 'light' || savedTheme === 'artistic-theme') savedTheme = 'dark-theme';
+            
+            const html = document.documentElement;
+            html.classList.remove('artistic-theme', 'navy-theme');
+            if (savedTheme === 'navy-theme') {
+                html.classList.add('navy-theme');
+            }
             
             currentThemeIndex = themes.indexOf(savedTheme);
             if(currentThemeIndex === -1) currentThemeIndex = 0;
@@ -1636,5 +1847,288 @@
             }, 5000);
         }
     </script>
+
+
+
+    <script>
+        const searchDatabase = [];
+
+        function buildSearchDatabase() {
+            searchDatabase.length = 0; 
+            
+            document.querySelectorAll('.work-card').forEach((card, index) => {
+                let text = card.innerText || card.textContent || '';
+                if (!card.id) card.id = 'work-card-s-' + index;
+                let type = card.classList.contains('video-card') ? 'فيديو ومونتاج مونتاج' : 
+                           card.classList.contains('audio-card') ? 'صوتي تسجيل زفة شيلة زفات شيلات تعليق أنشودة اناشيد' : 'تصميم جرافيكس هوية';
+                
+                let title = card.querySelector('.work-overlay')?.innerText || card.querySelector('h4')?.innerText || 'عمل فني';
+                
+                searchDatabase.push({
+                    id: card.id,
+                    title: title + ' (' + (card.classList.contains('video-card') ? 'فيديو' : card.classList.contains('audio-card') ? 'صوت' : 'تصميم') + ')',
+                    text: text + ' ' + type + ' ' + title + ' أعمال معرض',
+                    page: 'works-page',
+                    icon: card.classList.contains('video-card') ? 'fas fa-video' : card.classList.contains('audio-card') ? 'fas fa-headphones' : 'fas fa-palette',
+                    element: card
+                });
+            });
+
+            document.querySelectorAll('.service-box').forEach((box, index) => {
+                let title = box.querySelector('h4')?.innerText || '';
+                if (!box.id) box.id = 'service-box-s-' + index;
+                searchDatabase.push({
+                    id: box.id,
+                    title: title,
+                    text: 'خدمة موقع قسم خدمات رئيسية ' + title,
+                    page: 'home-page',
+                    icon: 'fas fa-concierge-bell',
+                    element: box
+                });
+            });
+
+            document.querySelectorAll('.package-card').forEach((pkg, index) => {
+                let title = pkg.querySelector('h3')?.innerText || '';
+                let text = pkg.innerText || '';
+                if (!pkg.id) pkg.id = 'package-card-s-' + index;
+                searchDatabase.push({
+                    id: pkg.id,
+                    title: title,
+                    text: text + ' باقات أسعار طلب حجز سعر كم',
+                    page: 'home-page',
+                    icon: 'fas fa-box-open',
+                    element: pkg
+                });
+            });
+
+            document.querySelectorAll('.faq-item').forEach((faq, index) => {
+                let title = faq.querySelector('.faq-question')?.innerText || '';
+                let text = faq.innerText || '';
+                if (!faq.id) faq.id = 'faq-item-s-' + index;
+                searchDatabase.push({
+                    id: faq.id,
+                    title: title,
+                    text: text + ' سؤال استفسار مساعدة دعم',
+                    page: 'faq-page',
+                    icon: 'fas fa-question-circle',
+                    element: faq
+                });
+            });
+
+            document.querySelectorAll('.literary-card').forEach((lit, index) => {
+                let title = lit.querySelector('h4')?.innerText || '';
+                let text = lit.innerText || '';
+                if (!lit.id) lit.id = 'literary-card-s-' + index;
+                searchDatabase.push({
+                    id: lit.id,
+                    title: title,
+                    text: text + ' أدبي مقال كتابة تأليف لغة شعر نص',
+                    page: 'literary-page',
+                    icon: 'fas fa-book-open',
+                    element: lit
+                });
+            });
+            
+            document.querySelectorAll('.graphic-id-card').forEach((card, index) => {
+                if (!card.id) card.id = 'graphic-card-s-' + index;
+                searchDatabase.push({
+                    id: card.id,
+                    title: 'تصميم هوية أو شعار',
+                    text: 'تصميم جرافيك ابداعي، لوجو، هوية، أختام، بوسترات',
+                    page: 'works-page',
+                    icon: 'fas fa-palette',
+                    element: card
+                });
+            });
+        }
+
+        function openSearchModal() {
+            buildSearchDatabase();
+            document.getElementById('searchModal').classList.add('active');
+            let searchInput = document.getElementById('searchInput');
+            searchInput.value = '';
+            document.getElementById('searchResults').innerHTML = '<div class="no-results" style="margin-top:20px; font-weight:normal;"><i class="fas fa-search" style="font-size: 30px; display:block; margin-bottom:15px; color: var(--gold);"></i>اكتب أي كلمة للبحث في أثير ساوند...</div>';
+            setTimeout(() => searchInput.focus(), 100);
+        }
+
+        function closeSearchModal() {
+            document.getElementById('searchModal').classList.remove('active');
+        }
+
+        function performSearch() {
+            let query = document.getElementById('searchInput').value.toLowerCase().trim();
+            let resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = '';
+
+            if (query.length < 2) {
+                resultsContainer.innerHTML = '<div class="no-results" style="margin-top:20px; font-weight:normal;"><i class="fas fa-search" style="font-size: 30px; display:block; margin-bottom:15px; color: var(--gold);"></i>اكتب المزيد لعرض النتائج...</div>';
+                return;
+            }
+
+            let filtered = searchDatabase.filter(item => 
+                item.title.toLowerCase().includes(query) || 
+                item.text.toLowerCase().includes(query)
+            );
+
+            if (filtered.length === 0) {
+                resultsContainer.innerHTML = '<div class="no-results"><i class="fas fa-search-minus" style="font-size: 40px; margin-bottom:15px; color: var(--gold); display:block;"></i> لا توجد نتائج مطابقة لبحثك.</div>';
+                return;
+            }
+
+            filtered.forEach(item => {
+                let div = document.createElement('div');
+                div.className = 'search-result-item';
+                let pageName = item.page === 'works-page' ? 'معرض الأعمال' : 
+                               item.page === 'home-page' ? 'الرئيسية' : 
+                               item.page === 'faq-page' ? 'الأسئلة الشائعة' : 'الركن الأدبي';
+                div.innerHTML = `
+                    <i class="${item.icon}"></i>
+                    <div class="search-result-text">
+                        <h4>${item.title}</h4>
+                        <p>اضغط للذهاب إلى: ${pageName}</p>
+                    </div>
+                `;
+                div.onclick = () => {
+                    closeSearchModal();
+                    if(typeof cinematicSection === 'function') cinematicSection(item.page);
+                    
+                    if (item.page === 'works-page') {
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        let allBtn = document.querySelector('.filter-btn[onclick*="all"]');
+                        if(allBtn) allBtn.classList.add('active');
+                        if(typeof filterWorks === 'function') filterWorks('all', allBtn || document.querySelector('.filter-btn'));
+                    }
+
+                    setTimeout(() => {
+                        let target = document.getElementById(item.id);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            let oldTransition = target.style.transition;
+                            let oldBoxShadow = target.style.boxShadow;
+                            target.style.transition = '0.5s';
+                            target.style.boxShadow = '0 0 40px var(--gold)';
+                            setTimeout(() => {
+                                target.style.boxShadow = oldBoxShadow;
+                            }, 2000);
+                            
+                            if (target.classList.contains('faq-item') && !target.classList.contains('active')) {
+                                if(typeof toggleFAQ === 'function') toggleFAQ(target);
+                            }
+                        }
+                    }, 800);
+                };
+                resultsContainer.appendChild(div);
+            });
+        }
+    </script>
+
+    <script>
+        /* ====== Scroll Reveal ====== */
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, i * 80);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        function initReveal() {
+            document.querySelectorAll('.reveal, .reveal-left').forEach(el => {
+                revealObserver.observe(el);
+            });
+        }
+
+        /* ====== شريط المهارات المتحرك ====== */
+        const skillsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                        const target = parseInt(bar.dataset.target);
+                        bar.style.width = target + '%';
+                    });
+                    entry.target.querySelectorAll('.skill-pct').forEach(pct => {
+                        const target = parseInt(pct.dataset.val);
+                        let count = 0;
+                        const step = target / 60;
+                        const interval = setInterval(() => {
+                            count = Math.min(count + step, target);
+                            pct.textContent = Math.ceil(count) + '%';
+                            if (count >= target) clearInterval(interval);
+                        }, 20);
+                    });
+                    skillsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+
+        function initSkills() {
+            const sec = document.querySelector('.skills-section');
+            if (sec) skillsObserver.observe(sec);
+        }
+
+        /* ====== Reveal لعناصر الشبكة (stagger) ====== */
+        function addRevealToElements() {
+            // إضافة reveal للإحصائيات
+            document.querySelectorAll('.stat-box').forEach((el, i) => {
+                el.classList.add('reveal');
+                el.style.transitionDelay = (i * 0.1) + 's';
+            });
+            // إضافة reveal لبطاقات الخدمات
+            document.querySelectorAll('.service-box').forEach((el, i) => {
+                el.classList.add('reveal');
+                el.style.transitionDelay = (i * 0.07) + 's';
+            });
+            // إضافة reveal للباقات
+            document.querySelectorAll('.package-card').forEach((el, i) => {
+                el.classList.add('reveal');
+                el.style.transitionDelay = (i * 0.15) + 's';
+            });
+            // إضافة reveal لبطاقات الأدب
+            document.querySelectorAll('.literary-card').forEach((el, i) => {
+                el.classList.add('reveal');
+                el.style.transitionDelay = (i * 0.1) + 's';
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            addRevealToElements();
+            initReveal();
+            initSkills();
+        });
+
+        // إعادة تشغيل Reveal عند تغيير الصفحة
+        const _origCinematic = window.cinematicSection;
+        if (typeof _origCinematic === 'function') {
+            window.cinematicSection = function(id) {
+                _origCinematic(id);
+                setTimeout(() => {
+                    initReveal();
+                    initSkills();
+                }, 450);
+            };
+        }
+    </script>
+
+    <!-- نافذة البحث الشامل -->
+    <div class="search-modal" id="searchModal" onclick="if(event.target===this) closeSearchModal()">
+        <div class="search-header">
+            <i class="fas fa-search" style="color: var(--gold); font-size: 22px;"></i>
+            <input type="text" id="searchInput" placeholder="ابحث في أثير ساوند..." oninput="performSearch()" onkeydown="if(event.key==='Escape') closeSearchModal()">
+            <i class="fas fa-times close-search" onclick="closeSearchModal()"></i>
+        </div>
+        <div class="search-results" id="searchResults">
+            <div class="no-results" style="margin-top:20px; font-weight:normal;">
+                <i class="fas fa-search" style="font-size: 30px; display:block; margin-bottom:15px; color: var(--gold);"></i>
+                اكتب أي كلمة للبحث في أثير ساوند...
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
+Reading page...Getting DOM...Stopping...
+
+Stop Agent
