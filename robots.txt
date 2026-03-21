@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://atheer-sound.pages.dev/sitemap.xml
