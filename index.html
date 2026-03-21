@@ -602,7 +602,141 @@
         .artistic-theme .search-result-text p { color: #666; }
         @keyframes fadeInSearch { from { opacity: 0; transform: translateY(-20px); filter: blur(5px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
 
+        /* ============================================================ */
+        /* --- تبويبات الركن الأدبي الفرعية --- */
+        /* ============================================================ */
+        .literary-sub-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0 35px; }
+        .lit-tab-btn {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(212,175,55,0.3);
+            color: #aaa;
+            padding: 10px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s;
+            outline: none;
+        }
+        .lit-tab-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.08); }
+        .lit-tab-btn.active { background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; border-color: transparent; box-shadow: 0 4px 15px rgba(212,175,55,0.35); }
+        .lit-sub-content { display: none; }
+        .lit-sub-content.active { display: block; animation: fadeIn 0.4s ease; }
+
+        /* --- بطاقة القصيدة --- */
+        .poems-toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 28px; padding: 18px 22px; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.15); border-radius: 15px; }
+        .poems-search { flex: 1; min-width: 200px; background: rgba(0,0,0,0.4); border: 1px solid #333; border-radius: 10px; padding: 10px 16px; color: #fff; font-family: 'Cairo', sans-serif; font-size: 14px; outline: none; transition: 0.3s; }
+        .poems-search:focus { border-color: var(--gold); box-shadow: 0 0 10px rgba(212,175,55,0.2); }
+        .poems-search::placeholder { color: #555; }
+        .occasion-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+        .occ-btn { background: rgba(255,255,255,0.04); border: 1px solid #444; color: #999; padding: 7px 16px; border-radius: 20px; cursor: pointer; font-family: 'Cairo'; font-size: 13px; font-weight: bold; transition: 0.3s; }
+        .occ-btn:hover, .occ-btn.active { background: rgba(212,175,55,0.15); border-color: var(--gold); color: var(--gold); }
+
+        .poems-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; margin-top: 10px; }
+        .poem-card {
+            background: linear-gradient(145deg, rgba(25,20,5,0.9), rgba(15,12,3,0.95));
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 18px;
+            padding: 28px 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+        }
+        .poem-card::before {
+            content: '\f2cd';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 400;
+            position: absolute;
+            top: -8px;
+            left: 15px;
+            font-size: 80px;
+            color: rgba(212,175,55,0.04);
+            pointer-events: none;
+            transition: 0.5s;
+        }
+        .poem-card:hover { border-color: var(--gold); transform: translateY(-6px); box-shadow: 0 12px 35px rgba(212,175,55,0.18); background: linear-gradient(145deg, rgba(35,28,5,0.95), rgba(20,16,4,1)); }
+        .poem-card:hover::before { color: rgba(212,175,55,0.09); transform: scale(1.1); }
+        .poem-occasion-badge { display: inline-block; background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.3); color: var(--gold); font-size: 11px; font-weight: 900; padding: 3px 12px; border-radius: 20px; margin-bottom: 14px; }
+        .poem-card h4 { color: #f0f0f0; font-size: 19px; font-weight: 900; margin: 0 0 14px 0; line-height: 1.5; }
+        .poem-preview { color: #888; font-size: 14px; line-height: 2; margin-bottom: 18px; border-right: 3px solid rgba(212,175,55,0.2); padding-right: 12px; flex-grow: 1; }
+        .poem-read-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--gold); font-weight: bold; font-size: 13px; cursor: pointer; border: none; background: transparent; font-family: 'Cairo'; transition: 0.3s; padding: 0; }
+        .poem-read-btn:hover { letter-spacing: 1px; }
+        .poem-read-btn i { transition: 0.3s; }
+        .poem-read-btn:hover i { transform: translateX(-4px); }
+        .no-poems-msg { text-align: center; color: #555; font-size: 16px; padding: 60px 0; font-weight: bold; }
+
+        /* --- نافذة القصيدة المنبثقة --- */
+        .poem-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 40000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(18px); padding: 20px; }
+        .poem-modal-overlay.active { display: flex; animation: popIn 0.4s ease; }
+        .poem-modal-card {
+            background: linear-gradient(160deg, #1a1500, #0d0d00, #141000);
+            border: 2px solid var(--gold);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            max-height: 85vh;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(212,175,55,0.25), inset 0 0 40px rgba(0,0,0,0.5);
+        }
+        .poem-modal-decoration { color: var(--gold); font-size: 30px; opacity: 0.4; margin-bottom: 10px; letter-spacing: 15px; }
+        .poem-modal-title { color: var(--gold); font-size: 26px; font-weight: 900; margin: 0 0 8px; text-shadow: 0 0 20px rgba(212,175,55,0.4); }
+        .poem-modal-badge { display: inline-block; background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.3); color: #aaa; font-size: 12px; padding: 3px 14px; border-radius: 20px; margin-bottom: 30px; }
+        .poem-modal-divider { width: 80px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 30px; }
+        .poem-modal-text {
+            color: #ddd;
+            font-size: 19px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            line-height: 2.4;
+            white-space: pre-line;
+            text-align: center;
+            overflow-y: auto;
+            flex-grow: 1;
+            min-height: 0;
+            padding: 0 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) transparent;
+        }
+        .poem-modal-text::-webkit-scrollbar { width: 5px; }
+        .poem-modal-text::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 5px; }
+        .poem-modal-text .poem-line { display: block; margin-bottom: 4px; transition: 0.3s; }
+        .poem-modal-text .poem-line:hover { color: var(--gold); text-shadow: 0 0 15px rgba(212,175,55,0.4); }
+        .poem-modal-actions { margin-top: 25px; flex-shrink: 0; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .poem-modal-close { position: absolute; top: 18px; left: 20px; color: #555; font-size: 22px; cursor: pointer; transition: 0.3s; border: none; background: transparent; }
+        .poem-modal-close:hover { color: #ff4d4d; transform: rotate(90deg); }
+        .poem-share-btn { background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.3); color: var(--gold); padding: 10px 24px; border-radius: 25px; font-family: 'Cairo'; font-weight: bold; font-size: 13px; cursor: pointer; transition: 0.3s; }
+        .poem-share-btn:hover { background: rgba(212,175,55,0.2); }
+        .poem-order-btn { background: linear-gradient(45deg, var(--gold), #b8860b); color: #000; border: none; padding: 10px 24px; border-radius: 25px; font-family: 'Cairo'; font-weight: 900; font-size: 13px; cursor: pointer; transition: 0.3s; }
+        .poem-order-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(212,175,55,0.4); }
+        .poem-back-btn { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2); color: #bbb; padding: 10px 24px; border-radius: 25px; font-family: 'Cairo'; font-weight: bold; font-size: 13px; cursor: pointer; transition: 0.3s; }
+        .poem-back-btn:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: #fff; }
+
+
+        /* Navy theme للقصائد */
+        .navy-theme .poem-card { background: linear-gradient(145deg, rgba(8,18,45,0.9), rgba(5,12,30,0.95)); border-color: rgba(30,90,180,0.25); }
+        .navy-theme .poem-card:hover { border-color: var(--gold); background: linear-gradient(145deg, rgba(12,25,60,0.95), rgba(8,18,45,1)); }
+        .navy-theme .poem-preview { border-right-color: rgba(30,90,180,0.3); color: #5a7a9a; }
+        .navy-theme .poems-toolbar { background: rgba(10,22,50,0.5); border-color: rgba(30,90,180,0.2); }
+        .navy-theme .poems-search { background: rgba(5,13,35,0.7); border-color: rgba(30,90,180,0.3); color: #c8daf0; }
+        .navy-theme .occ-btn { background: rgba(30,90,180,0.06); border-color: rgba(30,90,180,0.3); color: #5a7a9a; }
+        .navy-theme .occ-btn:hover, .navy-theme .occ-btn.active { background: rgba(212,175,55,0.12); border-color: var(--gold); color: var(--gold); }
+        .navy-theme .lit-tab-btn { background: rgba(30,90,180,0.06); border-color: rgba(30,90,180,0.3); color: #6a8ab0; }
+        .navy-theme .lit-tab-btn:hover { border-color: var(--gold); color: var(--gold); }
+        .navy-theme .poem-modal-card { background: linear-gradient(160deg, #050e22, #030a18, #060d20); }
+
 </style>
+    <script src="poems-data.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 </head>
 <body>
@@ -987,26 +1121,83 @@
             </div>
         </div>
 
+        <!-- ====== نافذة القصيدة المنبثقة ====== -->
+        <div class="poem-modal-overlay" id="poemModal" onclick="if(event.target===this)closePoemModal()">
+            <div class="poem-modal-card">
+                <button class="poem-modal-close" onclick="closePoemModal()"><i class="fas fa-times"></i></button>
+                <div class="poem-modal-decoration">❧ ✦ ❧</div>
+                <h2 class="poem-modal-title" id="pm-title">عنوان القصيدة</h2>
+                <span class="poem-modal-badge" id="pm-badge">مناسبة</span>
+                <div class="poem-modal-divider"></div>
+                <div class="poem-modal-text" id="pm-text"></div>
+                <div class="poem-modal-actions">
+                    <button class="poem-share-btn" onclick="sharePoemWA()"><i class="fab fa-whatsapp" style="margin-left:6px;"></i>مشاركة</button>
+                    <button class="poem-order-btn" onclick="orderPoem()"><i class="fas fa-pen-nib" style="margin-left:6px;"></i>اطلب مشابهة</button>
+                    <button class="poem-back-btn" onclick="closePoemModal()"><i class="fas fa-arrow-right" style="margin-left:6px;"></i>رجوع للخلف</button>
+                </div>
+            </div>
+        </div>
+
         <div id="literary-page" class="page-section">
             <div class="section-title-wrapper" style="margin-top: 10px;"><h2 class="section-title-frame">الركن الأدبي لأثير</h2></div>
-            <div style="text-align: center; max-width: 1000px; margin: auto;">
-                <p style="color: #ccc; font-size: 18px; margin-bottom: 40px;">مساحة تجمع بين سحر البيان ودقة النطق، نضع فيها عصارة خبرتنا الأكاديمية بين يديكم.</p>
-                <div class="literary-grid">
-                    <div class="literary-card"><h4>كيف تختار كلمات زفتك؟</h4><p>نصائح ذهبية لانتقاء قصيدة تعبر عن شخصيتك وتلامس قلوب الحاضرين في يومك الموعود.</p><a onclick="openArticle('art1')" class="read-more">قراءة المزيد <i class="fas fa-angle-left"></i></a></div>
-                    <div class="literary-card"><h4>أخطاء شائعة في التعليق الصوتي</h4><p>إضاءات لغوية حول أبرز الأخطاء النحوية والصرفية التي يقع فيها المعلقون وكيفية تجنبها.</p><a onclick="openArticle('art2')" class="read-more">قراءة المزيد <i class="fas fa-angle-left"></i></a></div>
-                    <div class="literary-card"><h4>جماليات القصيدة المغناة</h4><p>نظرة نقدية وأدبية حول كيفية تحويل الكلمة الصماء إلى نغمة خالدة تأسر الأرواح.</p><a onclick="openArticle('art3')" class="read-more">قراءة المزيد <i class="fas fa-angle-left"></i></a></div>
+            <div style="text-align: center; max-width: 1100px; margin: auto;">
+                <p style="color: #aaa; font-size: 16px; margin-bottom: 30px;">مساحة تجمع بين سحر البيان ودقة النطق، نضع فيها عصارة خبرتنا الأكاديمية بين يديكم.</p>
+
+                <!-- === شريط التبويبات الفرعية === -->
+                <div class="literary-sub-tabs" role="tablist">
+                    <button class="lit-tab-btn active" onclick="switchLitTab('articles')" id="lit-tab-articles">
+                        <i class="fas fa-newspaper" style="margin-left:6px;"></i>مقالاتنا
+                    </button>
+                    <button class="lit-tab-btn" onclick="switchLitTab('poems')" id="lit-tab-poems">
+                        <i class="fas fa-feather-pointed" style="margin-left:6px;"></i>قصائدنا
+                    </button>
+                    <button class="lit-tab-btn" onclick="switchLitTab('qulwala')" id="lit-tab-qulwala">
+                        <i class="fas fa-language" style="margin-left:6px;"></i>قل ولا تقل
+                    </button>
+                    <button class="lit-tab-btn" onclick="switchLitTab('clinic')" id="lit-tab-clinic">
+                        <i class="fas fa-scale-balanced" style="margin-left:6px;"></i>عيادة القصيدة
+                    </button>
                 </div>
-                <div class="section-title-wrapper" style="margin-top: 70px;"><h2 class="section-title-frame" style="font-size: 22px; padding: 8px 30px;">سلسلة "قل ولا تقل" للإعلاميين (50 إضاءة)</h2></div>
-                <div class="capsule-grid" id="capsules-container"></div>
-                <div class="poem-clinic">
-                    <h3>⚖️ عيادة "أثير" اللغوية (زن قصيدتك)</h3>
-                    <p>هل كتبت كلمات لزفتك أو حفل تخرجك ومتردد في صحتها اللغوية أو وزنها العروضي؟<br>أرسل أبياتك هنا، وسيقوم الدكتور بكيل المراني بتقييمها لك مجاناً.</p>
-                    <form class="clinic-form" onsubmit="sendPoem(event)">
-                        <input type="text" id="clinic-name" placeholder="اسمك الكريم" required>
-                        <textarea id="clinic-poem" rows="4" placeholder="ضع أبيات قصيدتك هنا..." required></textarea>
-                        <button type="submit" class="btn-order" style="margin-top: 0; width: 100%;">أرسل للتقييم عبر واتساب <i class="fab fa-whatsapp" style="margin-right: 5px;"></i></button>
-                    </form>
+
+                <!-- === تبويب: المقالات === -->
+                <div class="lit-sub-content active" id="lit-sub-articles">
+                    <div class="literary-grid">
+                        <div class="literary-card"><h4>كيف تختار كلمات زفتك؟</h4><p>نصائح ذهبية لانتقاء قصيدة تعبر عن شخصيتك وتلامس قلوب الحاضرين في يومك الموعود.</p><a onclick="openArticle('art1')" class="read-more">قراءة المزيد <i class="fas fa-angle-left"></i></a></div>
+                        <div class="literary-card"><h4>أخطاء شائعة في التعليق الصوتي</h4><p>إضاءات لغوية حول أبرز الأخطاء النحوية والصرفية التي يقع فيها المعلقون وكيفية تجنبها.</p><a onclick="openArticle('art2')" class="read-more">قراءة المزيد <i class="fas fa-angle-left"></i></a></div>
+                        <div class="literary-card"><h4>جماليات القصيدة المغناة</h4><p>نظرة نقدية وأدبية حول كيفية تحويل الكلمة الصماء إلى نغمة خالدة تأسر الأرواح.</p><a onclick="openArticle('art3')" class="read-more">قراءة المزيد <i class="fas fa-angle-left"></i></a></div>
+                    </div>
                 </div>
+
+                <!-- === تبويب: القصائد (مبني ديناميكياً من poems-data.js) === -->
+                <div class="lit-sub-content" id="lit-sub-poems">
+                    <div class="poems-toolbar">
+                        <input class="poems-search" id="poems-search-input" type="text" placeholder="🔍  ابحث في القصائد..." oninput="renderPoems()">
+                        <div class="occasion-filters" id="occasions-filter"></div>
+                    </div>
+                    <div class="poems-grid" id="poems-grid"></div>
+                </div>
+
+                <!-- === تبويب: قل ولا تقل === -->
+                <div class="lit-sub-content" id="lit-sub-qulwala">
+                    <div class="section-title-wrapper" style="margin-top: 0; margin-bottom: 20px;">
+                        <h2 class="section-title-frame" style="font-size: 20px; padding: 8px 25px;">سلسلة "قل ولا تقل" للإعلاميين (50 إضاءة)</h2>
+                    </div>
+                    <div class="capsule-grid" id="capsules-container"></div>
+                </div>
+
+                <!-- === تبويب: عيادة القصيدة === -->
+                <div class="lit-sub-content" id="lit-sub-clinic">
+                    <div class="poem-clinic" style="margin-top: 10px;">
+                        <h3>⚖️ عيادة "أثير" اللغوية (زن قصيدتك)</h3>
+                        <p>هل كتبت كلمات لزفتك أو حفل تخرجك ومتردد في صحتها اللغوية أو وزنها العروضي؟<br>أرسل أبياتك هنا، وسيقوم الدكتور بكيل المراني بتقييمها لك مجاناً.</p>
+                        <form class="clinic-form" onsubmit="sendPoem(event)">
+                            <input type="text" id="clinic-name" placeholder="اسمك الكريم" required>
+                            <textarea id="clinic-poem" rows="4" placeholder="ضع أبيات قصيدتك هنا..." required></textarea>
+                            <button type="submit" class="btn-order" style="margin-top: 0; width: 100%;">أرسل للتقييم عبر واتساب <i class="fab fa-whatsapp" style="margin-right: 5px;"></i></button>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -2107,9 +2298,148 @@
                 setTimeout(() => {
                     initReveal();
                     initSkills();
+                    if (id === 'literary-page') initPoemsModule();
                 }, 450);
             };
         }
+    </script>
+
+    <script>
+        /* ============================================================
+         *  محرك القصائد — Poems Engine
+         *  يعتمد على البيانات من ملف poems-data.js (window.poemsData)
+         * ============================================================ */
+
+        let _poemsInitialized = false;
+        let _activeOccasion = 'all';
+        let _currentPoem = null;
+
+        function buildOccasionFilters() {
+            const data = window.poemsData || [];
+            const occurrences = ['all', ...new Set(data.map(p => p.occasion))];
+            const labels = { all: '✨ الكل' };
+            const container = document.getElementById('occasions-filter');
+            if (!container) return;
+            container.innerHTML = '';
+            occurrences.forEach(occ => {
+                const btn = document.createElement('button');
+                btn.className = 'occ-btn' + (occ === 'all' ? ' active' : '');
+                btn.textContent = labels[occ] || occ;
+                btn.setAttribute('data-occ', occ);
+                btn.onclick = () => {
+                    document.querySelectorAll('.occ-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    _activeOccasion = occ;
+                    renderPoems();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function renderPoems() {
+            const data = window.poemsData || [];
+            const grid = document.getElementById('poems-grid');
+            const searchVal = (document.getElementById('poems-search-input') && document.getElementById('poems-search-input').value || '').trim().toLowerCase();
+            if (!grid) return;
+
+            const filtered = data.filter(p => {
+                const matchOcc = _activeOccasion === 'all' || p.occasion === _activeOccasion;
+                const matchSearch = !searchVal ||
+                    p.title.toLowerCase().includes(searchVal) ||
+                    p.text.toLowerCase().includes(searchVal);
+                return matchOcc && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="no-poems-msg"><i class="fas fa-feather" style="display:block;font-size:36px;margin-bottom:15px;color:rgba(212,175,55,0.3);"></i>لا توجد نتائج مطابقة</div>';
+                return;
+            }
+
+            grid.innerHTML = filtered.map(function(p) {
+                var lines = p.text.trim().split('\n').map(function(l){ return l.trim(); }).filter(function(l) { return l !== '' && !l.startsWith('د.') && l.indexOf('*') === -1 && l.indexOf('=') === -1 && l.indexOf('-') === -1; });
+                var preview = lines.slice(0, 2).join('<br>') + ' ...';
+                return '<div class="poem-card" onclick="openPoemModal(' + p.id + ')">' +
+                    '<span class="poem-occasion-badge">' + p.occasion + '</span>' +
+                    '<h4>' + p.title + '</h4>' +
+                    '<div class="poem-preview">' + preview + '</div>' +
+                    '<button class="poem-read-btn">قراءة القصيدة كاملة <i class="fas fa-angle-left"></i></button>' +
+                    '</div>';
+            }).join('');
+        }
+
+        function openPoemModal(id) {
+            var poem = (window.poemsData || []).filter(function(p){ return p.id === id; })[0];
+            if (!poem) return;
+            _currentPoem = poem;
+            document.getElementById('pm-title').textContent = poem.title;
+            document.getElementById('pm-badge').textContent = poem.occasion;
+            var lines = poem.text.trim().split('\n');
+            document.getElementById('pm-text').innerHTML = lines.map(function(l){
+                return '<span class="poem-line">' + (l || '&nbsp;') + '</span>';
+            }).join('');
+            document.getElementById('poemModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePoemModal() {
+            document.getElementById('poemModal').classList.remove('active');
+            document.body.style.overflow = '';
+            _currentPoem = null;
+        }
+
+        function sharePoemWA() {
+            if (!_currentPoem) return;
+            var msg = '✨ قصيدة: ' + _currentPoem.title + '\n\n' + _currentPoem.text + '\n\n— أثير ساوند للخدمات الأدبية';
+            window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+        }
+
+        function orderPoem() {
+            if (!_currentPoem) return;
+            var msg = 'السلام عليكم، أرغب في طلب قصيدة في نفس أسلوب قصيدة "' + _currentPoem.title + '" ضمن تصنيف (' + _currentPoem.occasion + ').';
+            window.open('https://wa.me/967770080131?text=' + encodeURIComponent(msg), '_blank');
+        }
+
+        function switchLitTab(tabName) {
+            document.querySelectorAll('.lit-tab-btn').forEach(function(b){ b.classList.remove('active'); });
+            document.querySelectorAll('.lit-sub-content').forEach(function(c){ c.classList.remove('active'); });
+            var btn = document.getElementById('lit-tab-' + tabName);
+            var content = document.getElementById('lit-sub-' + tabName);
+            if (btn) btn.classList.add('active');
+            if (content) {
+                content.classList.add('active');
+                if (tabName === 'poems' && !_poemsInitialized) initPoemsModule();
+                if (tabName === 'qulwala') {
+                    var cap = document.getElementById('capsules-container');
+                    if (cap && cap.children.length === 0) buildCapsules();
+                }
+            }
+        }
+
+        function initPoemsModule() {
+            _poemsInitialized = true;
+            buildOccasionFilters();
+            renderPoems();
+        }
+
+        function buildCapsules() {
+            var container = document.getElementById('capsules-container');
+            if (!container || container.children.length > 0) return;
+            var capsuleData = window.capsuleData || [];
+            capsuleData.forEach(function(item) {
+                var div = document.createElement('div');
+                div.className = 'capsule-card';
+                div.innerHTML = '<div class="capsule-front"><i class="fas fa-times-circle" style="margin-left:6px;"></i>' + item.wrong + '</div>' +
+                    '<div class="capsule-back"><i class="fas fa-check-circle" style="margin-left:6px;"></i>' + item.correct + '</div>';
+                container.appendChild(div);
+            });
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                var modal = document.getElementById('poemModal');
+                if (modal && modal.classList.contains('active')) closePoemModal();
+            }
+        });
     </script>
 
     <!-- نافذة البحث الشامل -->
