@@ -802,7 +802,7 @@
     </div>
 
     <header class="header" onclick="cinematicSection('home-page')" style="cursor: pointer;" title="الصفحة الرئيسية">
-        <img src="header_with_logo.png" class="header-banner" alt="أثير ساوند" onerror="this.src='header.png'; this.onerror=null;">
+        <img src="header_opt.webp" class="header-banner" alt="أثير ساوند" onerror="this.src='header.png'; this.onerror=null;">
     </header>
 
     <nav class="nav">
@@ -1022,11 +1022,11 @@
 
             <div class="works-grid" id="works-grid">
                 
-                <div class="work-card video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/KDWzyJSBjgc?rel=0" frameborder="0" allowfullscreen></iframe></div><div class="work-overlay">مرحباً سيد الشهور</div></div>
-                <div class="work-card video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/M7UTysvdJn0?rel=0" frameborder="0" allowfullscreen></iframe></div><div class="work-overlay">ورجع رمضان</div></div>
-                <div class="work-card video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/Z1DrrotLpso?rel=0" frameborder="0" allowfullscreen></iframe></div><div class="work-overlay">يا طيور الفرح طيري</div></div>
-                <div class="work-card video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/NBYWoZaEzNM?rel=0" frameborder="0" allowfullscreen></iframe></div><div class="work-overlay">التدريبات العقلية</div></div>
-                <div class="work-card video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/1hauQGYKXXc?rel=0" frameborder="0" allowfullscreen></iframe></div><div class="work-overlay">يمني الجريح</div></div>
+                <div class="work-card video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/KDWzyJSBjgc?rel=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe></div><div class="work-overlay">مرحباً سيد الشهور</div></div>
+                <div class="work-card video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/M7UTysvdJn0?rel=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe></div><div class="work-overlay">ورجع رمضان</div></div>
+                <div class="work-card video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/Z1DrrotLpso?rel=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe></div><div class="work-overlay">يا طيور الفرح طيري</div></div>
+                <div class="work-card video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/NBYWoZaEzNM?rel=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe></div><div class="work-overlay">التدريبات العقلية</div></div>
+                <div class="work-card video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/1hauQGYKXXc?rel=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe></div><div class="work-overlay">يمني الجريح</div></div>
 
                 <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>زفوا الأوائل - مدارس طيبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/9dtwmtarlsf5wr442wk15/zoffo.mp3?rlkey=yc3f9z6u7ypo1tg1rv755m20q&st=hkl0sfyc&raw=1" type="audio/mpeg"></audio></div></div>
                 <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يا ورد يا كاذي - ستايل هندي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/ccm7t581iy8m7ae6byxhm/zaffahindi-Cover.mp3?rlkey=x7z7wzzsi8q4ojn740rsn0bnq&st=w8u9tkur&raw=1" type="audio/mpeg"></audio></div></div>
@@ -2564,6 +2564,67 @@
         </div>
     </div>
 
+    <!-- Media Controller Script -->
+    <script>
+        // إيقاف جميع المقاطع والتأكد من عدم التداخل بين الملفات الصوتية والفيديو
+        var ytPlayers = [];
+        
+        // تحميل YouTube API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onYouTubeIframeAPIReady() {
+            var iframes = document.querySelectorAll('iframe[src*="youtube"]');
+            iframes.forEach(function(iframe, index) {
+                iframe.id = iframe.id || 'ytplayer_' + index;
+                var player = new YT.Player(iframe.id, {
+                    events: {
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+                ytPlayers.push(player);
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            // إذا بدأ تشغيل فيديو
+            if (event.data == YT.PlayerState.PLAYING) {
+                // إيقاف مقاطع الصوت (audio)
+                var audios = document.getElementsByTagName('audio');
+                for(var i = 0; i < audios.length; i++){
+                    audios[i].pause();
+                }
+                // إيقاف الفيديوهات الأخرى
+                ytPlayers.forEach(function(p) {
+                    if (p !== event.target && p.pauseVideo) {
+                        try { p.pauseVideo(); } catch(e){}
+                    }
+                });
+            }
+        }
+
+        // إيقاف عند تشغيل ملف صوتي (Audio)
+        document.addEventListener('play', function(e){
+            // إيقاف المقاطع الصوتية الأخرى
+            var audios = document.getElementsByTagName('audio');
+            for(var i = 0; i < audios.length; i++){
+                if(audios[i] != e.target){
+                    audios[i].pause();
+                }
+            }
+            
+            // إيقاف جميع فيديوهات اليوتيوب المفتوحة
+            if(e.target.tagName && e.target.tagName.toLowerCase() === 'audio') {
+                ytPlayers.forEach(function(p) {
+                    if(p.pauseVideo) {
+                        try { p.pauseVideo(); } catch(e){}
+                    }
+                });
+            }
+        }, true);
+    </script>
 </body>
 </html>
 Reading page...Getting DOM...Stopping...
