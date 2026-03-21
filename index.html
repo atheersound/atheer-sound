@@ -39,6 +39,7 @@
             --gold-light: #fcf6ba;
             --bg: #0c0c0c;
             --card: #151515;
+            --border: rgba(212,175,55,0.2);
             --transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -72,13 +73,42 @@
         .nav a.btn-nav-contact:hover { transform: scale(1.05); background: #fff; color: #000; animation: none; }
         @keyframes pulse-nav { 0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.5); } 70% { box-shadow: 0 0 0 10px rgba(212,175,55,0); } 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); } }
 
-        .container { max-width: 1200px; margin: auto; padding: 20px; position: relative; z-index: 2; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .fade-transition { opacity: 0; transform: translateY(20px); filter: none; }
+        .container { max-width: 1200px; margin: auto; padding: 20px; position: relative; z-index: 2; }
+        
+        /* ====== الانتقالات السينمائية المُحسَّنة ====== */
+        .page-content-wrapper { transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1); transform-origin: top center; will-change: transform, opacity, filter; }
+        .fade-transition { opacity: 0; transform: scale(0.97) translateY(20px); filter: blur(8px); }
+        .stagger-item { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
+        .stagger-item.show { opacity: 1; transform: translateY(0); }
 
         /* --- الـ Hero --- */
-        .home-hero { height: 240px; max-width: 800px; margin: 0 auto 30px auto; border-radius: 25px; border: 2px solid var(--gold); background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1000'); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .home-hero h2 { font-size: clamp(24px, 6vw, 40px); color: var(--gold); font-weight: 900; margin-bottom: 5px; }
-        .typing-container { font-size: 22px; margin-top: 10px; font-weight: bold; color: #eee; }
+        .home-hero { height: 450px; max-width: 900px; margin: 0 auto 30px auto; border-radius: 25px; border: 2px solid var(--gold); background: linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.62)), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200'); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.15); padding: 30px 20px; }
+        /* توهّج ضوئي نابض خلف العنوان */
+        .home-hero::before { content: ''; position: absolute; width: 350px; height: 350px; background: radial-gradient(circle, rgba(212,175,55,0.18) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: hero-pulse 3s ease-in-out infinite; border-radius: 50%; pointer-events: none; z-index: 0; }
+        @keyframes hero-pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; } 50% { transform: translate(-50%, -50%) scale(1.4); opacity: 1; } }
+        .home-hero h2 { font-size: clamp(28px, 6vw, 48px); color: var(--gold); font-weight: 900; margin-bottom: 8px; position: relative; z-index: 2; text-shadow: 0 0 30px rgba(212,175,55,0.4); }
+        .typing-container { font-size: clamp(16px, 3vw, 22px); margin-top: 8px; font-weight: bold; color: #eee; position: relative; z-index: 2; }
+        /* موجة صوتية متحركة */
+        .hero-soundwave { display: flex; align-items: center; justify-content: center; gap: 4px; height: 50px; margin: 18px 0; position: relative; z-index: 2; }
+        .hero-soundwave span { display: block; width: 4px; background: linear-gradient(to top, rgba(212,175,55,0.4), var(--gold)); border-radius: 3px; animation: hero-wave 1.4s ease-in-out infinite; min-height: 6px; }
+        .hero-soundwave span:nth-child(1)  { animation-delay: 0.0s; }
+        .hero-soundwave span:nth-child(2)  { animation-delay: 0.1s; }
+        .hero-soundwave span:nth-child(3)  { animation-delay: 0.2s; }
+        .hero-soundwave span:nth-child(4)  { animation-delay: 0.05s; }
+        .hero-soundwave span:nth-child(5)  { animation-delay: 0.3s; }
+        .hero-soundwave span:nth-child(6)  { animation-delay: 0.15s; }
+        .hero-soundwave span:nth-child(7)  { animation-delay: 0.35s; }
+        .hero-soundwave span:nth-child(8)  { animation-delay: 0.08s; }
+        .hero-soundwave span:nth-child(9)  { animation-delay: 0.25s; }
+        .hero-soundwave span:nth-child(10) { animation-delay: 0.4s; }
+        .hero-soundwave span:nth-child(11) { animation-delay: 0.12s; }
+        .hero-soundwave span:nth-child(12) { animation-delay: 0.28s; }
+        @keyframes hero-wave { 0%, 100% { height: 6px; } 50% { height: 40px; } }
+        /* زر CTA */
+        .hero-cta { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; font-family: 'Cairo', sans-serif; font-weight: 900; font-size: 17px; padding: 13px 35px; border-radius: 50px; border: none; cursor: pointer; transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 8px 25px rgba(212,175,55,0.4); position: relative; z-index: 2; margin-top: 20px; text-decoration: none; }
+        .hero-cta:hover { transform: scale(1.07) translateY(-3px); box-shadow: 0 12px 35px rgba(212,175,55,0.6); background: linear-gradient(135deg, #ffe066, var(--gold)); }
+        .hero-cta i { font-size: 20px; animation: icon-bounce 1.5s ease-in-out infinite; }
+        @keyframes icon-bounce { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-5px); } }
 
         /* --- الركن الأكاديمي والفني (أختام التميز) --- */
         .academic-seals-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 60px; max-width: 900px; margin: 50px auto; z-index: 10; position: relative; }
@@ -233,6 +263,52 @@
         .clinic-form input, .clinic-form textarea { background: #111; border: 1px solid #333; color: #fff; padding: 15px; border-radius: 10px; font-family: 'Cairo'; font-size: 15px; }
         .clinic-form input:focus, .clinic-form textarea:focus { border-color: var(--gold); outline: none; }
 
+        /* ====== صفحة التواصل المطوّرة ====== */
+        .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto 60px; align-items: start; }
+        @media (max-width: 768px) { .contact-layout { grid-template-columns: 1fr; gap: 30px; } }
+
+        /* لوحة المعلومات (يمين) */
+        .contact-info-panel { background: linear-gradient(145deg, #111, #0a0a0a); border: 1px solid rgba(212,175,55,0.2); border-radius: 20px; padding: 35px; display: flex; flex-direction: column; gap: 24px; }
+        .contact-info-panel h3 { color: var(--gold); font-size: 20px; font-weight: 900; margin: 0 0 5px; display: flex; align-items: center; gap: 10px; }
+        .contact-info-panel p.sub { color: #888; font-size: 14px; margin: 0 0 20px; line-height: 1.7; }
+        .contact-card { display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.1); border-radius: 14px; padding: 16px 18px; transition: 0.3s; cursor: pointer; text-decoration: none; }
+        .contact-card:hover { background: rgba(212,175,55,0.07); border-color: var(--gold); transform: translateX(-4px); }
+        .contact-card-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+        .contact-card-text { text-align: right; }
+        .contact-card-text strong { display: block; color: var(--gold); font-size: 14px; font-weight: 900; margin-bottom: 3px; }
+        .contact-card-text span { color: #aaa; font-size: 15px; font-weight: bold; direction: ltr; display: block; }
+        .card-wa-ye .contact-card-icon { background: rgba(37,211,102,0.15); color: #25D366; }
+        .card-wa-sa .contact-card-icon { background: rgba(18,140,126,0.15); color: #128C7E; }
+        .card-tg .contact-card-icon { background: rgba(0,136,204,0.15); color: #0088cc; }
+        .card-mail .contact-card-icon { background: rgba(234,67,53,0.15); color: #EA4335; }
+        .card-yt .contact-card-icon { background: rgba(255,0,0,0.12); color: #FF0000; }
+        .contact-divider { height: 1px; background: rgba(212,175,55,0.12); margin: 4px 0; }
+        .contact-locations { display: flex; gap: 12px; }
+        .location-badge { flex: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.12); border-radius: 12px; padding: 14px 12px; text-align: center; transition: 0.3s; }
+        .location-badge:hover { border-color: var(--gold); background: rgba(212,175,55,0.06); }
+        .location-badge .flag-emoji { font-size: 28px; display: block; margin-bottom: 6px; }
+        .location-badge strong { color: var(--gold); font-size: 13px; display: block; }
+        .location-badge span { color: #777; font-size: 12px; }
+
+        /* نموذج التواصل (يسار) */
+        .contact-form-panel { background: linear-gradient(145deg, #111, #0a0a0a); border: 1px solid rgba(212,175,55,0.2); border-radius: 20px; padding: 35px; }
+        .contact-form-panel h3 { color: var(--gold); font-size: 20px; font-weight: 900; margin: 0 0 25px; display: flex; align-items: center; gap: 10px; }
+        .cf-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+        .cf-field label { color: #aaa; font-size: 13px; font-weight: bold; }
+        .cf-input { background: rgba(255,255,255,0.04); border: 1px solid #333; border-radius: 12px; padding: 13px 16px; color: #fff; font-family: 'Cairo', sans-serif; font-size: 15px; transition: 0.3s; outline: none; width: 100%; box-sizing: border-box; }
+        .cf-input:focus { border-color: var(--gold); background: rgba(212,175,55,0.04); box-shadow: 0 0 0 3px rgba(212,175,55,0.08); }
+        .cf-input::placeholder { color: #555; }
+        select.cf-input option { background: #1a1a1a; color: #fff; }
+        .cf-submit { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; border: none; border-radius: 30px; font-family: 'Cairo', sans-serif; font-weight: 900; font-size: 16px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 5px; }
+        .cf-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212,175,55,0.4); }
+        /* Navy theme */
+        .navy-theme .contact-info-panel, .navy-theme .contact-form-panel { background: linear-gradient(145deg, #0a1628, #060d1f); border-color: rgba(30,90,180,0.25); }
+        .navy-theme .contact-card { background: rgba(30,90,180,0.05); border-color: rgba(30,90,180,0.15); }
+        .navy-theme .contact-card:hover { background: rgba(30,90,180,0.12); border-color: var(--gold); }
+        .navy-theme .location-badge { background: rgba(30,90,180,0.05); border-color: rgba(30,90,180,0.15); }
+        .navy-theme .cf-input { background: rgba(30,90,180,0.05); border-color: rgba(30,90,180,0.25); color: #c8daf0; }
+        .navy-theme .cf-input:focus { border-color: var(--gold); background: rgba(30,90,180,0.1); }
+
         /* --- الأزرار العائمة الموحدة (FAB) --- */
         .fab-container { position: fixed; bottom: 30px; right: 30px; z-index: 10000; }
         .fab-main { width: 65px; height: 65px; background: linear-gradient(135deg, var(--gold), #b8860b); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 28px; color: #000; cursor: pointer; box-shadow: 0 5px 25px rgba(212,175,55,0.5); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -325,16 +401,16 @@
         .btn-back { margin-top: 20px; background: transparent; color: var(--gold); border: 2px solid var(--gold); padding: 12px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Cairo', sans-serif; display: inline-block; text-decoration: none;}
         .btn-back:hover { background: var(--gold); color: #000;}
 
-        /* --- مشغل الصوتيات الاحترافي (Custom Audio Player) --- */
-        .custom-audio-player { display: flex; align-items: center; background: rgba(0,0,0,0.6); border: 1px solid #333; border-radius: 50px; padding: 10px 15px; gap: 15px; margin-top: 5px; margin-bottom: 20px; direction: ltr; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
-        .play-pause-btn { background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 16px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 0 10px rgba(212,175,55,0.4); flex-shrink: 0; outline: none; }
+        /* --- المشغل المرئي المطور (SoundCloud Style) --- */
+        .custom-audio-player { display: flex; align-items: center; background: rgba(0,0,0,0.6); border: 1px solid #333; border-radius: 50px; padding: 10px 15px; gap: 15px; margin-top: 10px; margin-bottom: 5px; direction: ltr; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); width: 100%; box-sizing: border-box; }
+        .play-pause-btn { background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 16px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px rgba(212,175,55,0.4); flex-shrink: 0; outline: none; }
         .play-pause-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px rgba(212,175,55,0.6); }
 
-        .player-center { flex-grow: 1; display: flex; flex-direction: column; gap: 6px; }
+        .player-center { flex-grow: 1; display: flex; flex-direction: column; gap: 6px; width: 100%; overflow: hidden; }
 
-        .waveform-anim { display: flex; align-items: flex-end; justify-content: center; height: 16px; gap: 3px; opacity: 0.3; transition: 0.3s; }
+        .waveform-anim { display: flex; align-items: flex-end; justify-content: flex-start; height: 16px; gap: 3px; opacity: 0.3; transition: 0.3s; width: 100%; box-sizing: border-box; }
         .waveform-anim.playing { opacity: 1; }
-        .waveform-anim span { display: block; width: 3px; background: var(--gold); border-radius: 2px; height: 3px; }
+        .waveform-anim span { display: block; width: 4px; background: var(--gold); border-radius: 2px; height: 3px; }
         .waveform-anim.playing span { animation: wave-anim 1s infinite alternate ease-in-out; }
         .waveform-anim.playing span:nth-child(2) { animation-delay: 0.2s; }
         .waveform-anim.playing span:nth-child(3) { animation-delay: 0.4s; }
@@ -342,14 +418,19 @@
         .waveform-anim.playing span:nth-child(5) { animation-delay: 0.5s; }
         .waveform-anim.playing span:nth-child(6) { animation-delay: 0.3s; }
         .waveform-anim.playing span:nth-child(7) { animation-delay: 0.6s; }
-
+        /* أمواج إضافية لمحاكاة الساوندكلاود */
+        .waveform-anim.playing span:nth-child(8) { animation-delay: 0.2s; }
+        .waveform-anim.playing span:nth-child(9) { animation-delay: 0.5s; }
+        .waveform-anim.playing span:nth-child(10) { animation-delay: 0.1s; }
+        .waveform-anim.playing span:nth-child(11) { animation-delay: 0.4s; }
+        .waveform-anim.playing span:nth-child(12) { animation-delay: 0.3s; }
+        
         @keyframes wave-anim { 0% { height: 3px; } 100% { height: 100%; } }
 
-        .progress-container { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12px; color: #888; font-weight: bold; font-family: monospace; }
+        .progress-container { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 11px; color: #aaa; font-family: monospace; }
         .seek-bar { -webkit-appearance: none; appearance: none; width: 100%; height: 5px; background: #333; border-radius: 3px; outline: none; cursor: pointer; transition: 0.1s; }
-        .seek-bar::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--progress-col); cursor: pointer; box-shadow: 0 0 5px rgba(212,175,55,0.8); transition: 0.2s; }
+        .seek-bar::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); cursor: pointer; box-shadow: 0 0 5px rgba(212,175,55,0.8); transition: 0.2s; }
         .seek-bar::-webkit-slider-thumb:hover { transform: scale(1.3); }
-
         /* --- شريط الإعلانات العلوي المطور --- */
         .announcement-bar {
             background: linear-gradient(90deg, #111, #1a1a1a);
@@ -384,6 +465,7 @@
             justify-content: center;
             gap: 15px;
             pointer-events: none;
+            will-change: transform, opacity;
         }
         .announce-slide.active {
             opacity: 1;
@@ -394,6 +476,14 @@
             color: var(--gold); font-weight: bold; text-decoration: none; cursor: pointer; transition: 0.3s;
         }
         .announce-link:hover { color: #fff; text-shadow: 0 0 10px rgba(212,175,55,0.8); }
+        
+        @media (max-width: 600px) {
+            .announcement-bar { padding: 8px 10px; font-size: 11px; }
+            .announce-slide { gap: 6px; }
+            .announce-slide span.hide-mobile { display: none; }
+            .close-announcement { left: 10px; font-size: 16px; top: 10px; }
+        }
+
         .close-announcement {
             position: absolute; left: 20px; cursor: pointer; color: #666; transition: 0.3s; font-size: 18px;
         }
@@ -574,7 +664,14 @@
         .page-content-wrapper { flex: 1; min-width: 0; width: 100%; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         @media (max-width: 900px) {
             .main-layout-container { flex-direction: column; }
-            .side-menu { width: 100%; position: static; border-left: none; border-bottom: 3px solid var(--gold); }
+            .side-menu { width: 100%; position: static; border-left: none; border-bottom: 3px solid var(--gold); padding: 15px 10px; display: flex; flex-direction: column; }
+            .side-menu-title { font-size: 16px; margin-bottom: 10px; padding-bottom: 8px; }
+            .side-menu-list { flex-direction: row; overflow-x: auto; padding-bottom: 5px; scroll-snap-type: x mandatory; }
+            .side-menu-list::-webkit-scrollbar { height: 4px; }
+            .side-menu-list::-webkit-scrollbar-track { background: transparent; }
+            .side-menu-list::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.5); border-radius: 10px; }
+            .side-menu-list a { flex-shrink: 0; scroll-snap-align: start; white-space: nowrap; font-size: 14px; padding: 8px 15px; }
+            .side-btn-contact { margin-top: 0; margin-right: 15px; flex-shrink: 0; }
         }
         /* --- تأثيرات إضافية --- */
         #theme-transition-overlay { position: fixed; inset: 0; background: var(--bg-color, #050505); z-index: 999999; opacity: 0; pointer-events: none; transition: opacity 0.5s ease-in-out; }
@@ -710,6 +807,23 @@
             left: 150%;
         }
 
+        /* تعديلات للموبايل للكتب الترويجية */
+        @media (max-width: 768px) {
+            .promo-book-card {
+                transform: none; /* إزالة التحويل المنظوري */
+                width: 140px;
+                height: 200px;
+                margin: 5px auto;
+            }
+            .promo-book-card:hover {
+                transform: translateY(-10px) scale(1.05); /* حركة بسيطة للأعلى دون منظور */
+            }
+            /* إزالة الـ margin-top الخاص بالكتاب الثاني إن وجد له أب مباشر أو كلاس خاص، سنفترض أنه موجود كعنصر ثانٍ */
+            .books-container .promo-book-card:nth-child(2) {
+                margin-top: 0 !important;
+            }
+        }
+
 
 
         /* Navy theme للقصائد */
@@ -783,19 +897,19 @@
         <div class="announcement-content">
             <div class="announce-slide active">
                 <span class="announce-badge">تحديث</span>
-                <span class="announce-text">أهلاً بكم في الموقع الرسمي لأثير ساوند.. منصتكم الأولى للإنتاج الفني والأكاديمي.</span>
+                <span class="announce-text">أهلاً بكم في الموقع الرسمي لأثير ساوند<span class="hide-mobile">.. منصتكم الأولى للإنتاج الفني والأكاديمي.</span></span>
             </div>
             <div class="announce-slide">
                 <span class="announce-badge" style="background: #e74c3c; color: #fff; box-shadow: 0 0 10px rgba(231,76,60,0.4);">جديدنا</span>
-                <a onclick="scrollToHomeSection('packages-section', 'nav-packages')" class="announce-link">تعرف على باقاتنا الحصرية بأسعار تنافسية! <i class="fas fa-arrow-left"></i></a>
+                <a onclick="scrollToHomeSection('packages-section', 'nav-packages')" class="announce-link">تعرف على باقاتنا الحصرية<span class="hide-mobile"> بأسعار تنافسية!</span> <i class="fas fa-arrow-left"></i></a>
             </div>
             <div class="announce-slide">
                 <span class="announce-badge" style="background: #2ecc71; color: #fff; box-shadow: 0 0 10px rgba(46,204,113,0.4);">خدمات</span>
-                <a onclick="cinematicSection('works-page')" class="announce-link">استمع الآن لأحدث أعمالنا الفنية في معرض الأعمال <i class="fas fa-play" style="font-size: 10px;"></i></a>
+                <a onclick="cinematicSection('works-page')" class="announce-link">استمع الآن لأحدث أعمالنا<span class="hide-mobile"> الفنية في معرض الأعمال </span><i class="fas fa-play" style="font-size: 10px;"></i></a>
             </div>
             <div class="announce-slide">
                 <span class="announce-badge" style="background: #9b59b6; color: #fff; box-shadow: 0 0 10px rgba(155,89,182,0.4);">أدب</span>
-                <span class="announce-text">أضفنا سلسلة "قل ولا تقل" للإعلاميين في الركن الأدبي لتعزيز مهاراتكم.</span>
+                <span class="announce-text">أضفنا سلسلة "قل ولا تقل"<span class="hide-mobile"> للإعلاميين في الركن الأدبي لتعزيز مهاراتكم.</span></span>
             </div>
         </div>
         <i class="fas fa-times close-announcement" onclick="document.getElementById('announcement-bar').style.display='none'"></i>
@@ -842,6 +956,14 @@
             <div class="home-hero">
                 <h2>أثير ساوند للإنتاج الفني</h2>
                 <div class="typing-container" id="typing-box"></div>
+                <div class="hero-soundwave" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <button class="hero-cta" onclick="cinematicSection('works-page')">
+                    <i class="fas fa-play-circle"></i>
+                    استمع لأعمالنا
+                </button>
             </div>
 
             <div class="academic-seals-container">
@@ -1028,91 +1150,91 @@
                 <div class="work-card video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/NBYWoZaEzNM?rel=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe></div><div class="work-overlay">التدريبات العقلية</div></div>
                 <div class="work-card video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/1hauQGYKXXc?rel=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe></div><div class="work-overlay">يمني الجريح</div></div>
 
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>زفوا الأوائل - مدارس طيبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/9dtwmtarlsf5wr442wk15/zoffo.mp3?rlkey=yc3f9z6u7ypo1tg1rv755m20q&st=hkl0sfyc&raw=1" type="audio/mpeg"></audio></div></div>
-                                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يا طايع الوالدين</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/hsn3n0tua4pqzlo1iro2k/yatayi3.mp3?rlkey=4bdxb0csbi6zbe6piysm7zvzt&st=ly5cgtcz&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يا هلا مدرستي.. مدارس منار العلم</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/fi7cqanedp5w4szhuiyhs/yahala.mp3?rlkey=hqttk9tvl6ci3ca646wt1x1ao&st=kp79jfpb&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يا طير الفرح غني.. أنشودة عيد. مدارس النخبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/qs3trr2kk50rkmqzq422u/tair_alnokhba.mp3?rlkey=9hvudct390vjln2o5iqy5db0r&st=ftcpfx9o&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>أنشودة التمارين الرياضية لمدارس دروب المتميزين</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/vicrw0yl4kjbsjjcr4m0n/sports.mp3?rlkey=ofgzan3clcoz8mpe7s6yvhf2u&st=iotqbluf&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>درب السلامة. إهداء للمعلم. مدارس النخبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/hsxok2iky7coqdpygi7i8/shukran.mp3?rlkey=0e4bgofou3ufb5135nvco317u&st=jz0uo4b0&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>غنية يا طلة الصبح</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/mcsg5h6vld20pv4tnaz47/gamarayamani.mp3?rlkey=w1bdfwn78wbvbeax7xow3tte2&st=it9a0av4&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>شدوا بعضكم يا أهل فلسطين. مدارس مجد الحضارة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/1pnsj6a7vg24iwfsrvwgi/shido.mp3?rlkey=mgyqpt9c78de12m4ty5wfr5v9&st=0v0mkk50&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>أنشودة لغزة من مدارس رواد المجد</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/huszpxifv45z9e46gqiss/rowad_tofan_with.mp3?rlkey=y8byp0owsssfae1y7qzn73r1m&st=ztwx3qir&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>مدارس القادة النموذجية</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/p24n4932un4na928g6hvn/qadah.mp3?rlkey=0wvr2nocq5w6859sgv417xat4&st=xxvhbszm&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>منار العلم رايتنا. لمدارس منار العلم</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/xnx466hk3qcyctabthjtb/opreet_manar.mp3?rlkey=r41059gju5jlxzda7asvvpa0y&st=1t6f7utg&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>أنشودة ترحيبية مدارس الأفق</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/j1p8kmv2snm143a4r4fpc/Ofoq_jahiz.mp3?rlkey=2f9zwab7l1du1p1mte5u8esnl&st=19p7x2ui&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>نور في الأجواء</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/lafzs6oum762k3vduelxq/nor-Cover.mp3?rlkey=llbsoc6f6zugfenh3gza51iv9&st=2q0ipzh6&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>أنشودة مدارس نهج الأوائل</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/7b4kmcr7o94oqyap3vwa4/nahjo_schools.mp3?rlkey=ma26twwubrww9dirc17hz6sdi&st=9y4nllby&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>أنشودة مدارس المتحدون</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/nkprwlusiuoj81zxf0cde/motahidon_school.mp3?rlkey=fs0cntcavt4r57bo4zsm9mte4&st=hi6rlr7g&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>هاتوا الفل- مدارس النخبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/8uc0y0i1qfw5r2z97pvpg/maryam_nokhba_hatolful_jahiz.mp3?rlkey=wxakweejxefqinztc9ps46r9v&st=t0jt5msh&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>أنشودة حماسية مدارس مجد الحضارة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/h5vys7jkycnxogkxsp8kd/marsh_majdo.mp3?rlkey=9b78013lqd525ssaefg80dq72&st=0emiawyi&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يا مرحبا بالضيوف. مدارس طيبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/j5l9zzmuldis6c2hkqbtb/marhaba.mp3?rlkey=chn76sagj7wdcnlqjtf8kr12b&st=kr6bgvu4&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>كوفر أنشودة رحمن رحيم</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/kmsgvlmmfs5e871dq2qbi/manPalmohyee.mp3?rlkey=z681zt5qrc0gdj0od7rnqapjx&st=xm86ede2&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>للعلا.. أنشودة حماسية مدارس العلا</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/iyi90c81n88mckprhn7r8/lel3ola.mp3?rlkey=u279girgro66lu5tdgoneiqyb&st=1806znch&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يا مدرستنا كثر الله خيرك</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/a4qdvtntrkgc00so4oig3/kathar.mp3?rlkey=zrmq7h0fecsb4scsw4m9cvyr0&st=gxkjopvo&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>ريم على القاع</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/8wq4spirkksplxxjebjnq/issam-Cover.mp3?rlkey=u7olxqqtgcrv4ydsdg50rbr5r&st=hgp4x76f&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>أنشودة مدارس أشبال الحكمة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/oytn7jyy3q7o718bo9gef/hikma.mp3?rlkey=4myjgq9aojf35cq653wt7n3v7&st=qjbfjafc&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>هذا يمان . تكريم للطفل المبدع يمان</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/mxyvvq7coum8t0zuz7qm7/hath_yaman.mp3?rlkey=4mht1oppijrry01umpj859a52&st=ajgusrq6&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>حملت شوقي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/x9o6udmg13ypl0bo53i8o/hamatl-shawqi.mp3?rlkey=2e5ez8vxl0w9woa290kpfrh9o&st=qhxwhfs2&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>صباح الخير يا صرحا. لمدارس النخبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/lqgu4cnfclqghvqnoi1i6/goodmorning_nokhba.mp3?rlkey=jywj7ydcp00lmhmij6wkgx6gp&st=wiglbj6z&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>مدارس جيل الرسالة. تكريم الطالب محمد الغرباني</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/bedtq8ushqtfpchy1u7qq/ghurbani.mp3?rlkey=ndh6mz37mseevp17ii79enrwl&st=okgsifa6&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>دمتِ للتاريخ. مدارس مجد الحضارة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/li1giuidd414g3uyycsut/domti_majd.mp3?rlkey=uaiovmxhm3ms1g9nb3q582q76&st=83xvkf79&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>دمي فلسطيني . مدارس دروب المتميزين</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/s75pxtj2self71iylbjf4/damifalastini.mp3?rlkey=29jzyjdjxxd6p55dog5tcoaxl&st=v7mpiqqe&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>في لحظة الحزن</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/smmchu4thomy9527tz8i3/bari-Cover.mp3?rlkey=ailvicaj22juugcvo4lamf3z3&st=n4t1372a&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>الزمن زماني . مدارس طيبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/br8ju0uqil77foz1scal4/azzaman._Tayba.mp3?rlkey=dqjfkn1a5fci7rsrcswiyazn6&st=lz22uann&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>الصلاة تغشي محمد. تراث يمني مطور</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/p3rjsgcsxedr51fo22zh1/assalah.mp3?rlkey=mp8xtuse1zwsoehni9mo7rgij&st=ty92csse&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>عدنا إلى البنيان. مدارس البنيان الأهلية</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/vaj0d5k2ktgtqhg6551mp/albonyan.mp3?rlkey=905l5b60uts2m6xpsc0qn5uom&st=k83sgq38&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>التقينا</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/8u1up715zg3navof99hrk/eltageena.mp3?rlkey=pme2taig9zixjhnrbz86bnmjb&st=lrrl1qxd&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>راح العمر مواعيد</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/kul8lb5s12lgn3z5fem0n/ra7_al3omer.mp3?rlkey=sa20ml26at51bdjksyb132m18&st=1i6vowgt&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يا لطيف الروح</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/uui3aro8wfk34f9fl8m0w/yalateef_alro7.mp3?rlkey=gnepbxekvjlnbpt9cemdcs06c&st=6157z9vc&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>مرحب يا هلال . مدارس الرواد</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/c0qigwq2vsdck8g4udddn/.mp3?rlkey=xgiljwb3wqeempmzesri0y0qz&st=p8ygb3gt&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يا سماوات بلادي باركينا. مدارس مجد الحضارة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/gk8q3co2jse3desuwcfnl/yasamawat.mp3?rlkey=lrhug5v42slvrpns80ousxglu&st=3jxkbe1r&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يمه مغلاش "كوفر"</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/of762oa7384wb4d9ir6q4/...mp3?rlkey=c47xin6vov1dusp2agcrnog54&st=boviqqys&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يا هوى روحي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/mji13h5lkiqyp3mlawu85/yahawa.mp3?rlkey=ewmlopg5g598zeevdbzb0s3bh&st=glbssu06&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>هاهي الأرقام تصعد. مدارس أبجد</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/azkg6vano5c31t8y016b3/abjad.mp3?rlkey=8pxfaauryu2k4stmnl794smpv&st=mgi1cfxf&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>اسلمي يا قدس</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/p1gt1klmfly0d0bek2chb/islami-yaquds.mp3?rlkey=16cgcnqq26nv3b756nphuf1j7&st=oedr6pf9&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>ها هنا جيل الرسالة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/igbtcrsdhmwbnatu30itk/hahonajeel.mp3?rlkey=mz11aa6mtx85mrksdxoyzdi15&st=reubk1lz&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>كان الحشا دارك المفتوح</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/obm2rcr3rfbontqce2jeq/kanalhasha.mp3?rlkey=rt9onvcfaiigivqu76slr6mfe&st=6r9bpsxc&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>حفل تخرج مدارس دروب المتميزين</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/jwf5y5mfukllx335j4h70/dorobparty.mp3?rlkey=6ar40g5cyshrax25guprlmatx&st=o2mewsw2&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>زفوا الأوائل - مدارس طيبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/9dtwmtarlsf5wr442wk15/zoffo.mp3?rlkey=yc3f9z6u7ypo1tg1rv755m20q&st=hkl0sfyc&raw=1" type="audio/mpeg"></audio></div></div>
+                                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>يا طايع الوالدين</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/hsn3n0tua4pqzlo1iro2k/yatayi3.mp3?rlkey=4bdxb0csbi6zbe6piysm7zvzt&st=ly5cgtcz&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>يا هلا مدرستي.. مدارس منار العلم</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/fi7cqanedp5w4szhuiyhs/yahala.mp3?rlkey=hqttk9tvl6ci3ca646wt1x1ao&st=kp79jfpb&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>يا طير الفرح غني.. أنشودة عيد. مدارس النخبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/qs3trr2kk50rkmqzq422u/tair_alnokhba.mp3?rlkey=9hvudct390vjln2o5iqy5db0r&st=ftcpfx9o&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>أنشودة التمارين الرياضية لمدارس دروب المتميزين</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/vicrw0yl4kjbsjjcr4m0n/sports.mp3?rlkey=ofgzan3clcoz8mpe7s6yvhf2u&st=iotqbluf&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>درب السلامة. إهداء للمعلم. مدارس النخبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/hsxok2iky7coqdpygi7i8/shukran.mp3?rlkey=0e4bgofou3ufb5135nvco317u&st=jz0uo4b0&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>غنية يا طلة الصبح</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/mcsg5h6vld20pv4tnaz47/gamarayamani.mp3?rlkey=w1bdfwn78wbvbeax7xow3tte2&st=it9a0av4&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>شدوا بعضكم يا أهل فلسطين. مدارس مجد الحضارة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/1pnsj6a7vg24iwfsrvwgi/shido.mp3?rlkey=mgyqpt9c78de12m4ty5wfr5v9&st=0v0mkk50&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>أنشودة لغزة من مدارس رواد المجد</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/huszpxifv45z9e46gqiss/rowad_tofan_with.mp3?rlkey=y8byp0owsssfae1y7qzn73r1m&st=ztwx3qir&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>مدارس القادة النموذجية</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/p24n4932un4na928g6hvn/qadah.mp3?rlkey=0wvr2nocq5w6859sgv417xat4&st=xxvhbszm&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>منار العلم رايتنا. لمدارس منار العلم</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/xnx466hk3qcyctabthjtb/opreet_manar.mp3?rlkey=r41059gju5jlxzda7asvvpa0y&st=1t6f7utg&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>أنشودة ترحيبية مدارس الأفق</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/j1p8kmv2snm143a4r4fpc/Ofoq_jahiz.mp3?rlkey=2f9zwab7l1du1p1mte5u8esnl&st=19p7x2ui&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>نور في الأجواء</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/lafzs6oum762k3vduelxq/nor-Cover.mp3?rlkey=llbsoc6f6zugfenh3gza51iv9&st=2q0ipzh6&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>أنشودة مدارس نهج الأوائل</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/7b4kmcr7o94oqyap3vwa4/nahjo_schools.mp3?rlkey=ma26twwubrww9dirc17hz6sdi&st=9y4nllby&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>أنشودة مدارس المتحدون</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/nkprwlusiuoj81zxf0cde/motahidon_school.mp3?rlkey=fs0cntcavt4r57bo4zsm9mte4&st=hi6rlr7g&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>هاتوا الفل- مدارس النخبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/8uc0y0i1qfw5r2z97pvpg/maryam_nokhba_hatolful_jahiz.mp3?rlkey=wxakweejxefqinztc9ps46r9v&st=t0jt5msh&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>أنشودة حماسية مدارس مجد الحضارة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/h5vys7jkycnxogkxsp8kd/marsh_majdo.mp3?rlkey=9b78013lqd525ssaefg80dq72&st=0emiawyi&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>يا مرحبا بالضيوف. مدارس طيبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/j5l9zzmuldis6c2hkqbtb/marhaba.mp3?rlkey=chn76sagj7wdcnlqjtf8kr12b&st=kr6bgvu4&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>كوفر أنشودة رحمن رحيم</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/kmsgvlmmfs5e871dq2qbi/manPalmohyee.mp3?rlkey=z681zt5qrc0gdj0od7rnqapjx&st=xm86ede2&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>للعلا.. أنشودة حماسية مدارس العلا</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/iyi90c81n88mckprhn7r8/lel3ola.mp3?rlkey=u279girgro66lu5tdgoneiqyb&st=1806znch&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>يا مدرستنا كثر الله خيرك</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/a4qdvtntrkgc00so4oig3/kathar.mp3?rlkey=zrmq7h0fecsb4scsw4m9cvyr0&st=gxkjopvo&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>ريم على القاع</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/8wq4spirkksplxxjebjnq/issam-Cover.mp3?rlkey=u7olxqqtgcrv4ydsdg50rbr5r&st=hgp4x76f&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>أنشودة مدارس أشبال الحكمة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/oytn7jyy3q7o718bo9gef/hikma.mp3?rlkey=4myjgq9aojf35cq653wt7n3v7&st=qjbfjafc&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>هذا يمان . تكريم للطفل المبدع يمان</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/mxyvvq7coum8t0zuz7qm7/hath_yaman.mp3?rlkey=4mht1oppijrry01umpj859a52&st=ajgusrq6&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>حملت شوقي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/x9o6udmg13ypl0bo53i8o/hamatl-shawqi.mp3?rlkey=2e5ez8vxl0w9woa290kpfrh9o&st=qhxwhfs2&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>صباح الخير يا صرحا. لمدارس النخبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/lqgu4cnfclqghvqnoi1i6/goodmorning_nokhba.mp3?rlkey=jywj7ydcp00lmhmij6wkgx6gp&st=wiglbj6z&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>مدارس جيل الرسالة. تكريم الطالب محمد الغرباني</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/bedtq8ushqtfpchy1u7qq/ghurbani.mp3?rlkey=ndh6mz37mseevp17ii79enrwl&st=okgsifa6&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>دمتِ للتاريخ. مدارس مجد الحضارة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/li1giuidd414g3uyycsut/domti_majd.mp3?rlkey=uaiovmxhm3ms1g9nb3q582q76&st=83xvkf79&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>دمي فلسطيني . مدارس دروب المتميزين</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/s75pxtj2self71iylbjf4/damifalastini.mp3?rlkey=29jzyjdjxxd6p55dog5tcoaxl&st=v7mpiqqe&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>في لحظة الحزن</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/smmchu4thomy9527tz8i3/bari-Cover.mp3?rlkey=ailvicaj22juugcvo4lamf3z3&st=n4t1372a&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>الزمن زماني . مدارس طيبة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/br8ju0uqil77foz1scal4/azzaman._Tayba.mp3?rlkey=dqjfkn1a5fci7rsrcswiyazn6&st=lz22uann&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>الصلاة تغشي محمد. تراث يمني مطور</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/p3rjsgcsxedr51fo22zh1/assalah.mp3?rlkey=mp8xtuse1zwsoehni9mo7rgij&st=ty92csse&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>عدنا إلى البنيان. مدارس البنيان الأهلية</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/vaj0d5k2ktgtqhg6551mp/albonyan.mp3?rlkey=905l5b60uts2m6xpsc0qn5uom&st=k83sgq38&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>التقينا</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/8u1up715zg3navof99hrk/eltageena.mp3?rlkey=pme2taig9zixjhnrbz86bnmjb&st=lrrl1qxd&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>راح العمر مواعيد</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/kul8lb5s12lgn3z5fem0n/ra7_al3omer.mp3?rlkey=sa20ml26at51bdjksyb132m18&st=1i6vowgt&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>يا لطيف الروح</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/uui3aro8wfk34f9fl8m0w/yalateef_alro7.mp3?rlkey=gnepbxekvjlnbpt9cemdcs06c&st=6157z9vc&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>مرحب يا هلال . مدارس الرواد</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/c0qigwq2vsdck8g4udddn/.mp3?rlkey=xgiljwb3wqeempmzesri0y0qz&st=p8ygb3gt&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>يا سماوات بلادي باركينا. مدارس مجد الحضارة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/gk8q3co2jse3desuwcfnl/yasamawat.mp3?rlkey=lrhug5v42slvrpns80ousxglu&st=3jxkbe1r&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>يمه مغلاش "كوفر"</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/of762oa7384wb4d9ir6q4/...mp3?rlkey=c47xin6vov1dusp2agcrnog54&st=boviqqys&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>يا هوى روحي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/mji13h5lkiqyp3mlawu85/yahawa.mp3?rlkey=ewmlopg5g598zeevdbzb0s3bh&st=glbssu06&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>هاهي الأرقام تصعد. مدارس أبجد</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/azkg6vano5c31t8y016b3/abjad.mp3?rlkey=8pxfaauryu2k4stmnl794smpv&st=mgi1cfxf&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>اسلمي يا قدس</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/p1gt1klmfly0d0bek2chb/islami-yaquds.mp3?rlkey=16cgcnqq26nv3b756nphuf1j7&st=oedr6pf9&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>ها هنا جيل الرسالة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/igbtcrsdhmwbnatu30itk/hahonajeel.mp3?rlkey=mz11aa6mtx85mrksdxoyzdi15&st=reubk1lz&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>كان الحشا دارك المفتوح</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/obm2rcr3rfbontqce2jeq/kanalhasha.mp3?rlkey=rt9onvcfaiigivqu76slr6mfe&st=6r9bpsxc&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>حفل تخرج مدارس دروب المتميزين</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/jwf5y5mfukllx335j4h70/dorobparty.mp3?rlkey=6ar40g5cyshrax25guprlmatx&st=o2mewsw2&raw=1" type="audio/mpeg"></audio></div></div>
 
-                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>آهات بشرية</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/rdfkpd46oiybe5y6hk0xu/ahaat.mp3?rlkey=22e19cgivsqemm0qot5n7zxah&st=mfhvz4sd&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يا عليم السرار.. تراث يمني</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/fs8uciiwwyyvowsoteqlv/ya3aleeman.mp3?rlkey=w736y52muphhc3zxn934tqwhq&st=9kcbdhx3&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>أنشودة دعوني أناجي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/ocmrw4gv79u1c2j2ek01z/onaji.mp3?rlkey=fw7wb0xldqosqg3w8dpiphbjh&st=ypf20xjc&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>هيا نحفظ قرآنا</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/3qvutlz1cjsahs69rsmqj/hayyaNhafad.mp3?rlkey=9hiosswv4fvz2sfrbefwv2p57&st=0mg837w0&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>أنشودة الناس للناس</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/lirsj6ky0tct24cit0ktx/annas.mp3?rlkey=xrwt28uhfmov23h76qg4xan46&st=6q0fw0g6&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>موسم الروح</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/2ft3c38yalj7gpjwjget0/mosem.mp3?rlkey=s4qekkl3g8m956l7azo0wqhy2&st=wzw51n3u&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>ورجع رمضان</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/pbgiy8e4leil6zi5m9d6f/ramadan3_acap.mp3?rlkey=fggd922o2h08oe7miwi0fuzxp&st=lrry05cz&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يا هلالا صاغ حبا</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/uv1ald9jpz82jec3d937l/yahailal.mp3?rlkey=evazlsm4ing67u5htw40aft7p&st=q06mnskb&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>عرفتك يارب</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/8xstawqg12srlta8j20su/allaho.mp3?rlkey=rwyu5qeob4lqs64hbz57oq935&st=qscjzbty&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>أنتِ حكاية دهرنا</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/b7r8oyw3ffbusw82atub3/antihikayato.mp3?rlkey=kt6jaqa7pr5bdo9v0yg2dc1ty&st=vlpgv9u2&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>في دجى ليلي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/h4zcr9bw22dff8i5qvto4/fiduja.mp3?rlkey=uf5b4ufmf3egvqypvlbdevhhw&st=6dz61elv&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>آهات بشرية</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/rdfkpd46oiybe5y6hk0xu/ahaat.mp3?rlkey=22e19cgivsqemm0qot5n7zxah&st=mfhvz4sd&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>يا عليم السرار.. تراث يمني</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/fs8uciiwwyyvowsoteqlv/ya3aleeman.mp3?rlkey=w736y52muphhc3zxn934tqwhq&st=9kcbdhx3&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>أنشودة دعوني أناجي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/ocmrw4gv79u1c2j2ek01z/onaji.mp3?rlkey=fw7wb0xldqosqg3w8dpiphbjh&st=ypf20xjc&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>هيا نحفظ قرآنا</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/3qvutlz1cjsahs69rsmqj/hayyaNhafad.mp3?rlkey=9hiosswv4fvz2sfrbefwv2p57&st=0mg837w0&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>أنشودة الناس للناس</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/lirsj6ky0tct24cit0ktx/annas.mp3?rlkey=xrwt28uhfmov23h76qg4xan46&st=6q0fw0g6&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>موسم الروح</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/2ft3c38yalj7gpjwjget0/mosem.mp3?rlkey=s4qekkl3g8m956l7azo0wqhy2&st=wzw51n3u&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>ورجع رمضان</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/pbgiy8e4leil6zi5m9d6f/ramadan3_acap.mp3?rlkey=fggd922o2h08oe7miwi0fuzxp&st=lrry05cz&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>يا هلالا صاغ حبا</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/uv1ald9jpz82jec3d937l/yahailal.mp3?rlkey=evazlsm4ing67u5htw40aft7p&st=q06mnskb&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>عرفتك يارب</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/8xstawqg12srlta8j20su/allaho.mp3?rlkey=rwyu5qeob4lqs64hbz57oq935&st=qscjzbty&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>أنتِ حكاية دهرنا</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/b7r8oyw3ffbusw82atub3/antihikayato.mp3?rlkey=kt6jaqa7pr5bdo9v0yg2dc1ty&st=vlpgv9u2&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-nomusic atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>في دجى الطَّلْقِ</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/h4zcr9bw22dff8i5qvto4/fiduja.mp3?rlkey=uf5b4ufmf3egvqypvlbdevhhw&st=6dz61elv&raw=1" type="audio/mpeg"></audio></div></div>
 
-                <div class="work-card audio-card audio-shila atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>شيلة: قل للذي فارق خطى السير دربه</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/lgx3aekrkdryv3k5heciq/shila.mp3?rlkey=e57dr4bwd8yg5n6f2ywn43g5k&st=oxuxg2ba&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-shila atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>شيلة مدح للشيخ عبد الله الأشول</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/zb6ksj6r3mum7l81bo4t0/shila_mad7.mp3?rlkey=5dwpw43o622v5ise5zyim2vzp&st=sgcut0on&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-shila atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>كوفر شيلة مطورة باسم (رويدا)</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/cfp3n9s8fqxroyk9d1zil/roro.mp3?rlkey=j29wo2el9lpvj9tc2393uybq5&st=gecfgbze&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-shila atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>شيلة مدح الشيخ حميد بن عبيد</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/a1yxi3ypppj31o0m9gg4q/shia_bin-obaid.mp3?rlkey=r6pk47nn9e69fsdu931nlsido&st=0ctv13at&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-shila atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>شيلة حال الرجل والمرأة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/1rmhobvux6xlsiow7050r/shilamanandwomen.mp3?rlkey=m0lvzuygfk5ca48wrgkqglfxr&st=xk1f58r9&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-shila atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>شيلة: قل للذي فارق خطى السير دربه</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/lgx3aekrkdryv3k5heciq/shila.mp3?rlkey=e57dr4bwd8yg5n6f2ywn43g5k&st=oxuxg2ba&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-shila atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>شيلة مدح للشيخ عبد الله الأشول</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/zb6ksj6r3mum7l81bo4t0/shila_mad7.mp3?rlkey=5dwpw43o622v5ise5zyim2vzp&st=sgcut0on&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-shila atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>كوفر شيلة مطورة باسم (رويدا)</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/cfp3n9s8fqxroyk9d1zil/roro.mp3?rlkey=j29wo2el9lpvj9tc2393uybq5&st=gecfgbze&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-shila atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>شيلة مدح الشيخ حميد بن عبيد</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/a1yxi3ypppj31o0m9gg4q/shia_bin-obaid.mp3?rlkey=r6pk47nn9e69fsdu931nlsido&st=0ctv13at&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-shila atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>شيلة حال الرجل والمرأة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/1rmhobvux6xlsiow7050r/shilamanandwomen.mp3?rlkey=m0lvzuygfk5ca48wrgkqglfxr&st=xk1f58r9&raw=1" type="audio/mpeg"></audio></div></div>
 
-                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>عرسنا غير .. أفراح آل الرضمي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/50i9yvp7uiobae6bl7t6q/yassir.mp3?rlkey=aku6p0rmkklqsc97emmjfkguz&st=r8da4dz8&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>زفة العروسة هنوف</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/36dnb75i7abi6gedqrd2p/hanof.mp3?rlkey=dzn3c8ndnb31gog2c9qzsi2p4&st=nhxl29iq&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>ألا يا طير</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/xh2bx9lxdoad3otgadq19/alayatieeeeer.mp3?rlkey=vy3twa2cdf692e024l7lth1is&st=7sqxazt4&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>اقبلي بسمة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/etf59h76f51g3hrjmk3sl/igbili.mp3?rlkey=h32xi47v96bfrcb3oiie67u75&st=rf6r5w4m&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>زفة وداع بسمة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/t4ab5pd7klzkjm3vdx0vs/zaffawada3_basma.mp3?rlkey=4z3bbwyxvi8zgj0asuflhjz6q&st=lgp1d90i&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>زفة أبرار</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/zmb8a1lruy3xl2d0skdjd/abrar_Zaffah.mp3?rlkey=3n9do42m5fah60f2eyolkfdtj&st=jt2331p8&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>عرس الكابتن أكرم سالم</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/qr06ma51qowj0qqhatdae/akramwedding.mp3?rlkey=80d58su71r270svc3jrl2wg2w&st=mhge4hlq&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>عرسنا غير .. أفراح آل الرضمي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/50i9yvp7uiobae6bl7t6q/yassir.mp3?rlkey=aku6p0rmkklqsc97emmjfkguz&st=r8da4dz8&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>زفة العروسة هنوف</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/36dnb75i7abi6gedqrd2p/hanof.mp3?rlkey=dzn3c8ndnb31gog2c9qzsi2p4&st=nhxl29iq&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>ألا يا طير</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/xh2bx9lxdoad3otgadq19/alayatieeeeer.mp3?rlkey=vy3twa2cdf692e024l7lth1is&st=7sqxazt4&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>اقبلي بسمة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/etf59h76f51g3hrjmk3sl/igbili.mp3?rlkey=h32xi47v96bfrcb3oiie67u75&st=rf6r5w4m&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>زفة وداع بسمة</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/t4ab5pd7klzkjm3vdx0vs/zaffawada3_basma.mp3?rlkey=4z3bbwyxvi8zgj0asuflhjz6q&st=lgp1d90i&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>زفة أبرار</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/zmb8a1lruy3xl2d0skdjd/abrar_Zaffah.mp3?rlkey=3n9do42m5fah60f2eyolkfdtj&st=jt2331p8&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-zaffa atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>عرس الكابتن أكرم سالم</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/qr06ma51qowj0qqhatdae/akramwedding.mp3?rlkey=80d58su71r270svc3jrl2wg2w&st=mhge4hlq&raw=1" type="audio/mpeg"></audio></div></div>
 
-                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>تشدو ربيع النصر.. احتفائية بمولد النبي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/0nkalhykv66r7gq287o83/nabi_rabee1.mp3?rlkey=za797jq2y6yush5dst79i7sch&st=4cle8i8p&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>مبروك للناجحين</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/it1s0oo4myomfbtvdg42o/mabrook-Cover.wav?rlkey=c0qot2gygfdz8trrtil3b8u7h&st=7mab4oci&raw=1" type="audio/wav"></audio></div></div>
-                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>عيد ميلاد ليان</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/6t6tholk7nf9yvqoocumw/layona.mp3?rlkey=b387i7franhn65nufzfvljynl&st=kun2ndr4&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>افرحي مجد الحضارة. مناسبة المولد النبوي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/g4688hjkflkph5qp7medr/ifrahimajd.mp3?rlkey=15d2engyyond9mlkuu8yehx3p&st=x7jxv6lg&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>كوفر اغنية عيد ميلاد ريتاج</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/76rybe7hj5fiwed5bo33o/ritagoooo.mp3?rlkey=dkjrwi95dy6bv304p2p3ggzim&st=qj2s53r7&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>حروف التهاني. عرس عبد الرحمن الصبري</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/icsi2fqdxaga1ljynbsku/huroof.mp3?rlkey=ynmprxtd4re945efxdf5i0tjn&st=cmt0i93x&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>محراب غرامي. أغنية وطنية</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/p3scmodpnz3b0iluxroe9/mi7rab.weba?rlkey=aq7jbbaf0xuvk9frab1qpt8tn&st=gm5cwckc&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>أمي يا بهجة فؤادي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/wkgvofe29ktsa5mp68x13/yabahjat.mp3?rlkey=tgb4c3afvsjq5jibhen6kjx66&st=y7rp10e4&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>تشدو ربيع النصر.. احتفائية بمولد النبي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/0nkalhykv66r7gq287o83/nabi_rabee1.mp3?rlkey=za797jq2y6yush5dst79i7sch&st=4cle8i8p&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>مبروك للناجحين</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/it1s0oo4myomfbtvdg42o/mabrook-Cover.wav?rlkey=c0qot2gygfdz8trrtil3b8u7h&st=7mab4oci&raw=1" type="audio/wav"></audio></div></div>
+                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>عيد ميلاد ليان</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/6t6tholk7nf9yvqoocumw/layona.mp3?rlkey=b387i7franhn65nufzfvljynl&st=kun2ndr4&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>افرحي مجد الحضارة. مناسبة المولد النبوي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/g4688hjkflkph5qp7medr/ifrahimajd.mp3?rlkey=15d2engyyond9mlkuu8yehx3p&st=x7jxv6lg&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>كوفر اغنية عيد ميلاد ريتاج</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/76rybe7hj5fiwed5bo33o/ritagoooo.mp3?rlkey=dkjrwi95dy6bv304p2p3ggzim&st=qj2s53r7&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>حروف التهاني. عرس عبد الرحمن الصبري</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/icsi2fqdxaga1ljynbsku/huroof.mp3?rlkey=ynmprxtd4re945efxdf5i0tjn&st=cmt0i93x&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>محراب غرامي. أغنية وطنية</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/p3scmodpnz3b0iluxroe9/mi7rab.weba?rlkey=aq7jbbaf0xuvk9frab1qpt8tn&st=gm5cwckc&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-event atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><h4>أمي يا بهجة فؤادي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/wkgvofe29ktsa5mp68x13/yabahjat.mp3?rlkey=tgb4c3afvsjq5jibhen6kjx66&st=y7rp10e4&raw=1" type="audio/mpeg"></audio></div></div>
 
-                <div class="work-card audio-card audio-voiceover atheer-audio-card"><div class="audio-content"><i class="fas fa-microphone-lines main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>تعليق صوتي 1</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/3z9x08hssdxets15lp6pf/WhatsApp-Audio-2025-12-24-at-1.25.38-PM.mpeg.mp3?rlkey=qeuwl9s31l1hlchyrp4yg8y8j&st=wrs0ndwi&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-voiceover atheer-audio-card"><div class="audio-content"><i class="fas fa-microphone-lines main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>تعليق صوتي 2</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/cu09p75ntghadypy84nsv/.mp3?rlkey=8bat02bxexb3n8pnw7mxiqk2e&st=krwo4iva&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-voiceover atheer-audio-card"><div class="audio-content"><i class="fas fa-microphone-lines main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>تعليق صوتي 3</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/ir24pkufd22ezdaxijon0/.mp3?rlkey=a6m37tcuvgc2wgdl935b9p1hp&st=8lqy6d5t&raw=1" type="audio/mpeg"></audio></div></div>
-                <div class="work-card audio-card audio-voiceover atheer-audio-card"><div class="audio-content"><i class="fas fa-microphone-lines main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>تعليق صوتي 4</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/0q5xxo4k0i5t9b67i9nc7/.mp3?rlkey=tfl4cj5zgdrnng6dira5h55is&st=ncpqgx56&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-voiceover atheer-audio-card"><div class="audio-content"><i class="fas fa-microphone-lines main-audio-icon"></i><h3>أثير ساوند</h3><h4>تعليق صوتي 1</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/3z9x08hssdxets15lp6pf/WhatsApp-Audio-2025-12-24-at-1.25.38-PM.mpeg.mp3?rlkey=qeuwl9s31l1hlchyrp4yg8y8j&st=wrs0ndwi&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-voiceover atheer-audio-card"><div class="audio-content"><i class="fas fa-microphone-lines main-audio-icon"></i><h3>أثير ساوند</h3><h4>تعليق صوتي 2</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/cu09p75ntghadypy84nsv/.mp3?rlkey=8bat02bxexb3n8pnw7mxiqk2e&st=krwo4iva&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-voiceover atheer-audio-card"><div class="audio-content"><i class="fas fa-microphone-lines main-audio-icon"></i><h3>أثير ساوند</h3><h4>تعليق صوتي 3</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/ir24pkufd22ezdaxijon0/.mp3?rlkey=a6m37tcuvgc2wgdl935b9p1hp&st=8lqy6d5t&raw=1" type="audio/mpeg"></audio></div></div>
+                <div class="work-card audio-card audio-voiceover atheer-audio-card"><div class="audio-content"><i class="fas fa-microphone-lines main-audio-icon"></i><h3>أثير ساوند</h3><h4>تعليق صوتي 4</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/0q5xxo4k0i5t9b67i9nc7/.mp3?rlkey=tfl4cj5zgdrnng6dira5h55is&st=ncpqgx56&raw=1" type="audio/mpeg"></audio></div></div>
 <div class="work-card audio-card audio-music atheer-audio-card"><div class="audio-content"><i class="fas fa-headphones main-audio-icon"></i><h3>أثير ساوند</h3><p class="contact-info">اليمن: 770080131 | السعودية: 557172941</p><h4>يا ورد يا كاذي - ستايل هندي</h4><audio controls preload="none"><source src="https://www.dropbox.com/scl/fi/ccm7t581iy8m7ae6byxhm/zaffahindi-Cover.mp3?rlkey=x7z7wzzsi8q4ojn740rsn0bnq&st=w8u9tkur&raw=1" type="audio/mpeg"></audio></div></div>
 
                 <!-- الهويات والشعارات -->
@@ -1386,12 +1508,121 @@
 
         <div id="contact-us-page" class="page-section">
             <div class="section-title-wrapper" style="margin-top: 10px;"><h2 class="section-title-frame">تواصل معنا</h2></div>
-            <div style="max-width: 600px; margin: auto; padding: 40px; background: #151515; border: 1px solid #333; text-align: right; border-radius: 20px;">
-                <form onsubmit="sendToWhatsApp(event)">
-                    <input type="text" id="wa-name" placeholder="الاسم / الجهة" style="width: 100%; padding: 12px; margin-bottom: 15px; background: #222; border: 1px solid #444; color: #fff; border-radius: 8px;">
-                    <textarea id="wa-message" placeholder="تفاصيل طلبك" style="width: 100%; padding: 12px; margin-bottom: 15px; background: #222; border: 1px solid #444; color: #fff; border-radius: 8px;" rows="5"></textarea>
-                    <button type="submit" style="width: 100%; padding: 15px; background: var(--gold); border: none; font-weight: bold; cursor: pointer; border-radius: 8px;">إرسال للإنتاج الفني <i class="fab fa-whatsapp"></i></button>
-                </form>
+
+            <div class="contact-layout">
+
+                <!-- عمود المعلومات (يمين) -->
+                <div class="contact-info-panel">
+                    <div>
+                        <h3><i class="fas fa-headset"></i> نحن هنا لخدمتك</h3>
+                        <p class="sub">تواصل معنا عبر أي قناة تفضلها وسنردّ عليك في أقرب وقت. نسعد بتلقي طلباتك وأسئلتك على مدار الأسبوع.</p>
+                    </div>
+
+                    <div class="contact-divider"></div>
+
+                    <!-- واتساب اليمن -->
+                    <a href="https://wa.me/967770080131" target="_blank" class="contact-card card-wa-ye">
+                        <div class="contact-card-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-card-text">
+                            <strong>🇾🇪 واتساب — اليمن</strong>
+                            <span>+967 770 080 131</span>
+                        </div>
+                    </a>
+
+                    <!-- واتساب السعودية -->
+                    <a href="https://wa.me/966557172941" target="_blank" class="contact-card card-wa-sa">
+                        <div class="contact-card-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-card-text">
+                            <strong>🇸🇦 واتساب — السعودية</strong>
+                            <span>+966 557 172 941</span>
+                        </div>
+                    </a>
+
+                    <!-- تليجرام -->
+                    <a href="https://t.me/atheersound" target="_blank" class="contact-card card-tg">
+                        <div class="contact-card-icon"><i class="fab fa-telegram-plane"></i></div>
+                        <div class="contact-card-text">
+                            <strong>تليجرام</strong>
+                            <span>@atheersound</span>
+                        </div>
+                    </a>
+
+                    <!-- بريد إلكتروني -->
+                    <a href="mailto:atheersound@gmail.com" class="contact-card card-mail">
+                        <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-card-text">
+                            <strong>البريد الإلكتروني</strong>
+                            <span>atheersound@gmail.com</span>
+                        </div>
+                    </a>
+
+                    <!-- يوتيوب -->
+                    <a href="https://www.youtube.com/@AtheerSound" target="_blank" class="contact-card card-yt">
+                        <div class="contact-card-icon"><i class="fab fa-youtube"></i></div>
+                        <div class="contact-card-text">
+                            <strong>يوتيوب</strong>
+                            <span>@AtheerSound</span>
+                        </div>
+                    </a>
+
+                    <div class="contact-divider"></div>
+
+                    <!-- المواقع الجغرافية -->
+                    <div class="contact-locations">
+                        <div class="location-badge">
+                            <span class="flag-emoji">🇾🇪</span>
+                            <strong>صنعاء، اليمن</strong>
+                            <span>متاح طوال الأسبوع</span>
+                        </div>
+                        <div class="location-badge">
+                            <span class="flag-emoji">🇸🇦</span>
+                            <strong>الرياض، السعودية</strong>
+                            <span>خدمة عن بُعد</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- عمود النموذج (يسار) -->
+                <div class="contact-form-panel">
+                    <h3><i class="fas fa-paper-plane"></i> أرسل طلبك الآن</h3>
+
+                    <form onsubmit="sendToWhatsApp(event)">
+
+                        <div class="cf-field">
+                            <label>الاسم / الجهة <span style="color:#e74c3c">*</span></label>
+                            <input type="text" id="wa-name" class="cf-input" placeholder="مثال: مدارس النخبة" required>
+                        </div>
+
+                        <div class="cf-field">
+                            <label>الخدمة المطلوبة</label>
+                            <select id="wa-service" class="cf-input">
+                                <option value="">— اختر الخدمة —</option>
+                                <option>الإنتاج الصوتي والموسيقي</option>
+                                <option>زفة أو أنشودة مناسبة</option>
+                                <option>المونتاج وتصميم الفيديو</option>
+                                <option>التصميم والهوية البصرية</option>
+                                <option>التعليق الصوتي المتقدم</option>
+                                <option>الخدمات الأدبية واللغوية</option>
+                                <option>الخدمات الأكاديمية والنشر</option>
+                                <option>تطوير الويب والتطبيقات</option>
+                                <option>شراء كتاب إلكتروني</option>
+                                <option>استفسار عام</option>
+                            </select>
+                        </div>
+
+                        <div class="cf-field">
+                            <label>تفاصيل الطلب <span style="color:#e74c3c">*</span></label>
+                            <textarea id="wa-message" class="cf-input" placeholder="اكتب هنا تفاصيل ما تحتاجه..." rows="6" required></textarea>
+                        </div>
+
+                        <button type="submit" class="cf-submit">
+                            <i class="fab fa-whatsapp" style="font-size:20px;"></i>
+                            إرسال عبر واتساب
+                        </button>
+
+                    </form>
+                </div>
+
             </div>
         </div>
 
@@ -1838,6 +2069,17 @@
             document.getElementById('fab-container').classList.toggle('active');
         }
 
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+            const name    = document.getElementById('wa-name').value.trim();
+            const service = document.getElementById('wa-service') ? document.getElementById('wa-service').value : '';
+            const message = document.getElementById('wa-message').value.trim();
+            if (!name || !message) return;
+            const serviceText = service ? `\nالخدمة المطلوبة: ${service}` : '';
+            const text = `السلام عليكم، أود التواصل مع أثير ساوند:\n\nالاسم / الجهة: ${name}${serviceText}\n\nتفاصيل الطلب:\n${message}`;
+            window.open(`https://wa.me/967770080131?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
         function sendPoem(e) {
             e.preventDefault();
             const name = document.getElementById('clinic-name').value;
@@ -1864,10 +2106,26 @@
         function cinematicSection(id) {
             const container = document.getElementById('main-container');
             container.classList.add('fade-transition');
+            
             setTimeout(() => {
                 showSection(id);
                 container.classList.remove('fade-transition');
-            }, 400);
+                
+                // تطبيق Stagger Animation على العناصر (البطاقات) داخل القسم النشط
+                setTimeout(() => {
+                    const activeSection = document.getElementById(id);
+                    if (activeSection) {
+                        const items = activeSection.querySelectorAll('.work-card, .service-card, .pack-card, .capsule-card, .poem-clinic, .graphic-id-card');
+                        items.forEach((item, index) => {
+                            item.classList.add('stagger-item');
+                            item.classList.remove('show');
+                            setTimeout(() => {
+                                item.classList.add('show');
+                            }, index * 50); // تأخير متسلسل
+                        });
+                    }
+                }, 100);
+            }, 500);
         }
 
         /* ====== الفلترة المطورة المحدثة ====== */
@@ -2567,6 +2825,115 @@
 
     <!-- Media Controller Script -->
     <script>
+        // --- تهيئة المشغل المطور (SoundCloud Style) ---
+        function initCustomAudioPlayers() {
+            // مسح أي مشغلات مطورة قديمة لتجنب التكرار
+            document.querySelectorAll('.custom-audio-player').forEach(p => p.remove());
+
+            const audioElements = document.querySelectorAll('.audio-content audio, audio.custom-player-initialized, audio[controls]');
+            
+            audioElements.forEach(audio => {
+                audio.classList.add('custom-player-initialized');
+                audio.removeAttribute('controls');
+                
+                // إخفاء تام وعميق للمشغل الافتراضي حتى لا يظهر أبداً بأي شكل من الأشكال
+                audio.style.display = 'none';
+                audio.style.visibility = 'hidden';
+                audio.style.height = '0';
+                audio.style.width = '0';
+                audio.style.position = 'absolute';
+                
+                // بناء المشغل المطور
+                const playerContainer = document.createElement('div');
+                playerContainer.className = 'custom-audio-player';
+                
+                const playBtn = document.createElement('button');
+                playBtn.className = 'play-pause-btn';
+                playBtn.innerHTML = '<i class="fas fa-play" style="margin-left: 3px;"></i>';
+                
+                const centerDiv = document.createElement('div');
+                centerDiv.className = 'player-center';
+                
+                const waveAnim = document.createElement('div');
+                waveAnim.className = 'waveform-anim';
+                for(let i=0; i<12; i++) {
+                    const span = document.createElement('span');
+                    waveAnim.appendChild(span);
+                }
+                
+                const progressDiv = document.createElement('div');
+                progressDiv.className = 'progress-container';
+                const timeSpan = document.createElement('span');
+                timeSpan.textContent = '0:00 / 0:00';
+                timeSpan.style.direction = 'ltr';
+                const seekBar = document.createElement('input');
+                seekBar.type = 'range';
+                seekBar.className = 'seek-bar';
+                seekBar.value = '0';
+                seekBar.max = '100';
+                
+                progressDiv.appendChild(seekBar);
+                progressDiv.appendChild(timeSpan);
+                centerDiv.appendChild(waveAnim);
+                centerDiv.appendChild(progressDiv);
+                
+                playerContainer.appendChild(playBtn);
+                playerContainer.appendChild(centerDiv);
+                
+                // إدراج المشغل بجوار الـ audio المخفي
+                audio.parentNode.insertBefore(playerContainer, audio.nextSibling);
+                
+                const formatTime = (time) => {
+                    if (isNaN(time)) return '0:00';
+                    const min = Math.floor(time / 60);
+                    const sec = Math.floor(time % 60);
+                    return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+                };
+
+                playBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (audio.paused) {
+                        audio.play();
+                    } else {
+                        audio.pause();
+                    }
+                });
+
+                audio.addEventListener('play', () => {
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    waveAnim.classList.add('playing');
+                });
+
+                audio.addEventListener('pause', () => {
+                    playBtn.innerHTML = '<i class="fas fa-play" style="margin-left: 3px;"></i>';
+                    waveAnim.classList.remove('playing');
+                });
+
+                audio.addEventListener('loadedmetadata', () => {
+                    timeSpan.textContent = `0:00 / ${formatTime(audio.duration)}`;
+                });
+
+                audio.addEventListener('timeupdate', () => {
+                    const percent = (audio.currentTime / audio.duration) * 100 || 0;
+                    seekBar.value = percent;
+                    timeSpan.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+                });
+
+                seekBar.addEventListener('input', (e) => {
+                    const seekTo = (e.target.value / 100) * audio.duration;
+                    audio.currentTime = seekTo;
+                });
+                
+                seekBar.addEventListener('mousedown', (e) => e.stopPropagation());
+                seekBar.addEventListener('touchstart', (e) => e.stopPropagation());
+            });
+        }
+
+        // استدعاء الدالة عند تحميل الصفحة وأيضاً عند أي عملية فلترة أو تغيير صفحات
+        document.addEventListener('DOMContentLoaded', () => {
+            initCustomAudioPlayers();
+        });
+
         // إيقاف جميع المقاطع والتأكد من عدم التداخل بين الملفات الصوتية والفيديو
         var ytPlayers = [];
         
@@ -2595,7 +2962,7 @@
                 // إيقاف مقاطع الصوت (audio)
                 var audios = document.getElementsByTagName('audio');
                 for(var i = 0; i < audios.length; i++){
-                    audios[i].pause();
+                    if(!audios[i].paused) audios[i].pause();
                 }
                 // إيقاف الفيديوهات الأخرى
                 ytPlayers.forEach(function(p) {
@@ -2611,7 +2978,7 @@
             // إيقاف المقاطع الصوتية الأخرى
             var audios = document.getElementsByTagName('audio');
             for(var i = 0; i < audios.length; i++){
-                if(audios[i] != e.target){
+                if(audios[i] != e.target && !audios[i].paused){
                     audios[i].pause();
                 }
             }
