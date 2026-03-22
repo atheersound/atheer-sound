@@ -128,124 +128,7 @@
             window.open(`https://wa.me/967770080131?text=السلام عليكم، أرغب في طلب خدمة: ${currentServiceToOrder}`, '_blank');
         }
 
-        function initCustomAudioPlayers() {
-            const audioElements = document.querySelectorAll('.work-card audio');
-            
-            audioElements.forEach(audio => {
-                audio.removeAttribute('controls');
-                audio.style.display = 'none';
-                
-                const playerUI = document.createElement('div');
-                playerUI.className = 'custom-audio-player';
-                
-                const playBtn = document.createElement('button');
-                playBtn.className = 'play-pause-btn';
-                playBtn.innerHTML = '<i class="fas fa-play" style="margin-left: 3px;"></i>';
-                
-                const centerDiv = document.createElement('div');
-                centerDiv.className = 'player-center';
-                
-                const wave = document.createElement('div');
-                wave.className = 'waveform-anim';
-                wave.innerHTML = '<span></span><span></span><span></span><span></span><span></span><span></span><span></span>';
-                
-                const progressContainer = document.createElement('div');
-                progressContainer.className = 'progress-container';
-                
-                const curTime = document.createElement('span');
-                curTime.className = 'current-time';
-                curTime.textContent = '0:00';
-                
-                const seekBar = document.createElement('input');
-                seekBar.type = 'range';
-                seekBar.className = 'seek-bar';
-                seekBar.value = '0';
-                seekBar.step = '0.1';
-                seekBar.max = '100';
-                
-                const totTime = document.createElement('span');
-                totTime.className = 'total-time';
-                totTime.textContent = '0:00';
-                
-                progressContainer.appendChild(curTime);
-                progressContainer.appendChild(seekBar);
-                progressContainer.appendChild(totTime);
-                
-                centerDiv.appendChild(wave);
-                centerDiv.appendChild(progressContainer);
-                
-                playerUI.appendChild(playBtn);
-                playerUI.appendChild(centerDiv);
-                
-                audio.parentNode.appendChild(playerUI);
-                
-                const formatTime = (time) => {
-                    if (isNaN(time)) return '0:00';
-                    const min = Math.floor(time / 60);
-                    const sec = Math.floor(time % 60);
-                    return `${min}:${sec < 10 ? '0' : ''}${sec}`;
-                };
 
-                const updateDuration = () => {
-                    if (audio.duration && !isNaN(audio.duration)) {
-                        seekBar.max = audio.duration;
-                        totTime.textContent = formatTime(audio.duration);
-                    }
-                };
-
-                audio.addEventListener('loadedmetadata', updateDuration);
-                audio.addEventListener('durationchange', updateDuration);
-
-                playBtn.addEventListener('click', () => {
-                    if(audio.paused) {
-                        document.querySelectorAll('audio').forEach(a => {
-                            if(a !== audio) a.pause();
-                        });
-                        audio.play();
-                    } else {
-                        audio.pause();
-                    }
-                });
-
-                audio.addEventListener('play', () => {
-                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                    wave.classList.add('playing');
-                });
-
-                audio.addEventListener('pause', () => {
-                    playBtn.innerHTML = '<i class="fas fa-play" style="margin-left: 3px;"></i>';
-                    wave.classList.remove('playing');
-                });
-
-                audio.addEventListener('timeupdate', () => {
-                    if (!seekBar.max || seekBar.max == 100 || totTime.textContent === '0:00') updateDuration();
-                    seekBar.value = audio.currentTime;
-                    curTime.textContent = formatTime(audio.currentTime);
-                    
-                    const min = seekBar.min || 0;
-                    const max = seekBar.max || 100;
-                    const val = seekBar.value;
-                    const percentage = (max - min) > 0 ? (val - min) * 100 / (max - min) : 0;
-                    seekBar.style.background = `linear-gradient(to left, var(--progress-col) ${percentage}%, #333 ${percentage}%)`;
-                });
-
-                seekBar.addEventListener('input', () => {
-                    if(audio.duration) {
-                        audio.currentTime = seekBar.value;
-                    }
-                });
-                
-                audio.addEventListener('ended', () => {
-                    playBtn.innerHTML = '<i class="fas fa-play" style="margin-left: 3px;"></i>';
-                    wave.classList.remove('playing');
-                    seekBar.value = 0;
-                    seekBar.style.background = '#333';
-                    curTime.textContent = '0:00';
-                });
-            });
-        }
-        
-        window.addEventListener('DOMContentLoaded', initCustomAudioPlayers);
 
         window.addEventListener('scroll', () => {
             const winScroll = document.documentElement.scrollTop;
@@ -562,7 +445,7 @@
             document.querySelectorAll('.side-menu-list a').forEach(a => a.classList.remove('active-link'));
             
             const navMap = {
-                'home-page':'nav-home', 'works-page':'nav-works', 'contact-us-page':'nav-contact',
+                'home-page':'nav-home', 'works-page':'nav-works', 'services-page':'nav-services', 'contact-us-page':'nav-contact',
                 'about-page':'nav-about', 'literary-page':'nav-literary', 'service-detail-view':'nav-home',
                 'privacy-page':'nav-privacy', 'faq-page':'nav-faq'
             };
@@ -752,6 +635,7 @@
     <nav class="nav">
         <a onclick="cinematicSection('home-page')" class="active-link" id="nav-home">الرئيسية</a>
         <a onclick="cinematicSection('works-page')" id="nav-works">معرض الأعمال</a>
+        <a onclick="cinematicSection('services-page')" id="nav-services">خدماتنا</a>
         <a onclick="cinematicSection('literary-page')" id="nav-literary">الركن الأدبي</a>
         <a onclick="cinematicSection('about-page')" id="nav-about">من نحن</a>
         <a onclick="openSearchModal()" style="padding: 6px 15px; font-size: 18px; cursor: pointer;" title="بحث شامل"><i class="fas fa-search"></i></a>
@@ -763,23 +647,6 @@
 
     <div class="container main-layout-container" id="main-layout-container">
         
-        <!-- القائمة الجانبية -->
-        <aside class="side-menu">
-            <h3 class="side-menu-title">روابط سريعة</h3>
-            <ul class="side-menu-list">
-                <li><a onclick="openSearchModal()" id="side-search"><i class="fas fa-search"></i> بحث شامل</a></li>
-                <li><a onclick="cinematicSection('home-page')" id="side-home" class="active-link"><i class="fas fa-home"></i> الرئيسية</a></li>
-                <li><a onclick="scrollToHomeSection('packages-section', 'nav-packages')" id="side-packages"><i class="fas fa-crown"></i> باقاتنا</a></li>
-                <li><a onclick="scrollToHomeSection('partners-section', 'nav-partners')" id="side-partners"><i class="fas fa-handshake"></i> شركاء النجاح</a></li>
-                <li><a onclick="cinematicSection('faq-page')" id="side-faq"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a></li>
-                <li><a onclick="cinematicSection('works-page')" id="side-works"><i class="fas fa-photo-video"></i> معرض الأعمال</a></li>
-                <li><a onclick="cinematicSection('literary-page')" id="side-literary"><i class="fas fa-book"></i> الركن الأدبي</a></li>
-                <li><a onclick="cinematicSection('about-page')" id="side-about"><i class="fas fa-info-circle"></i> من نحن</a></li>
-                <li><a onclick="cinematicSection('privacy-page')" id="side-privacy"><i class="fas fa-shield-alt"></i> سياسة الخصوصية</a></li>
-                <li><a onclick="cinematicSection('contact-us-page')" id="side-contact" class="side-btn-contact"><i class="fab fa-whatsapp"></i> اطلب خدمتك</a></li>
-            </ul>
-        </aside>
-
         <!-- محتوى الصفحة -->
         <div class="page-content-wrapper" id="main-container">
         <div id="home-page" class="page-section active">
@@ -1340,10 +1207,111 @@
             </div>
         </div>
 
+        <div id="services-page" class="page-section">
+            <div class="section-title-wrapper" style="margin-top: 10px;"><h2 class="section-title-frame">خدماتنا</h2></div>
+            <div class="services-list" style="margin-bottom: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 0 40px;">
+                <!-- خدمة 1 -->
+                <div class="service-detail-card" style="background: linear-gradient(145deg, var(--card), var(--bg)); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: 0.4s; text-align: right;">
+                    <i class="fas fa-headphones" style="font-size: 40px; color: var(--gold); margin-bottom: 20px; display: block;"></i>
+                    <h3 style="color: #fff; font-size: 22px; margin-bottom: 15px; font-weight: 900;">الإنتاج الصوتي والموسيقي</h3>
+                    <p style="color: #aaa; font-size: 15px; line-height: 1.8; margin-bottom: 20px;">نقدم خدمات تسجيل صوتي احترافية وهندسة صوتية متقدمة لضمان نقاء الصوت وجودته العالية. من تسجيل الأغاني إلى تصميم المؤثرات الصوتية للأفلام والألعاب.</p>
+                    <button class="btn-order" onclick="showService('الإنتاج الصوتي والموسيقي')" style="width: 100%; border-radius: 10px;">اطلب هذه الخدمة</button>
+                </div>
+
+                <!-- خدمة 2 -->
+                <div class="service-detail-card" style="background: linear-gradient(145deg, var(--card), var(--bg)); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: 0.4s; text-align: right;">
+                    <i class="fas fa-gift" style="font-size: 40px; color: var(--gold); margin-bottom: 20px; display: block;"></i>
+                    <h3 style="color: #fff; font-size: 22px; margin-bottom: 15px; font-weight: 900;">المناسبات والإهداءات</h3>
+                    <p style="color: #aaa; font-size: 15px; line-height: 1.8; margin-bottom: 20px;">تصميم زفات وشيلات حصرية وأناشيد تخرج وتهنئة مخصصة بأسمائكم. نوثق لحظاتكم المميزة بأعمال فنية تليق بمناسباتكم السعيدة وتبقى خالدة في الذاكرة.</p>
+                    <button class="btn-order" onclick="showService('المناسبات والإهداءات')" style="width: 100%; border-radius: 10px;">اطلب هذه الخدمة</button>
+                </div>
+
+                <!-- خدمة 3 -->
+                <div class="service-detail-card" style="background: linear-gradient(145deg, var(--card), var(--bg)); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: 0.4s; text-align: right;">
+                    <i class="fas fa-clapperboard" style="font-size: 40px; color: var(--gold); margin-bottom: 20px; display: block;"></i>
+                    <h3 style="color: #fff; font-size: 22px; margin-bottom: 15px; font-weight: 900;">المونتاج وتصميم الفيديو</h3>
+                    <p style="color: #aaa; font-size: 15px; line-height: 1.8; margin-bottom: 20px;">نقدم خدمات مونتاج فيديو سينمائي، وتصميم موشن جرافيك مبدع لايصال فكرتك. نحوّل اللقطات الخام إلى قصص مرئية جذابة تلهم جمهورك.</p>
+                    <button class="btn-order" onclick="showService('المونتاج وتصميم الفيديو')" style="width: 100%; border-radius: 10px;">اطلب هذه الخدمة</button>
+                </div>
+
+                <!-- خدمة 4 -->
+                <div class="service-detail-card" style="background: linear-gradient(145deg, var(--card), var(--bg)); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: 0.4s; text-align: right;">
+                    <i class="fas fa-object-group" style="font-size: 40px; color: var(--gold); margin-bottom: 20px; display: block;"></i>
+                    <h3 style="color: #fff; font-size: 22px; margin-bottom: 15px; font-weight: 900;">التصميم والهوية البصرية</h3>
+                    <p style="color: #aaa; font-size: 15px; line-height: 1.8; margin-bottom: 20px;">تصميم شعارات، هويات تجارية كاملة، وتصاميم للسوشيال ميديا تعكس احترافية مشروعك. نبني صورة علامتك التجارية لتكون مميزة ولا تُنسى.</p>
+                    <button class="btn-order" onclick="showService('التصميم والهوية البصرية')" style="width: 100%; border-radius: 10px;">اطلب هذه الخدمة</button>
+                </div>
+
+                <!-- خدمة 5 -->
+                <div class="service-detail-card" style="background: linear-gradient(145deg, var(--card), var(--bg)); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: 0.4s; text-align: right;">
+                    <i class="fas fa-microphone-lines" style="font-size: 40px; color: var(--gold); margin-bottom: 20px; display: block;"></i>
+                    <h3 style="color: #fff; font-size: 22px; margin-bottom: 15px; font-weight: 900;">التعليق الصوتي المتقدم</h3>
+                    <p style="color: #aaa; font-size: 15px; line-height: 1.8; margin-bottom: 20px;">أصوات احترافية للكتب الصوتية، الإعلانات، الأفلام الوثائقية، والرد الآلي. نوفر خامات صوتية متنوعة تناسب مختلف أنواع المحتوى وبمختلف اللغات واللهجات.</p>
+                    <button class="btn-order" onclick="showService('التعليق الصوتي المتقدم')" style="width: 100%; border-radius: 10px;">اطلب هذه الخدمة</button>
+                </div>
+
+                <!-- خدمة 6 -->
+                <div class="service-detail-card" style="background: linear-gradient(145deg, var(--card), var(--bg)); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: 0.4s; text-align: right;">
+                    <i class="fas fa-feather-pointed" style="font-size: 40px; color: var(--gold); margin-bottom: 20px; display: block;"></i>
+                    <h3 style="color: #fff; font-size: 22px; margin-bottom: 15px; font-weight: 900;">الخدمات الأدبية واللغوية</h3>
+                    <p style="color: #aaa; font-size: 15px; line-height: 1.8; margin-bottom: 20px;">تأليف قصائد شعرية مخصصة، كتابة محتوى إبداعي، تدقيق لغوي وحركات نحوية. نهتم بجمالية الكلمة ودقتها لتصل رسالتك بأسمى شكل.</p>
+                    <button class="btn-order" onclick="showService('الخدمات الأدبية واللغوية')" style="width: 100%; border-radius: 10px;">اطلب هذه الخدمة</button>
+                </div>
+
+                <!-- خدمة 7 -->
+                <div class="service-detail-card" style="background: linear-gradient(145deg, var(--card), var(--bg)); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: 0.4s; text-align: right;">
+                    <i class="fas fa-book-open-reader" style="font-size: 40px; color: var(--gold); margin-bottom: 20px; display: block;"></i>
+                    <h3 style="color: #fff; font-size: 22px; margin-bottom: 15px; font-weight: 900;">الخدمات الأكاديمية والنشر</h3>
+                    <p style="color: #aaa; font-size: 15px; line-height: 1.8; margin-bottom: 20px;">مساعدة في التنسيق والإخراج للكتب، تصميم الأغلفة، وتجهيز المؤلفات للنشر. نقدم الدعم للكتاب والباحثين لإخراج أعمالهم بأفضل صورة أحترافية.</p>
+                    <button class="btn-order" onclick="showService('الخدمات الأكاديمية والنشر')" style="width: 100%; border-radius: 10px;">اطلب هذه الخدمة</button>
+                </div>
+
+                <!-- خدمة 8 -->
+                <div class="service-detail-card" style="background: linear-gradient(145deg, var(--card), var(--bg)); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: 0.4s; text-align: right;">
+                    <i class="fas fa-laptop-code" style="font-size: 40px; color: var(--gold); margin-bottom: 20px; display: block;"></i>
+                    <h3 style="color: #fff; font-size: 22px; margin-bottom: 15px; font-weight: 900;">تطوير الويب والتطبيقات</h3>
+                    <p style="color: #aaa; font-size: 15px; line-height: 1.8; margin-bottom: 20px;">برمجة مواقع وتطبيقات تفاعلية متطورة تعكس قوة علامتك التجارية. ندمج بين التصميم الجميل والأداء المتميز لتوفير تجربة مستخدم سلسلة.</p>
+                    <button class="btn-order" onclick="showService('تطوير الويب والتطبيقات')" style="width: 100%; border-radius: 10px;">اطلب هذه الخدمة</button>
+                </div>
+            </div>
+        </div>
+
         <div id="contact-us-page" class="page-section">
             <div class="section-title-wrapper" style="margin-top: 10px;"><h2 class="section-title-frame">تواصل معنا</h2></div>
 
             <div class="contact-layout">
+
+                <!-- عمود النموذج (يسار/وسط) -->
+                <div class="contact-form-panel">
+                    <form onsubmit="sendToWhatsApp(event)" class="contact-form">
+                        <div class="form-group">
+                            <label><i class="fas fa-user" style="color:var(--gold);"></i> الاسم الكريم</label>
+                            <input type="text" id="wa-name" placeholder="أدخل اسمك أو اسم المؤسسة..." required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-list" style="color:var(--gold);"></i> نوع الخدمة</label>
+                            <select id="wa-service">
+                                <option value="" disabled selected>-- اختر الخدمة المطلوبة --</option>
+                                <option value="الإنتاج الصوتي والموسيقي">إنتاج صوتي وموسيقي</option>
+                                <option value="المناسبات والإهداءات">زفات وأناشيد المناسبات</option>
+                                <option value="المونتاج وتصميم الفيديو">مونتاج وتصميم فيديو</option>
+                                <option value="التصميم والهوية البصرية">تصميم جرافيك وهوية بصرية</option>
+                                <option value="التعليق الصوتي المتقدم">تعليق صوتي متقدم</option>
+                                <option value="الخدمات الأدبية واللغوية">خدمات أدبية ولغوية (أشعار، تدقيق)</option>
+                                <option value="الخدمات الأكاديمية والنشر">خدمات أكاديمية ونشر</option>
+                                <option value="تطوير الويب والتطبيقات">تطوير ويب وتطبيقات</option>
+                                <option value="أخرى">طلب آخر</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-align-right" style="color:var(--gold);"></i> تفاصيل الطلب</label>
+                            <textarea id="wa-message" rows="4" placeholder="اكتب تفاصيل وملخص فكرتك هنا..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit-form">
+                            إرسال الطلب عبر واتساب <i class="fab fa-whatsapp" style="margin-right:8px; font-size:1.2em;"></i>
+                        </button>
+                    </form>
+                </div>
 
                 <!-- عمود المعلومات (يمين) -->
                 <div class="contact-info-panel">
@@ -1377,94 +1345,19 @@
                         <div class="contact-card-icon"><i class="fab fa-telegram-plane"></i></div>
                         <div class="contact-card-text">
                             <strong>تليجرام</strong>
-                              <script>
-        console.log("Articles Data is being loaded directly in index.html...");
-        window.articlesData = [
-            {
-                id: 1,
-                title: 'كيف تختار كلمات زفتك؟',
-                category: 'نصائح وأفكار',
-                preview: 'الزفة ليست مجرد إيقاع وموسيقى، بل هي توثيق للحظة العمر. نكتب لك القصيدة لتكون بصمتك الخاصة التي تروي قصة حبكما بأسلوب شعري فخم يلامس القلوب ويظل علقاً في الأذهان.',
-                content: `الزفة ليست مجرد إيقاع وموسيقى، بل هي توثيق للحظة العمر. نكتب لك القصيدة لتكون بصمتك الخاصة التي تروي قصة حبكما بأسلوب شعري فخم يلامس القلوب ويظل عالقاً في الأذهان. خلف كل إيقاع رصين، وبين ثنايا الألحان التي تملأ جنبات القاعة، تكمن حكاية لا ترويها الآلات، بل تنطق بها الكلمات. إن الزفة في جوهرها ليست احتفالاً باللحظة فحسب، بل هي "هندسة للذاكرة"، وعملية توثيق أدبية لأهم منعطف في حياة الإنسان. فالموسيقى قد تطرب الآذان، لكن الكلمة المكتوبة خصيصاً لأجل العروسين هي التي تخترق جدار الزمن لتبقى محفورة في وجدان الأجيال.
+                            <span>@atheersound</span>
+                        </div>
+                    </a>
+                </div>
 
-الكلمة.. روح اللحن ونبضه
-إذا كانت الألحان هي الجسد، فإن القصيدة هي الروح. إن الزفة الجاهزة أو "المعلبة" قد تفي بغرض الاحتفال، لكنها تفتقد لـ "البصمة الوراثية" للعروسين؛ تفتقد لذكر ملامحهما، طموحاتهما، وخصوصية الحكاية التي جمعت بينهما. هنا تبرز أهمية صياغة القصيدة الخاصة، حيث يتحول النص الأدبي إلى مرآة تعكس نبل العائلات، وشهامة الآباء، وطهر الأمهات، في مزيج فريد يجعل من الزفة "أثيراً" يلامس السماء.
+            </div>
+        </div>
+    </div>
 
-بصمة خاصة في أرشيف العمر
-نحن لا نكتب مجرد أبياتٍ موزونة، بل نرسم بورتريه شعرياً لا يشبه أحداً سواه. إن تخصيص الكلمات يعني أننا نمنح الفرح "هوية"، ونحول الحفل من مجرد مناسبة اجتماعية إلى حدثٍ ثقافي وفني يتناقله الحاضرون بإعجاب. فكل اسم يُذكر، وكل صفة تُمدح، وكل دعاء يُصاغ بقافية رصينة، هو خيط من نور يُنسج في ثوب الذاكرة، ليبقى العروسان حين يستمعان لزفتهما بعد سنوات، يشعران بأن تلك اللحظة لم تمت، بل بقيت حية نابضة في سطور القصيد.
-
-"إن الألحان قد تتشابه، والإيقاعات قد تتكرر، لكن القوافي التي تُكتب بمداد الحب والخصوصية هي التي تصنع الفرق بين فرحٍ يمر، وفرحٍ يخلد."
-
-الخاتمة: الفن في خدمة الشعور
-في "أثير ساوند"، نؤمن بأن كل عروس هي ملكة في قصيدة، وكل عريس هو بطل في ملحمة. لذا، فإن كتابة القصيدة ليست مجرد ترتيب للكلمات، بل هي استنطاق لمشاعر الأهل، وتجسيد لفرحة الأصدقاء، لتكون النتيجة تحفة فنية تتجاوز حدود الزمن، وتصبح الوثيقة الأغلى في "ألبوم العمر"..`
-            },
-            {
-                id: 2,
-                title: 'أخطاء شائعة في التعليق الصوتي',
-                category: 'فنون الصوت',
-                preview: 'التعليق الصوتي هو فن إيصال المعنى، وأكثر ما يفسد هذا الفن هو الأخطاء اللغوية والأدائية التي قد تخرج المستمع من حالة الاندماج مع المحتوى.',
-                content: `التعليق الصوتي هو فن إيصال المعنى، وأكثر ما يفسد هذا الفن هو الأخطاء اللغوية والأدائية. من أهم هذه الأخطاء: 1. الأخطاء اللغوية والنحوية (الفخ الأكبر)
-بما أن اللغة هي المادة الخام للمعلق، فإن أي خلل فيها يُفقد العمل مصداقيته، خاصة في المحتوى التعليمي أو الوثائقي.
-
-تجاهل التشكيل (الحركات): الوقوف الخاطئ على الكلمات أو إغفال حركات الإعراب (خاصة أواخر الكلمات) يغير المعنى تماماً.
-
-مخارج الحروف: الخلط بين الحروف المتشابهة (مثل الضاد والظاء، أو الثاء والسين) يمنح انطباعاً بعدم الاحترافية.
-
-القراءة الآلية: غياب "روح النص"؛ حيث يقرأ المعلق الكلمات كأنه آلة، دون مراعاة لعلامات الترقيم أو الوقفات التعبيرية التي تعطي للنص أبعاده الشعورية.
-
-2. الرتابة في الأداء (Monotony)
-الوقوع في إيقاع واحد طوال النص هو "قاتل الانتباه".
-
-النغمة المتكررة: البدء والانتهاء بنفس النبرة في كل جملة يجعل المستمع يفقد التركيز سريعاً.
-
-عدم التمييز بين القوالب: أداء الإعلان التجاري السريع بنفس نبرة الوثائقي الهادئة أو القصيدة الوجدانية خطأ فادح؛ فلكل مقامٍ مقال (وصوت).
-
-3. الأخطاء التقنية وبيئة التسجيل
-حتى الأداء العبقري قد يفسده ضعف الهندسة الصوتية.
-
-ضجيج الخلفية والصدى: التسجيل في غرف غير معالجة صوتياً يؤدي لظهور "صدى" (Reverb) يشتت المستمع.
-
-أصوات الفم والنفس: عدم استخدام "الفلتر" (Pop Filter) أو الاقتراب الزائد من الميكروفون يؤدي لظهور أصوات النفس المزعجة أو فرقعات الحروف الانفجارية (مثل الباء والتاء).
-
-تفاوت المستويات: تسجيل أجزاء من النص بمستويات صوتية مختلفة، مما يجعل الصوت يرتفع وينخفض بشكل غير مريح.
-
-4. غياب التحضير الذهني
-التعليق الصوتي يبدأ بالعقل قبل الحنجرة.
-
-عدم فهم النص: التسجيل دون قراءة النص مسبقاً وفهم رسالته والجمهور المستهدف يؤدي إلى أداء "خارج السياق".
-
-المبالغة في التمثيل (Overacting): محاولة تزييف الصوت أو جعل النبرة "عميقة" بشكل مصطنع ينفر المستمع؛ فالعفوية والصدق هما مفتاح الوصول للقلب.
-
-نصيحة من خبير:
-"المعلق المحترف هو من يقرأ المعنى لا الكلمات، ومن يجعل صوته خادماً للفكرة لا مستعرضاً لإمكانياته الحنجرية."
-
-في "أثير ساوند"، نحرص دائماً على تجاوز هذه الأخطاء من خلال التدقيق اللغوي الصارم وتوفير بيئة تسجيل احترافية تضمن وصول رسالتكم بأعلى جودة..`
-            },
-            {
-                id: 3,
-                title: 'جماليات القصيدة المغناة',
-                category: 'دراسات أدبية',
-                preview: 'كيف تتحول الكلمة الصماء إلى نغمة خالدة تأسر الأرواح؟ إن سر القصيدة المغناة يكمن في التزاوج التام بين عمق المعنى وعذوبة اللحن.',
-                content: `تراتيل الأثير: في رحاب القصيدة المغناة
-إن القصيدة في أصلها "موسيقى مكتوبة"، يسكنُ في تضاعيفها جرسٌ خفيّ وأوزانٌ عروضية تتوق للتحرر. وحين تلامسها أناملُ الملحن المبدع, ويبثُّ فيها المؤدي من روحه، فإنها تخرج من أسر "القراءة" إلى رحابة "الاستماع"، لتصبح وثيقةً شعورية عابرة للزمن، تسكنُ الذاكرة وتأبى النسيان.
-
-الحرفُ حين يرتدي ثوب النغم
-تبدأ جمالية القصيدة المغناة من تلك اللحظة التي يفكُّ فيها اللحنُ شيفرة المعنى؛ فالملحن لا يضع نغماتٍ فحسب، بل هو "مترجمٌ عاطفي" يعيد صياغة الصور الشعرية عبر المقامات الموسيقية. فحين يكون النصُّ وجدانياً، تتهادى الألحان بوقارٍ يناسبُ لوعة الشوق، وحين يكون حماسياً أو فخرياً، تثورُ الإيقاعات لتشعل في الكلمات لهب الحضور. إن اللحن هنا ليس زينةً مضافة، بل هو "الضوء" الذي يسلطه الفن على جواهر المعاني الخفية.
-
-عبقرية السبك وتآلف الأوزان
-تتجلى فرادة هذا الفن في التناغم بين الروي والقافية وبين الإيقاع الموسيقي. فالقصيدة الموزونة على بحور الشعر العربي (كـالوافر، والبسيط، والكامل) تمتلك إيقاعاً فطرياً يسهل على الأذن العربية استقباله. وعندما تُغنى، يتحول "البحر الشعري" إلى نهرٍ جارٍ من الأنغام، حيث تخدم الوقفات الموسيقية "القفلات الشعرية"، مما يخلق حالة من "النشوة الجمالية" التي لا يحققها النص المقروء منفرداً.
-
-خلودُ القصيدة في وعي الجمهور
-كم من قصائد خلدت بفضل "الغناء" أكثر مما خلدت في بطون الدواوين! إن الغناء يمنح القصيدة "أجنحة" لتصل إلى عامة الناس وخاصتهم، محطمةً حواجز اللغة النخبوية الصعبة. فالقصيدة المغناة هي التي تجعل من "الفصحى" لغةً قريبة من القلب، ومن "النبطي والحميني" تراثاً نابضاً بالحياة، فهي الجسر الذي يربط أصالة الموروث بحداثة الأداء.
-
-"إن الشعر هو روحُ الوجود، والموسيقى هي لغته العالمية؛ وحين يجتمعان، فإننا لا نستمع إلى أغنية، بل نشهدُ ميلاد لحظةٍ تاريخية في عمر الجمال."
-
-الخاتمة: الفن كرسالة خالدة
-في عالم الإنتاج الصوتي الحديث، تظل القصيدة المغناة هي "التاج" الذي يزين رأس الإبداع. إنها تجسيدٌ حيّ لقوة الكلمة حين تتحالف مع الفن، لتصنع أثراً يبقى نابضاً في "أثير" القلوب، موثقاً لمشاعر الإنسان وأفراحه وأشجانه بمدادٍ من نور وألحانٍ من سحر..`
-            }
-        ];
-        console.log("Articles Data Loaded:", window.articlesData);
-    </script>        <span class="footer-logo-ar">أثير</span>
+    <footer class="footer-new">
+        <div class="footer-main-new">
+            <div class="footer-col-new footer-brand-col">
+                <span class="footer-logo-ar">أثير</span>
                     <span class="footer-logo-en">ATHEER SOUND</span>
                 </div>
                 <p class="footer-tagline">منصة الإبداع الفني والأكاديمي — نجمع بين سحر الفن ودقة العلم، لنخلد أجمل لحظاتك بأعمال تليق بك.</p>
@@ -1490,20 +1383,25 @@
                 </ul>
             </div>
 
-            <!-- العمود 3: روابط -->
+            <!-- العمود 3: روابط سريعة (نُقلت من القائمة الجانبية) -->
             <div class="footer-col-new">
                 <h4 class="footer-col-title"><i class="fas fa-sitemap"></i> روابط سريعة</h4>
                 <ul class="footer-links">
-                    <li onclick="cinematicSection('home-page')"><i class="fas fa-angle-left"></i> الصفحة الرئيسية</li>
-                    <li onclick="cinematicSection('works-page')"><i class="fas fa-angle-left"></i> معرض الأعمال</li>
-                    <li onclick="cinematicSection('literary-page')"><i class="fas fa-angle-left"></i> الركن الأدبي</li>
-                    <li onclick="cinematicSection('faq-page')"><i class="fas fa-angle-left"></i> الأسئلة الشائعة</li>
-                    <li onclick="cinematicSection('about-page')"><i class="fas fa-angle-left"></i> من نحن</li>
-                    <li onclick="cinematicSection('privacy-page')"><i class="fas fa-angle-left"></i> سياسة الخصوصية</li>
+                    <li onclick="openSearchModal()"><i class="fas fa-search"></i> بحث شامل</li>
+                    <li onclick="cinematicSection('home-page')"><i class="fas fa-home"></i> الرئيسية</li>
+                    <li onclick="scrollToHomeSection('packages-section', 'nav-packages')"><i class="fas fa-crown"></i> باقاتنا</li>
+                    <li onclick="scrollToHomeSection('partners-section', 'nav-partners')"><i class="fas fa-handshake"></i> شركاء النجاح</li>
+                    <li onclick="cinematicSection('services-page')"><i class="fas fa-headphones"></i> خدماتنا</li>
+                    <li onclick="cinematicSection('faq-page')"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</li>
+                    <li onclick="cinematicSection('works-page')"><i class="fas fa-photo-video"></i> معرض الأعمال</li>
+                    <li onclick="cinematicSection('literary-page')"><i class="fas fa-book"></i> الركن الأدبي</li>
+                    <li onclick="cinematicSection('about-page')"><i class="fas fa-info-circle"></i> من نحن</li>
+                    <li onclick="cinematicSection('privacy-page')"><i class="fas fa-shield-alt"></i> سياسة الخصوصية</li>
+                    <li onclick="cinematicSection('contact-us-page')" style="color:var(--gold);"><i class="fab fa-whatsapp"></i> اطلب خدمتك</li>
                 </ul>
             </div>
 
-            <!-- العمود 4: التواصل -->
+            <!-- العمود 4: تواصل معنا -->
             <div class="footer-col-new">
                 <h4 class="footer-col-title"><i class="fas fa-phone-volume"></i> تواصل معنا</h4>
                 <div class="footer-contact-item" onclick="openContactModal('yemen')">
@@ -1530,9 +1428,20 @@
 
         <!-- الشريط السفلي -->
         <div class="footer-bottom">
-            <div class="footer-bottom-inner">
-                <span class="footer-copy">&copy; 2026 مؤسسة أثير ساوند &mdash; جميع الحقوق محفوظة</span>
-                <span class="footer-made"><i class="fas fa-heart" style="color:#c0392b;"></i> صُنع بشغف في اليمن والسعودية</span>
+            <div class="footer-bottom-inner" style="flex-direction: column; gap: 15px;">
+                <div class="footer-bottom-links" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <a onclick="cinematicSection('home-page')" style="color: #ccc; cursor: pointer; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='#ccc'">الرئيسية</a>
+                    <a onclick="cinematicSection('works-page')" style="color: #ccc; cursor: pointer; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='#ccc'">معرض الأعمال</a>
+                    <a onclick="cinematicSection('services-page')" style="color: #ccc; cursor: pointer; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='#ccc'">خدماتنا</a>
+                    <a onclick="cinematicSection('literary-page')" style="color: #ccc; cursor: pointer; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='#ccc'">الركن الأدبي</a>
+                    <a onclick="cinematicSection('about-page')" style="color: #ccc; cursor: pointer; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='#ccc'">من نحن</a>
+                    <a onclick="cinematicSection('faq-page')" style="color: #ccc; cursor: pointer; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='#ccc'">الأسئلة الشائعة</a>
+                    <a onclick="cinematicSection('privacy-page')" style="color: #ccc; cursor: pointer; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='#ccc'">سياسة الخصوصية</a>
+                </div>
+                <div style="display: flex; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 10px;">
+                    <span class="footer-copy">&copy; 2026 مؤسسة أثير ساوند &mdash; جميع الحقوق محفوظة</span>
+                    <span class="footer-made"><i class="fas fa-heart" style="color:#c0392b;"></i> صُنع بشغف في اليمن والسعودية</span>
+                </div>
             </div>
         </div>
     </footer>
