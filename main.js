@@ -435,10 +435,10 @@ const searchDatabase = [];
             container.innerHTML = '';
             categories.forEach(cat => {
                 const btn = document.createElement('button');
-                btn.className = 'cat-btn' + (cat === 'all' ? ' active' : '');
+                btn.className = 'occ-btn' + (cat === 'all' ? ' active' : '');
                 btn.textContent = labels[cat] || cat;
                 btn.onclick = () => {
-                    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.occ-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     _activeCategory = cat;
                     renderArticles();
@@ -470,11 +470,11 @@ const searchDatabase = [];
             }
 
             grid.innerHTML = filtered.map(a => `
-                <div class="article-card-dynamic" onclick="openArticleModal(${a.id})">
-                    <span class="article-cat-badge">${a.category || ''}</span>
+                <div class="poem-card" onclick="openArticleModal(${a.id})">
+                    <span class="poem-occasion-badge">${a.category || ''}</span>
                     <h4>${a.title || ''}</h4>
-                    <p class="article-preview">${a.preview || ''}</p>
-                    <button class="article-read-btn">اقرأ المقال كاملاً <i class="fas fa-angle-left"></i></button>
+                    <p class="poem-preview">${a.preview || ''}</p>
+                    <button class="poem-read-btn">اقرأ المقال كاملاً <i class="fas fa-angle-left"></i></button>
                 </div>
             `).join('');
         }
