@@ -1031,13 +1031,13 @@
 
                 <!-- === تبويب: المقالات === -->
                 <div class="lit-sub-content active" id="lit-sub-articles">
-                    <div class="articles-toolbar">
-                        <input type="text" id="articles-search-input" class="articles-search" placeholder="ابحث في المقالات..." oninput="renderArticles()">
-                        <div id="articles-categories-filter" class="category-filters">
+                    <div class="poems-toolbar">
+                        <input type="text" id="articles-search-input" class="poems-search" placeholder="ابحث في المقالات..." oninput="renderArticles()">
+                        <div id="articles-categories-filter" class="occasion-filters">
                             <!-- سيتم الملء ديناميكياً بواسطة JavaScript -->
                         </div>
                     </div>
-                    <div id="articles-grid" class="articles-grid">
+                    <div id="articles-grid" class="poems-grid">
                         <!-- سيتم الملء بواسطة JavaScript -->
                     </div>
                 </div>
@@ -1497,7 +1497,7 @@
     <script src="poems-data.js?v=2105"></script>
     <script src="articles-data.js?v=2106" data-articles-data="true"></script>
     
-    <script src="main.js?v=2106"></script>
+    <script src="main.js?v=2107"></script>
     <script>
     (function () {
         const fallbackArticles = [
@@ -1572,10 +1572,10 @@
             filterWrap.innerHTML = categories.map(cat => {
                 const label = cat === 'all' ? '✨ الكل' : escapeHtml(cat);
                 const activeClass = cat === activeCategory ? ' active' : '';
-                return '<button class="cat-btn' + activeClass + '" data-cat="' + escapeHtml(cat) + '">' + label + '</button>';
+                return '<button class="occ-btn' + activeClass + '" data-cat="' + escapeHtml(cat) + '">' + label + '</button>';
             }).join('');
 
-            Array.prototype.forEach.call(filterWrap.querySelectorAll('.cat-btn'), btn => {
+            Array.prototype.forEach.call(filterWrap.querySelectorAll('.occ-btn'), btn => {
                 btn.addEventListener('click', function () {
                     window.__articlesActiveCategory = this.getAttribute('data-cat') || 'all';
                     renderArticlesFallback();
@@ -1596,15 +1596,15 @@
             }
 
             grid.innerHTML = filtered.map(a => {
-                return '<div class="article-card-dynamic" data-article-id="' + a.id + '">' +
-                    '<span class="article-cat-badge">' + escapeHtml(a.category) + '</span>' +
+                return '<div class="poem-card" data-article-id="' + a.id + '">' +
+                    '<span class="poem-occasion-badge">' + escapeHtml(a.category) + '</span>' +
                     '<h4>' + escapeHtml(a.title) + '</h4>' +
-                    '<p class="article-preview">' + escapeHtml(a.preview) + '</p>' +
-                    '<button class="article-read-btn">اقرأ المقال كاملاً <i class="fas fa-angle-left"></i></button>' +
+                    '<p class="poem-preview">' + escapeHtml(a.preview) + '</p>' +
+                    '<button class="poem-read-btn">اقرأ المقال كاملاً <i class="fas fa-angle-left"></i></button>' +
                 '</div>';
             }).join('');
 
-            Array.prototype.forEach.call(grid.querySelectorAll('.article-card-dynamic'), card => {
+            Array.prototype.forEach.call(grid.querySelectorAll('.poem-card[data-article-id]'), card => {
                 card.addEventListener('click', function () {
                     const id = Number(this.getAttribute('data-article-id'));
                     if (typeof window.openArticleModal === 'function') {
