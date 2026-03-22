@@ -1,5 +1,13 @@
 const searchDatabase = [];
 
+        function safeInnerText(parent, selector) {
+            if (!parent) return '';
+            const node = parent.querySelector(selector);
+            if (!node) return '';
+            return node.innerText || node.textContent || '';
+        }
+
+
         function buildSearchDatabase() {
             searchDatabase.length = 0; 
             
@@ -9,7 +17,7 @@ const searchDatabase = [];
                 let type = card.classList.contains('video-card') ? 'فيديو ومونتاج مونتاج' : 
                            card.classList.contains('audio-card') ? 'صوتي تسجيل زفة شيلة زفات شيلات تعليق أنشودة اناشيد' : 'تصميم جرافيكس هوية';
                 
-                let title = card.querySelector('.work-overlay')?.innerText || card.querySelector('h4')?.innerText || 'عمل فني';
+                let title = safeInnerText(card, '.work-overlay') || safeInnerText(card, 'h4') || 'عمل فني';
                 
                 searchDatabase.push({
                     id: card.id,
@@ -22,7 +30,7 @@ const searchDatabase = [];
             });
 
             document.querySelectorAll('.service-box').forEach((box, index) => {
-                let title = box.querySelector('h4')?.innerText || '';
+                let title = safeInnerText(box, 'h4') || '';
                 if (!box.id) box.id = 'service-box-s-' + index;
                 searchDatabase.push({
                     id: box.id,
@@ -35,7 +43,7 @@ const searchDatabase = [];
             });
 
             document.querySelectorAll('.package-card').forEach((pkg, index) => {
-                let title = pkg.querySelector('h3')?.innerText || '';
+                let title = safeInnerText(pkg, 'h3') || '';
                 let text = pkg.innerText || '';
                 if (!pkg.id) pkg.id = 'package-card-s-' + index;
                 searchDatabase.push({
@@ -49,7 +57,7 @@ const searchDatabase = [];
             });
 
             document.querySelectorAll('.faq-item').forEach((faq, index) => {
-                let title = faq.querySelector('.faq-question')?.innerText || '';
+                let title = safeInnerText(faq, '.faq-question') || '';
                 let text = faq.innerText || '';
                 if (!faq.id) faq.id = 'faq-item-s-' + index;
                 searchDatabase.push({
@@ -63,7 +71,7 @@ const searchDatabase = [];
             });
 
             document.querySelectorAll('.literary-card').forEach((lit, index) => {
-                let title = lit.querySelector('h4')?.innerText || '';
+                let title = safeInnerText(lit, 'h4') || '';
                 let text = lit.innerText || '';
                 if (!lit.id) lit.id = 'literary-card-s-' + index;
                 searchDatabase.push({
@@ -381,24 +389,138 @@ const searchDatabase = [];
             }
         }
 
-        function initPoemsModule() {
-            _poemsInitialized = true;
-            buildOccasionFilters();
-            renderPoems();
+        /* ============================================================
+         *  محرك المقالات — Articles Engine
+         *  يعتمد على البيانات من ملف articles-data.js (window.articlesData)
+         * ============================================================ */
+
+        let _articlesInitialized = false;
+        let _activeCategory = 'all';
+        let _articlesDataLoaderPromise = null;
+
+        function ensureArticlesDataLoaded() {
+            if (Array.isArray(window.articlesData) && window.articlesData.length > 0) {
+                return Promise.resolve();
+            }
+
+            if (_articlesDataLoaderPromise) return _articlesDataLoaderPromise;
+
+            _articlesDataLoaderPromise = new Promise((resolve) => {
+                const existingScript = document.querySelector('script[data-articles-data="true"]');
+                if (existingScript) {
+                    const finalize = () => resolve();
+                    existingScript.addEventListener('load', finalize, { once: true });
+                    existingScript.addEventListener('error', finalize, { once: true });
+                    setTimeout(finalize, 2000);
+                    return;
+                }
+
+                const script = document.createElement('script');
+                script.src = 'articles-data.js?v=2106';
+                script.dataset.articlesData = 'true';
+                script.onload = () => resolve();
+                script.onerror = () => resolve();
+                document.head.appendChild(script);
+            });
+
+            return _articlesDataLoaderPromise;
         }
 
-        function buildCapsules() {
-            var container = document.getElementById('capsules-container');
-            if (!container || container.children.length > 0) return;
-            var capsuleData = window.capsuleData || [];
-            capsuleData.forEach(function(item) {
-                var div = document.createElement('div');
-                div.className = 'capsule-card';
-                div.innerHTML = '<div class="capsule-front"><i class="fas fa-times-circle" style="margin-left:6px;"></i>' + item.wrong + '</div>' +
-                    '<div class="capsule-back"><i class="fas fa-check-circle" style="margin-left:6px;"></i>' + item.correct + '</div>';
-                container.appendChild(div);
+        function buildArticleCategoryFilters() {
+            const data = Array.isArray(window.articlesData) ? window.articlesData : [];
+            const categories = ['all', ...new Set(data.map(a => a && a.category ? String(a.category) : '').filter(Boolean))];
+            const labels = { all: '✨ الكل' };
+            const container = document.getElementById('articles-categories-filter');
+            if (!container) return;
+            container.innerHTML = '';
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'cat-btn' + (cat === 'all' ? ' active' : '');
+                btn.textContent = labels[cat] || cat;
+                btn.onclick = () => {
+                    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    _activeCategory = cat;
+                    renderArticles();
+                };
+                container.appendChild(btn);
             });
         }
+
+        function renderArticles() {
+            const data = Array.isArray(window.articlesData) ? window.articlesData : [];
+            const grid = document.getElementById('articles-grid');
+            const searchVal = (document.getElementById('articles-search-input') && document.getElementById('articles-search-input').value || '').trim().toLowerCase();
+            if (!grid) return;
+
+            const filtered = data.filter(a => {
+                const category = a && a.category ? String(a.category) : '';
+                const title = a && a.title ? String(a.title) : '';
+                const preview = a && a.preview ? String(a.preview) : '';
+                const matchCat = _activeCategory === 'all' || category === _activeCategory;
+                const matchSearch = !searchVal ||
+                    title.toLowerCase().includes(searchVal) ||
+                    preview.toLowerCase().includes(searchVal);
+                return matchCat && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="no-poems-msg"><i class="fas fa-newspaper" style="display:block;font-size:36px;margin-bottom:15px;color:rgba(212,175,55,0.3);"></i>لا توجد مقالات تطابق بحثك</div>';
+                return;
+            }
+
+            grid.innerHTML = filtered.map(a => `
+                <div class="article-card-dynamic" onclick="openArticleModal(${a.id})">
+                    <span class="article-cat-badge">${a.category || ''}</span>
+                    <h4>${a.title || ''}</h4>
+                    <p class="article-preview">${a.preview || ''}</p>
+                    <button class="article-read-btn">اقرأ المقال كاملاً <i class="fas fa-angle-left"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function openArticleModal(id) {
+            const data = Array.isArray(window.articlesData) ? window.articlesData : [];
+            const article = data.find(a => a.id === id);
+            if (!article) return;
+            
+            // إعادة استخدام مودال القصائد للعرض أو إنشاء واحد مخصص
+            // هنا سنعرض البيانات في نفس تصميم مودال القصائد لمطابقة الرغبة في التنظيم
+            document.getElementById('pd-title').textContent = article.title;
+            document.getElementById('pd-badge').textContent = article.category;
+            document.getElementById('pd-text').innerHTML = `<div style="text-align: justify; direction: rtl; line-height: 1.8; font-weight: normal; font-size: 18px;">${article.content || ''}</div>`;
+            
+            // تغيير النص في أزرار المودال ليتناسب مع المقال
+            const orderBtn = document.querySelector('.poem-order-btn');
+            if(orderBtn) orderBtn.innerHTML = '<i class="fas fa-pen-nib"></i> ناقش هذا الموضوع';
+            
+            cinematicSection('poem-detail-view');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function initArticlesModule() {
+            const doInit = () => {
+                if (!_articlesInitialized) {
+                    _articlesInitialized = true;
+                    buildArticleCategoryFilters();
+                }
+                renderArticles();
+            };
+
+            if (Array.isArray(window.articlesData) && window.articlesData.length > 0) {
+                doInit();
+                return;
+            }
+
+            ensureArticlesDataLoaded().then(doInit);
+        }
+
+        // تحديث switchLitTab لدعم تهيئة المقالات - يعمل مع أي إصدار من الدالة
+        const _origSwitchLitTab2 = switchLitTab;
+        window.switchLitTab = function(tabName) {
+            _origSwitchLitTab2(tabName);
+            if (tabName === 'articles') initArticlesModule();
+        };
 
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
@@ -515,9 +637,34 @@ const searchDatabase = [];
             });
         }
 
+        function initPoemsModule() {
+            _poemsInitialized = true;
+            buildOccasionFilters();
+            renderPoems();
+        }
+
+        function buildCapsules() {
+            var container = document.getElementById('capsules-container');
+            if (!container || (container.children && container.children.length > 0)) return;
+            var capsuleData = window.capsuleData || [];
+            capsuleData.forEach(function(item) {
+                var div = document.createElement('div');
+                div.className = 'capsule-card';
+                div.innerHTML = '<div class="capsule-front"><i class="fas fa-times-circle" style="margin-left:6px;"></i>' + item.wrong + '</div>' +
+                    '<div class="capsule-back"><i class="fas fa-check-circle" style="margin-left:6px;"></i>' + item.correct + '</div>';
+                container.appendChild(div);
+            });
+        }
+
         // استدعاء الدالة عند تحميل الصفحة وأيضاً عند أي عملية فلترة أو تغيير صفحات
         document.addEventListener('DOMContentLoaded', () => {
             initCustomAudioPlayers();
+            // تهيئة المقالات إذا كان تبويبها نشطاً افتراضياً
+            const articlesTab = document.getElementById('lit-sub-articles');
+            if (articlesTab && articlesTab.classList.contains('active')) {
+                initArticlesModule();
+            }
+            initPoemsModule();    // تهيئة القصائد عند التحميل
         });
 
         // إيقاف جميع المقاطع والتأكد من عدم التداخل بين الملفات الصوتية والفيديو

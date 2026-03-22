@@ -1496,92 +1496,152 @@
     <!-- Media Controller Script -->
     <script src="poems-data.js?v=2105"></script>
     <script src="articles-data.js?v=2106" data-articles-data="true"></script>
+    
+    <script src="main.js?v=2106"></script>
     <script>
-        window.articlesData = [
+    (function () {
+        const fallbackArticles = [
             {
                 id: 1,
                 title: 'كيف تختار كلمات زفتك؟',
                 category: 'نصائح وأفكار',
-                preview: 'الزفة ليست مجرد إيقاع وموسيقى، بل هي توثيق للحظة العمر. نكتب لك القصيدة لتكون بصمتك الخاصة التي تروي قصة حبكما بأسلوب شعري فخم يلامس القلوب ويظل علقاً في الأذهان.',
-                content: `الزفة ليست مجرد إيقاع وموسيقى، بل هي توثيق للحظة العمر. نكتب لك القصيدة لتكون بصمتك الخاصة التي تروي قصة حبكما بأسلوب شعري فخم يلامس القلوب ويظل عالقاً في الأذهان. خلف كل إيقاع رصين، وبين ثنايا الألحان التي تملأ جنبات القاعة، تكمن حكاية لا ترويها الآلات، بل تنطق بها الكلمات. إن الزفة في جوهرها ليست احتفالاً باللحظة فحسب، بل هي "هندسة للذاكرة"، وعملية توثيق أدبية لأهم منعطف في حياة الإنسان. فالموسيقى قد تطرب الآذان، لكن الكلمة المكتوبة خصيصاً لأجل العروسين هي التي تخترق جدار الزمن لتبقى محفورة في وجدان الأجيال.
-
-الكلمة.. روح اللحن ونبضه
-إذا كانت الألحان هي الجسد، فإن القصيدة هي الروح. إن الزفة الجاهزة أو "المعلبة" قد تفي بغرض الاحتفال، لكنها تفتقد لـ "البصمة الوراثية" للعروسين؛ تفتقد لذكر ملامحهما، طموحاتهما، وخصوصية الحكاية التي جمعت بينهما. هنا تبرز أهمية صياغة القصيدة الخاصة، حيث يتحول النص الأدبي إلى مرآة تعكس نبل العائلات، وشهامة الآباء، وطهر الأمهات، في مزيج فريد يجعل من الزفة "أثيراً" يلامس السماء.
-
-بصمة خاصة في أرشيف العمر
-نحن لا نكتب مجرد أبياتٍ موزونة، بل نرسم بورتريه شعرياً لا يشبه أحداً سواه. إن تخصيص الكلمات يعني أننا نمنح الفرح "هوية"، ونحول الحفل من مجرد مناسبة اجتماعية إلى حدثٍ ثقافي وفني يتناقله الحاضرون بإعجاب. فكل اسم يُذكر، وكل صفة تُمدح، وكل دعاء يُصاغ بقافية رصينة، هو خيط من نور يُنسج في ثوب الذاكرة، ليبقى العروسان حين يستمعان لزفتهما بعد سنوات، يشعران بأن تلك اللحظة لم تمت، بل بقيت حية نابضة في سطور القصيد.
-
-"إن الألحان قد تتشابه، والإيقاعات قد تتكرر، لكن القوافي التي تُكتب بمداد الحب والخصوصية هي التي تصنع الفرق بين فرحٍ يمر، وفرحٍ يخلد."
-
-الخاتمة: الفن في خدمة الشعور
-في "أثير ساوند"، نؤمن بأن كل عروس هي ملكة في قصيدة، وكل عريس هو بطل في ملحمة. لذا، فإن كتابة القصيدة ليست مجرد ترتيب للكلمات، بل هي استنطاق لمشاعر الأهل، وتجسيد لفرحة الأصدقاء، لتكون النتيجة تحفة فنية تتجاوز حدود الزمن، وتصبح الوثيقة الأغلى في "ألبوم العمر"..`
+                preview: 'الزفة ليست مجرد إيقاع، بل توثيق للحظة العمر بكلمات مخصصة.',
+                content: 'الزفة ليست مجرد إيقاع، بل توثيق للحظة العمر بكلمات مخصصة.'
             },
             {
                 id: 2,
                 title: 'أخطاء شائعة في التعليق الصوتي',
                 category: 'فنون الصوت',
-                preview: 'التعليق الصوتي هو فن إيصال المعنى، وأكثر ما يفسد هذا الفن هو الأخطاء اللغوية والأدائية التي قد تخرج المستمع من حالة الاندماج مع المحتوى.',
-                content: `التعليق الصوتي هو فن إيصال المعنى، وأكثر ما يفسد هذا الفن هو الأخطاء اللغوية والأدائية. من أهم هذه الأخطاء: 1. الأخطاء اللغوية والنحوية (الفخ الأكبر)
-بما أن اللغة هي المادة الخام للمعلق، فإن أي خلل فيها يُفقد العمل مصداقيته، خاصة في المحتوى التعليمي أو الوثائقي.
-
-تجاهل التشكيل (الحركات): الوقوف الخاطئ على الكلمات أو إغفال حركات الإعراب (خاصة أواخر الكلمات) يغير المعنى تماماً.
-
-مخارج الحروف: الخلط بين الحروف المتشابهة (مثل الضاد والظاء، أو الثاء والسين) يمنح انطباعاً بعدم الاحترافية.
-
-القراءة الآلية: غياب "روح النص"؛ حيث يقرأ المعلق الكلمات كأنه آلة، دون مراعاة لعلامات الترقيم أو الوقفات التعبيرية التي تعطي للنص أبعاده الشعورية.
-
-2. الرتابة في الأداء (Monotony)
-الوقوع في إيقاع واحد طوال النص هو "قاتل الانتباه".
-
-النغمة المتكررة: البدء والانتهاء بنفس النبرة في كل جملة يجعل المستمع يفقد التركيز سريعاً.
-
-عدم التمييز بين القوالب: أداء الإعلان التجاري السريع بنفس نبرة الوثائقي الهادئة أو القصيدة الوجدانية خطأ فادح؛ فلكل مقامٍ مقال (وصوت).
-
-3. الأخطاء التقنية وبيئة التسجيل
-حتى الأداء العبقري قد يفسده ضعف الهندسة الصوتية.
-
-ضجيج الخلفية والصدى: التسجيل في غرف غير معالجة صوتياً يؤدي لظهور "صدى" (Reverb) يشتت المستمع.
-
-أصوات الفم والنفس: عدم استخدام "الفلتر" (Pop Filter) أو الاقتراب الزائد من الميكروفون يؤدي لظهور أصوات النفس المزعجة أو فرقعات الحروف الانفجارية (مثل الباء والتاء).
-
-تفاوت المستويات: تسجيل أجزاء من النص بمستويات صوتية مختلفة، مما يجعل الصوت يرتفع وينخفض بشكل غير مريح.
-
-4. غياب التحضير الذهني
-التعليق الصوتي يبدأ بالعقل قبل الحنجرة.
-
-عدم فهم النص: التسجيل دون قراءة النص مسبقاً وفهم رسالته والجمهور المستهدف يؤدي إلى أداء "خارج السياق".
-
-المبالغة في التمثيل (Overacting): محاولة تزييف الصوت أو جعل النبرة "عميقة" بشكل مصطنع ينفر المستمع؛ فالعفوية والصدق هما مفتاح الوصول للقلب.
-
-نصيحة من خبير:
-"المعلق المحترف هو من يقرأ المعنى لا الكلمات، ومن يجعل صوته خادماً للفكرة لا مستعرضاً لإمكانياته الحنجرية."
-
-في "أثير ساوند"، نحرص دائماً على تجاوز هذه الأخطاء من خلال التدقيق اللغوي الصارم وتوفير بيئة تسجيل احترافية تضمن وصول رسالتكم بأعلى جودة..`
+                preview: 'تعرف على أبرز أخطاء الأداء واللغة والتسجيل وكيف تتجنبها.',
+                content: 'تعرف على أبرز أخطاء الأداء واللغة والتسجيل وكيف تتجنبها.'
             },
             {
                 id: 3,
                 title: 'جماليات القصيدة المغناة',
                 category: 'دراسات أدبية',
-                preview: 'كيف تتحول الكلمة الصماء إلى نغمة خالدة تأسر الأرواح؟ إن سر القصيدة المغناة يكمن في التزاوج التام بين عمق المعنى وعذوبة اللحن.',
-                content: `تراتيل الأثير: في رحاب القصيدة المغناة
-إن القصيدة في أصلها "موسيقى مكتوبة"، يسكنُ في تضاعيفها جرسٌ خفيّ وأوزانٌ عروضية تتوق للتحرر. وحين تلامسها أناملُ الملحن المبدع، ويبثُّ فيها المؤدي من روحه، فإنها تخرج من أسر "القراءة" إلى رحابة "الاستماع"، لتصبح وثيقةً شعورية عابرة للزمن، تسكنُ الذاكرة وتأبى النسيان.
-
-الحرفُ حين يرتدي ثوب النغم
-تبدأ جمالية القصيدة المغناة من تلك اللحظة التي يفكُّ فيها اللحنُ شيفرة المعنى؛ فالملحن لا يضع نغماتٍ فحسب، بل هو "مترجمٌ عاطفي" يعيد صياغة الصور الشعرية عبر المقامات الموسيقية. فحين يكون النصُّ وجدانياً، تتهادى الألحان بوقارٍ يناسبُ لوعة الشوق، وحين يكون حماسياً أو فخرياً، تثورُ الإيقاعات لتشعل في الكلمات لهب الحضور. إن اللحن هنا ليس زينةً مضافة، بل هو "الضوء" الذي يسلطه الفن على جواهر المعاني الخفية.
-
-عبقرية السبك وتآلف الأوزان
-تتجلى فرادة هذا الفن في التناغم بين الروي والقافية وبين الإيقاع الموسيقي. فالقصيدة الموزونة على بحور الشعر العربي (كـالوافر، والبسيط، والكامل) تمتلك إيقاعاً فطرياً يسهل على الأذن العربية استقباله. وعندما تُغنى، يتحول "البحر الشعري" إلى نهرٍ جارٍ من الأنغام، حيث تخدم الوقفات الموسيقية "القفلات الشعرية"، مما يخلق حالة من "النشوة الجمالية" التي لا يحققها النص المقروء منفرداً.
-
-خلودُ القصيدة في وعي الجمهور
-كم من قصائد خلدت بفضل "الغناء" أكثر مما خلدت في بطون الدواوين! إن الغناء يمنح القصيدة "أجنحة" لتصل إلى عامة الناس وخاصتهم، محطمةً حواجز اللغة النخبوية الصعبة. فالقصيدة المغناة هي التي تجعل من "الفصحى" لغةً قريبة من القلب، ومن "النبطي والحميني" تراثاً نابضاً بالحياة، فهي الجسر الذي يربط أصالة الموروث بحداثة الأداء.
-
-"إن الشعر هو روحُ الوجود، والموسيقى هي لغته العالمية؛ وحين يجتمعان، فإننا لا نستمع إلى أغنية، بل نشهدُ ميلاد لحظةٍ تاريخية في عمر الجمال."
-
-الخاتمة: الفن كرسالة خالدة
-في عالم الإنتاج الصوتي الحديث، تظل القصيدة المغناة هي "التاج" الذي يزين رأس الإبداع. إنها تجسيدٌ حيّ لقوة الكلمة حين تتحالف مع الفن، لتصنع أثراً يبقى نابضاً في "أثير" القلوب، موثقاً لمشاعر الإنسان وأفراحه وأشجانه بمدادٍ من نور وألحانٍ من سحر..`
+                preview: 'حين تتلاقى قوة الكلمة مع سحر اللحن تولد قصيدة خالدة.',
+                content: 'حين تتلاقى قوة الكلمة مع سحر اللحن تولد قصيدة خالدة.'
             }
         ];
+
+        function normalizeArticle(item, idx) {
+            const safe = item || {};
+            const idNum = Number(safe.id);
+            return {
+                id: Number.isFinite(idNum) && idNum > 0 ? idNum : (idx + 1),
+                title: String(safe.title || '').trim(),
+                category: String(safe.category || '').trim(),
+                preview: String(safe.preview || '').trim(),
+                content: String(safe.content || '').trim()
+            };
+        }
+
+        function getArticlesDataSafe() {
+            const source = Array.isArray(window.articlesData) ? window.articlesData : [];
+            const cleaned = source.map(normalizeArticle).filter(a => a.title && a.category);
+            if (cleaned.length > 0) return cleaned;
+            const fallbackClean = fallbackArticles.map(normalizeArticle);
+            window.articlesData = fallbackClean;
+            return fallbackClean;
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function renderArticlesFallback() {
+            const grid = document.getElementById('articles-grid');
+            const filterWrap = document.getElementById('articles-categories-filter');
+            const searchInput = document.getElementById('articles-search-input');
+            if (!grid || !filterWrap || !searchInput) return;
+
+            const data = getArticlesDataSafe();
+            const query = (searchInput.value || '').trim().toLowerCase();
+            const activeCategory = window.__articlesActiveCategory || 'all';
+
+            const categories = ['all'];
+            data.forEach(a => {
+                if (categories.indexOf(a.category) === -1) categories.push(a.category);
+            });
+
+            filterWrap.innerHTML = categories.map(cat => {
+                const label = cat === 'all' ? '✨ الكل' : escapeHtml(cat);
+                const activeClass = cat === activeCategory ? ' active' : '';
+                return '<button class="cat-btn' + activeClass + '" data-cat="' + escapeHtml(cat) + '">' + label + '</button>';
+            }).join('');
+
+            Array.prototype.forEach.call(filterWrap.querySelectorAll('.cat-btn'), btn => {
+                btn.addEventListener('click', function () {
+                    window.__articlesActiveCategory = this.getAttribute('data-cat') || 'all';
+                    renderArticlesFallback();
+                });
+            });
+
+            const filtered = data.filter(a => {
+                const matchCat = activeCategory === 'all' || a.category === activeCategory;
+                const matchSearch = !query ||
+                    a.title.toLowerCase().indexOf(query) !== -1 ||
+                    a.preview.toLowerCase().indexOf(query) !== -1;
+                return matchCat && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="no-poems-msg"><i class="fas fa-newspaper" style="display:block;font-size:36px;margin-bottom:15px;color:rgba(212,175,55,0.3);"></i>لا توجد مقالات تطابق بحثك</div>';
+                return;
+            }
+
+            grid.innerHTML = filtered.map(a => {
+                return '<div class="article-card-dynamic" data-article-id="' + a.id + '">' +
+                    '<span class="article-cat-badge">' + escapeHtml(a.category) + '</span>' +
+                    '<h4>' + escapeHtml(a.title) + '</h4>' +
+                    '<p class="article-preview">' + escapeHtml(a.preview) + '</p>' +
+                    '<button class="article-read-btn">اقرأ المقال كاملاً <i class="fas fa-angle-left"></i></button>' +
+                '</div>';
+            }).join('');
+
+            Array.prototype.forEach.call(grid.querySelectorAll('.article-card-dynamic'), card => {
+                card.addEventListener('click', function () {
+                    const id = Number(this.getAttribute('data-article-id'));
+                    if (typeof window.openArticleModal === 'function') {
+                        window.openArticleModal(id);
+                    }
+                });
+            });
+        }
+
+        function bootArticlesFallback() {
+            const searchInput = document.getElementById('articles-search-input');
+            if (searchInput && !searchInput.dataset.fallbackBound) {
+                searchInput.dataset.fallbackBound = '1';
+                searchInput.addEventListener('input', renderArticlesFallback);
+            }
+
+            const articlesTabBtn = document.getElementById('lit-tab-articles');
+            if (articlesTabBtn && !articlesTabBtn.dataset.fallbackBound) {
+                articlesTabBtn.dataset.fallbackBound = '1';
+                articlesTabBtn.addEventListener('click', function () {
+                    setTimeout(renderArticlesFallback, 0);
+                });
+            }
+
+            renderArticlesFallback();
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(bootArticlesFallback, 0);
+        });
+
+        window.addEventListener('load', function () {
+            setTimeout(bootArticlesFallback, 100);
+        });
+
+        window.forceRenderArticles = renderArticlesFallback;
+    })();
     </script>
-    <script src="main.js?v=2106"></script>
 </body>
 </html>
