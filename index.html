@@ -23,7 +23,37 @@
     <link rel="stylesheet" href="style.css">
 
     <script>
-        let statsChartInstance = null;
+                let statsChartInstance = null;
+        const statsChartLabels = ['أعمال فنية منتجة', 'مدارس ومؤسسات', 'أوبريت وزفة حصرية', 'سنوات التميز'];
+        const statsChartValues = [300, 100, 50, 25];
+
+        function updateChartInsight(index) {
+            const insight = document.getElementById('chartInsight');
+            if (!insight || !statsChartInstance || index == null || index < 0) return;
+            const label = statsChartInstance.data.labels[index];
+            const value = statsChartInstance.data.datasets[0].data[index];
+            insight.innerHTML = `<i class="fas fa-chart-line"></i> ${label}: <strong>+${value}</strong>`;
+        }
+
+        function setStatsChartType(type, buttonElement) {
+            if (!statsChartInstance) return;
+
+            const borderColor = statsChartInstance.data.datasets[0].borderColor || '#d4af37';
+            const isCircular = type === 'doughnut' || type === 'pie';
+            statsChartInstance.config.type = type;
+
+            statsChartInstance.options.plugins.legend.display = isCircular;
+            statsChartInstance.options.scales = isCircular ? {} : {
+                y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#ccc', font: { family: 'Cairo' } } },
+                x: { grid: { display: false }, ticks: { color: borderColor, font: { family: 'Cairo', weight: 'bold', size: 14 } } }
+            };
+
+            statsChartInstance.update();
+
+            document.querySelectorAll('.chart-type-btn').forEach(btn => btn.classList.remove('active'));
+            if (buttonElement) buttonElement.classList.add('active');
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             const ctx = document.getElementById('statsChart');
             if(ctx) {
@@ -34,10 +64,10 @@
                 statsChartInstance = new Chart(ctx.getContext('2d'), {
                     type: 'bar',
                     data: {
-                        labels: ['أعمال فنية منتجة', 'مدارس ومؤسسات', 'أوبريت وزفة حصرية', 'سنوات التميز'],
+                        labels: statsChartLabels,
                         datasets: [{
                             label: 'إحصائيات أثير ساوند',
-                            data: [300, 100, 50, 3],
+                            data: statsChartValues,
                             backgroundColor: bgColor,
                             borderColor: brColor,
                             borderWidth: 2,
@@ -48,10 +78,25 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
+                        interaction: { mode: 'nearest', intersect: true },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: (ctx) => ` ${ctx.label}: +${ctx.raw}`
+                                }
+                            }
+                        },
                         scales: {
-                            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#ccc', font: {family: 'Cairo'} } },
-                            x: { grid: { display: false }, ticks: { color: brColor, font: {family: 'Cairo', weight: 'bold', size: 14} } }
+                            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#ccc', font: { family: 'Cairo' } } },
+                            x: { grid: { display: false }, ticks: { color: brColor, font: { family: 'Cairo', weight: 'bold', size: 14 } } }
+                        },
+                        onHover: (event, elements) => {
+                            const target = event?.native?.target;
+                            if (target) target.style.cursor = elements.length ? 'pointer' : 'default';
+                        },
+                        onClick: (event, elements) => {
+                            if (elements.length > 0) updateChartInsight(elements[0].index);
                         },
                         animation: { duration: 2000, easing: 'easeOutQuart' }
                     }
@@ -447,7 +492,7 @@
             const navMap = {
                 'home-page':'nav-home', 'works-page':'nav-works', 'services-page':'nav-services', 'contact-us-page':'nav-contact',
                 'about-page':'nav-about', 'literary-page':'nav-literary', 'service-detail-view':'nav-home',
-                'privacy-page':'nav-privacy', 'faq-page':'nav-faq'
+                'privacy-page':'nav-privacy', 'faq-page':'nav-faq', 'community-page':'nav-community'
             };
             if(navMap[id]) {
                 if(document.getElementById(navMap[id])) document.getElementById(navMap[id]).classList.add('active-link');
@@ -498,7 +543,7 @@
             }, 500);
         }
 
-        function updateChartTheme(theme) {
+                function updateChartTheme(theme) {
             if (!statsChartInstance) return;
             const colors = {
                 'artistic-theme': { bg: 'rgba(123, 150, 139, 0.7)', br: '#7B968B' },
@@ -508,7 +553,11 @@
             const c = colors[theme] || colors['dark-theme'];
             statsChartInstance.data.datasets[0].backgroundColor = c.bg;
             statsChartInstance.data.datasets[0].borderColor = c.br;
-            statsChartInstance.options.scales.x.ticks.color = c.br;
+
+            if (statsChartInstance.options.scales && statsChartInstance.options.scales.x && statsChartInstance.options.scales.x.ticks) {
+                statsChartInstance.options.scales.x.ticks.color = c.br;
+            }
+
             statsChartInstance.update();
         }
 
@@ -542,6 +591,35 @@
             
             updateThemeIcon(savedTheme);
         });
+
+
+        // ===== عداد الزوار =====
+        (function initVisitorCounter() {
+            var KEY = 'atheer_visitor_count';
+            var count = parseInt(localStorage.getItem(KEY) || '4200', 10);
+            var SESSION_KEY = 'atheer_counted';
+            if (!sessionStorage.getItem(SESSION_KEY)) {
+                count += 1;
+                localStorage.setItem(KEY, count);
+                sessionStorage.setItem(SESSION_KEY, '1');
+            }
+            function animateCount(el, target) {
+                var start = Math.max(0, target - 50);
+                el.textContent = start.toLocaleString('ar-EG');
+                var step = function() {
+                    if (start < target) {
+                        start++;
+                        el.textContent = start.toLocaleString('ar-EG');
+                        requestAnimationFrame(step);
+                    }
+                };
+                requestAnimationFrame(step);
+            }
+            window.addEventListener('DOMContentLoaded', function() {
+                var el = document.getElementById('visitor-count-number');
+                if (el) animateCount(el, count);
+            });
+        })();
 
         // Announcement Bar Logic
         let currentAnnounce = 0;
@@ -650,6 +728,39 @@
         <i class="fas fa-times close-announcement" onclick="document.getElementById('announcement-bar').style.display='none'"></i>
     </div>
 
+    <!-- ===== بانر مسابقة أثير الأدبية ===== -->
+    <div class="competition-banner" id="competition-banner" onclick="cinematicSection('community-page')" role="button" tabindex="0" aria-label="مسابقة أثير ساوند الأدبية">
+        <div class="comp-banner-inner">
+            <div class="comp-sparkles">
+                <span class="sparkle s1">✦</span>
+                <span class="sparkle s2">★</span>
+                <span class="sparkle s3">✦</span>
+                <span class="sparkle s4">⭐</span>
+                <span class="sparkle s5">✦</span>
+                <span class="sparkle s6">★</span>
+            </div>
+            <div class="comp-trophy"><i class="fas fa-trophy"></i></div>
+            <div class="comp-text-block">
+                <span class="comp-exclusive-tag">حصرياً</span>
+                <h3 class="comp-main-title">مسابقة أثير ساوند الأدبية</h3>
+                <p class="comp-main-sub">شارك موهبتك الأدبية وانضم إلى مجتمع أثير</p>
+            </div>
+            <div class="comp-cta-area">
+                <span class="comp-cta-pulse">اكتشف الآن <i class="fas fa-arrow-left"></i></span>
+            </div>
+        </div>
+        <div class="comp-glow-bar"></div>
+    </div>
+
+    <!-- ===== عداد الزوار ===== -->
+    <div class="visitor-counter-widget" id="visitor-counter-widget" title="إجمالي زوار الموقع">
+        <div class="vc-icon"><i class="fas fa-users"></i></div>
+        <div class="vc-info">
+            <span class="vc-label">زوار الموقع</span>
+            <span class="vc-number" id="visitor-count-number">0</span>
+        </div>
+    </div>
+
 
 
     <nav class="nav">
@@ -657,6 +768,7 @@
         <a onclick="cinematicSection('works-page')" id="nav-works">معرض الأعمال</a>
         <a onclick="cinematicSection('services-page')" id="nav-services">خدماتنا</a>
         <a onclick="cinematicSection('literary-page')" id="nav-literary">الركن الأدبي</a>
+        <a onclick="cinematicSection('community-page')" id="nav-community" class="nav-community-link">مجتمع أثير <i class="fas fa-users" style="font-size:12px;margin-right:3px;"></i></a>
         <a onclick="cinematicSection('about-page')" id="nav-about">من نحن</a>
         <a onclick="openSearchModal()" style="padding: 6px 15px; font-size: 18px; cursor: pointer;" title="بحث شامل"><i class="fas fa-search"></i></a>
         <a id="theme-toggle" onclick="toggleTheme()" style="padding: 6px 15px; font-size: 18px;"><i class="fas fa-moon"></i></a>
@@ -672,7 +784,7 @@
     <div class="container main-layout-container" id="main-layout-container">
         
         <!-- محتوى الصفحة -->
-                <aside class="side-menu side-menu-right" aria-label="sidebar menu">
+        <aside class="side-menu side-menu-right" aria-label="sidebar menu">
             <h3 class="side-menu-title">روابط سريعة</h3>
             <div class="side-menu-list">
                 <a onclick="cinematicSection('home-page')" id="side-home"><i class="fas fa-home"></i> الرئيسية</a>
@@ -684,9 +796,28 @@
                 <a onclick="cinematicSection('privacy-page')" id="side-privacy"><i class="fas fa-shield-alt"></i> سياسة الخصوصية</a>
                 <a onclick="openSearchModal()" id="side-search"><i class="fas fa-search"></i> بحث شامل</a>
             </div>
-        </aside>
 
-        <div class="page-content-wrapper" id="main-container">
+            <div class="side-books" aria-label="إصدارات أثير">
+                <h4 class="side-books-title"><i class="fas fa-book-open"></i> إصدارات أثير</h4>
+                <div class="side-books-grid">
+                    <a class="side-book-card" href="javascript:void(0)" onclick="orderBook('خمسون لغزا شعريا')">
+                        <img src="50_cover_opt.webp" loading="lazy" alt="كتاب خمسون لغزاً شعرياً">
+                        <div class="side-book-info">
+                            <strong>خمسون لغزاً شعرياً</strong>
+                            <span>$1</span>
+                        </div>
+                    </a>
+                    <a class="side-book-card" href="javascript:void(0)" onclick="orderBook('نعم أستطيع بقيمة 1.99 دولار')">
+                        <img src="yes_opt.webp" loading="lazy" alt="كتاب نعم أستطيع">
+                        <div class="side-book-info">
+                            <strong>نعم أستطيع</strong>
+                            <span>$1.99</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </aside>
+<div class="page-content-wrapper" id="main-container">
         <div id="home-page" class="page-section active">
             <div class="home-hero">
                 <h2>أثير ساوند للإنتاج الفني</h2>
@@ -773,7 +904,7 @@
                     </div>
                 </div>
                 
-                <div style="flex: 1.8; min-width: 400px; display: flex; justify-content: center; gap: 30px; position: relative; z-index: 2; flex-wrap: wrap; padding-top: 20px;">
+                <div style="flex: 1.8; min-width: 400px; display: none; justify-content: center; gap: 30px; position: relative; z-index: 2; flex-wrap: wrap; padding-top: 20px;">
                     <!-- المؤثرات الخلفية للكتب -->
                     <div style="position: absolute; width: 350px; height: 350px; background: radial-gradient(circle, var(--gold-transparent) 0%, transparent 60%); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;"></div>
                     
@@ -798,10 +929,12 @@
                 <div class="stat-box"><span class="stat-val counter-anim" data-target="300" data-prefix="+">0</span><span class="stat-tit">عمل فني منتج</span></div>
                 <div class="stat-box"><span class="stat-val counter-anim" data-target="100" data-prefix="+">0</span><span class="stat-tit">مدرسة ومؤسسة تعليمية</span></div>
                 <div class="stat-box"><span class="stat-val counter-anim" data-target="50" data-prefix="+">0</span><span class="stat-tit">أوبريت وزفة حصرية</span></div>
-                <div class="stat-box"><span class="stat-val counter-anim" data-target="3" data-prefix="+">0</span><span class="stat-tit">سنوات من التميز</span></div>
+                <div class="stat-box"><span class="stat-val counter-anim" data-target="25" data-prefix="+">0</span><span class="stat-tit">سنوات من التميز</span></div>
             </div>
             
+            <div class="chart-controls"><button class="chart-type-btn active" onclick="setStatsChartType('bar', this)">عمودي</button><button class="chart-type-btn" onclick="setStatsChartType('line', this)">خطي</button><button class="chart-type-btn" onclick="setStatsChartType('doughnut', this)">دائري</button></div>
             <div class="chart-wrapper"><canvas id="statsChart" height="250"></canvas></div>
+            <div class="chart-insight" id="chartInsight"><i class="fas fa-hand-pointer"></i> اضغط على أي عمود لمعرفة القيمة التفصيلية</div>
 
             <div class="section-title-wrapper" id="partners-section"><h2 class="section-title-frame">آراء شركاء النجاح</h2></div>
             
@@ -1164,6 +1297,92 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+
+
+        <div id="community-page" class="page-section">
+            <div class="section-title-wrapper" style="margin-top: 10px;"><h2 class="section-title-frame">مجتمع أثير ساوند</h2></div>
+            <div style="text-align: center; max-width: 900px; margin: 0 auto 30px; color: #aaa; font-size: 16px; line-height: 1.9;">
+                <p>مجتمعنا الأدبي الرائد.. حيث تلتقي الموهبة بالإتقان، وتسطع نجوم الكلمة في سماء أثير ساوند.</p>
+            </div>
+
+            <!-- بطاقة المسابقة الرئيسية -->
+            <div class="community-contest-card">
+                <div class="cc-header">
+                    <div class="cc-icon-wrap"><i class="fas fa-trophy"></i></div>
+                    <div>
+                        <h3 class="cc-title">مسابقة أثير ساوند الأدبية</h3>
+                        <p class="cc-tag">مسابقة حصرية لأفضل القصائد والنصوص الأدبية</p>
+                    </div>
+                </div>
+                <div class="cc-body">
+                    <div class="cc-details-grid">
+                        <div class="cc-detail-item">
+                            <i class="fas fa-pen-nib cc-di-icon"></i>
+                            <div>
+                                <strong>الفئات المقبولة</strong>
+                                <span>القصيدة العمودية، الشعر الحر، النثر الأدبي</span>
+                            </div>
+                        </div>
+                        <div class="cc-detail-item">
+                            <i class="fas fa-medal cc-di-icon"></i>
+                            <div>
+                                <strong>الجوائز</strong>
+                                <span>إنتاج صوتي احترافي لأفضل الأعمال الفائزة</span>
+                            </div>
+                        </div>
+                        <div class="cc-detail-item">
+                            <i class="fas fa-calendar-alt cc-di-icon"></i>
+                            <div>
+                                <strong>موعد المشاركة</strong>
+                                <span>مفتوح طوال الموسم الأدبي 2026</span>
+                            </div>
+                        </div>
+                        <div class="cc-detail-item">
+                            <i class="fas fa-users cc-di-icon"></i>
+                            <div>
+                                <strong>المشاركون</strong>
+                                <span>مفتوح لجميع المبدعين العرب</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button class="cc-participate-btn" onclick="window.open('https://wa.me/967770080131?text=' + encodeURIComponent('السلام عليكم، أرغب في المشاركة في مسابقة أثير ساوند الأدبية'), '_blank')">
+                            <i class="fab fa-whatsapp"></i> شارك الآن عبر واتساب
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ميزات المجتمع -->
+            <div class="community-features">
+                <div class="comm-feature-card">
+                    <i class="fas fa-feather-pointed"></i>
+                    <h4>محتوى أدبي حصري</h4>
+                    <p>قصائد وتحليلات أدبية ودروس لغوية يقدمها نخبة الأكاديميين</p>
+                </div>
+                <div class="comm-feature-card">
+                    <i class="fas fa-microphone-alt"></i>
+                    <h4>جلسات صوتية مباشرة</h4>
+                    <p>جلسات قراءة وتسجيل صوتي تفاعلية مع خبراء أثير ساوند</p>
+                </div>
+                <div class="comm-feature-card">
+                    <i class="fas fa-star"></i>
+                    <h4>إبراز المواهب</h4>
+                    <p>نبرز موهبتك على منصات أثير ساوند لتصل لآلاف المتابعين</p>
+                </div>
+            </div>
+
+            <!-- روابط الانضمام -->
+            <div class="community-join-section">
+                <h3><i class="fas fa-hand-sparkles" style="margin-left: 10px;"></i>انضم إلى مجتمعنا الأدبي</h3>
+                <p>كن جزءاً من أكبر تجمع أدبي عربي متخصص في الإنتاج الصوتي الأدبي. تابعنا وتفاعل مع إبداعات المجتمع.</p>
+                <div class="comm-social-row">
+                    <a href="https://t.me/atheersound" target="_blank" class="comm-social-btn telegram"><i class="fab fa-telegram-plane"></i> تليجرام</a>
+                    <a href="https://www.youtube.com/@AtheerSound" target="_blank" class="comm-social-btn youtube"><i class="fab fa-youtube"></i> يوتيوب</a>
+                    <a href="https://wa.me/967770080131" target="_blank" class="comm-social-btn whatsapp"><i class="fab fa-whatsapp"></i> واتساب</a>
+                </div>
             </div>
         </div>
 
@@ -1683,6 +1902,9 @@
     </script>
 </body>
 </html>
+
+
+
 
 
 
