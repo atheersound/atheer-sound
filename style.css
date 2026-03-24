@@ -435,57 +435,67 @@
         .close-article:hover, .close-inspire:hover, .close-video:hover { color: #ff4d4d; }
 
         .main-footer { background: #080808; padding: 80px 20px 0; border-top: 2px solid var(--gold); margin-top: 80px; position: relative; z-index: 2; }
+/* ============================================================ */
+/* === تصميم الفوتر المطور (Atheer Footer) ==================== */
+/* ============================================================ */
+.atheer-footer { background: linear-gradient(180deg, #0d0d0d 0%, #030303 100%); border-top: 2px solid var(--gold); position: relative; z-index: 10; margin-top: 80px; font-family: 'Cairo', sans-serif; direction: rtl; }
+.atheer-footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, #ffe066, transparent); opacity: 0.5; }
+.af-container { max-width: 1250px; margin: 0 auto; padding: 70px 25px 40px; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; }
 
-        /* ====== Footer Redesign ====== */
-        .footer-wave { line-height: 0; margin-bottom: -2px; display: none; }
-        .footer-inner { max-width: 1300px; margin: auto; display: grid; grid-template-columns: 2fr 1.5fr 1fr 1.5fr; gap: 40px; padding: 60px 20px 50px; }
-        @media (max-width: 1100px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 600px)  { .footer-inner { grid-template-columns: 1fr; gap: 30px; padding: 40px 20px; } }
+.af-brand { display: flex; flex-direction: column; gap: 8px; }
+.af-logo-ar { font-size: 40px; font-weight: 900; color: var(--gold); line-height: 1; text-shadow: 0 0 20px rgba(212,175,55,0.3); letter-spacing: 1px; }
+.af-logo-en { font-size: 13px; letter-spacing: 5px; color: #888; font-weight: bold; margin-top: 5px; }
+.af-desc { color: #aaa; font-size: 14.5px; line-height: 1.9; margin-top: 15px; margin-bottom: 25px; max-width: 320px; }
+.af-socials { display: flex; gap: 10px; flex-wrap: wrap; }
+.af-soc-btn { width: 42px; height: 42px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); color: #aaa; display: flex; align-items: center; justify-content: center; font-size: 18px; text-decoration: none; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.af-soc-btn:hover { background: var(--gold); color: #000; transform: translateY(-5px); box-shadow: 0 8px 20px rgba(212,175,55,0.3); border-color: var(--gold); }
 
-        .footer-logo-text { display: flex; flex-direction: column; margin-bottom: 18px; }
-        .footer-logo-ar { font-size: 32px; font-weight: 900; color: var(--gold); line-height: 1; letter-spacing: 2px; text-shadow: 0 0 20px rgba(212,175,55,0.4); }
-        .footer-logo-en { font-size: 11px; letter-spacing: 6px; color: #555; font-weight: bold; margin-top: 4px; }
-        .footer-tagline { color: #666; font-size: 14px; line-height: 1.9; margin-bottom: 25px; max-width: 280px; }
-        .footer-social { display: flex; gap: 10px; flex-wrap: wrap; }
-        .fsoc-btn { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: 0.3s; border: 1px solid #222; color: #888; background: #111; text-decoration: none; }
-        .fsoc-btn:hover { transform: translateY(-4px); }
-        .fsoc-wa:hover  { background: #25D366; color: #fff; border-color: #25D366; box-shadow: 0 5px 15px rgba(37,211,102,0.4); }
-        .fsoc-wa2:hover { background: #128C7E; color: #fff; border-color: #128C7E; box-shadow: 0 5px 15px rgba(18,140,126,0.4); }
-        .fsoc-yt:hover  { background: #FF0000; color: #fff; border-color: #FF0000; box-shadow: 0 5px 15px rgba(255,0,0,0.4); }
-        .fsoc-tg:hover  { background: #0088cc; color: #fff; border-color: #0088cc; box-shadow: 0 5px 15px rgba(0,136,204,0.4); }
-        .fsoc-mail:hover{ background: #EA4335; color: #fff; border-color: #EA4335; box-shadow: 0 5px 15px rgba(234,67,53,0.4); }
+.af-title { color: #fff; font-size: 18px; font-weight: 900; margin: 0 0 25px 0; display: flex; align-items: center; gap: 10px; }
+.af-title i { color: var(--gold); font-size: 16px; }
+.af-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.af-links li { color: #aaa; font-size: 14.5px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.af-links li i { color: rgba(212,175,55,0.5); font-size: 12px; transition: 0.3s; }
+.af-links li:hover { color: var(--gold); transform: translateX(-6px); }
+.af-links li:hover i { color: var(--gold); transform: scale(1.2); }
 
-        .footer-col-title { color: var(--gold); font-size: 15px; font-weight: 900; margin: 0 0 20px 0; padding-bottom: 10px; border-bottom: 1px solid rgba(212,175,55,0.15); display: flex; align-items: center; gap: 8px; }
-        .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-        .footer-links li { color: #666; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-        .footer-links li i { color: var(--gold); font-size: 11px; }
-        .footer-links li:hover { color: var(--gold); transform: translateX(-5px); }
+.af-contact-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.1); border-radius: 14px; padding: 12px 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; cursor: pointer; transition: 0.3s; }
+.af-contact-box:hover { background: rgba(212,175,55,0.05); border-color: rgba(212,175,55,0.3); transform: translateX(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.af-c-icon { width: 38px; height: 38px; border-radius: 10px; background: rgba(212,175,55,0.1); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.af-c-text { display: flex; flex-direction: column; gap: 2px; }
+.af-c-country { color: #fff; font-size: 14px; font-weight: bold; }
+.af-c-phone { color: var(--gold); font-size: 14px; font-weight: bold; font-family: monospace; direction: ltr; letter-spacing: 1px; }
 
-        .footer-contact-item { display: flex; align-items: center; gap: 15px; padding: 12px 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.08); border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: 0.3s; }
-        .footer-contact-item:hover { background: rgba(212,175,55,0.06); border-color: rgba(212,175,55,0.25); transform: translateX(-3px); }
-        .footer-flag-wrap { flex-shrink: 0; }
-        .footer-country { display: block; color: var(--gold); font-size: 13px; font-weight: 900; }
-        .footer-phone { display: block; color: #888; font-size: 15px; font-weight: bold; direction: ltr; }
-        .footer-email-btn { display: flex; align-items: center; padding: 10px 15px; background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.15); border-radius: 10px; color: #888; font-size: 13px; font-weight: bold; text-decoration: none; transition: 0.3s; margin-top: 5px; }
-        .footer-email-btn:hover { background: rgba(212,175,55,0.1); color: var(--gold); border-color: var(--gold); }
+.af-email-box { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.1); padding: 14px 16px; border-radius: 14px; color: #aaa; text-decoration: none; font-size: 14px; font-weight: bold; transition: 0.3s; margin-top: 15px; }
+.af-email-box:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.05); }
+.af-email-box i { color: var(--gold); font-size: 16px; }
 
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.04); margin-top: 20px; }
-        .footer-bottom-inner { max-width: 1300px; margin: auto; padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .footer-copy { color: #3a3a3a; font-size: 13px; }
-        .footer-made { color: #3a3a3a; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+.af-bottom { border-top: 1px solid rgba(255,255,255,0.05); background: #000; padding: 25px 20px; }
+.af-bottom-inner { max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+.af-copy { color: #777; font-size: 13.5px; font-weight: bold; }
+.af-made { color: #777; font-size: 13.5px; font-weight: bold; display: flex; align-items: center; gap: 6px; }
+.af-made i { color: #c0392b; animation: heart-beat 1.5s infinite; }
 
-        /* Navy theme footer */
-        .navy-theme .main-footer { background: #030810; border-top-color: rgba(30,90,180,0.4); }
-        .navy-theme .footer-tagline { color: #4a6a90; }
-        .navy-theme .fsoc-btn { background: #0a1628; border-color: rgba(30,90,180,0.2); color: #4a6a90; }
-        .navy-theme .footer-links li { color: #4a6a90; }
-        .navy-theme .footer-contact-item { background: rgba(30,90,180,0.05); border-color: rgba(30,90,180,0.1); }
-        .navy-theme .footer-contact-item:hover { background: rgba(30,90,180,0.1); border-color: rgba(30,90,180,0.3); }
-        .navy-theme .footer-phone, .navy-theme .footer-email-btn { color: #4a6a90; }
-        .navy-theme .footer-email-btn { background: rgba(30,90,180,0.05); border-color: rgba(30,90,180,0.15); }
-        .navy-theme .footer-copy, .navy-theme .footer-made { color: #1a2f50; }
+/* التوافق مع الجوال للفوتر */
+@media (max-width: 1024px) { .af-container { grid-template-columns: 1fr 1fr; gap: 50px; } }
+@media (max-width: 768px) { 
+    .af-container { grid-template-columns: 1fr; padding: 60px 20px 40px; text-align: right; gap: 40px; }
+    .af-brand { align-items: center; text-align: center; }
+    .af-desc { text-align: center; margin-left: auto; margin-right: auto; }
+    .af-socials { justify-content: center; }
+    .af-bottom-inner { flex-direction: column; text-align: center; justify-content: center; }
+    .af-contact-box { flex-direction: row; } 
+}
 
-        .css-flag { width: 50px; height: 35px; display: inline-flex; flex-direction: column; cursor: pointer; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.5); margin-left: 15px; margin-bottom: 15px; border-radius: 4px; overflow: hidden; border: 1px solid #333; vertical-align: middle; }
+/* الثيم الليلي (Navy) للفوتر الجديد */
+.navy-theme .atheer-footer { background: linear-gradient(180deg, #030810 0%, #010308 100%); border-top-color: rgba(30,90,180,0.4); }
+.navy-theme .atheer-footer::before { background: linear-gradient(90deg, transparent, #5a8ee0, transparent); }
+.navy-theme .af-desc, .navy-theme .af-links li, .navy-theme .af-email-box { color: #6a8ab0; }
+.navy-theme .af-title { color: #c8daf0; }
+.navy-theme .af-soc-btn, .navy-theme .af-contact-box, .navy-theme .af-email-box { background: rgba(30,90,180,0.03); border-color: rgba(30,90,180,0.15); }
+.navy-theme .af-c-icon { background: rgba(30,90,180,0.1); color: #5a8ee0; }
+.navy-theme .af-soc-btn:hover, .navy-theme .af-contact-box:hover, .navy-theme .af-email-box:hover { background: rgba(30,90,180,0.08); border-color: var(--gold); }
+.navy-theme .af-bottom { background: #010308; border-top-color: rgba(30,90,180,0.2); }
+.navy-theme .af-copy, .navy-theme .af-made { color: #4a6a90; }        .css-flag { width: 50px; height: 35px; display: inline-flex; flex-direction: column; cursor: pointer; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.5); margin-left: 15px; margin-bottom: 15px; border-radius: 4px; overflow: hidden; border: 1px solid #333; vertical-align: middle; }
         .css-flag:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px rgba(212,175,55,0.8)); }
         .ye-red { background-color: #CE1126; flex: 1; }
         .ye-white { background-color: #FFFFFF; flex: 1; }
