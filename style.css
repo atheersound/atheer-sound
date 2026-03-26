@@ -1666,3 +1666,81 @@
             border-color: rgba(212,175,55,0.6);
             box-shadow: 0 10px 35px rgba(212,175,55,0.15);
         }
+
+/* --- LTR / English Adjustments --- */
+html[dir="ltr"] body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: left;
+}
+
+html[dir="ltr"] .header-social-icons {
+    left: auto;
+    right: 14px;
+}
+
+html[dir="ltr"] .close-announcement {
+    left: auto;
+    right: 20px;
+}
+
+html[dir="ltr"] .stat-box,
+html[dir="ltr"] .service-box h4,
+html[dir="ltr"] .package-card ul,
+html[dir="ltr"] .contact-info-panel,
+html[dir="ltr"] .contact-form-panel,
+html[dir="ltr"] .contact-card-text,
+html[dir="ltr"] .literary-card,
+html[dir="ltr"] .article-card,
+html[dir="ltr"] .inspire-card,
+html[dir="ltr"] .af-desc,
+html[dir="ltr"] .clinic-form {
+    text-align: left;
+}
+
+html[dir="ltr"] .package-badge {
+    left: auto;
+    right: -30px;
+    transform: rotate(45deg);
+}
+
+html[dir="ltr"] .fab-container {
+    right: auto;
+    left: 30px;
+}
+
+html[dir="ltr"] .fab-menu {
+    right: auto;
+    left: 5px;
+}
+
+html[dir="ltr"] .af-container {
+    direction: ltr;
+}
+/* =========================================
+   تنسيقات اللغة الإنجليزية (LTR)
+   ========================================= */
+body.en-layout {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif;
+    text-align: left;
+}
+
+body.en-layout .side-menu-right {
+    right: auto;
+    left: -280px; /* نقل القائمة الجانبية لليسار في النسخة الإنجليزية */
+}
+
+body.en-layout .side-menu-right.active {
+    left: 0;
+}
+
+/* عكس الهوامش للأيقونات لتناسب الاتجاه من اليسار لليمين */
+body.en-layout .fas, 
+body.en-layout .fab {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+/* عكس اتجاه الأسهم في الفوتر */
+body.en-layout .af-links li i {
+    transform: scaleX(-1); 
+}
