@@ -16,13 +16,13 @@
             --primary-blue: #005DB2;
             --primary-red: #E60000; 
             --primary-yellow: #FFCC00; 
-            --bg-light: #f8f9fa;
-            --bg-white: #FFFFFF;
+            --bg-light: #e4edf6;
+            --bg-white: #f0f6fc;
             --text-dark: #222222;
-            --border-color: #e5e7eb;
+            --border-color: #cddceb;
             --card-shadow: rgba(0,0,0,0.04);
-            --badge-bg: #f0f4f8;
-            --badge-border: #cce0f5;
+            --badge-bg: #e2edf8;
+            --badge-border: #bdd4e7;
         }
 
         body.dark-mode {
@@ -48,8 +48,8 @@
        .qs-item {
             display: flex; flex-direction: column;
             align-items: center; justify-content: center; gap: 8px; padding: 15px 10px;
-            background: linear-gradient(145deg, #f0f4f8, #e2e8f0); 
-            border: 1px solid #d2dce6;
+            background: linear-gradient(145deg, #e7eef6, #d9e3ee); 
+            border: 1px solid #c5d2df;
             border-radius: 12px; cursor: pointer; transition: 0.25s;
             text-decoration: none; text-align: center;
             width: 100%; box-sizing: border-box;
@@ -499,9 +499,9 @@ body.dark-mode .nav-tab:hover:not(.active) {
         .testimonial-card:hover .testimonial-icon { color: var(--primary-yellow); opacity: 0.2; transform: scale(1.1); }
         .audio-item { border: none !important; }
         .audio-item .testibg {
-            background: linear-gradient(150deg, #ffffff 0%, #f1f5fa 100%);
-            border: 1px solid #c9d6e4;
-            border-bottom: 3px solid #b4c6da;
+            background: linear-gradient(150deg, #f3f8fd 0%, #e5edf5 100%);
+            border: 1px solid #b9cadb;
+            border-bottom: 3px solid #a6bbd1;
             border-radius: 12px; padding: 20px; text-align: center;
             box-shadow: 0 6px 18px rgba(9, 30, 66, 0.10);
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
@@ -3384,12 +3384,28 @@ body.dark-mode .nav-tab:hover:not(.active) {
         counterEl.textContent = total.toLocaleString('ar-EG');
     }
 
+
+    function initGlobalAudioExclusivity() {
+        if (window.__atheerAudioExclusiveBound) return;
+        window.__atheerAudioExclusiveBound = true;
+
+        document.addEventListener('play', function(e) {
+            var current = e.target;
+            if (!(current instanceof HTMLAudioElement)) return;
+
+            document.querySelectorAll('audio').forEach(function(a) {
+                if (a !== current && !a.paused) a.pause();
+            });
+        }, true);
+    }
+
     /* --- Init all page features --- */
     function initAll(){
         safeRun(function(){ if(typeof initObserver==='function') initObserver(); });
         safeRun(function(){ animateCounters(); }); 
         safeRun(function(){ initScrollToTop(); });        
         safeRun(function(){ if(typeof initCustomAudioPlayers==='function') initCustomAudioPlayers(); });
+        safeRun(function(){ if(typeof initGlobalAudioExclusivity==='function') initGlobalAudioExclusivity(); });
         safeRun(function(){ if(typeof createFloatingNotes==='function') createFloatingNotes(); });
         safeRun(function(){ if(typeof initMagneticIcons==='function') initMagneticIcons(); });
         safeRun(function(){ if(typeof renderPoems==='function') renderPoems(); });
