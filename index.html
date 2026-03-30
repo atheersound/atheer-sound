@@ -1288,8 +1288,8 @@ body.dark-mode .floating-audio-mini-btn {
     }
 </style>
 <script>
-    // التحقق مما إذا كان الزائر قد تخطى الشاشة الترحيبية مسبقاً
-    if (localStorage.getItem('atheer_intro_seen_2') === 'true') {
+    // التحقق مما إذا كان الزائر يقوم بتحديث الصفحة في نفس الجلسة
+    if (sessionStorage.getItem('atheer_session_active') === 'true') {
         document.write('<style>#intro-screen, #splash-screen { display: none !important; }</style>');
     }
 </script>
@@ -1344,8 +1344,8 @@ body.dark-mode .floating-audio-mini-btn {
 
     if(startBtn) {
         startBtn.addEventListener('click', function() {
-            // حفظ حالة الزائر في المتصفح بأنه قد رأى الشاشة
-            localStorage.setItem('atheer_intro_seen_2', 'true');
+            // تفعيل ذاكرة الجلسة لمنع تكرار الشاشة عند التحديث
+            sessionStorage.setItem('atheer_session_active', 'true');
 
             // 1. إخفاء الشاشة الترحيبية بلطف
             if(introScreen) {
@@ -1374,8 +1374,7 @@ body.dark-mode .floating-audio-mini-btn {
         });
     }
 })();
-</script>            
-            <div class="bg-glow bg-glow-1">
+</script>            <div class="bg-glow bg-glow-1">
 </div>
 <div class="bg-glow bg-glow-2">
 </div>
