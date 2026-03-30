@@ -4,11 +4,46 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="أثير ساوند للإنتاج الفني والهندسة الصوتية، شيلات وزفات بالأسماء، بودكاست، إلقاء قصائد، مونتاج فيديو، وتعليق صوتي باحترافية عالية." name="description"/>
+<meta content="أثير ساوند, إنتاج فني, هندسة صوتية, شيلات بالأسماء, زفات بالأسماء, بودكاست, إلقاء قصائد, مونتاج فيديو, تعليق صوتي" name="keywords"/>
+<meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/>
+<meta content="index, follow" name="googlebot"/>
+<meta content="أثير ساوند" name="author"/>
+<meta content="ar_SA" property="og:locale"/>
+<meta content="website" property="og:type"/>
+<meta content="أثير ساوند للإنتاج الفني | الأعمال الصوتية والمرئية" property="og:title"/>
+<meta content="خدمات إنتاج فني وصوتي متكاملة تشمل الشيلات والزفات والبودكاست وإلقاء القصائد والمونتاج والتعليق الصوتي." property="og:description"/>
+<meta content="أثير ساوند" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="أثير ساوند للإنتاج الفني | الأعمال الصوتية والمرئية" name="twitter:title"/>
+<meta content="خدمات إنتاج فني وصوتي باحترافية عالية للأعمال الصوتية والمرئية." name="twitter:description"/>
+<meta content="#8f6a24" name="theme-color"/>
 <title>
    أثير ساوند للإنتاج الفني | الأعمال الصوتية والمرئية
   </title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "أثير ساوند للإنتاج الفني",
+  "description": "خدمات إنتاج فني وصوتي تشمل الشيلات والزفات والبودكاست وإلقاء القصائد والمونتاج والتعليق الصوتي.",
+  "inLanguage": "ar",
+  "areaServed": "SA",
+  "serviceType": [
+    "الهندسة الصوتية",
+    "شيلات بالأسماء",
+    "زفات بالأسماء",
+    "بودكاست",
+    "إلقاء قصائد",
+    "مونتاج فيديو",
+    "تعليق صوتي"
+  ]
+}
+</script>
 <script src="poems-data.js">
 </script>
 <style>
@@ -880,6 +915,141 @@ body.dark-mode .nav-tab.active {
             cursor: pointer; transition: 0.3s; font-size: 16px; padding: 0;
         }
         .sticky-back-btn:hover { background: var(--primary-red); color: white; border-color: var(--primary-red); transform: translateX(4px); }
+
+        /* ================= Responsive Improvements ================= */
+        @media (max-width: 1024px) {
+            .youtube-canvas {
+                aspect-ratio: auto;
+                max-height: none;
+                min-height: 100vh;
+            }
+            .content-area {
+                padding: 24px 24px;
+            }
+            .main-header {
+                padding: 8px 18px;
+            }
+            .main-navigation {
+                padding: 6px 12px;
+            }
+            .nav-tabs-container {
+                justify-content: flex-start;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                scroll-snap-type: x proximity;
+            }
+            .nav-tabs-container::-webkit-scrollbar {
+                display: none;
+            }
+            .nav-tab {
+                flex: 0 0 auto;
+                white-space: nowrap;
+                scroll-snap-align: start;
+            }
+            .sticky-section-header {
+                top: 66px;
+                max-width: calc(100% - 24px);
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                align-items: stretch;
+            }
+            .youtube-canvas {
+                max-width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .main-header {
+                padding: 8px 10px;
+                gap: 8px;
+            }
+            .brand-section {
+                width: 100%;
+                justify-content: center;
+            }
+            .brand-text-wrapper {
+                align-items: center;
+                text-align: center;
+            }
+            .brand-name {
+                font-size: 20px;
+            }
+            .brand-slogan {
+                font-size: 13px;
+            }
+            .content-area {
+                padding: 20px 14px;
+            }
+            .section-title {
+                font-size: 22px;
+                margin-bottom: 22px;
+                padding-bottom: 10px;
+            }
+            .stats-grid,
+            .poems-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-services {
+                gap: 10px;
+            }
+            .qs-item {
+                padding: 13px 8px;
+            }
+            .qs-label {
+                font-size: 12px;
+            }
+            .nav-tab {
+                font-size: 13px;
+                padding: 8px 12px;
+            }
+            .sticky-section-header {
+                top: 62px;
+                padding: 8px 12px;
+                border-radius: 14px;
+                margin-bottom: 20px;
+            }
+            .sticky-section-header h2 {
+                font-size: 18px;
+            }
+            #backToTop {
+                left: 14px;
+                bottom: 14px;
+                width: 40px;
+                height: 40px;
+                font-size: 17px;
+            }
+            .modern-footer {
+                padding: 12px 14px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .content-area {
+                padding: 16px 10px;
+            }
+            .main-navigation {
+                padding: 5px 8px;
+            }
+            .nav-tab {
+                font-size: 12.5px;
+                padding: 7px 10px;
+                border-radius: 9px;
+            }
+            .section-title {
+                font-size: 20px;
+            }
+            .quick-services {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .audio-item .testibg {
+                padding: 16px 14px;
+            }
+        }
 </style>
 </head>
 <body>
