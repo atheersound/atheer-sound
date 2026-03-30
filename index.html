@@ -943,66 +943,90 @@ body.dark-mode .nav-tab.active {
             cursor: pointer; transition: 0.3s; font-size: 16px; padding: 0;
         }
         .sticky-back-btn:hover { background: var(--primary-red); color: white; border-color: var(--primary-red); transform: translateX(4px); }
-        /* ================= Floating Audio Widget ================= */
-        .floating-audio-widget {
-            position: fixed;
-            inset-inline-end: 14px;
-            bottom: 76px;
-            display: none;
-            align-items: center;
-            gap: 6px;
-            padding: 6px;
-            border-radius: 999px;
-            background: transparent;
-            border: none;
-            box-shadow: none;
-            z-index: 12000;
-        }
-        .floating-audio-widget.show {
-            display: inline-flex;
-            animation: fadeInWidget 0.22s ease;
-        }
-        @keyframes fadeInWidget {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        body.dark-mode .floating-audio-widget {
-            background: transparent;
-            border: none;
-            box-shadow: none;
-        }        .floating-audio-mini-btn {
-            width: 34px;
-            height: 34px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-white);
-            color: var(--text-dark);
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
-            padding: 0;
-        }
-        .floating-audio-mini-btn:hover {
-            border-color: var(--primary-blue);
-            color: var(--primary-blue);
-            transform: translateY(-1px);
-        }
-        .floating-audio-mini-btn.close {
-            border-color: rgba(230,0,0,0.45);
-            color: var(--primary-red);
-        }
-        .floating-audio-mini-btn.close:hover {
-            border-color: var(--primary-red);
-            background: rgba(230,0,0,0.08);
-        }
-        body.dark-mode .floating-audio-mini-btn {
-            background: rgba(255,255,255,0.04);
-            border-color: rgba(255,255,255,0.22);
-        }
+       /* ================= Floating Audio Widget ================= */
+.floating-audio-widget {
+    position: fixed;
+    inset-inline-end: 14px;
+    bottom: 76px;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    padding: 6px;
+    border-radius: 999px;
+    background: transparent;
+    z-index: 12000;
+}
+.floating-audio-widget.show {
+    display: inline-flex;
+    animation: fadeInWidget 0.3s ease;
+}
+@keyframes fadeInWidget {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-        /* ================= Global Search Results ================= */
+/* حاوية الأزرار المخفية */
+.floating-audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-width 0.4s ease, opacity 0.3s ease;
+}
+
+/* تأثير التوسع عند النقر */
+.floating-audio-widget.expanded .floating-audio-controls {
+    max-width: 120px;
+    opacity: 1;
+}
+
+/* تمييز الزر الرئيسي عند الفتح */
+.floating-audio-widget.expanded .main-expand-btn {
+    background: var(--primary-blue);
+    color: #fff;
+    border-color: var(--primary-blue);
+}
+
+/* إيقاف دوران القرص عند إيقاف الصوت */
+.floating-audio-widget.paused .main-expand-btn i.fa-spin {
+    animation-play-state: paused;
+}
+
+.floating-audio-mini-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-white);
+    color: var(--text-dark);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.floating-audio-mini-btn:hover {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+.floating-audio-mini-btn.close {
+    border-color: rgba(230,0,0,0.3);
+    color: var(--primary-red);
+}
+.floating-audio-mini-btn.close:hover {
+    border-color: var(--primary-red);
+    background: rgba(230,0,0,0.08);
+}
+body.dark-mode .floating-audio-mini-btn {
+    background: #1e2228;
+    border-color: #30363d;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}        /* ================= Global Search Results ================= */
 
         .cards-grid {
             display: grid;
@@ -3664,15 +3688,18 @@ body.dark-mode .nav-tab.active {
 </div>
 </footer>
 <div id="floatingAudioWidget" class="floating-audio-widget" aria-live="polite">
-    <button type="button" id="floatingAudioPlay" class="floating-audio-mini-btn" title="تشغيل">
-        <i class="fas fa-play"></i>
+    <button type="button" id="floatingAudioExpand" class="floating-audio-mini-btn main-expand-btn" title="التحكم بالصوت">
+        <i class="fas fa-compact-disc fa-spin" style="animation-duration: 3s;"></i>
     </button>
-    <button type="button" id="floatingAudioToggle" class="floating-audio-mini-btn" title="إيقاف مؤقت / متابعة">
-        <i class="fas fa-pause"></i>
-    </button>
-    <button type="button" id="floatingAudioClose" class="floating-audio-mini-btn close" title="إغلاق">
-        <i class="fas fa-xmark"></i>
-    </button>
+    
+    <div id="floatingAudioControls" class="floating-audio-controls">
+        <button type="button" id="floatingAudioToggle" class="floating-audio-mini-btn" title="إيقاف مؤقت / متابعة">
+            <i class="fas fa-pause"></i>
+        </button>
+        <button type="button" id="floatingAudioClose" class="floating-audio-mini-btn close" title="إغلاق المشغل">
+            <i class="fas fa-xmark"></i>
+        </button>
+    </div>
 </div><button id="backToTop" onclick="document.querySelector('.youtube-canvas').scrollTo({top:0, behavior:'smooth'})" title="العودة للأعلى">
     <i class="fas fa-arrow-up"></i>
 </button>
@@ -4109,22 +4136,31 @@ body.dark-mode .nav-tab.active {
         window.__atheerFloatingAudioWidgetBound = true;
 
         const widgetEl = document.getElementById('floatingAudioWidget');
-        const playBtn = document.getElementById('floatingAudioPlay');
+        const expandBtn = document.getElementById('floatingAudioExpand');
         const toggleBtn = document.getElementById('floatingAudioToggle');
         const closeBtn = document.getElementById('floatingAudioClose');
-        if (!widgetEl || !playBtn || !toggleBtn || !closeBtn) return;
+        const controlsContainer = document.getElementById('floatingAudioControls');
+        
+        if (!widgetEl || !expandBtn || !toggleBtn || !closeBtn) return;
 
         const toggleIcon = toggleBtn.querySelector('i');
         let currentAudio = null;
 
         function updateToggleState() {
             if (!toggleIcon || !currentAudio) return;
-            toggleIcon.className = currentAudio.paused ? 'fas fa-play' : 'fas fa-pause';
+            if (currentAudio.paused) {
+                toggleIcon.className = 'fas fa-play';
+                widgetEl.classList.add('paused');
+            } else {
+                toggleIcon.className = 'fas fa-pause';
+                widgetEl.classList.remove('paused');
+            }
         }
 
         function showWidgetFor(audioEl) {
             currentAudio = audioEl;
             widgetEl.classList.add('show');
+            widgetEl.classList.remove('expanded'); 
             updateToggleState();
         }
 
@@ -4134,13 +4170,12 @@ body.dark-mode .nav-tab.active {
                 try { currentAudio.currentTime = 0; } catch (e) {}
             }
             widgetEl.classList.remove('show');
+            widgetEl.classList.remove('expanded');
             currentAudio = null;
         }
 
-        playBtn.addEventListener('click', function() {
-            if (!currentAudio) return;
-            currentAudio.play().catch(function(){});
-            updateToggleState();
+        expandBtn.addEventListener('click', function() {
+            widgetEl.classList.toggle('expanded');
         });
 
         toggleBtn.addEventListener('click', function() {
@@ -4174,7 +4209,7 @@ body.dark-mode .nav-tab.active {
             if (!(el instanceof HTMLAudioElement)) return;
             if (currentAudio && el === currentAudio) stopAndHide();
         }, true);
-    }
+    }    
     /* --- Init all page features --- */
     function initAll(){
         safeRun(function(){ if(typeof initObserver==='function') initObserver(); });
