@@ -25,14 +25,17 @@
             --badge-border: #bdd4e7;
         }
 
-        body.dark-mode {
-            --bg-light: #0d1117;
-            --bg-white: #161b22;
-            --text-dark: #c9d1d9;
-            --border-color: #30363d;
-            --card-shadow: rgba(0,0,0,0.3);
-            --badge-bg: #21262d;
-            --badge-border: #30363d;
+                body.dark-mode {
+            --primary-blue: #8f6a24;
+            --primary-red: #7b3f1e;
+            --primary-yellow: #c69a3a;
+            --bg-light: #151109;
+            --bg-white: #21180f;
+            --text-dark: #e8ddc8;
+            --border-color: #4f3b20;
+            --card-shadow: rgba(0,0,0,0.38);
+            --badge-bg: #2a1f13;
+            --badge-border: #5f4726;
         }
 
         body, button, input { font-family: 'Cairo', sans-serif; color: var(--text-dark); }
@@ -57,8 +60,8 @@
         }
 
         body.dark-mode .qs-item {
-            background: linear-gradient(145deg, #1e2228, #16191d);
-            border-color: #30363d;
+            background: linear-gradient(145deg, #2b2113, #1d150d);
+            border-color: #4f3b20;
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
@@ -138,7 +141,7 @@
             flex-shrink: 0;
         }
         body.dark-mode .announcement-bar {
-            background-color: #0d1117;
+            background-color: #151109;
             border-bottom: 1px solid #30363d;
         }
         .ticker-label {
@@ -196,7 +199,7 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     display: flex; flex-direction: row; align-items: center; justify-content: center;
 }
-body.dark-mode .main-navigation { background: rgba(13, 17, 23, 0.9); border-bottom: 3px solid #30363d; }
+body.dark-mode .main-navigation { background: rgba(21, 17, 9, 0.9); border-bottom: 3px solid #4f3b20; }
 .nav-tabs-container {
     display: flex; flex-direction: row; align-items: center;
     gap: 6px; flex-wrap: nowrap; flex: 1; justify-content: center;
@@ -225,9 +228,11 @@ body.dark-mode .nav-tab {
     box-shadow: 0 6px 0 #b0c4de, 0 8px 15px rgba(0, 93, 178, 0.15);
 }
 body.dark-mode .nav-tab:hover:not(.active) {
-    box-shadow: 0 6px 0 #004a8e, 0 8px 15px rgba(0, 93, 178, 0.3);
+    box-shadow: 0 6px 0 #6f531c, 0 8px 15px rgba(143, 106, 36, 0.32);
 }
-.nav-tab.active { 
+body.dark-mode .nav-tab.active {
+    background: linear-gradient(145deg, #a07a2b, #6f531c);
+}.nav-tab.active { 
     background: linear-gradient(145deg, var(--primary-blue), #004a8e);
     color: #FFFFFF; 
     border-color: transparent;
@@ -413,9 +418,9 @@ body.dark-mode .nav-tab:hover:not(.active) {
 
         body.dark-mode .offers-board {
             background:
-                radial-gradient(circle at 12% 18%, rgba(0,93,178,0.22), transparent 44%),
-                radial-gradient(circle at 88% 12%, rgba(230,0,0,0.2), transparent 40%),
-                linear-gradient(145deg, #161b22, #0f141b);
+                radial-gradient(circle at 12% 18%, rgba(143,106,36,0.28), transparent 44%),
+                radial-gradient(circle at 88% 12%, rgba(123,63,30,0.22), transparent 40%),
+                linear-gradient(145deg, #241a10, #171007);
             box-shadow: 0 16px 45px rgba(0,0,0,0.42);
         }
         body.dark-mode .offers-board::after {
@@ -423,21 +428,21 @@ body.dark-mode .nav-tab:hover:not(.active) {
         }
         body.dark-mode .offers-announcement-card,
         body.dark-mode .offer-card {
-            background: rgba(22,27,34,0.9);
-            border-color: #2b333d;
+            background: rgba(33,24,15,0.9);
+            border-color: #4f3b20;
             box-shadow: 0 8px 24px rgba(0,0,0,0.35);
         }
         body.dark-mode .offer-card:hover {
-            box-shadow: 0 14px 28px rgba(0,93,178,0.22);
+            box-shadow: 0 14px 28px rgba(143,106,36,0.28);
         }
         body.dark-mode .offer-badge {
-            background: rgba(255,204,0,0.15);
-            color: #f5cf5a;
-            border-color: rgba(255,204,0,0.35);
+            background: rgba(198,154,58,0.2);
+            color: #e2bf78;
+            border-color: rgba(198,154,58,0.45);
         }
         body.dark-mode .offers-footer {
-            background: linear-gradient(90deg, rgba(0,93,178,0.12), rgba(230,0,0,0.1));
-            border-color: rgba(0,93,178,0.45);
+            background: linear-gradient(90deg, rgba(143,106,36,0.16), rgba(123,63,30,0.14));
+            border-color: rgba(143,106,36,0.5);
         }
 
         @media (max-width: 768px) {
@@ -528,7 +533,7 @@ body.dark-mode .nav-tab:hover:not(.active) {
         }
         body.dark-mode .audio-item .testibg {
             border: 1px solid var(--border-color);
-            background: rgba(30,30,40,0.4);
+            background: rgba(42,31,19,0.55);
             box-shadow: 0 8px 24px rgba(0,0,0,0.35);
         }
         body.dark-mode .audio-item h3 { color: #ffffff !important; }
@@ -597,7 +602,7 @@ body.dark-mode .nav-tab:hover:not(.active) {
             box-shadow: 0 4px 20px rgba(0, 93, 178, 0.08);
             padding: 6px 30px;
         }
-        body.dark-mode .main-navigation { background: rgba(13, 17, 23, 0.92); border-bottom: 3px solid var(--primary-blue); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        body.dark-mode .main-navigation { background: rgba(21, 17, 9, 0.92); border-bottom: 3px solid var(--primary-blue); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
 
         /* 2. Fade In */
         @keyframes revealFallback { to { opacity: 1; transform: none; } }
@@ -718,13 +723,13 @@ body.dark-mode .nav-tab:hover:not(.active) {
             white-space: nowrap;
         }
         body.dark-mode .visitor-counter-chip {
-            background: rgba(255,255,255,0.04);
-            border-color: rgba(255,255,255,0.2);
+            background: rgba(198,154,58,0.10);
+            border-color: rgba(198,154,58,0.35);
             box-shadow: 0 3px 12px rgba(0,0,0,0.35);
         }
         body.dark-mode .launch-date-pill {
-            border-color: rgba(230,163,11,0.7);
-            background: linear-gradient(135deg, rgba(230,163,11,0.18), rgba(0,93,178,0.14));
+            border-color: rgba(198,154,58,0.78);
+            background: linear-gradient(135deg, rgba(198,154,58,0.24), rgba(123,63,30,0.18));
         }
         
         @media (max-width: 768px) {
@@ -837,7 +842,7 @@ body.dark-mode .nav-tab:hover:not(.active) {
         /* 4. Splash Screen Animations (شاشة التحميل) */
         @keyframes bounceWave { 0%, 100% { height: 20px; opacity: 0.6; } 50% { height: 60px; opacity: 1; } }
         @keyframes fadeInText { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
-        body.dark-mode #splash-screen { background: #0d1117 !important; }
+        body.dark-mode #splash-screen { background: #151109 !important; }
 /* Scroll to Top Button */
         #backToTop { 
             position: fixed; bottom: 30px; left: 30px; width: 45px; height: 45px; 
@@ -860,7 +865,7 @@ body.dark-mode .nav-tab:hover:not(.active) {
             box-shadow: 0 8px 25px rgba(0,0,0,0.06); width: fit-content; gap: 15px; transition: 0.3s;
         }
         body.dark-mode .sticky-section-header {
-            background: rgba(22, 27, 34, 0.85); box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            background: rgba(33, 24, 15, 0.9); box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
         .sticky-section-header:hover { border-color: var(--primary-yellow); transform: translateY(-2px); }
         .sticky-section-header h2 { margin: 0; font-size: 20px; font-weight: 900; color: var(--primary-blue); line-height: 1.2; }
