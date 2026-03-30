@@ -615,7 +615,17 @@ body.dark-mode .nav-tab.active {
             .header-center-text { flex: 0 0 100% !important; order: 3; margin: 4px 0 0 0 !important; }
             .header-center-text h1 { font-size: 16px !important; }
             .header-center-text p { font-size: 11px !important; }
-            .action-section { display: none !important; } /* إخفاء الأرقام في الهيدر على الموبايل لتوفير مساحةطŒ متوفرة في التبويبات والفوتر */
+            .action-section {
+                display: flex !important;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+                order: 4;
+                margin-top: 4px;
+                direction: ltr;
+            }
+            .contact-info { display: none !important; }
+            .social-icons { margin-top: 0; justify-content: center; flex-wrap: wrap; }
             .nav-tabs-container { overflow-x: auto; justify-content: flex-start !important; padding-bottom: 5px; }
             .nav-tabs-container::-webkit-scrollbar { display: none; }
         }
@@ -1003,6 +1013,10 @@ body.dark-mode .nav-tab.active {
             .qs-label {
                 font-size: 12px;
             }
+            .social-icons {
+                gap: 7px;
+            }
+            .social-icons a { width: 30px; height: 30px; font-size: 14px; }
             .nav-tab {
                 font-size: 13px;
                 padding: 8px 12px;
