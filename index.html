@@ -943,96 +943,68 @@ body.dark-mode .nav-tab.active {
             cursor: pointer; transition: 0.3s; font-size: 16px; padding: 0;
         }
         .sticky-back-btn:hover { background: var(--primary-red); color: white; border-color: var(--primary-red); transform: translateX(4px); }
-
         /* ================= Floating Audio Widget ================= */
         .floating-audio-widget {
             position: fixed;
-            inset-inline-end: 16px;
-            bottom: 78px;
-            width: min(360px, calc(100vw - 22px));
+            inset-inline-end: 14px;
+            bottom: 76px;
+            display: none;
+            align-items: center;
+            gap: 6px;
+            padding: 6px;
+            border-radius: 999px;
             background: linear-gradient(145deg, #f5faff, #e8f1fb);
             border: 1px solid #a7bed6;
-            border-radius: 14px;
-            box-shadow: 0 12px 30px rgba(6, 29, 57, 0.22);
+            box-shadow: 0 10px 24px rgba(6, 29, 57, 0.22);
             z-index: 12000;
-            padding: 12px;
-            display: none;
         }
         .floating-audio-widget.show {
-            display: block;
-            animation: fadeInWidget 0.25s ease;
+            display: inline-flex;
+            animation: fadeInWidget 0.22s ease;
         }
         @keyframes fadeInWidget {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
         body.dark-mode .floating-audio-widget {
             background: linear-gradient(145deg, #2b2113, #1d150d);
             border-color: #5f4726;
-            box-shadow: 0 14px 28px rgba(0,0,0,0.45);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.45);
         }
-        .floating-audio-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-        .floating-audio-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--primary-blue);
-            font-size: 12px;
-            font-weight: 800;
-        }
-        .floating-audio-title {
-            font-size: 14px;
-            font-weight: 800;
-            color: var(--text-dark);
-            line-height: 1.65;
-            margin-bottom: 10px;
-            max-height: 44px;
-            overflow: hidden;
-        }
-        .floating-audio-controls {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .floating-audio-btn {
-            flex: 1;
+        .floating-audio-mini-btn {
+            width: 34px;
+            height: 34px;
             border: 1px solid var(--border-color);
             background: var(--bg-white);
             color: var(--text-dark);
-            border-radius: 10px;
-            padding: 8px 10px;
-            font-size: 13px;
-            font-weight: 700;
+            border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
             cursor: pointer;
             transition: 0.2s;
+            padding: 0;
         }
-        .floating-audio-btn:hover {
+        .floating-audio-mini-btn:hover {
             border-color: var(--primary-blue);
             color: var(--primary-blue);
+            transform: translateY(-1px);
         }
-        .floating-audio-btn.stop {
+        .floating-audio-mini-btn.close {
             border-color: rgba(230,0,0,0.45);
             color: var(--primary-red);
         }
-        .floating-audio-btn.stop:hover {
-            background: rgba(230,0,0,0.08);
+        .floating-audio-mini-btn.close:hover {
             border-color: var(--primary-red);
+            background: rgba(230,0,0,0.08);
         }
-        body.dark-mode .floating-audio-btn {
+        body.dark-mode .floating-audio-mini-btn {
             background: rgba(255,255,255,0.04);
-            border-color: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.22);
         }
+
         /* ================= Global Search Results ================= */
+
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -1188,12 +1160,13 @@ body.dark-mode .nav-tab.active {
             }
             .floating-audio-widget {
                 inset-inline-end: 10px;
-                bottom: 68px;
-                width: calc(100vw - 20px);
-                padding: 10px;
+                bottom: 64px;
+                padding: 5px;
+                gap: 5px;
             }
-            .floating-audio-title {
-                font-size: 13px;
+            .floating-audio-mini-btn {
+                width: 31px;
+                height: 31px;
             }
             .modern-footer {
                 padding: 12px 14px;
@@ -3584,22 +3557,16 @@ body.dark-mode .nav-tab.active {
 </div>
 </footer>
 <div id="floatingAudioWidget" class="floating-audio-widget" aria-live="polite">
-    <div class="floating-audio-head">
-        <span class="floating-audio-badge"><i class="fas fa-wave-square"></i>التشغيل الحالي</span>
-    </div>
-    <div id="floatingAudioTitle" class="floating-audio-title">جاري تشغيل ملف صوتي...</div>
-    <div class="floating-audio-controls">
-        <button type="button" id="floatingAudioPlayPause" class="floating-audio-btn">
-            <i class="fas fa-pause"></i>
-            <span>إيقاف مؤقت</span>
-        </button>
-        <button type="button" id="floatingAudioStop" class="floating-audio-btn stop">
-            <i class="fas fa-stop"></i>
-            <span>إيقاف</span>
-        </button>
-    </div>
-</div>
-<button id="backToTop" onclick="document.querySelector('.youtube-canvas').scrollTo({top:0, behavior:'smooth'})" title="العودة للأعلى">
+    <button type="button" id="floatingAudioPlay" class="floating-audio-mini-btn" title="تشغيل">
+        <i class="fas fa-play"></i>
+    </button>
+    <button type="button" id="floatingAudioToggle" class="floating-audio-mini-btn" title="إيقاف مؤقت / متابعة">
+        <i class="fas fa-pause"></i>
+    </button>
+    <button type="button" id="floatingAudioClose" class="floating-audio-mini-btn close" title="إغلاق">
+        <i class="fas fa-xmark"></i>
+    </button>
+</div><button id="backToTop" onclick="document.querySelector('.youtube-canvas').scrollTo({top:0, behavior:'smooth'})" title="العودة للأعلى">
     <i class="fas fa-arrow-up"></i>
 </button>
 <script>
@@ -4035,93 +4002,52 @@ body.dark-mode .nav-tab.active {
         window.__atheerFloatingAudioWidgetBound = true;
 
         const widgetEl = document.getElementById('floatingAudioWidget');
-        const titleEl = document.getElementById('floatingAudioTitle');
-        const playPauseBtn = document.getElementById('floatingAudioPlayPause');
-        const stopBtn = document.getElementById('floatingAudioStop');
-        if (!widgetEl || !titleEl || !playPauseBtn || !stopBtn) return;
+        const playBtn = document.getElementById('floatingAudioPlay');
+        const toggleBtn = document.getElementById('floatingAudioToggle');
+        const closeBtn = document.getElementById('floatingAudioClose');
+        if (!widgetEl || !playBtn || !toggleBtn || !closeBtn) return;
 
+        const toggleIcon = toggleBtn.querySelector('i');
         let currentAudio = null;
 
-        function cleanText(text) {
-            return (text || '').replace(/\s+/g, ' ').trim();
-        }
-
-        function getAudioTitle(audioEl) {
-            if (!audioEl) return 'ملف صوتي';
-            if (audioEl.dataset && audioEl.dataset.title) return audioEl.dataset.title;
-
-            const directCard = audioEl.closest('.testibg, .work-card, .sub-service-card, .poem-card, .faq-item');
-            if (directCard) {
-                const heading = directCard.querySelector('h3, h4, .faq-question, .poem-title');
-                const headingText = cleanText(heading ? (heading.innerText || heading.textContent) : '');
-                if (headingText) return headingText;
-            }
-
-            const parent = audioEl.parentElement;
-            if (parent) {
-                const nearCaption = parent.querySelector('p');
-                const captionText = cleanText(nearCaption ? (nearCaption.innerText || nearCaption.textContent) : '');
-                if (captionText) return captionText;
-            }
-
-            const sourceEl = audioEl.querySelector('source');
-            const sourceUrl = (sourceEl && sourceEl.getAttribute('src')) || audioEl.getAttribute('src') || '';
-            if (sourceUrl) {
-                const fileName = sourceUrl.split('?')[0].split('/').pop();
-                if (fileName) return decodeURIComponent(fileName);
-            }
-
-            return 'ملف صوتي';
-        }
-
-        function updatePlayPauseState() {
-            const iconEl = playPauseBtn.querySelector('i');
-            const textEl = playPauseBtn.querySelector('span');
-            if (!iconEl || !textEl || !currentAudio) return;
-
-            if (currentAudio.paused) {
-                iconEl.className = 'fas fa-play';
-                textEl.textContent = 'متابعة';
-            } else {
-                iconEl.className = 'fas fa-pause';
-                textEl.textContent = 'إيقاف مؤقت';
-            }
+        function updateToggleState() {
+            if (!toggleIcon || !currentAudio) return;
+            toggleIcon.className = currentAudio.paused ? 'fas fa-play' : 'fas fa-pause';
         }
 
         function showWidgetFor(audioEl) {
             currentAudio = audioEl;
-            titleEl.textContent = getAudioTitle(audioEl);
             widgetEl.classList.add('show');
-            updatePlayPauseState();
+            updateToggleState();
         }
 
-        function hideWidget(resetAudio) {
-            widgetEl.classList.remove('show');
-            if (resetAudio) currentAudio = null;
-        }
-
-        function stopCurrentAudio() {
-            if (!currentAudio) {
-                hideWidget(true);
-                return;
+        function stopAndHide() {
+            if (currentAudio) {
+                currentAudio.pause();
+                try { currentAudio.currentTime = 0; } catch (e) {}
             }
-            currentAudio.pause();
-            try { currentAudio.currentTime = 0; } catch (e) {}
-            hideWidget(true);
+            widgetEl.classList.remove('show');
+            currentAudio = null;
         }
 
-        playPauseBtn.addEventListener('click', function() {
+        playBtn.addEventListener('click', function() {
+            if (!currentAudio) return;
+            currentAudio.play().catch(function(){});
+            updateToggleState();
+        });
+
+        toggleBtn.addEventListener('click', function() {
             if (!currentAudio) return;
             if (currentAudio.paused) {
                 currentAudio.play().catch(function(){});
             } else {
                 currentAudio.pause();
             }
-            updatePlayPauseState();
+            updateToggleState();
         });
 
-        stopBtn.addEventListener('click', function() {
-            stopCurrentAudio();
+        closeBtn.addEventListener('click', function() {
+            stopAndHide();
         });
 
         document.addEventListener('play', function(e) {
@@ -4133,17 +4059,13 @@ body.dark-mode .nav-tab.active {
         document.addEventListener('pause', function(e) {
             const el = e.target;
             if (!(el instanceof HTMLAudioElement)) return;
-            if (currentAudio && el === currentAudio) {
-                updatePlayPauseState();
-            }
+            if (currentAudio && el === currentAudio) updateToggleState();
         }, true);
 
         document.addEventListener('ended', function(e) {
             const el = e.target;
             if (!(el instanceof HTMLAudioElement)) return;
-            if (currentAudio && el === currentAudio) {
-                hideWidget(true);
-            }
+            if (currentAudio && el === currentAudio) stopAndHide();
         }, true);
     }
     /* --- Init all page features --- */
