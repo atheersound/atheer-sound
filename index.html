@@ -1254,7 +1254,12 @@ body.dark-mode .nav-tab.active {
         .intro-contact { flex-direction: column; gap: 10px; align-items: center; }
     }
 </style>
-
+<script>
+    // التحقق مما إذا كان الزائر قد تخطى الشاشة الترحيبية مسبقاً
+    if (localStorage.getItem('atheer_intro_seen_2') === 'true') {
+        document.write('<style>#intro-screen, #splash-screen { display: none !important; }</style>');
+    }
+</script>
 <div id="intro-screen">
     <img src="as.png" alt="شعار أثير ساوند" class="intro-logo">
     
@@ -1306,6 +1311,9 @@ body.dark-mode .nav-tab.active {
 
     if(startBtn) {
         startBtn.addEventListener('click', function() {
+            // حفظ حالة الزائر في المتصفح بأنه قد رأى الشاشة
+            localStorage.setItem('atheer_intro_seen_2', 'true');
+
             // 1. إخفاء الشاشة الترحيبية بلطف
             if(introScreen) {
                 introScreen.style.opacity = '0';
@@ -1333,8 +1341,8 @@ body.dark-mode .nav-tab.active {
         });
     }
 })();
-</script>
-<div class="bg-glow bg-glow-1">
+</script>            
+            <div class="bg-glow bg-glow-1">
 </div>
 <div class="bg-glow bg-glow-2">
 </div>
