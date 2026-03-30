@@ -944,6 +944,38 @@ body.dark-mode .nav-tab.active {
         }
         .sticky-back-btn:hover { background: var(--primary-red); color: white; border-color: var(--primary-red); transform: translateX(4px); }
 
+        /* ================= Global Search Results ================= */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+        .search-result-card {
+            text-align: right;
+            cursor: pointer;
+            border-right: 4px solid var(--primary-yellow);
+            padding: 18px 16px;
+        }
+        .search-result-title {
+            color: var(--primary-blue);
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .search-result-meta {
+            font-size: 12px;
+            color: var(--primary-red);
+            font-weight: 700;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+        .search-result-snippet {
+            font-size: 14px;
+            color: var(--text-dark);
+            opacity: 0.9;
+            line-height: 1.8;
+            margin: 0;
+        }
         /* ================= Responsive Improvements ================= */
         @media (max-width: 1024px) {
             .youtube-canvas {
@@ -3644,6 +3676,246 @@ body.dark-mode .nav-tab.active {
         }, true);
     }
 
+
+    function initGlobalSearch() {
+        const inputEl = document.getElementById('globalSearchInput');
+        const resultCountEl = document.getElementById('resultCount');
+        const resultsContainerEl = document.getElementById('searchResultsContainer');
+        const resultsGridEl = document.getElementById('searchResultsGrid');
+        const noResultsEl = document.getElementById('noResultsMsg');
+        if (!inputEl || !resultCountEl || !resultsContainerEl || !resultsGridEl || !noResultsEl) return;
+
+        const searchState = window.__atheerSearchState || { index: [] };
+        window.__atheerSearchState = searchState;
+
+        function normalizeArabic(text) {
+            return (text || '')
+                .toString()
+                .toLowerCase()
+                .replace(/[\u064b-\u0652\u0670\u0640]/g, '')
+                .replace(/[إأآٱ]/g, 'ا')
+                .replace(/ى/g, 'ي')
+                .replace(/ؤ/g, 'و')
+                .replace(/ئ/g, 'ي')
+                .replace(/ة/g, 'ه')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function collapseText(text) {
+            return (text || '').replace(/\s+/g, ' ').trim();
+        }
+
+        function escapeHtml(text) {
+            return String(text || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function getSectionTitle(sectionEl) {
+            if (!sectionEl) return 'نتيجة بحث';
+            const headingEl = sectionEl.querySelector('.sticky-section-header h2, .section-title, h2, h3');
+            const title = collapseText(headingEl ? (headingEl.innerText || headingEl.textContent) : '');
+            return title || 'نتيجة بحث';
+        }
+
+        function getNavButtonForSection(sectionId) {
+            const tabs = Array.from(document.querySelectorAll('.main-navigation .nav-tab'));
+            return tabs.find(function(btn) {
+                const onclick = btn.getAttribute('onclick') || '';
+                return onclick.indexOf("'" + sectionId + "'") !== -1 || onclick.indexOf('"' + sectionId + '"') !== -1;
+            }) || null;
+        }
+
+        function extractSnippet(fullText, queryRaw) {
+            const text = collapseText(fullText);
+            if (!text) return '';
+
+            const query = collapseText(queryRaw);
+            if (!query) return text.slice(0, 180);
+
+            const lowerText = text.toLowerCase();
+            const lowerQuery = query.toLowerCase();
+            const index = lowerText.indexOf(lowerQuery);
+            if (index === -1) return text.slice(0, 180);
+
+            const start = Math.max(0, index - 55);
+            const end = Math.min(text.length, index + lowerQuery.length + 95);
+            const prefix = start > 0 ? '... ' : '';
+            const suffix = end < text.length ? ' ...' : '';
+            return prefix + text.slice(start, end) + suffix;
+        }
+
+        function buildSearchIndex() {
+            const index = [];
+            const sections = Array.from(document.querySelectorAll('.content-section'))
+                .filter(function(sec) { return sec.id && sec.id !== 'search-section'; });
+
+            sections.forEach(function(sectionEl) {
+                const sectionId = sectionEl.id;
+                const sectionTitle = getSectionTitle(sectionEl);
+                const localSeen = new Set();
+
+                const selectors = [
+                    '.work-card',
+                    '.audio-item .testibg',
+                    '.faq-item',
+                    '.offer-card',
+                    '.offers-announcement-card',
+                    '.sub-service-card',
+                    '.poem-card',
+                    '.testimonial-card',
+                    '.stat-card',
+                    '.timeline-item',
+                    '.verse-container',
+                    'li',
+                    'p'
+                ].join(', ');
+
+                const blocks = Array.from(sectionEl.querySelectorAll(selectors));
+                if (!blocks.length) blocks.push(sectionEl);
+
+                blocks.forEach(function(block) {
+                    if (!block) return;
+                    const text = collapseText(block.innerText || block.textContent || '');
+                    if (text.length < 8) return;
+
+                    const uniqueKey = sectionId + '|' + text.slice(0, 160);
+                    if (localSeen.has(uniqueKey)) return;
+                    localSeen.add(uniqueKey);
+
+                    const heading = block.querySelector('h3, h4, .faq-question, .offer-chip, .poem-title, .section-title');
+                    const itemTitle = collapseText(heading ? (heading.innerText || heading.textContent) : '') || sectionTitle;
+
+                    index.push({
+                        sectionId: sectionId,
+                        sectionTitle: sectionTitle,
+                        itemTitle: itemTitle,
+                        text: text,
+                        normalizedText: normalizeArabic(text)
+                    });
+                });
+            });
+
+            const headerEl = document.querySelector('.main-header');
+            if (headerEl) {
+                const headerText = collapseText(headerEl.innerText || headerEl.textContent || '');
+                if (headerText) {
+                    index.push({
+                        sectionId: 'home-section',
+                        sectionTitle: 'الرئيسية',
+                        itemTitle: 'بيانات التواصل',
+                        text: headerText,
+                        normalizedText: normalizeArabic(headerText)
+                    });
+                }
+            }
+
+            const footerEl = document.querySelector('.modern-footer');
+            if (footerEl) {
+                const footerText = collapseText(footerEl.innerText || footerEl.textContent || '');
+                if (footerText) {
+                    index.push({
+                        sectionId: 'home-section',
+                        sectionTitle: 'الرئيسية',
+                        itemTitle: 'الفوتر',
+                        text: footerText,
+                        normalizedText: normalizeArabic(footerText)
+                    });
+                }
+            }
+
+            return index;
+        }
+
+        function renderResults(matches, queryRaw) {
+            if (!queryRaw.trim()) {
+                resultCountEl.textContent = '';
+                resultsContainerEl.style.display = 'none';
+                noResultsEl.style.display = 'none';
+                resultsGridEl.innerHTML = '';
+                return;
+            }
+
+            if (!matches.length) {
+                resultCountEl.textContent = 'نتائج البحث: 0';
+                resultsContainerEl.style.display = 'none';
+                noResultsEl.style.display = 'block';
+                resultsGridEl.innerHTML = '';
+                return;
+            }
+
+            const maxResults = 80;
+            const shown = matches.slice(0, maxResults);
+
+            resultsGridEl.innerHTML = shown.map(function(item) {
+                const sectionId = escapeHtml(item.sectionId);
+                const title = escapeHtml(item.itemTitle || item.sectionTitle || 'نتيجة بحث');
+                const sectionTitle = escapeHtml(item.sectionTitle || 'القسم');
+                const snippet = escapeHtml(extractSnippet(item.text, queryRaw));
+
+                return '<button type="button" class="work-card search-result-card" data-target="' + sectionId + '">' +
+                       '<div class="search-result-title">' + title + '</div>' +
+                       '<div class="search-result-meta">' + sectionTitle + '</div>' +
+                       '<p class="search-result-snippet">' + snippet + '</p>' +
+                       '</button>';
+            }).join('');
+
+            resultCountEl.textContent = 'نتائج البحث: ' + matches.length + (matches.length > maxResults ? ' (عرض أول ' + maxResults + ')' : '');
+            noResultsEl.style.display = 'none';
+            resultsContainerEl.style.display = 'block';
+
+            resultsGridEl.querySelectorAll('.search-result-card').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    const targetId = card.getAttribute('data-target');
+                    if (!targetId) return;
+
+                    const tabButton = getNavButtonForSection(targetId);
+                    if (typeof switchTab === 'function') {
+                        switchTab(targetId, tabButton);
+                    }
+
+                    const targetSection = document.getElementById(targetId);
+                    const canvas = document.querySelector('.youtube-canvas');
+                    if (targetSection && canvas) {
+                        setTimeout(function() {
+                            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 120);
+                    }
+                });
+            });
+        }
+
+        function doSearch() {
+            const rawQuery = collapseText(inputEl.value || '');
+            const normalizedQuery = normalizeArabic(rawQuery);
+            const terms = normalizedQuery.split(' ').filter(Boolean);
+
+            if (!terms.length) {
+                renderResults([], '');
+                return;
+            }
+
+            const matches = searchState.index.filter(function(item) {
+                return terms.every(function(term) {
+                    return item.normalizedText.indexOf(term) !== -1;
+                });
+            });
+
+            renderResults(matches, rawQuery);
+        }
+
+        searchState.index = buildSearchIndex();
+        window.performLiveSearch = doSearch;
+
+        if (!inputEl.dataset.searchBound) {
+            inputEl.addEventListener('input', doSearch);
+            inputEl.dataset.searchBound = '1';
+        }
+    }
     /* --- Init all page features --- */
     function initAll(){
         safeRun(function(){ if(typeof initObserver==='function') initObserver(); });
@@ -3654,6 +3926,7 @@ body.dark-mode .nav-tab.active {
         safeRun(function(){ if(typeof createFloatingNotes==='function') createFloatingNotes(); });
         safeRun(function(){ if(typeof initMagneticIcons==='function') initMagneticIcons(); });
         safeRun(function(){ if(typeof renderPoems==='function') renderPoems(); });
+        safeRun(function(){ if(typeof initGlobalSearch==='function') initGlobalSearch(); });
         safeRun(function(){ if(typeof initReveal==='function') initReveal(); });
         safeRun(function(){ if(typeof initStickyHeaders==='function') initStickyHeaders(); }); // تفعيل الهيدر الثابت
         safeRun(function(){ if(typeof initFooterVisitCounter==='function') initFooterVisitCounter(); });
