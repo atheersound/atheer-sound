@@ -240,6 +240,8 @@ body.dark-mode .main-navigation { background: rgba(21, 17, 9, 0.9); border-botto
     gap: 6px; flex-wrap: nowrap; flex: 1; justify-content: center;
 }
 
+.nav-tools { position:absolute; inset-inline-end:20px; top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:6px; z-index:3; }
+.nav-tools .theme-toggle-btn { margin-right:0; }
 .nav-tab { 
     text-decoration: none; color: var(--text-dark); 
     font-size: 14.5px;
@@ -957,6 +959,7 @@ body.dark-mode .nav-tab.active {
             }
             .main-navigation {
                 padding: 6px 12px;
+                padding-inline-end: 94px;
             }
             .nav-tabs-container {
                 justify-content: flex-start;
@@ -965,6 +968,15 @@ body.dark-mode .nav-tab.active {
                 scrollbar-width: none;
                 -ms-overflow-style: none;
                 scroll-snap-type: x proximity;
+                padding-inline-end: 86px;
+            }
+            .nav-tools {
+                inset-inline-end: 8px;
+                gap: 4px;
+            }
+            .nav-tools .theme-toggle-btn {
+                width: 34px;
+                height: 34px;
             }
             .nav-tabs-container::-webkit-scrollbar {
                 display: none;
@@ -1065,6 +1077,14 @@ body.dark-mode .nav-tab.active {
             }
             .main-navigation {
                 padding: 5px 8px;
+                padding-inline-end: 82px;
+            }
+            .nav-tabs-container {
+                padding-inline-end: 76px;
+            }
+            .nav-tools .theme-toggle-btn {
+                width: 31px;
+                height: 31px;
             }
             .nav-tab {
                 font-size: 12.5px;
@@ -1213,7 +1233,7 @@ body.dark-mode .nav-tab.active {
       تواصل معنا
      </button>
 </div>
-<div style="position:absolute; inset-inline-end:20px; top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:6px;">
+<div class="nav-tools">
 <button class="theme-toggle-btn" onclick="switchTab('search-section',null); setTimeout(()=&gt;document.getElementById('globalSearchInput').focus(),80);" title="بحث">
 <i class="fas fa-search">
 </i>
