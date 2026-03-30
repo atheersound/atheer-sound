@@ -1202,6 +1202,12 @@ body.dark-mode .nav-tab.active {
                 padding: 16px 14px;
             }
         }
+/* ================= حل مشكلة تغطية الأيقونات لآخر تبويب في الجوال ================= */
+        @media (max-width: 1024px) {
+            .nav-tabs-container .nav-tab:last-child {
+                margin-left: 90px !important; /* يضيف مساحة فارغة بعد آخر زر بمقدار مساحة الأيقونات */
+            }
+        }
 </style>
 </head>
 <body>
