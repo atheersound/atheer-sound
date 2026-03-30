@@ -1455,37 +1455,43 @@ body.dark-mode .floating-audio-mini-btn {
 </div>
 </header>
 
+<style>
+    /* دمج أيقونات البحث والثيم لتكون ضمن التبويبات وتتحرك معها */
+    .nav-tools { position: static !important; transform: none !important; margin-inline-start: 8px; flex-shrink: 0; }
+    @media (max-width: 1024px) {
+        .main-navigation { padding-inline-end: 12px !important; }
+        .nav-tabs-container { padding-inline-end: 12px !important; }
+        .nav-tabs-container::after { display: none !important; }
+    }
+</style>
 <nav class="main-navigation">
-<div class="nav-tabs-container">
-<button class="nav-tab active" id="home-tab" onclick="switchTab('home-section', this)">
-      الرئيسية
-     </button>
-<button class="nav-tab" id="services-tab" onclick="switchTab('services-section', this)">
-      خدماتنا
-     </button>
-<button class="nav-tab" onclick="switchTab('poems-section', this)">
-      قصائد وأشعار
-     </button>
-<button class="nav-tab" onclick="switchTab('offers-section', this)">
-      الإعلانات والعروض
-     </button>
-<button class="nav-tab" onclick="switchTab('contact-section', this)">
-      <i class="fab fa-whatsapp" style="color:#25D366;"></i>
-      تواصل معنا
-     </button>
-</div>
-<div class="nav-tools">
-<button class="theme-toggle-btn" onclick="switchTab('search-section',null); setTimeout(()=&gt;document.getElementById('globalSearchInput').focus(),80);" title="بحث">
-<i class="fas fa-search">
-</i>
-</button>
-<button class="theme-toggle-btn" id="theme-btn" onclick="toggleDarkMode()">
-<i class="fas fa-moon">
-</i>
-</button>
-</div>
-</nav>
-<div class="content-area">
+    <div class="nav-tabs-container">
+        <button class="nav-tab active" id="home-tab" onclick="switchTab('home-section', this)">
+            الرئيسية
+        </button>
+        <button class="nav-tab" id="services-tab" onclick="switchTab('services-section', this)">
+            خدماتنا
+        </button>
+        <button class="nav-tab" onclick="switchTab('poems-section', this)">
+            قصائد وأشعار
+        </button>
+        <button class="nav-tab" onclick="switchTab('offers-section', this)">
+            الإعلانات والعروض
+        </button>
+        <button class="nav-tab" onclick="switchTab('contact-section', this)">
+            <i class="fab fa-whatsapp" style="color:#25D366;"></i> تواصل معنا
+        </button>
+        
+        <div class="nav-tools">
+            <button class="theme-toggle-btn" onclick="switchTab('search-section',null); setTimeout(()=>document.getElementById('globalSearchInput').focus(),80);" title="بحث">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="theme-toggle-btn" id="theme-btn" onclick="toggleDarkMode()">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+</nav><div class="content-area">
 <section class="content-section active-section" id="home-section">
 
 <h2 class="section-title reveal" style="display: block; text-align: center; border-bottom: none; margin-top: 25px;">
