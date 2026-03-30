@@ -944,6 +944,94 @@ body.dark-mode .nav-tab.active {
         }
         .sticky-back-btn:hover { background: var(--primary-red); color: white; border-color: var(--primary-red); transform: translateX(4px); }
 
+        /* ================= Floating Audio Widget ================= */
+        .floating-audio-widget {
+            position: fixed;
+            inset-inline-end: 16px;
+            bottom: 78px;
+            width: min(360px, calc(100vw - 22px));
+            background: linear-gradient(145deg, #f5faff, #e8f1fb);
+            border: 1px solid #a7bed6;
+            border-radius: 14px;
+            box-shadow: 0 12px 30px rgba(6, 29, 57, 0.22);
+            z-index: 12000;
+            padding: 12px;
+            display: none;
+        }
+        .floating-audio-widget.show {
+            display: block;
+            animation: fadeInWidget 0.25s ease;
+        }
+        @keyframes fadeInWidget {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        body.dark-mode .floating-audio-widget {
+            background: linear-gradient(145deg, #2b2113, #1d150d);
+            border-color: #5f4726;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.45);
+        }
+        .floating-audio-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .floating-audio-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary-blue);
+            font-size: 12px;
+            font-weight: 800;
+        }
+        .floating-audio-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.65;
+            margin-bottom: 10px;
+            max-height: 44px;
+            overflow: hidden;
+        }
+        .floating-audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .floating-audio-btn {
+            flex: 1;
+            border: 1px solid var(--border-color);
+            background: var(--bg-white);
+            color: var(--text-dark);
+            border-radius: 10px;
+            padding: 8px 10px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .floating-audio-btn:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+        .floating-audio-btn.stop {
+            border-color: rgba(230,0,0,0.45);
+            color: var(--primary-red);
+        }
+        .floating-audio-btn.stop:hover {
+            background: rgba(230,0,0,0.08);
+            border-color: var(--primary-red);
+        }
+        body.dark-mode .floating-audio-btn {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.2);
+        }
         /* ================= Global Search Results ================= */
         .cards-grid {
             display: grid;
@@ -1097,6 +1185,15 @@ body.dark-mode .nav-tab.active {
                 width: 40px;
                 height: 40px;
                 font-size: 17px;
+            }
+            .floating-audio-widget {
+                inset-inline-end: 10px;
+                bottom: 68px;
+                width: calc(100vw - 20px);
+                padding: 10px;
+            }
+            .floating-audio-title {
+                font-size: 13px;
             }
             .modern-footer {
                 padding: 12px 14px;
@@ -3486,6 +3583,22 @@ body.dark-mode .nav-tab.active {
     </div>
 </div>
 </footer>
+<div id="floatingAudioWidget" class="floating-audio-widget" aria-live="polite">
+    <div class="floating-audio-head">
+        <span class="floating-audio-badge"><i class="fas fa-wave-square"></i>التشغيل الحالي</span>
+    </div>
+    <div id="floatingAudioTitle" class="floating-audio-title">جاري تشغيل ملف صوتي...</div>
+    <div class="floating-audio-controls">
+        <button type="button" id="floatingAudioPlayPause" class="floating-audio-btn">
+            <i class="fas fa-pause"></i>
+            <span>إيقاف مؤقت</span>
+        </button>
+        <button type="button" id="floatingAudioStop" class="floating-audio-btn stop">
+            <i class="fas fa-stop"></i>
+            <span>إيقاف</span>
+        </button>
+    </div>
+</div>
 <button id="backToTop" onclick="document.querySelector('.youtube-canvas').scrollTo({top:0, behavior:'smooth'})" title="العودة للأعلى">
     <i class="fas fa-arrow-up"></i>
 </button>
@@ -3916,6 +4029,123 @@ body.dark-mode .nav-tab.active {
             inputEl.dataset.searchBound = '1';
         }
     }
+
+    function initFloatingAudioWidget() {
+        if (window.__atheerFloatingAudioWidgetBound) return;
+        window.__atheerFloatingAudioWidgetBound = true;
+
+        const widgetEl = document.getElementById('floatingAudioWidget');
+        const titleEl = document.getElementById('floatingAudioTitle');
+        const playPauseBtn = document.getElementById('floatingAudioPlayPause');
+        const stopBtn = document.getElementById('floatingAudioStop');
+        if (!widgetEl || !titleEl || !playPauseBtn || !stopBtn) return;
+
+        let currentAudio = null;
+
+        function cleanText(text) {
+            return (text || '').replace(/\s+/g, ' ').trim();
+        }
+
+        function getAudioTitle(audioEl) {
+            if (!audioEl) return 'ملف صوتي';
+            if (audioEl.dataset && audioEl.dataset.title) return audioEl.dataset.title;
+
+            const directCard = audioEl.closest('.testibg, .work-card, .sub-service-card, .poem-card, .faq-item');
+            if (directCard) {
+                const heading = directCard.querySelector('h3, h4, .faq-question, .poem-title');
+                const headingText = cleanText(heading ? (heading.innerText || heading.textContent) : '');
+                if (headingText) return headingText;
+            }
+
+            const parent = audioEl.parentElement;
+            if (parent) {
+                const nearCaption = parent.querySelector('p');
+                const captionText = cleanText(nearCaption ? (nearCaption.innerText || nearCaption.textContent) : '');
+                if (captionText) return captionText;
+            }
+
+            const sourceEl = audioEl.querySelector('source');
+            const sourceUrl = (sourceEl && sourceEl.getAttribute('src')) || audioEl.getAttribute('src') || '';
+            if (sourceUrl) {
+                const fileName = sourceUrl.split('?')[0].split('/').pop();
+                if (fileName) return decodeURIComponent(fileName);
+            }
+
+            return 'ملف صوتي';
+        }
+
+        function updatePlayPauseState() {
+            const iconEl = playPauseBtn.querySelector('i');
+            const textEl = playPauseBtn.querySelector('span');
+            if (!iconEl || !textEl || !currentAudio) return;
+
+            if (currentAudio.paused) {
+                iconEl.className = 'fas fa-play';
+                textEl.textContent = 'متابعة';
+            } else {
+                iconEl.className = 'fas fa-pause';
+                textEl.textContent = 'إيقاف مؤقت';
+            }
+        }
+
+        function showWidgetFor(audioEl) {
+            currentAudio = audioEl;
+            titleEl.textContent = getAudioTitle(audioEl);
+            widgetEl.classList.add('show');
+            updatePlayPauseState();
+        }
+
+        function hideWidget(resetAudio) {
+            widgetEl.classList.remove('show');
+            if (resetAudio) currentAudio = null;
+        }
+
+        function stopCurrentAudio() {
+            if (!currentAudio) {
+                hideWidget(true);
+                return;
+            }
+            currentAudio.pause();
+            try { currentAudio.currentTime = 0; } catch (e) {}
+            hideWidget(true);
+        }
+
+        playPauseBtn.addEventListener('click', function() {
+            if (!currentAudio) return;
+            if (currentAudio.paused) {
+                currentAudio.play().catch(function(){});
+            } else {
+                currentAudio.pause();
+            }
+            updatePlayPauseState();
+        });
+
+        stopBtn.addEventListener('click', function() {
+            stopCurrentAudio();
+        });
+
+        document.addEventListener('play', function(e) {
+            const el = e.target;
+            if (!(el instanceof HTMLAudioElement)) return;
+            showWidgetFor(el);
+        }, true);
+
+        document.addEventListener('pause', function(e) {
+            const el = e.target;
+            if (!(el instanceof HTMLAudioElement)) return;
+            if (currentAudio && el === currentAudio) {
+                updatePlayPauseState();
+            }
+        }, true);
+
+        document.addEventListener('ended', function(e) {
+            const el = e.target;
+            if (!(el instanceof HTMLAudioElement)) return;
+            if (currentAudio && el === currentAudio) {
+                hideWidget(true);
+            }
+        }, true);
+    }
     /* --- Init all page features --- */
     function initAll(){
         safeRun(function(){ if(typeof initObserver==='function') initObserver(); });
@@ -3923,6 +4153,7 @@ body.dark-mode .nav-tab.active {
         safeRun(function(){ initScrollToTop(); });        
         safeRun(function(){ if(typeof initCustomAudioPlayers==='function') initCustomAudioPlayers(); });
         safeRun(function(){ if(typeof initGlobalAudioExclusivity==='function') initGlobalAudioExclusivity(); });
+        safeRun(function(){ if(typeof initFloatingAudioWidget==='function') initFloatingAudioWidget(); });
         safeRun(function(){ if(typeof createFloatingNotes==='function') createFloatingNotes(); });
         safeRun(function(){ if(typeof initMagneticIcons==='function') initMagneticIcons(); });
         safeRun(function(){ if(typeof renderPoems==='function') renderPoems(); });
