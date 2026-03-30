@@ -48,12 +48,12 @@
        .qs-item {
             display: flex; flex-direction: column;
             align-items: center; justify-content: center; gap: 8px; padding: 15px 10px;
-            background: linear-gradient(145deg, #e7eef6, #d9e3ee); 
-            border: 1px solid #c5d2df;
+            background: linear-gradient(145deg, #cfdeed, #becfe0); 
+            border: 1px solid #a3b8ce;
             border-radius: 12px; cursor: pointer; transition: 0.25s;
             text-decoration: none; text-align: center;
             width: 100%; box-sizing: border-box;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            box-shadow: 0 6px 16px rgba(14, 36, 64, 0.10);
         }
 
         body.dark-mode .qs-item {
@@ -259,6 +259,13 @@ body.dark-mode .nav-tab:hover:not(.active) {
         .work-card:hover { transform: translateY(-5px); border-color: var(--primary-yellow); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
         .work-card h3 { color: var(--primary-blue); margin-bottom: 12px; font-weight: 800; margin-top: 0; }
         .work-card p { opacity: 0.8; line-height: 1.6; margin: 0; font-size: 15px; color: var(--text-dark); }
+        body:not(.dark-mode) .work-card,
+        body:not(.dark-mode) .stat-card,
+        body:not(.dark-mode) .testimonial-card {
+            background: linear-gradient(145deg, #d5e3f0, #c4d4e4);
+            border-color: #a7bdd2;
+            box-shadow: 0 8px 20px rgba(16, 38, 64, 0.14);
+        }
         /* ================= عروض احترافية ================= */
         .offers-board {
             max-width: 980px;
@@ -499,13 +506,21 @@ body.dark-mode .nav-tab:hover:not(.active) {
         .testimonial-card:hover .testimonial-icon { color: var(--primary-yellow); opacity: 0.2; transform: scale(1.1); }
         .audio-item { border: none !important; }
         .audio-item .testibg {
-            background: linear-gradient(150deg, #f3f8fd 0%, #e5edf5 100%);
-            border: 1px solid #b9cadb;
-            border-bottom: 3px solid #a6bbd1;
+            background: linear-gradient(150deg, #c9daec 0%, #b8cde2 100%);
+            border: 1px solid #8ea9c4;
+            border-bottom: 3px solid #7594b3;
             border-radius: 12px; padding: 20px; text-align: center;
             box-shadow: 0 6px 18px rgba(9, 30, 66, 0.10);
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
         }
+        body:not(.dark-mode) .audio-item audio {
+            background: #f5faff;
+            border: 1px solid #9fb4cb;
+            border-radius: 10px;
+            padding: 2px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.55);
+        }
+
         .audio-item .testibg:hover {
             transform: translateY(-5px);
             border-color: #8db0d4;
