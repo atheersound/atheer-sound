@@ -3916,23 +3916,23 @@ body.dark-mode .testibg.playing-active > i {
     }
 
 
-    function initFooterVisitCounter() {
-        const counterEl = document.getElementById('visitCounterNumber');
-        if (!counterEl) return;
+function initFooterVisitCounter() {
+    const counterEl = document.getElementById('visitCounterNumber');
+    if (!counterEl) return;
 
-        const storageKey = 'atheer_total_visits';
-        const sessionKey = 'atheer_visit_counted';
-
-        let total = parseInt(localStorage.getItem(storageKey) || '0', 10);
-        if (!sessionStorage.getItem(sessionKey)) {
-            total += 1;
-            localStorage.setItem(storageKey, String(total));
-            sessionStorage.setItem(sessionKey, '1');
-        }
-
-        counterEl.textContent = total.toLocaleString('ar-EG');
-    }
-
+    // استخدام واجهة مجانية لعمل عداد حقيقي عالمي خاص بأثير ساوند
+    // هذا الرابط سيرفع العداد بمقدار 1 مع كل زيارة ويعيد الرقم الإجمالي
+    fetch('https://api.counterapi.dev/v1/atheersound_website/total_visits/up')
+        .then(response => response.json())
+        .then(data => {
+            // عرض الرقم وتنسيقه بالصيغة العربية
+            counterEl.textContent = data.count.toLocaleString('ar-EG');
+        })
+        .catch(error => {
+            console.error('خطأ في الاتصال بعداد الزيارات:', error);
+            // في حال وجود مشكلة في الاتصال بالإنترنت، نعرض رسالة أو نتركه كما هو
+        });
+}
 
    function initGlobalAudioExclusivity() {
         if (window.__atheerAudioExclusiveBound) return;
