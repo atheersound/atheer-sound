@@ -1463,6 +1463,50 @@ body.dark-mode .floating-audio-mini-btn {
         .nav-tabs-container { padding-inline-end: 12px !important; }
         .nav-tabs-container::after { display: none !important; }
     }
+/* ================= تمييز الملف الصوتي الفعال ================= */
+.testibg.playing-active {
+    border-color: var(--primary-red) !important;
+    box-shadow: 0 0 0 0 rgba(230, 0, 0, 0.4) !important;
+    transform: translateY(-5px);
+    animation: active-audio-pulse 1.5s infinite cubic-bezier(0.66, 0, 0, 1);
+    background: linear-gradient(150deg, #f0f6fc 0%, #e2edf8 100%) !important;
+}
+
+/* تأثير النبض (Pulse) */
+@keyframes active-audio-pulse {
+    to {
+        box-shadow: 0 0 0 15px rgba(230, 0, 0, 0);
+    }
+}
+
+/* تحريك وتلوين الأيقونة بداخل الكارت الذي يعمل */
+.testibg.playing-active > i {
+    color: var(--primary-red) !important;
+    animation: bounce-music-icon 1s infinite alternate ease-in-out;
+    text-shadow: 0 4px 10px rgba(230, 0, 0, 0.3);
+}
+
+@keyframes bounce-music-icon {
+    0% { transform: scale(1) translateY(0); }
+    100% { transform: scale(1.15) translateY(-4px); }
+}
+
+/* التوافق مع الوضع الليلي (Dark Mode) */
+body.dark-mode .testibg.playing-active {
+    background: rgba(33, 24, 15, 0.95) !important;
+    border-color: var(--primary-yellow) !important;
+    animation: active-audio-pulse-dark 1.5s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+body.dark-mode .testibg.playing-active > i {
+    color: var(--primary-yellow) !important;
+    text-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
+}
+
+@keyframes active-audio-pulse-dark {
+    0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.3); }
+    to { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
+}
 </style>
 <nav class="main-navigation">
     <div class="nav-tabs-container">
@@ -3890,17 +3934,52 @@ body.dark-mode .floating-audio-mini-btn {
     }
 
 
-    function initGlobalAudioExclusivity() {
+   function initGlobalAudioExclusivity() {
         if (window.__atheerAudioExclusiveBound) return;
         window.__atheerAudioExclusiveBound = true;
 
+        // عند تشغيل أي ملف صوتي
         document.addEventListener('play', function(e) {
             var current = e.target;
             if (!(current instanceof HTMLAudioElement)) return;
 
+            // 1. إيقاف باقي الملفات
             document.querySelectorAll('audio').forEach(function(a) {
                 if (a !== current && !a.paused) a.pause();
             });
+
+            // 2. إزالة تأثير التشغيل من كل الكروت
+            document.querySelectorAll('.testibg.playing-active').forEach(function(card) {
+                card.classList.remove('playing-active');
+            });
+
+            // 3. إضافة تأثير التشغيل للكارت الحالي
+            var parentCard = current.closest('.testibg');
+            if (parentCard) {
+                parentCard.classList.add('playing-active');
+            }
+
+        }, true);
+
+        // عند إيقاف الملف الصوتي أو انتهائه
+        document.addEventListener('pause', function(e) {
+            var current = e.target;
+            if (!(current instanceof HTMLAudioElement)) return;
+            
+            var parentCard = current.closest('.testibg');
+            if (parentCard) {
+                parentCard.classList.remove('playing-active');
+            }
+        }, true);
+
+        document.addEventListener('ended', function(e) {
+            var current = e.target;
+            if (!(current instanceof HTMLAudioElement)) return;
+            
+            var parentCard = current.closest('.testibg');
+            if (parentCard) {
+                parentCard.classList.remove('playing-active');
+            }
         }, true);
     }
 
