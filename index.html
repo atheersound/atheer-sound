@@ -953,6 +953,39 @@ body.dark-mode .nav-tab.active {
             background: var(--primary-red); color: white; border-color: var(--primary-red); 
             transform: translate(4px, -50%); /* تم إصلاح حركة الزر لكي لا تخرب التوسيط */
         }
+/* ================= المشغل العائم للملفات الصوتية ================= */
+.floating-audio-widget {
+    position: fixed;
+    bottom: 30px;
+    inset-inline-end: 30px; 
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 6px;
+    border-radius: 50px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border: 2px solid var(--border-color);
+    gap: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+body.dark-mode .floating-audio-widget {
+    background: rgba(33, 24, 15, 0.95);
+    border-color: #4f3b20;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+.floating-audio-widget.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
 /* حاوية الأزرار المخفية */
 .floating-audio-controls {
     display: flex;
@@ -1845,6 +1878,7 @@ body.dark-mode .testibg.playing-active > i {
       أعمال للمدارس
      </h2>
 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+
 <div class="work-card audio-item audio-schools">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
@@ -2340,7 +2374,19 @@ body.dark-mode .testibg.playing-active > i {
 </div>
 </div>
 </div>
-</section><section class="content-section" id="zaffat-works"><h2 class="section-title">زفات بالأسماء</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;"><div class="work-card audio-item audio-zaffa">
+</section><section class="content-section" id="zaffat-works"><h2 class="section-title">زفات بالأسماء</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+<div class="work-card audio-item audio-zaffa">
+    <div class="testibg">
+        <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;"></i>
+        <h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
+            يا ليلة النور
+        </h3>
+        <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
+            <source src="https://www.dropbox.com/scl/fi/aav5bqunygazxi2tesgam/yalailat_annoor.mp3?rlkey=7rymvppvocessw8ojdffseapf&st=vti5xeer&raw=1" type="audio/mpeg"/>
+        </audio>
+    </div>
+</div>
+<div class="work-card audio-item audio-zaffa">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -2496,7 +2542,8 @@ body.dark-mode .testibg.playing-active > i {
 <source src=" https://www.dropbox.com/scl/fi/t9evg8ogiw6roh6is5pzy/qom_ahilani.mp3?rlkey=ex65nswe7ydzftnfxyi2l5sxl&amp;st=23vrt05l&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
-</div></div></section><section class="content-section" id="shilat-works"><h2 class="section-title">شيلات بالأسماء</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;"><div class="work-card audio-item audio-shila">
+</div></div></section><section class="content-section" id="shilat-works"><h2 class="section-title">شيلات بالأسماء</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+<div class="work-card audio-item audio-shila">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
