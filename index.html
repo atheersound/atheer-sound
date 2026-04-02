@@ -922,50 +922,37 @@ body.dark-mode .nav-tab.active {
         }
         #backToTop.show { opacity: 1; visibility: visible; transform: translateY(0); }
         #backToTop:hover { background: var(--primary-red); transform: translateY(-3px) scale(1.08); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
-/* ================= الهيدر الثابت للأقسام الفرعية ================= */
-        .sticky-section-header {
+.sticky-section-header {
             position: sticky; top: 75px; z-index: 990;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            padding: 10px 25px 10px 15px; margin: 0 auto 30px auto;
+            margin: 0 auto 30px auto;
             border-radius: 50px; border: 2px solid var(--border-color);
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.06); width: fit-content; gap: 15px; transition: 0.3s;
-        }
-        body.dark-mode .sticky-section-header {
-            background: rgba(33, 24, 15, 0.9); box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-        }
-        .sticky-section-header:hover { border-color: var(--primary-yellow); transform: translateY(-2px); }
-        .sticky-section-header h2 { margin: 0; font-size: 20px; font-weight: 900; color: var(--primary-blue); line-height: 1.2; }
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06); 
+            transition: 0.3s;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; /* هذا السطر يضمن بقاء النص في المنتصف */
+            width: fit-content;
+            min-width: 250px;
+            padding: 10px 55px; /* هذه الحشوة تمنع تداخل النص مع الزر */
+        }     
         .sticky-back-btn {
             background: var(--bg-light); border: 1px solid var(--border-color); color: var(--primary-red);
             width: 36px; height: 36px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer; transition: 0.3s; font-size: 16px; padding: 0;
+            /* فصل الزر تماماً عن مساحة النص وتوسيطه عمودياً */
+            position: absolute; 
+            right: 10px; 
+            top: 50%; 
+            transform: translateY(-50%);
         }
-        .sticky-back-btn:hover { background: var(--primary-red); color: white; border-color: var(--primary-red); transform: translateX(4px); }
-       /* ================= Floating Audio Widget ================= */
-.floating-audio-widget {
-    position: fixed;
-    inset-inline-end: 14px;
-    bottom: 76px;
-    display: none;
-    align-items: center;
-    gap: 6px;
-    padding: 6px;
-    border-radius: 999px;
-    background: transparent;
-    z-index: 12000;
-}
-.floating-audio-widget.show {
-    display: inline-flex;
-    animation: fadeInWidget 0.3s ease;
-}
-@keyframes fadeInWidget {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
+        
+        .sticky-back-btn:hover { 
+            background: var(--primary-red); color: white; border-color: var(--primary-red); 
+            transform: translate(4px, -50%); /* تم إصلاح حركة الزر لكي لا تخرب التوسيط */
+        }
 /* حاوية الأزرار المخفية */
 .floating-audio-controls {
     display: flex;
@@ -3228,7 +3215,7 @@ body.dark-mode .testibg.playing-active > i {
     <div style="text-align: center; margin-bottom: 30px;">
         <h2 class="section-title reveal" style="display: block; text-align: center; border-bottom: none; margin-top: 0;">
             <i class="fas fa-headphones" style="color: var(--primary-red); margin-left: 8px;"></i>
-            باقات التحرير الصوتي
+            التحرير الصوتي
         </h2>
         <p style="font-size: 16px; color: var(--text-dark); opacity: 0.8; margin-bottom: 20px;">
             نضع بين أيديكم خيارات ذكية ومتنوعة للتحليل والمعالجة الصوتية الدقيقة
@@ -3904,7 +3891,7 @@ body.dark-mode .testibg.playing-active > i {
             if(section) {
                 const titleEl = section.querySelector('.section-title');
                 if(titleEl && titleEl.tagName.toLowerCase() === 'h2') {
-                    const titleText = titleEl.innerText || titleEl.textContent;
+                    const titleHTML = titleEl.innerHTML;
                     
                     const stickyHeader = document.createElement('div');
                     stickyHeader.className = 'sticky-section-header';
@@ -3922,12 +3909,12 @@ body.dark-mode .testibg.playing-active > i {
                     };
                     
                     const newTitle = document.createElement('h2');
-                    newTitle.innerText = titleText;
+                    newTitle.innerHTML = titleHTML;
                     
                     stickyHeader.appendChild(backBtn);
                     stickyHeader.appendChild(newTitle);
                     
-                    section.replaceChild(stickyHeader, titleEl);
+                    titleEl.parentNode.replaceChild(stickyHeader, titleEl);
                 }
             }
         });
