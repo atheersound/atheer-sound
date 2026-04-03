@@ -115,14 +115,16 @@
                         #home-section {
             position: relative;
             --home-center-width: 700px;
+            --home-side-width: 206px;
             --home-side-edge: 0px;
+            --home-center-gap: 22px;
         }
 
                 #home-section .most-requested-panel,
         #home-section .home-left-panel {
             position: absolute;
             top: 8px;
-            width: 206px;
+            width: var(--home-side-width);
             margin: 0;
             z-index: 6;
         }
@@ -136,11 +138,30 @@
             padding: 10px;
         }
 
-        #home-section .home-left-panel {
+                #home-section .home-left-panel {
             left: var(--home-side-edge);
             display: flex;
             flex-direction: column;
             gap: 10px;
+        }
+
+        #home-section > .section-title {
+            margin-top: -2px !important;
+            margin-bottom: 12px;
+        }
+
+        #home-section .quick-services,
+        #home-section .header-trust-strip,
+        #home-section .stats-grid,
+        #home-section .testimonials-grid {
+            width: min(var(--home-center-width), calc(100% - (var(--home-side-width) * 2) - (var(--home-side-edge) * 2) - (var(--home-center-gap) * 2)));
+            max-width: min(var(--home-center-width), calc(100% - (var(--home-side-width) * 2) - (var(--home-side-edge) * 2) - (var(--home-center-gap) * 2))) !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        #home-section .quick-services {
+            margin-top: 4px;
         }
 
         #home-section .home-side-block {
@@ -364,9 +385,14 @@
         }
 
                 @media (max-width: 1300px) {
+            #home-section {
+                --home-side-width: 176px;
+                --home-center-gap: 14px;
+            }
+
             #home-section .most-requested-panel,
             #home-section .home-left-panel {
-                width: 176px;
+                width: var(--home-side-width);
                 top: 8px;
             }
 
@@ -393,6 +419,20 @@
         }
 
         @media (max-width: 1160px) {
+            #home-section {
+                --home-center-gap: 0px;
+            }
+
+            #home-section .quick-services,
+            #home-section .header-trust-strip,
+            #home-section .stats-grid,
+            #home-section .testimonials-grid {
+                width: min(var(--home-center-width), 100%);
+                max-width: min(var(--home-center-width), 100%) !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+
             #home-section .most-requested-panel,
             #home-section .home-left-panel {
                 position: static;
@@ -1020,7 +1060,7 @@ body.dark-mode .nav-tab.active {
         
         .qs-item:hover { transform: translateY(-3px); box-shadow: 0 6px 18px var(--card-shadow); }
         .qs-icon { font-size: 21px; }
-        .qs-label { font-size: 12px; font-weight: 700; color: var(--text-dark); line-height: 1.25; }
+        .qs-label { font-size: 13px; font-weight: 700; color: var(--text-dark); line-height: 1.25; }
 
         /* ================= لمسات الفخامة (التحسينات الجديدة) ================= */
         /* 1. Header (الزجاجي) */
@@ -1538,7 +1578,7 @@ body.dark-mode .floating-audio-mini-btn {
                 padding: 13px 8px;
             }
             .qs-label {
-                font-size: 12px;
+                font-size: 13px;
             }
             .social-icons {
                 gap: 7px;
