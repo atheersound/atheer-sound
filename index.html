@@ -79,14 +79,14 @@
         
         .quick-services {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
             margin: 30px auto 0;
-            max-width: 900px;
+            max-width: 700px;
         }
        .qs-item {
             display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 8px; padding: 15px 10px;
+            align-items: center; justify-content: center; gap: 7px; padding: 13px 8px;
             background: linear-gradient(145deg, #cfdeed, #becfe0); 
             border: 1px solid #a3b8ce;
             border-radius: 12px; cursor: pointer; transition: 0.25s;
@@ -110,6 +110,302 @@
         @media (max-width: 500px) {
             .quick-services {
                 grid-template-columns: repeat(2, 1fr);
+            }
+        }
+                        #home-section {
+            position: relative;
+            --home-center-width: 700px;
+            --home-side-gap: 14px;
+        }
+
+                #home-section .most-requested-panel,
+        #home-section .home-left-panel {
+            position: absolute;
+            top: 8px;
+            width: 206px;
+            margin: 0;
+            z-index: 6;
+        }
+
+        #home-section .most-requested-panel {
+            right: calc((100% - var(--home-center-width)) / 2 - 206px - var(--home-side-gap));
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 22px var(--card-shadow);
+            padding: 10px;
+        }
+
+        #home-section .home-left-panel {
+            left: calc((100% - var(--home-center-width)) / 2 - 206px - var(--home-side-gap));
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #home-section .home-side-block {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 22px var(--card-shadow);
+            padding: 10px;
+        }
+
+        #home-section .home-side-title {
+            margin: 0 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary-blue);
+            font-size: 14px;
+            font-weight: 900;
+            line-height: 1.3;
+        }
+
+        #home-section .home-side-text {
+            margin: 0 0 8px;
+            color: var(--text-dark);
+            font-size: 11px;
+            line-height: 1.45;
+            opacity: 0.9;
+        }
+
+        #home-section .home-side-action,
+        #home-section .home-side-alt {
+            display: block;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 800;
+            line-height: 1.35;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            padding: 7px 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #home-section .home-side-action {
+            color: #fff;
+            background: linear-gradient(145deg, var(--primary-blue), #1b75c4);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            margin-bottom: 6px;
+        }
+
+        #home-section .home-side-alt {
+            color: var(--text-dark);
+            background: linear-gradient(145deg, #cfdeed, #becfe0);
+            border: 1px solid #a3b8ce;
+        }
+
+        #home-section .home-side-action:hover,
+        #home-section .home-side-alt:hover,
+        #home-section .most-requested-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(14, 36, 64, 0.12);
+        }
+
+        #home-section .home-side-mini-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        #home-section .home-side-mini-list a {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 11px;
+            font-weight: 800;
+            line-height: 1.35;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            padding: 6px 7px;
+            border: 1px solid #a3b8ce;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #cfdeed, #becfe0);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #home-section .home-side-mini-list a i {
+            color: var(--primary-red);
+            font-size: 11px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        #home-section .home-side-book-link {
+            display: block;
+            text-decoration: none;
+            color: var(--text-dark);
+            border: 1px solid #a3b8ce;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #cfdeed, #becfe0);
+            padding: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #home-section .home-side-book-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(14, 36, 64, 0.12);
+        }
+
+        #home-section .home-side-book-cover {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 14px rgba(0, 0, 0, 0.12);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        #home-section .home-side-book-title {
+            display: block;
+            font-size: 11px;
+            font-weight: 900;
+            line-height: 1.4;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        #home-section .home-side-book-subtitle {
+            display: block;
+            font-size: 10px;
+            font-weight: 800;
+            line-height: 1.4;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        #home-section .most-requested-title {
+            margin: 0 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary-blue);
+            font-size: 15px;
+            font-weight: 900;
+        }
+
+        #home-section .most-requested-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        #home-section .most-requested-link {
+            display: flex;
+            align-items: flex-start;
+            gap: 7px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 11px;
+            line-height: 1.35;
+            font-weight: 800;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            padding: 7px 8px;
+            border: 1px solid #a3b8ce;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #cfdeed, #becfe0);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #home-section .most-requested-link i {
+            color: var(--primary-red);
+            font-size: 11px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        body.dark-mode #home-section .most-requested-link,
+        body.dark-mode #home-section .home-side-alt,
+        body.dark-mode #home-section .home-side-mini-list a {
+            background: linear-gradient(145deg, #2b2113, #1d150d);
+            border-color: #4f3b20;
+        }
+
+        body.dark-mode #home-section .home-side-action {
+            background: linear-gradient(145deg, #8f6a24, #6f531c);
+            border-color: #4f3b20;
+        }
+        body.dark-mode #home-section .home-side-book-link {
+            background: linear-gradient(145deg, #2b2113, #1d150d);
+            border-color: #4f3b20;
+            color: #f0e3c7;
+        }
+
+                @media (max-width: 1300px) {
+            #home-section .most-requested-panel,
+            #home-section .home-left-panel {
+                width: 176px;
+                top: 8px;
+            }
+
+            #home-section .most-requested-panel {
+                right: 8px;
+            }
+
+            #home-section .home-left-panel {
+                left: 8px;
+            }
+
+            #home-section .most-requested-title,
+            #home-section .home-side-title {
+                font-size: 13px;
+            }
+
+            #home-section .most-requested-link,
+            #home-section .home-side-text,
+            #home-section .home-side-action,
+            #home-section .home-side-alt,
+            #home-section .home-side-mini-list a {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 1160px) {
+            #home-section .most-requested-panel,
+            #home-section .home-left-panel {
+                position: static;
+                width: min(360px, 100%);
+                margin: 18px auto 12px;
+            }
+
+            #home-section .home-left-panel {
+                gap: 10px;
+            }
+
+            #home-section .most-requested-title,
+            #home-section .home-side-title {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            #home-section .most-requested-list {
+                gap: 10px;
+            }
+
+            #home-section .most-requested-link,
+            #home-section .home-side-text,
+            #home-section .home-side-action,
+            #home-section .home-side-alt,
+            #home-section .home-side-mini-list a {
+                font-size: 13px;
+                line-height: 1.5;
+                padding: 10px 11px;
+            }
+
+            #home-section .most-requested-link i,
+            #home-section .home-side-mini-list a i {
+                font-size: 13px;
+                margin-top: 0;
             }
         }
 
@@ -279,7 +575,7 @@ body.dark-mode .nav-tab.active {
 }
         /* ================= الأسئلة الشائعة (Accordion) ================= */
         .faq-category-title { color: var(--primary-blue); font-size: 18px; font-weight: 800; margin: 30px 0 15px 0; border-right: 4px solid var(--primary-red); padding-right: 15px; }
-        .faq-accordion { width: 100%; max-width: 900px; margin: 0 auto; }
+        .faq-accordion { width: 100%; max-width: 780px; margin: 0 auto; }
         .faq-item { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 10px; overflow: hidden; transition: 0.3s; }
         .faq-question { width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; text-align: right; color: var(--primary-blue); font-size: 16px; font-weight: 700; transition: 0.3s; }
         .faq-question:hover { background-color: var(--bg-light); }
@@ -440,6 +736,49 @@ body.dark-mode .nav-tab.active {
             font-size: 15px;
             font-weight: 800;
         }
+        .offer-book-card {
+            grid-column: auto;
+        }
+
+        .offer-book-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .offer-book-cover {
+            width: min(220px, 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.14);
+        }
+
+        .offer-book-copy {
+            width: 100%;
+        }
+
+        .offer-book-description {
+            margin: 0;
+            color: var(--text-dark);
+            line-height: 1.9;
+            font-size: 14px;
+            font-weight: 700;
+            opacity: 0.95;
+        }
+        .offers-books-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .offers-books-grid .offer-book-card {
+            margin: 0;
+            height: 100%;
+        }
         .offers-footer {
             margin: 16px 0 0;
             background: linear-gradient(90deg, rgba(0,93,178,0.08), rgba(230,0,0,0.08));
@@ -482,22 +821,23 @@ body.dark-mode .nav-tab.active {
             background: linear-gradient(90deg, rgba(143,106,36,0.16), rgba(123,63,30,0.14));
             border-color: rgba(143,106,36,0.5);
         }
-
         @media (max-width: 768px) {
             .offers-board { padding: 18px 14px; border-radius: 18px; }
             .offers-announcement-text { font-size: 16px; }
             .offer-card { padding: 15px 13px; }
             .offer-text { font-size: 14px; }
+            .offer-book-description { font-size: 13px; }
+            .offers-books-grid { grid-template-columns: 1fr; }
             .offers-footer { font-size: 14px; }
         }
 
         .verse-container { background: var(--bg-white); border-radius: 15px; padding: 20px; margin: 20px auto; max-width: 700px; text-align: center; border-right: 4px solid var(--primary-blue); border-left: 4px solid var(--primary-yellow); }
         .verse-text { font-size: 20px; font-weight: 700; color: var(--primary-blue); font-style: italic; }
 
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 30px auto; max-width: 900px; }
-        .stat-card { background: var(--bg-white); border-radius: 15px; padding: 25px; text-align: center; border: 1px solid var(--border-color); }
-        .stat-number { font-size: 32px; font-weight: 900; display: block; margin: 10px 0; }
-        .stat-label { font-size: 16px; font-weight: 700; color: var(--text-dark); opacity: 0.9; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 24px auto; max-width: 700px; justify-items: center; }
+        .stat-card { background: var(--bg-white); border-radius: 50%; width: 170px; aspect-ratio: 1 / 1; padding: 14px; text-align: center; border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; }
+        .stat-number { font-size: 30px; font-weight: 900; display: block; margin: 4px 0; line-height: 1.1; }
+        .stat-label { font-size: 13px; font-weight: 700; color: var(--text-dark); opacity: 0.9; line-height: 1.45; }
 
         .theme-toggle-btn { background: var(--bg-light); border: none; color: var(--text-dark); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; margin-right: auto; }
         .main-footer { margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--primary-blue); opacity: 0.9; display: flex; justify-content: center; gap: 25px; }
@@ -540,7 +880,7 @@ body.dark-mode .nav-tab.active {
         
         /* ================= ط¢راء شركاء النجاح ================= */
         .testimonials-wrapper { margin-top: 30px; text-align: right; border-top: 1px solid var(--border-color); padding-top: 25px; }
-        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 700px; margin: 0 auto; }
         .testimonial-card { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; position: relative; box-shadow: 0 5px 15px var(--card-shadow); border-right: 4px solid var(--primary-yellow); transition: 0.3s; text-align: right; }
         .testimonial-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); border-color: var(--primary-blue); }
         .testimonial-quote { font-size: 15px; line-height: 1.8; color: var(--text-dark); opacity: 0.9; font-style: italic; margin-bottom: 20px; position: relative; z-index: 2; }
@@ -599,7 +939,7 @@ body.dark-mode .nav-tab.active {
         .header-poem { font-size: 14.5px; font-weight: 800; color: var(--primary-blue); opacity: 0.9; text-align: center; }
         
         .header-trust-strip {
-            display: flex; justify-content: center; align-items: center; gap: 25px;
+            display: flex; justify-content: center; align-items: center; gap: 16px;
         }
         .header-trust-item {
             display: flex; align-items: center; gap: 8px;
@@ -657,8 +997,8 @@ body.dark-mode .nav-tab.active {
         .qs-item.bd-yellow { border-bottom: 3px solid var(--primary-yellow); }
         
         .qs-item:hover { transform: translateY(-3px); box-shadow: 0 6px 18px var(--card-shadow); }
-        .qs-icon { font-size: 24px; }
-        .qs-label { font-size: 13px; font-weight: 700; color: var(--text-dark); line-height: 1.3; }
+        .qs-icon { font-size: 21px; }
+        .qs-label { font-size: 12px; font-weight: 700; color: var(--text-dark); line-height: 1.25; }
 
         /* ================= لمسات الفخامة (التحسينات الجديدة) ================= */
         /* 1. Header (الزجاجي) */
@@ -809,7 +1149,7 @@ body.dark-mode .nav-tab.active {
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     margin: 30px auto;
-    max-width: 900px;
+    max-width: 780px;
     padding: 0 15px;
 }
 @media (max-width: 768px) { .sub-services-grid { grid-template-columns: 1fr; gap: 20px; } }
@@ -1165,7 +1505,8 @@ body.dark-mode .floating-audio-mini-btn {
                 padding-bottom: 10px;
             }
             .stats-grid,
-            .poems-grid {
+            .poems-grid,
+            .testimonials-grid {
                 grid-template-columns: 1fr;
             }
             .quick-services {
@@ -1280,7 +1621,7 @@ body.dark-mode .floating-audio-mini-btn {
         background: linear-gradient(135deg, #151109 0%, #21180f 100%);
     }
     .intro-logo { width: 150px; margin-bottom: 25px; animation: introFadeDown 1s ease; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
-    .intro-title { color: var(--primary-blue); font-size: 24px; font-weight: 900; max-width: 900px; margin-bottom: 25px; line-height: 1.6; animation: introFadeUp 1s ease 0.2s both; }
+    .intro-title { color: var(--primary-blue); font-size: 24px; font-weight: 900; max-width: 780px; margin-bottom: 25px; line-height: 1.6; animation: introFadeUp 1s ease 0.2s both; }
     .intro-text-main { color: var(--text-dark); font-size: 16px; line-height: 1.9; max-width: 850px; margin-bottom: 15px; font-weight: 700; opacity: 0.9; animation: introFadeUp 1s ease 0.4s both; }
     .intro-text-sub { color: var(--text-dark); font-size: 15px; line-height: 1.8; max-width: 800px; margin-bottom: 35px; font-weight: 600; opacity: 0.8; animation: introFadeUp 1s ease 0.6s both; }
     .intro-btn {
@@ -1564,23 +1905,139 @@ body.dark-mode .testibg.playing-active > i {
 </i>
        أعمالنا
       </h2>
-<div class="work-card audio-item reveal" style="max-width: 750px; margin: 10px auto 35px auto; border: 2px solid var(--primary-yellow); box-shadow: 0 8px 25px rgba(255, 204, 0, 0.15);">
-    <div class="testibg" style="border: none; background: transparent; padding: 15px;">
-        <i class="fas fa-crown" style="font-size: 35px; color: var(--primary-yellow); margin-bottom: 15px; display: block;"></i>
-        <h3 style="margin-bottom: 15px; font-size: 19px; color: var(--text-dark); font-weight: 900; line-height: 1.6;">
-            الآن: نصف ساعة من زفة العروس بألحان جميلة ومتنوعة
-               اطلبوا زفتكم بسم عروستكم
-        </h3>
-        
-        <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width: 100%; margin-top: 10px;">
-            <source src="https://www.dropbox.com/scl/fi/gjltija0zu5zhhl655bs7/zaffa.mp3?rlkey=n9y2vnqwlvyh7q4qe0c3stt63&st=03qhpetc&raw=1" type="audio/mpeg"/>
-        </audio>
-        
-        <p style="margin: 12px 0 0; font-size: 15px; color: var(--primary-red); font-weight: 800; text-align: center;">
-            زفة العروس - نصف ساعة
-        </p>
-    </div>
+<aside class="home-left-panel reveal">
+<div class="home-side-block">
+<h3 class="home-side-title"><i class="fas fa-bolt"></i>طلب سريع</h3>
+<p class="home-side-text">ارسل تفاصيل طلبك الآن وخذ رد سريع عبر الواتساب.</p>
+<a class="home-side-action" href="https://wa.me/967770080131" rel="noopener" target="_blank">واتساب مباشر</a>
+<a class="home-side-alt" href="#" onclick="switchTab('contact-section', null); return false;">نموذج التواصل</a>
 </div>
+<div class="home-side-block">
+<h3 class="home-side-title"><i class="fas fa-tags"></i>العروض الحالية</h3>
+<a class="home-side-action" href="#" onclick="switchTab('offers-section', null); return false;">شاهد كل العروض</a>
+<a class="home-side-alt" href="#most-requested-zaffat-half-hour" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffat-half-hour');">عرض زفة نصف ساعة</a>
+</div>
+<div class="home-side-block">
+<h3 class="home-side-title"><i class="fas fa-clock"></i>آخر الإضافات</h3>
+<ul class="home-side-mini-list">
+<li><a href="#most-requested-iyad-noor-alfalah" onclick="return openMostRequestedAudio('nomusic-works', 'most-requested-iyad-noor-alfalah');"><i class="fas fa-music"></i>إياد يا نور الفلاح</a></li>
+<li><a href="#most-requested-ya-laylat-alnour" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-ya-laylat-alnour');"><i class="fas fa-music"></i>يا ليلة النور</a></li>
+<li><a href="#most-requested-zaffat-half-hour" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffat-half-hour');"><i class="fas fa-music"></i>نصف ساعة : زفة العروس</a></li>
+</ul>
+</div>
+<div class="home-side-block">
+<h3 class="home-side-title"><i class="fas fa-book-open"></i>إصداراتنا</h3>
+<a class="home-side-book-link" href="#offer-book-yes-i-can" onclick="return openMostRequestedAudio('offers-section', 'offer-book-yes-i-can');">
+<img alt="كتاب نعم أستطيع" class="home-side-book-cover" loading="lazy" src="yes_opt.webp"/>
+<span class="home-side-book-title">كتاب : نعم أستطيع</span>
+<span class="home-side-book-subtitle">عشرون قصة نجاح ملهمة</span>
+</a>
+<a class="home-side-action" href="https://wa.me/967770080131?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B7%D9%84%D8%A8%20%D9%86%D8%B3%D8%AE%D8%A9%20%D9%85%D9%86%20%D9%83%D8%AA%D8%A7%D8%A8%20%D9%86%D8%B9%D9%85%20%D8%A3%D8%B3%D8%AA%D8%B7%D9%8A%D8%B9" rel="noopener" target="_blank">اطلب نسختك 1.98$</a>
+<a class="home-side-book-link" href="#offer-book-fifty-poetic-riddles" onclick="return openMostRequestedAudio('offers-section', 'offer-book-fifty-poetic-riddles');" style="margin-top:8px;">
+<img alt="كتاب خمسون لغزا شعريا" class="home-side-book-cover" loading="lazy" src="50_cover_opt.webp"/>
+<span class="home-side-book-title">كتاب : خمسون لغزا شعريا</span>
+<span class="home-side-book-subtitle">خمسون لغزا شعريا حصريا للمتعة والفائدة</span>
+</a>
+<a class="home-side-action" href="https://wa.me/967770080131?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B7%D9%84%D8%A8%20%D9%86%D8%B3%D8%AE%D8%A9%20%D9%85%D9%86%20%D9%83%D8%AA%D8%A7%D8%A8%20%D8%AE%D9%85%D8%B3%D9%88%D9%86%20%D9%84%D8%BA%D8%B2%D8%A7%20%D8%B4%D8%B9%D8%B1%D9%8A%D8%A7" rel="noopener" target="_blank">اطلب نسختك 0.99$</a>
+</div></aside>
+<aside class="most-requested-panel reveal">
+<h3 class="most-requested-title">
+<i class="fas fa-fire"></i>
+        الأكثر طلباً:
+      </h3>
+<ul class="most-requested-list">
+<li>
+<a class="most-requested-link" href="#most-requested-ya-laylat-alnour" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-ya-laylat-alnour');">
+<i class="fas fa-music"></i>
+            يا ليلة النور
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-ala-ya-marhaba-hanan" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-ala-ya-marhaba-hanan');">
+<i class="fas fa-music"></i>
+            ألا يا مرحبا .. العروسة حنان
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-arsna-ghair-alradhmi" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-arsna-ghair-alradhmi');">
+<i class="fas fa-music"></i>
+            عرسنا غير .. أفراح آل الرضمي
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-zaffat-half-hour" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffat-half-hour');">
+<i class="fas fa-music"></i>
+            نصف ساعة : زفة العروس
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-shila-ashoul" onclick="return openMostRequestedAudio('shilat-works', 'most-requested-shila-ashoul');">
+<i class="fas fa-music"></i>
+            شيلة مدح للشيخ عبد الله الأشول
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-cover-rouida" onclick="return openMostRequestedAudio('shilat-works', 'most-requested-cover-rouida');">
+<i class="fas fa-music"></i>
+            كوفر شيلة مطورة باسم (رويدا)
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-zafwo-awail-taybah" onclick="return openMostRequestedAudio('schools-works', 'most-requested-zafwo-awail-taybah');">
+<i class="fas fa-music"></i>
+            زفوا الأوائل - مدارس طيبة
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-darb-alnajah-tasneem" onclick="return openMostRequestedAudio('schools-works', 'most-requested-darb-alnajah-tasneem');">
+<i class="fas fa-music"></i>
+            درب النجاح. تكريم الطالبة تسنيم. مدارس منار العلم
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-lilmadrasa-moshtaqeen" onclick="return openMostRequestedAudio('schools-works', 'most-requested-lilmadrasa-moshtaqeen');">
+<i class="fas fa-music"></i>
+            للمدرسة مشتاقين. مدارس يمن الصمود
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-obrit-schools" onclick="return openMostRequestedAudio('schools-works', 'most-requested-obrit-schools');">
+<i class="fas fa-music"></i>
+            مقاطع أوبريت للمدارس
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-tarheeb-alafoq" onclick="return openMostRequestedAudio('schools-works', 'most-requested-tarheeb-alafoq');">
+<i class="fas fa-music"></i>
+            أنشودة ترحيبية مدارس الأفق
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-hato-alfol-nokhba" onclick="return openMostRequestedAudio('schools-works', 'most-requested-hato-alfol-nokhba');">
+<i class="fas fa-music"></i>
+            هاتوا الفل- مدارس النخبة
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-jeel-risala-gharbani" onclick="return openMostRequestedAudio('schools-works', 'most-requested-jeel-risala-gharbani');">
+<i class="fas fa-music"></i>
+            مدارس جيل الرسالة. تكريم الطالب محمد الغرباني
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-yommah-maghlash-cover" onclick="return openMostRequestedAudio('music-works', 'most-requested-yommah-maghlash-cover');">
+<i class="fas fa-music"></i>
+            يمه مغلاش "كوفر"
+          </a>
+</li>
+<li>
+<a class="most-requested-link" href="#most-requested-iyad-noor-alfalah" onclick="return openMostRequestedAudio('nomusic-works', 'most-requested-iyad-noor-alfalah');">
+<i class="fas fa-music"></i>
+            إياد يا نور الفلاح..تكريم الطفل الحافظ إياد الحوري
+          </a>
+</li>
+</ul>
+</aside>
 <div class="quick-services reveal">
     <div class="qs-item bd-blue" onclick="switchTab('zaffat-works', null)">
         <span class="qs-icon"><i class="fas fa-ring" style="color: var(--primary-blue);"></i></span>
@@ -1634,24 +2091,24 @@ body.dark-mode .testibg.playing-active > i {
         <span class="qs-icon"><i class="fas fa-sliders-h" style="color: var(--primary-red);"></i></span>
         <span class="qs-label">التحرير الصوتي</span>
     </div>
-</div><div class="header-trust-strip reveal" style="margin: 30px auto 10px; max-width: 900px; padding: 15px; background: var(--bg-white); border-radius: 15px; border: 1px solid var(--border-color); box-shadow: 0 5px 15px var(--card-shadow); flex-wrap: wrap; justify-content: space-around;">
+</div><div class="header-trust-strip reveal" style="margin: 24px auto 8px; max-width: 700px; padding: 10px 12px; background: var(--bg-white); border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--card-shadow); flex-wrap: wrap; justify-content: space-around;">
     <div class="header-trust-item">
         <div class="header-trust-icon">
             <i class="fas fa-medal" style="color:var(--primary-blue);"></i>
         </div>
-        <span class="header-trust-label" style="font-size: 15px;">جودة عالية</span>
+        <span class="header-trust-label" style="font-size: 13px;">جودة عالية</span>
     </div>
     <div class="header-trust-item">
         <div class="header-trust-icon">
             <i class="fas fa-bolt" style="color:var(--primary-yellow);"></i>
         </div>
-        <span class="header-trust-label" style="font-size: 15px;">تسليم سريع</span>
+        <span class="header-trust-label" style="font-size: 13px;">تسليم سريع</span>
     </div>
     <div class="header-trust-item">
         <div class="header-trust-icon">
             <i class="fas fa-tags" style="color:var(--primary-blue);"></i>
         </div>
-        <span class="header-trust-label" style="font-size: 15px;">أسعار مناسبة</span>
+        <span class="header-trust-label" style="font-size: 13px;">أسعار مناسبة</span>
     </div>
 </div>
 <div class="stats-grid reveal">
@@ -1839,7 +2296,7 @@ body.dark-mode .testibg.playing-active > i {
     </div>
 </section></section></section><section class="content-section" id="poetry-recitation-works">
 <h2 class="section-title">إلقاء قصائد</h2>
-<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px; max-width:900px; margin:0 auto;">
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px; max-width: 780px; margin:0 auto;">
 <div class="work-card audio-item">
 <div class="testibg">
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" onplay="var current=this; document.querySelectorAll('#poetry-recitation-works audio').forEach(function(a){ if(a!==current){ a.pause(); } });" style="width:100%;">
@@ -1879,7 +2336,7 @@ body.dark-mode .testibg.playing-active > i {
      </h2>
 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
 
-<div class="work-card audio-item audio-schools">
+<div class="work-card audio-item audio-schools" id="most-requested-zafwo-awail-taybah">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -1905,7 +2362,7 @@ body.dark-mode .testibg.playing-active > i {
 </audio>
 </div>
 </div>
-<div class="work-card audio-item audio-schools">
+<div class="work-card audio-item audio-schools" id="most-requested-darb-alnajah-tasneem">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -1918,7 +2375,7 @@ body.dark-mode .testibg.playing-active > i {
 </audio>
 </div>
 </div>
-<div class="work-card audio-item audio-schools">
+<div class="work-card audio-item audio-schools" id="most-requested-lilmadrasa-moshtaqeen">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -1931,7 +2388,7 @@ body.dark-mode .testibg.playing-active > i {
 </audio>
 </div>
 </div>
-<div class="work-card audio-item audio-schools">
+<div class="work-card audio-item audio-schools" id="most-requested-obrit-schools">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -2061,7 +2518,7 @@ body.dark-mode .testibg.playing-active > i {
 </audio>
 </div>
 </div>
-<div class="work-card audio-item audio-schools">
+<div class="work-card audio-item audio-schools" id="most-requested-tarheeb-alafoq">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -2100,7 +2557,7 @@ body.dark-mode .testibg.playing-active > i {
 </audio>
 </div>
 </div>
-<div class="work-card audio-item audio-schools">
+<div class="work-card audio-item audio-schools" id="most-requested-hato-alfol-nokhba">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -2191,7 +2648,7 @@ body.dark-mode .testibg.playing-active > i {
 </audio>
 </div>
 </div>
-<div class="work-card audio-item audio-schools">
+<div class="work-card audio-item audio-schools" id="most-requested-jeel-risala-gharbani">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -2282,19 +2739,7 @@ body.dark-mode .testibg.playing-active > i {
 </audio>
 </div>
 </div>
-<div class="work-card audio-item audio-schools">
-<div class="testibg">
-<i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
-</i>
-<h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
-         أيدفن في التراب.. رثاء للأب
-        </h3>
 
-<audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="  https://www.dropbox.com/scl/fi/31zipe9d4kfb9p0zttlor/ayodfan.mp3?rlkey=82rzesy4int2ibklnbl9xu6e6&amp;st=adt56v8y&amp;raw=1" type="audio/mpeg"/>
-</audio>
-</div>
-</div>
 <div class="work-card audio-item audio-schools">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
@@ -2375,7 +2820,18 @@ body.dark-mode .testibg.playing-active > i {
 </div>
 </div>
 </section><section class="content-section" id="zaffat-works"><h2 class="section-title">زفات بالأسماء</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
-<div class="work-card audio-item audio-zaffa">
+<div class="work-card audio-item audio-zaffa" id="most-requested-zaffat-half-hour">
+    <div class="testibg">
+        <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;"></i>
+        <h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
+            نصف ساعة : زفة العروس
+        </h3>
+        <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
+            <source src="https://www.dropbox.com/scl/fi/gjltija0zu5zhhl655bs7/zaffa.mp3?rlkey=n9y2vnqwlvyh7q4qe0c3stt63&st=03qhpetc&raw=1" type="audio/mpeg"/>
+        </audio>
+    </div>
+</div>
+<div class="work-card audio-item audio-zaffa" id="most-requested-ya-laylat-alnour">
     <div class="testibg">
         <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;"></i>
         <h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
@@ -2386,7 +2842,7 @@ body.dark-mode .testibg.playing-active > i {
         </audio>
     </div>
 </div>
-<div class="work-card audio-item audio-zaffa">
+<div class="work-card audio-item audio-zaffa" id="most-requested-ala-ya-marhaba-hanan">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -2398,7 +2854,7 @@ body.dark-mode .testibg.playing-active > i {
 <source src="https://www.dropbox.com/scl/fi/0oetvbznaq6jmhmtznlb3/ghazalin.mp3?rlkey=70s7e99xlpud8ydojkf36ddgp&amp;st=ej4lrkhp&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
-</div><div class="work-card audio-item audio-zaffa">
+</div><div class="work-card audio-item audio-zaffa" id="most-requested-arsna-ghair-alradhmi">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -2523,18 +2979,6 @@ body.dark-mode .testibg.playing-active > i {
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
 <h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
-         أقبلي روان.. لحن شامي
-        </h3>
-
-<audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/pn8s3h0eid1zu9huv3f4i/retha_aldobaili._?rlkey=e6pfzyjsnxe34959wwe0npl4e&amp;st=iutyocy2&amp;raw=1" type="audio/mpeg"/>
-</audio>
-</div>
-</div><div class="work-card audio-item audio-zaffa">
-<div class="testibg">
-<i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
-</i>
-<h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
          ألا قم شلني يا طير
         </h3>
 
@@ -2555,7 +2999,7 @@ body.dark-mode .testibg.playing-active > i {
 <source src="https://www.dropbox.com/scl/fi/lgx3aekrkdryv3k5heciq/shila.mp3?rlkey=e57dr4bwd8yg5n6f2ywn43g5k&amp;st=oxuxg2ba&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
-</div><div class="work-card audio-item audio-shila">
+</div><div class="work-card audio-item audio-shila" id="most-requested-shila-ashoul">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -2567,7 +3011,7 @@ body.dark-mode .testibg.playing-active > i {
 <source src="https://www.dropbox.com/scl/fi/zb6ksj6r3mum7l81bo4t0/shila_mad7.mp3?rlkey=5dwpw43o622v5ise5zyim2vzp&amp;st=sgcut0on&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
-</div><div class="work-card audio-item audio-shila">
+</div><div class="work-card audio-item audio-shila" id="most-requested-cover-rouida">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -2879,7 +3323,7 @@ body.dark-mode .testibg.playing-active > i {
 <source src="https://www.dropbox.com/scl/fi/p3rjsgcsxedr51fo22zh1/assalah.mp3?rlkey=mp8xtuse1zwsoehni9mo7rgij&amp;st=ty92csse&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
-</div><div class="work-card audio-item audio-music">
+</div><div class="work-card audio-item audio-music" id="most-requested-yommah-maghlash-cover">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -3059,8 +3503,20 @@ body.dark-mode .testibg.playing-active > i {
 <source src=" https://www.dropbox.com/scl/fi/fdnjgld4z4iv6trp4vqeh/kifah2.mp3?rlkey=ncb4pwxusw0kw6l1fmg7unsq0&amp;st=q9uduhub&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
+</div><div class="work-card audio-item audio-music">
+<div class="testibg">
+<i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
+</i>
+<h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
+         أيدفن في التراب.. رثاء للأب
+        </h3>
+
+<audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
+<source src="  https://www.dropbox.com/scl/fi/31zipe9d4kfb9p0zttlor/ayodfan.mp3?rlkey=82rzesy4int2ibklnbl9xu6e6&amp;st=adt56v8y&amp;raw=1" type="audio/mpeg"/>
+</audio>
+</div>
 </div></div></section><section class="content-section" id="nomusic-works"><h2 class="section-title">أعمال بدون موسيقا</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
-<div class="work-card audio-item audio-nomusic">
+<div class="work-card audio-item audio-nomusic" id="most-requested-iyad-noor-alfalah">
     <div class="testibg">
         <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;"></i>
         <h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">إياد يا نور الفلاح..تكريم الطفل الحافظ إياد الحوري</h3>
@@ -3086,7 +3542,7 @@ body.dark-mode .testibg.playing-active > i {
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
 <h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
-         ط¢هات بشرية
+         آهات بشرية
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
@@ -3122,7 +3578,7 @@ body.dark-mode .testibg.playing-active > i {
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
 <h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
-         هيا نحفظ قرط¢نا
+         هيا نحفظ قرآنا
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
@@ -3194,7 +3650,7 @@ body.dark-mode .testibg.playing-active > i {
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
 <h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
-         أنتظگ حكاية دهرنا
+         أنتِ حكاية دهرنا
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
@@ -3378,9 +3834,37 @@ body.dark-mode .testibg.playing-active > i {
             </div>
             <p class="offer-text"> اطلب عملين من مؤسسة أثير ساوند واحصل على الثالث مجانا</p>
         </article>
-    </div>
+</div>
 
-    <p class="offers-footer searchable-item">تابعونا لمزيد من العروض الحصرية.</p>
+    <div class="offers-books-grid">
+        <article class="offer-card offer-book-card searchable-item" id="offer-book-yes-i-can">
+            <div class="offer-book-layout">
+                <img alt="غلاف كتاب نعم أستطيع" class="offer-book-cover" loading="lazy" src="yes_opt.webp"/>
+                <div class="offer-book-copy">
+                    <div class="offer-card-head">
+                        <span class="offer-chip">إصدار جديد</span>
+                        <span class="offer-badge">كتاب ملهم</span>
+                    </div>
+                    <p class="offer-text" style="margin-bottom: 10px;">كتاب : نعم أستطيع</p>
+                    <p class="offer-book-description">مجموعة حقيقية من قصص المعاناة العربية والعالمية لأشخاص تحدوا الألم والظروف الصعبة وحققوا نجاحا كبيرا ملهما بالإرادة والتصميم.</p>
+                </div>
+            </div>
+        </article>
+        <article class="offer-card offer-book-card searchable-item" id="offer-book-fifty-poetic-riddles">
+            <div class="offer-book-layout">
+                <img alt="غلاف كتاب خمسون لغزا شعريا" class="offer-book-cover" loading="lazy" src="50_cover_opt.webp"/>
+                <div class="offer-book-copy">
+                    <div class="offer-card-head">
+                        <span class="offer-chip">إصدار جديد</span>
+                        <span class="offer-badge">0.99 $</span>
+                    </div>
+                    <p class="offer-text" style="margin-bottom: 10px;">كتاب : خمسون لغزا شعريا</p>
+                    <p class="offer-book-description">خمسون لغزا شعريا حصريا للمتعة والفائدة.</p>
+                </div>
+            </div>
+        </article>
+</div>
+<p class="offers-footer searchable-item">تابعونا لمزيد من العروض الحصرية.</p>
 </div>
 </section>
 <section class="content-section" id="about-us">
@@ -3900,16 +4384,149 @@ body.dark-mode .testibg.playing-active > i {
     }
 
     /* --- Re-define critical UI functions if broken --- */
+        const __atheerTabRouteMap = {
+        'home-section': '',
+        'services-section': 'services',
+        'poems-section': 'poems',
+        'offers-section': 'offers',
+        'contact-section': 'contact',
+        'search-section': 'search',
+        'audio-works': 'audio',
+        'schools-works': 'schools',
+        'zaffat-works': 'zaffat',
+        'shilat-works': 'shilat',
+        'events-works': 'events',
+        'music-works': 'music',
+        'nomusic-works': 'nomusic',
+        'video-works': 'video',
+        'podcast-works': 'podcast',
+        'editing-works': 'editing',
+        'poetry-recitation-works': 'recitation',
+        'poems-composing-works': 'composing',
+        'about-us': 'about',
+        'terms-section': 'terms',
+        'privacy-section': 'privacy',
+        'faq-section': 'faq'
+    };
+
+    const __atheerRouteTabMap = Object.keys(__atheerTabRouteMap).reduce(function(acc, key) {
+        const slug = __atheerTabRouteMap[key];
+        if (slug) acc[slug] = key;
+        return acc;
+    }, {});
+
+    function __findNavTabBySection(sectionId) {
+        const tabs = Array.from(document.querySelectorAll('.main-navigation .nav-tab'));
+        return tabs.find(function(btn) {
+            const onclick = btn.getAttribute('onclick') || '';
+            return onclick.indexOf("'" + sectionId + "'") !== -1 || onclick.indexOf('"' + sectionId + '"') !== -1;
+        }) || null;
+    }
+
+    function __getRouteBasePath() {
+        const pathname = window.location.pathname || '/';
+        const segments = pathname.split('/').filter(Boolean);
+        if (!segments.length) return '';
+
+        const last = (segments[segments.length - 1] || '').toLowerCase();
+        const isRouteSegment = !!__atheerRouteTabMap[last];
+        const isIndexFile = last === 'index.html';
+        const baseSegments = (isRouteSegment || isIndexFile) ? segments.slice(0, -1) : segments;
+
+        return baseSegments.length ? '/' + baseSegments.join('/') : '';
+    }
+
+    function __getPathForTab(sectionId) {
+        const slug = __atheerTabRouteMap[sectionId] || '';
+        const basePath = __getRouteBasePath();
+        if (!slug) return basePath || '/';
+        return (basePath || '') + '/' + slug;
+    }
+
+    function __readTabFromLocation() {
+        const pathname = (window.location.pathname || '/').replace(/\/+$/, '') || '/';
+        const segments = pathname.split('/').filter(Boolean);
+        let last = segments.length ? (segments[segments.length - 1] || '').toLowerCase() : '';
+        if (last === 'index.html') last = '';
+
+        if (last && __atheerRouteTabMap[last]) {
+            return __atheerRouteTabMap[last];
+        }
+
+        const hashSlug = (window.location.hash || '').replace(/^#\/?/, '').toLowerCase();
+        if (hashSlug && __atheerRouteTabMap[hashSlug]) {
+            return __atheerRouteTabMap[hashSlug];
+        }
+
+        let queryTab = '';
+        try {
+            queryTab = new URLSearchParams(window.location.search || '').get('tab') || '';
+        } catch (e) {
+            queryTab = '';
+        }
+        queryTab = queryTab.toLowerCase();
+
+        if (queryTab && __atheerRouteTabMap[queryTab]) {
+            return __atheerRouteTabMap[queryTab];
+        }
+
+        return 'home-section';
+    }
+
+    function __syncUrlWithTab(sectionId, replaceState) {
+        if (!window.history || typeof window.history.pushState !== 'function') return;
+
+        const nextPath = __getPathForTab(sectionId);
+        const currentPath = window.location.pathname || '/';
+        if (nextPath === currentPath) return;
+
+        const method = replaceState ? 'replaceState' : 'pushState';
+        try {
+            window.history[method]({ sectionId: sectionId }, '', nextPath);
+        } catch (e) {}
+    }
+
+    window.applyTabRouteFromLocation = function(replaceUrl) {
+        let sectionId = __readTabFromLocation();
+        if (!document.getElementById(sectionId)) sectionId = 'home-section';
+
+        const tabBtn = __findNavTabBySection(sectionId);
+        window.__atheerApplyingRoute = true;
+        if (typeof window.switchTab === 'function') {
+            window.switchTab(sectionId, tabBtn);
+        }
+        window.__atheerApplyingRoute = false;
+
+        __syncUrlWithTab(sectionId, replaceUrl !== false);
+    };
+
+    if (!window.__atheerTabRouteEventsBound) {
+        window.__atheerTabRouteEventsBound = true;
+        window.addEventListener('popstate', function() {
+            if (typeof window.applyTabRouteFromLocation === 'function') {
+                window.applyTabRouteFromLocation(false);
+            }
+        });
+    }
     if(typeof window.switchTab !== 'function') {
         window.switchTab = function(tabId, element) {
             document.querySelectorAll('.content-section').forEach(function(s){ s.classList.remove('active-section'); });
             document.querySelectorAll('.nav-tab').forEach(function(t){ t.classList.remove('active'); });
+
             var target = document.getElementById(tabId);
             if(target) target.classList.add('active-section');
-            if(element) element.classList.add('active');
+
+            var navBtn = element || __findNavTabBySection(tabId);
+            if(navBtn) navBtn.classList.add('active');
+
+            if (!window.__atheerApplyingRoute) {
+                __syncUrlWithTab(tabId, false);
+            }
+
             /* scroll to top */
             var canvas = document.querySelector('.youtube-canvas');
             if(canvas) canvas.scrollTo({top:0, behavior:'smooth'});
+
             /* re-trigger reveal */
             setTimeout(function(){
                 document.querySelectorAll('.reveal:not(.active)').forEach(function(el){ el.classList.add('active'); });
@@ -3918,6 +4535,23 @@ body.dark-mode .testibg.playing-active > i {
         };
     }
 
+    if(typeof window.openMostRequestedAudio !== 'function') {
+        window.openMostRequestedAudio = function(sectionId, targetId) {
+            if (typeof window.switchTab === 'function' && sectionId) {
+                window.switchTab(sectionId, null);
+            }
+
+            setTimeout(function() {
+                var target = document.getElementById(targetId);
+                var canvas = document.querySelector('.youtube-canvas');
+                if (target && canvas) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 180);
+
+            return false;
+        };
+    }
     if(typeof window.toggleFaq !== 'function' && typeof window.toggleFAQ !== 'function') {
         window.toggleFaq = function(btn) {
             var item = btn.parentElement;
@@ -4367,6 +5001,12 @@ function initFooterVisitCounter() {
     }    
     /* --- Init all page features --- */
     function initAll(){
+        safeRun(function(){
+            if(typeof applyTabRouteFromLocation==='function' && !window.__atheerInitialRouteApplied){
+                window.__atheerInitialRouteApplied = true;
+                applyTabRouteFromLocation(true);
+            }
+        });
         safeRun(function(){ if(typeof initObserver==='function') initObserver(); });
         safeRun(function(){ animateCounters(); }); 
         safeRun(function(){ initScrollToTop(); });        
