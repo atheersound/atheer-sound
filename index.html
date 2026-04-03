@@ -118,6 +118,8 @@
             --home-side-width: 206px;
             --home-side-edge: 0px;
             --home-center-gap: 22px;
+            --home-space-xs: 8px;
+            --home-space-sm: 12px;
         }
 
                 #home-section .most-requested-panel,
@@ -135,7 +137,7 @@
             border: 1px solid var(--border-color);
             border-radius: 16px;
             box-shadow: 0 8px 22px var(--card-shadow);
-            padding: 10px;
+            padding: var(--home-space-sm);
         }
 
                 #home-section .home-left-panel {
@@ -153,7 +155,8 @@
         #home-section .quick-services,
         #home-section .header-trust-strip,
         #home-section .stats-grid,
-        #home-section .testimonials-grid {
+        #home-section .testimonials-grid,
+        #home-section .home-trust-note {
             width: min(var(--home-center-width), calc(100% - (var(--home-side-width) * 2) - (var(--home-side-edge) * 2) - (var(--home-center-gap) * 2)));
             max-width: min(var(--home-center-width), calc(100% - (var(--home-side-width) * 2) - (var(--home-side-edge) * 2) - (var(--home-center-gap) * 2))) !important;
             margin-left: auto !important;
@@ -163,13 +166,28 @@
         #home-section .quick-services {
             margin-top: 4px;
         }
+        #home-section .home-trust-note {
+            width: min(var(--home-center-width), calc(100% - (var(--home-side-width) * 2) - (var(--home-side-edge) * 2) - (var(--home-center-gap) * 2)));
+            max-width: min(var(--home-center-width), calc(100% - (var(--home-side-width) * 2) - (var(--home-side-edge) * 2) - (var(--home-center-gap) * 2))) !important;
+            margin: 8px auto 10px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--text-dark);
+            opacity: 0.78;
+        }
+
+        body.dark-mode #home-section .home-trust-note {
+            color: #f0e3c7;
+            opacity: 0.9;
+        }
 
         #home-section .home-side-block {
             background: var(--bg-white);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             box-shadow: 0 8px 22px var(--card-shadow);
-            padding: 10px;
+            padding: var(--home-space-sm);
         }
 
         #home-section .home-side-title {
@@ -231,7 +249,7 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: var(--home-space-xs);
         }
 
         #home-section .home-side-mini-list a {
@@ -331,7 +349,7 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            gap: 7px;
+            gap: var(--home-space-xs);
         }
 
         #home-section .most-requested-link {
@@ -426,7 +444,8 @@
             #home-section .quick-services,
             #home-section .header-trust-strip,
             #home-section .stats-grid,
-            #home-section .testimonials-grid {
+            #home-section .testimonials-grid,
+            #home-section .home-trust-note {
                 width: min(var(--home-center-width), 100%);
                 max-width: min(var(--home-center-width), 100%) !important;
                 margin-left: auto !important;
@@ -611,6 +630,7 @@ body.dark-mode .main-navigation { background: rgba(21, 17, 9, 0.9); border-botto
     background: linear-gradient(145deg, var(--bg-white), var(--bg-light));
     box-shadow: 0 4px 0 #d1d5db, 0 5px 10px rgba(0,0,0,0.05);
     display: flex; align-items: center; gap: 6px; 
+    position: relative;
 }
 body.dark-mode .nav-tab {
     background: linear-gradient(145deg, #1e2228, #16191d);
@@ -628,14 +648,31 @@ body.dark-mode .nav-tab:hover:not(.active) {
 }
 body.dark-mode .nav-tab.active {
     background: linear-gradient(145deg, #a07a2b, #6f531c);
-}.nav-tab.active { 
-    background: linear-gradient(145deg, var(--primary-blue), #004a8e);
-    color: #FFFFFF; 
-    border-color: transparent;
-    transform: translateY(4px);
-    box-shadow: 0 0 0 transparent, inset 0 4px 8px rgba(0,0,0,0.3); 
+    border-color: rgba(198,154,58,0.65);
+    box-shadow: 0 0 0 2px rgba(198,154,58,0.25), inset 0 4px 8px rgba(0,0,0,0.35);
 }
-        /* ================= الأسئلة الشائعة (Accordion) ================= */
+.nav-tab.active {
+    background: linear-gradient(145deg, var(--primary-blue), #004a8e);
+    color: #FFFFFF;
+    border-color: rgba(255,255,255,0.65);
+    transform: translateY(4px);
+    box-shadow: 0 0 0 2px rgba(0,93,178,0.18), inset 0 4px 8px rgba(0,0,0,0.3);
+}
+.nav-tab.active::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: -6px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--primary-yellow);
+    opacity: 0.95;
+}
+body.dark-mode .nav-tab.active::after {
+    background: #e2bf78;
+}
+/* ================= الأسئلة الشائعة (Accordion) ================= */
         .faq-category-title { color: var(--primary-blue); font-size: 18px; font-weight: 800; margin: 30px 0 15px 0; border-right: 4px solid var(--primary-red); padding-right: 15px; }
         .faq-accordion { width: 100%; max-width: 780px; margin: 0 auto; }
         .faq-item { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 10px; overflow: hidden; transition: 0.3s; }
@@ -2179,6 +2216,7 @@ body.dark-mode .testibg.playing-active > i {
         <span class="header-trust-label" style="font-size: 13px;">أسعار مناسبة</span>
     </div>
 </div>
+<p class="home-trust-note reveal">تحديث الأعمال باستمرار • تسليم حسب الاتفاق</p>
 <div class="stats-grid reveal">
 <div class="stat-card">
 <span class="stat-number" data-target="300" style="color:var(--primary-blue);">
