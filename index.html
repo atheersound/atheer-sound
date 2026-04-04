@@ -84,6 +84,57 @@
             margin: 30px auto 0;
             max-width: 700px;
         }
+               .featured-works-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 8px auto 12px;
+            padding: 14px 16px;
+            min-height: 68px;
+            width: min(470px, 100%);
+            max-width: 470px;
+            background: linear-gradient(135deg, #f6fbff 0%, #dceaf8 55%, #fef8e8 100%);
+            border: 1px solid #b9cde2;
+            border-radius: 14px;
+            box-shadow: 0 10px 24px rgba(14, 36, 64, 0.12);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .featured-works-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.42) 50%, transparent 100%);
+            transform: translateX(-85%);
+            animation: featuredCardShine 5.5s ease-in-out infinite;
+        }
+        .featured-works-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(31, 127, 201, 0.12);
+            color: var(--primary-blue);
+            font-size: 18px;
+            border: 1px solid rgba(31, 127, 201, 0.22);
+            flex-shrink: 0;
+        }
+        .featured-works-text h3 {
+            margin: 0;
+            color: var(--primary-blue);
+            font-size: 19px;
+            font-weight: 900;
+            line-height: 1.3;
+        }
+        @keyframes featuredCardShine {
+            0%, 42% { transform: translateX(-85%); }
+            58%, 100% { transform: translateX(125%); }
+        }
        .qs-item {
             display: flex; flex-direction: column;
             align-items: center; justify-content: center; gap: 7px; padding: 13px 8px;
@@ -101,7 +152,20 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
-        @media (max-width: 768px) {
+                body.dark-mode .featured-works-card {
+            background: linear-gradient(135deg, #2e2417 0%, #22180f 58%, #38280f 100%);
+            border-color: #60482a;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.36);
+        }
+        body.dark-mode .featured-works-icon {
+            background: rgba(230, 176, 62, 0.14);
+            color: var(--primary-yellow);
+            border-color: rgba(230, 176, 62, 0.35);
+        }
+        body.dark-mode .featured-works-text h3 {
+            color: #ffd37c;
+        }
+@media (max-width: 768px) {
             .quick-services {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -152,6 +216,10 @@
             margin-bottom: 12px;
         }
 
+                #home-section .featured-works-card {
+            width: min(470px, calc(100% - 14px));
+            max-width: 470px !important;
+        }
         #home-section .quick-services,
         #home-section .header-trust-strip,
         #home-section .stats-grid,
@@ -440,9 +508,8 @@
             #home-section {
                 --home-center-gap: 0px;
             }
-
-            #home-section .quick-services,
-            #home-section .header-trust-strip,
+        #home-section .quick-services,
+        #home-section .header-trust-strip,
             #home-section .stats-grid,
             #home-section .testimonials-grid,
             #home-section .home-trust-note {
@@ -1396,18 +1463,18 @@ body.dark-mode .nav-tab.active::after {
 .floating-audio-widget {
     position: fixed;
     bottom: 30px;
-    inset-inline-end: 30px; 
+    inset-inline-end: 30px;
     z-index: 9999;
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 6px;
-    border-radius: 50px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    border: 2px solid var(--border-color);
-    gap: 6px;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    gap: 10px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px) scale(0.9);
@@ -1415,9 +1482,9 @@ body.dark-mode .nav-tab.active::after {
 }
 
 body.dark-mode .floating-audio-widget {
-    background: rgba(33, 24, 15, 0.95);
-    border-color: #4f3b20;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    background: transparent;
+    border: none;
+    box-shadow: none;
 }
 
 .floating-audio-widget.show {
@@ -1429,7 +1496,7 @@ body.dark-mode .floating-audio-widget {
 .floating-audio-controls {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
     max-width: 0;
     overflow: hidden;
     opacity: 0;
@@ -1444,9 +1511,7 @@ body.dark-mode .floating-audio-widget {
 
 /* تمييز الزر الرئيسي عند الفتح */
 .floating-audio-widget.expanded .main-expand-btn {
-    background: var(--primary-blue);
-    color: #fff;
-    border-color: var(--primary-blue);
+    color: var(--primary-blue);
 }
 
 /* إيقاف دوران القرص عند إيقاف الصوت */
@@ -1457,35 +1522,50 @@ body.dark-mode .floating-audio-widget {
 .floating-audio-mini-btn {
     width: 36px;
     height: 36px;
-    border: 1px solid var(--border-color);
-    background: var(--bg-white);
+    border: none;
+    background: transparent;
     color: var(--text-dark);
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: 0.2s;
+    transition: transform 0.2s ease, color 0.2s ease, opacity 0.2s ease;
     padding: 0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: none;
 }
+
+.floating-audio-mini-btn i {
+    font-size: 19px;
+}
+
 .floating-audio-mini-btn:hover {
-    border-color: var(--primary-blue);
     color: var(--primary-blue);
     transform: translateY(-2px);
+    background: transparent;
 }
+
 .floating-audio-mini-btn.close {
-    border-color: rgba(230,0,0,0.3);
     color: var(--primary-red);
 }
+
 .floating-audio-mini-btn.close:hover {
-    border-color: var(--primary-red);
-    background: rgba(230,0,0,0.08);
+    color: var(--primary-red);
+    opacity: 0.85;
 }
+
 body.dark-mode .floating-audio-mini-btn {
-    background: #1e2228;
-    border-color: #30363d;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+body.dark-mode .floating-audio-widget.expanded .main-expand-btn {
+    color: var(--primary-yellow);
+}
+
+body.dark-mode .floating-audio-mini-btn:hover {
+    color: var(--primary-yellow);
 }        /* ================= Global Search Results ================= */
 
         .cards-grid {
@@ -1611,7 +1691,21 @@ body.dark-mode .floating-audio-mini-btn {
             .quick-services {
                 gap: 10px;
             }
-            .qs-item {
+            .featured-works-card {
+                min-height: 62px;
+                padding: 12px 14px;
+                gap: 8px;
+            }
+            .featured-works-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            .featured-works-text h3 {
+                margin: 0;
+                font-size: 17px;
+            }
+       .qs-item {
                 padding: 13px 8px;
             }
             .qs-label {
@@ -1679,6 +1773,11 @@ body.dark-mode .floating-audio-mini-btn {
             }
             .section-title {
                 font-size: 20px;
+            }
+            .featured-works-card {
+                width: 100%;
+                max-width: 100% !important;
+                padding: 12px 10px;
             }
             .quick-services {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1968,6 +2067,36 @@ body.dark-mode .testibg.playing-active > i {
     0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.3); }
     to { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
 }
+
+/* تمييز البطاقة المستهدفة من (آخر الإضافات/الأكثر طلباً) */
+.testibg.targeted-audio-card {
+    border-color: var(--primary-blue) !important;
+    background: linear-gradient(150deg, #f6fbff 0%, #e8f2ff 100%) !important;
+    box-shadow: 0 0 0 0 rgba(11, 110, 224, 0.35) !important;
+    transform: translateY(-4px);
+    animation: target-audio-pulse 1.2s ease-out 4;
+}
+
+.testibg.targeted-audio-card > i {
+    color: var(--primary-blue) !important;
+}
+
+@keyframes target-audio-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(11, 110, 224, 0.35); }
+    100% { box-shadow: 0 0 0 14px rgba(11, 110, 224, 0); }
+}
+
+body.dark-mode .testibg.targeted-audio-card {
+    border-color: var(--primary-yellow) !important;
+    background: rgba(33, 24, 15, 0.95) !important;
+    box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.35) !important;
+}
+
+body.dark-mode .testibg.targeted-audio-card > i {
+    color: var(--primary-yellow) !important;
+}
+    to { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
+}
 </style>
 <nav class="main-navigation">
     <div class="nav-tabs-container">
@@ -2002,8 +2131,15 @@ body.dark-mode .testibg.playing-active > i {
 <h2 class="section-title reveal" style="display: block; text-align: center; border-bottom: none; margin-top: 25px;">
 <i class="fas fa-briefcase" style="color: var(--primary-yellow); margin-left: 0;">
 </i>
-       أعمالنا
+       <span style="color: var(--primary-red);">أعمالنا</span>
       </h2>
+<div class="featured-works-card reveal" role="button" tabindex="0" onclick="switchTab('corporate-identities-works', null)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); switchTab('corporate-identities-works', null);}">
+<span class="featured-works-icon"><i class="fas fa-building"></i></span>
+<div class="featured-works-text">
+<h3>إعلانات لشركات ومؤسسات، وتترات برامج </h3>
+
+</div>
+</div>
 <aside class="home-left-panel reveal">
 <div class="home-side-block">
 <h3 class="home-side-title"><i class="fas fa-bolt"></i>طلب سريع</h3>
@@ -3465,6 +3601,78 @@ body.dark-mode .testibg.playing-active > i {
 <source src="https://www.dropbox.com/scl/fi/ccm7t581iy8m7ae6byxhm/zaffahindi-Cover.mp3?rlkey=x7z7wzzsi8q4ojn740rsn0bnq&amp;st=w8u9tkur&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
+</div></div></section><section class="content-section" id="corporate-identities-works"><h2 class="section-title">إعلانات لشركات ومؤسسات، وتترات برامج</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;"><div class="work-card audio-item audio-voiceover">
+<div class="testibg">
+<i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
+</i>
+<h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
+         المراني للسفريات والسياحة
+        </h3>
+
+<audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
+<source src="https://www.dropbox.com/scl/fi/6lj81zizngstfkrhc963q/safariyat.mp3?rlkey=ftdpra5syv1aked8qfww8fgkz&amp;st=2kc5cv4q&amp;raw=1" type="audio/mpeg"/>
+</audio>
+</div>
+</div><div class="work-card audio-item audio-voiceover">
+<div class="testibg">
+<i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
+</i>
+<h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
+         نجاز . لخدمات الأعراس
+        </h3>
+
+<audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
+<source src="https://www.dropbox.com/scl/fi/hber232smb4c7x6ul76bd/najaz.mp3?rlkey=bc7ailxqfhojf02gkxcooqpgh&amp;st=jl7etpg0&amp;raw=1" type="audio/mpeg"/>
+</audio>
+</div>
+</div><div class="work-card audio-item audio-voiceover">
+<div class="testibg">
+<i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
+</i>
+<h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
+         أثير ساوند للإنتاج الفني
+        </h3>
+
+<audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
+<source src="https://www.dropbox.com/scl/fi/6uuqis4zoobjrpnguq2eo/atheer.mp3?rlkey=zriy7bhgqurd2wh8e6f8p7p15&amp;st=7k9xul04&amp;raw=1" type="audio/mpeg"/>
+</audio>
+</div>
+</div><div class="work-card audio-item audio-voiceover">
+<div class="testibg">
+<i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
+</i>
+<h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
+         تتر برنامج تراحموا
+        </h3>
+
+<audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
+<source src="https://www.dropbox.com/scl/fi/o9jq0p15oaecjghs1qcqy/tarahamo.mp3?rlkey=z9mcaqigh6b3brkt1dk4lr8kh&amp;st=2nis7lqp&amp;raw=1" type="audio/mpeg"/>
+</audio>
+</div>
+</div><div class="work-card audio-item audio-voiceover">
+<div class="testibg">
+<i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
+</i>
+<h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
+         منصة إدراك التعليمية
+        </h3>
+
+<audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
+<source src="https://www.dropbox.com/scl/fi/lzzcete905v92k4645wak/idraak.mp3?rlkey=y865xytc0pftk2w2qf6ksafpj&amp;st=k0h9xn8h&amp;raw=1" type="audio/mpeg"/>
+</audio>
+</div>
+</div><div class="work-card audio-item audio-voiceover">
+<div class="testibg">
+<i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
+</i>
+<h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
+         جمعية البر والإحسان
+        </h3>
+
+<audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
+<source src="https://www.dropbox.com/scl/fi/ts7opck6nn0u6ifya1vvn/birr.mp3?rlkey=juyimeu3mwdyppm84sh4se6po&amp;st=hagn3ujg&amp;raw=1" type="audio/mpeg"/>
+</audio>
+</div>
 </div></div></section><section class="content-section" id="voiceover-works"><h2 class="section-title">التعليق الصوتي</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;"><div class="work-card audio-item audio-voiceover">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
@@ -4503,6 +4711,7 @@ body.dark-mode .testibg.playing-active > i {
         'shilat-works': 'shilat',
         'events-works': 'events',
         'music-works': 'music',
+        'corporate-identities-works': 'identities',
         'nomusic-works': 'nomusic',
         'video-works': 'video',
         'podcast-works': 'podcast',
@@ -4643,17 +4852,39 @@ body.dark-mode .testibg.playing-active > i {
 
     if(typeof window.openMostRequestedAudio !== 'function') {
         window.openMostRequestedAudio = function(sectionId, targetId) {
+            if (!targetId) return false;
+
             if (typeof window.switchTab === 'function' && sectionId) {
                 window.switchTab(sectionId, null);
             }
 
             setTimeout(function() {
                 var target = document.getElementById(targetId);
-                var canvas = document.querySelector('.youtube-canvas');
-                if (target && canvas) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (!target) return;
+
+                target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+
+                var visualCard = target.querySelector('.testibg') || target;
+                document.querySelectorAll('.testibg.targeted-audio-card').forEach(function(card) {
+                    card.classList.remove('targeted-audio-card');
+                });
+
+                visualCard.classList.add('targeted-audio-card');
+
+                if (window.__atheerTargetCardTimer) {
+                    clearTimeout(window.__atheerTargetCardTimer);
                 }
-            }, 180);
+
+                window.__atheerTargetCardTimer = setTimeout(function() {
+                    visualCard.classList.remove('targeted-audio-card');
+                }, 6500);
+
+                var audioEl = target.querySelector('audio');
+                if (audioEl) {
+                    audioEl.setAttribute('tabindex', '-1');
+                    try { audioEl.focus({ preventScroll: true }); } catch (e) {}
+                }
+            }, 220);
 
             return false;
         };
@@ -4681,7 +4912,7 @@ body.dark-mode .testibg.playing-active > i {
 
     /* --- دالة تحويل العناوين إلى ثابتة مع زر الرجوع --- */
     function initStickyHeaders() {
-        const workSections = ['audio-works', 'schools-works', 'zaffat-works', 'shilat-works', 'events-works', 'music-works', 'voiceover-works', 'poems-composing-works', 'nomusic-works', 'video-works', 'podcast-works', 'poetry-recitation-works', 'editing-works'];
+        const workSections = ['audio-works', 'schools-works', 'zaffat-works', 'shilat-works', 'events-works', 'music-works', 'voiceover-works', 'corporate-identities-works', 'poems-composing-works', 'nomusic-works', 'video-works', 'podcast-works', 'poetry-recitation-works', 'editing-works'];
         
         workSections.forEach(id => {
             const section = document.getElementById(id);
@@ -4718,21 +4949,81 @@ body.dark-mode .testibg.playing-active > i {
     }
 
 
+function initCustomAudioPlayers() {
+    if (window.__atheerAudioProtectionBound) return;
+    window.__atheerAudioProtectionBound = true;
+
+    document.querySelectorAll('audio').forEach(function(audioEl) {
+        audioEl.setAttribute('controlslist', 'nodownload noplaybackrate');
+        audioEl.setAttribute('disablepictureinpicture', '');
+        audioEl.setAttribute('disableremoteplayback', '');
+        audioEl.setAttribute('oncontextmenu', 'return false;');
+        audioEl.setAttribute('preload', 'none');
+
+        audioEl.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        audioEl.addEventListener('dragstart', function(e) { e.preventDefault(); });
+    });
+
+    if (!window.__atheerAudioProtectionShortcutsBound) {
+        window.__atheerAudioProtectionShortcutsBound = true;
+
+        document.addEventListener('keydown', function(e) {
+            var key = (e.key || '').toLowerCase();
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && (key === 's' || key === 'u' || key === 'p')) ||
+                (e.ctrlKey && e.shiftKey && (key === 'i' || key === 'j' || key === 'c'))
+            ) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
+
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target && e.target.closest && e.target.closest('audio, .audio-item, .testibg')) {
+                e.preventDefault();
+            }
+        });
+    }
+}
+
 function initFooterVisitCounter() {
     const counterEl = document.getElementById('visitCounterNumber');
-    if (!counterEl) return;
+    if (!counterEl || window.__atheerVisitCounterInitialized) return;
 
-    // استخدام واجهة مجانية لعمل عداد حقيقي عالمي خاص بأثير ساوند
-    // هذا الرابط سيرفع العداد بمقدار 1 مع كل زيارة ويعيد الرقم الإجمالي
-    fetch('https://api.counterapi.dev/v1/atheersound_website/total_visits/up')
-        .then(response => response.json())
-        .then(data => {
-            // عرض الرقم وتنسيقه بالصيغة العربية
-            counterEl.textContent = data.count.toLocaleString('ar-EG');
+    window.__atheerVisitCounterInitialized = true;
+
+    const fallbackKey = 'atheer_visit_counter_fallback';
+    const renderCount = function(value) {
+        const safeValue = Number.isFinite(value) ? Math.max(0, Math.floor(value)) : 0;
+        counterEl.textContent = safeValue.toLocaleString('ar-EG');
+    };
+
+    fetch('https://api.counterapi.dev/v1/atheersound_website/total_visits/up', { cache: 'no-store' })
+        .then(function(response) {
+            if (!response.ok) throw new Error('counter status ' + response.status);
+            return response.json();
         })
-        .catch(error => {
+        .then(function(data) {
+            const total = Number(data && data.count);
+            if (!Number.isFinite(total)) throw new Error('invalid counter response');
+
+            renderCount(total);
+            try { localStorage.setItem(fallbackKey, String(total)); } catch (e) {}
+        })
+        .catch(function(error) {
             console.error('خطأ في الاتصال بعداد الزيارات:', error);
-            // في حال وجود مشكلة في الاتصال بالإنترنت، نعرض رسالة أو نتركه كما هو
+
+            let fallbackCount = 0;
+            try {
+                fallbackCount = parseInt(localStorage.getItem(fallbackKey) || '0', 10) || 0;
+                fallbackCount += 1;
+                localStorage.setItem(fallbackKey, String(fallbackCount));
+            } catch (e) {
+                fallbackCount += 1;
+            }
+
+            renderCount(fallbackCount);
         });
 }
 
@@ -4758,6 +5049,7 @@ function initFooterVisitCounter() {
             // 3. إضافة تأثير التشغيل للكارت الحالي
             var parentCard = current.closest('.testibg');
             if (parentCard) {
+                parentCard.classList.remove('targeted-audio-card');
                 parentCard.classList.add('playing-active');
             }
 
@@ -5144,5 +5436,15 @@ function initFooterVisitCounter() {
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
 
 
