@@ -739,6 +739,131 @@ body.dark-mode .nav-tab.active {
 body.dark-mode .nav-tab.active::after {
     background: #e2bf78;
 }
+.nav-dropdown-toggle {
+    white-space: nowrap;
+}
+.nav-dropdown-caret {
+    font-size: 11px;
+    transition: transform 0.25s ease;
+}
+.nav-dropdown-toggle.is-open {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #b0c4de, 0 8px 15px rgba(0, 93, 178, 0.15);
+}
+body.dark-mode .nav-dropdown-toggle.is-open {
+    box-shadow: 0 6px 0 #6f531c, 0 8px 15px rgba(143, 106, 36, 0.32);
+}
+.nav-dropdown-toggle.is-open .nav-dropdown-caret,
+.nav-dropdown-toggle.active .nav-dropdown-caret {
+    transform: rotate(180deg);
+}
+.works-gallery-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    width: min(920px, calc(100vw - 28px));
+    padding: 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(31, 127, 201, 0.16);
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 18px 42px rgba(14, 36, 64, 0.18);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    z-index: 1006;
+}
+body.dark-mode .works-gallery-dropdown {
+    background: rgba(24, 18, 10, 0.97);
+    border-color: rgba(226, 191, 120, 0.18);
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.42);
+}
+.main-navigation.gallery-menu-open .works-gallery-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+.works-gallery-title {
+    margin: 0 0 12px;
+    color: var(--primary-blue);
+    font-size: 15px;
+    font-weight: 900;
+    text-align: right;
+}
+body.dark-mode .works-gallery-title {
+    color: #ffd37c;
+}
+.works-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    max-height: min(62vh, 390px);
+    overflow-y: auto;
+    padding-left: 2px;
+}
+.works-gallery-grid::-webkit-scrollbar {
+    width: 8px;
+}
+.works-gallery-grid::-webkit-scrollbar-thumb {
+    background: rgba(31, 127, 201, 0.28);
+    border-radius: 999px;
+}
+.works-gallery-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 11px 12px;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    background: linear-gradient(145deg, var(--bg-white), var(--bg-light));
+    color: var(--text-dark);
+    font-size: 13.5px;
+    font-weight: 800;
+    text-align: right;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+body.dark-mode .works-gallery-link {
+    background: linear-gradient(145deg, #22190f, #1a130b);
+    border-color: #4f3b20;
+}
+.works-gallery-link:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+    box-shadow: 0 10px 20px rgba(14, 36, 64, 0.12);
+}
+body.dark-mode .works-gallery-link:hover {
+    color: #ffd37c;
+    border-color: rgba(226, 191, 120, 0.5);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+}
+.works-gallery-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(31, 127, 201, 0.12);
+    border: 1px solid rgba(31, 127, 201, 0.18);
+}
+body.dark-mode .works-gallery-icon {
+    background: rgba(226, 191, 120, 0.12);
+    border-color: rgba(226, 191, 120, 0.22);
+}
+.works-gallery-text {
+    flex: 1;
+    line-height: 1.35;
+}
 /* ================= الأسئلة الشائعة (Accordion) ================= */
         .faq-category-title { color: var(--primary-blue); font-size: 18px; font-weight: 800; margin: 30px 0 15px 0; border-right: 4px solid var(--primary-red); padding-right: 15px; }
         .faq-accordion { width: 100%; max-width: 780px; margin: 0 auto; }
@@ -1641,6 +1766,13 @@ body.dark-mode .floating-audio-mini-btn:hover {
                 white-space: nowrap;
                 scroll-snap-align: start;
             }
+            .works-gallery-dropdown {
+                width: min(760px, calc(100vw - 20px));
+                padding: 12px;
+            }
+            .works-gallery-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
             .sticky-section-header {
                 top: 66px;
                 max-width: calc(100% - 24px);
@@ -1770,6 +1902,20 @@ body.dark-mode .floating-audio-mini-btn:hover {
                 font-size: 12.5px;
                 padding: 7px 10px;
                 border-radius: 9px;
+            }
+            .works-gallery-dropdown {
+                top: calc(100% + 8px);
+                width: calc(100vw - 16px);
+                border-radius: 16px;
+                padding: 10px;
+            }
+            .works-gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .works-gallery-link {
+                font-size: 12.5px;
+                padding: 10px;
             }
             .section-title {
                 font-size: 20px;
@@ -2106,6 +2252,10 @@ body.dark-mode .testibg.targeted-audio-card > i {
         <button class="nav-tab" id="services-tab" onclick="switchTab('services-section', this)">
             خدماتنا
         </button>
+        <button class="nav-tab nav-dropdown-toggle" id="gallery-tab" type="button" data-section-group="zaffat-works,shilat-works,events-works,schools-works,voiceover-works,poetry-recitation-works,poems-composing-works,music-works,nomusic-works,video-works,podcast-works,editing-works" onclick="return toggleWorksGalleryMenu(this);" aria-haspopup="true" aria-controls="worksGalleryDropdown" aria-expanded="false">
+            معرض الأعمال
+            <i class="fas fa-chevron-down nav-dropdown-caret"></i>
+        </button>
         <button class="nav-tab" onclick="switchTab('poems-section', this)">
             قصائد وأشعار
         </button>
@@ -2124,6 +2274,10 @@ body.dark-mode .testibg.targeted-audio-card > i {
                 <i class="fas fa-moon"></i>
             </button>
         </div>
+    </div>
+    <div class="works-gallery-dropdown" id="worksGalleryDropdown" aria-labelledby="gallery-tab" aria-hidden="true">
+        <h3 class="works-gallery-title">عناوين معرض الأعمال</h3>
+        <div class="works-gallery-grid" id="worksGalleryGrid"></div>
     </div>
 </nav><div class="content-area">
 <section class="content-section active-section" id="home-section">
@@ -4760,11 +4914,26 @@ body.dark-mode .testibg.targeted-audio-card > i {
         return acc;
     }, {});
 
+    function __navTabMatchesSection(btn, sectionId) {
+        if (!btn || !sectionId) return false;
+
+        const groupedSections = (btn.getAttribute('data-section-group') || '')
+            .split(',')
+            .map(function(value) { return value.trim(); })
+            .filter(Boolean);
+
+        if (groupedSections.indexOf(sectionId) !== -1) {
+            return true;
+        }
+
+        const onclick = btn.getAttribute('onclick') || '';
+        return onclick.indexOf("'" + sectionId + "'") !== -1 || onclick.indexOf('"' + sectionId + '"') !== -1;
+    }
+
     function __findNavTabBySection(sectionId) {
         const tabs = Array.from(document.querySelectorAll('.main-navigation .nav-tab'));
         return tabs.find(function(btn) {
-            const onclick = btn.getAttribute('onclick') || '';
-            return onclick.indexOf("'" + sectionId + "'") !== -1 || onclick.indexOf('"' + sectionId + '"') !== -1;
+            return __navTabMatchesSection(btn, sectionId);
         }) || null;
     }
 
@@ -4857,6 +5026,9 @@ body.dark-mode .testibg.targeted-audio-card > i {
         window.switchTab = function(tabId, element) {
             document.querySelectorAll('.content-section').forEach(function(s){ s.classList.remove('active-section'); });
             document.querySelectorAll('.nav-tab').forEach(function(t){ t.classList.remove('active'); });
+            if (typeof window.closeWorksGalleryMenu === 'function') {
+                window.closeWorksGalleryMenu();
+            }
 
             var target = document.getElementById(tabId);
             if(target) target.classList.add('active-section');
@@ -4877,6 +5049,61 @@ body.dark-mode .testibg.targeted-audio-card > i {
                 document.querySelectorAll('.reveal:not(.active)').forEach(function(el){ el.classList.add('active'); });
                 document.querySelectorAll('.reveal-left:not(.visible)').forEach(function(el){ el.classList.add('visible'); });
             }, 400);
+        };
+    }
+
+    if (typeof window.closeWorksGalleryMenu !== 'function') {
+        window.closeWorksGalleryMenu = function() {
+            var navEl = document.querySelector('.main-navigation');
+            var toggleBtn = document.getElementById('gallery-tab');
+            var dropdownEl = document.getElementById('worksGalleryDropdown');
+
+            if (navEl) navEl.classList.remove('gallery-menu-open');
+            if (toggleBtn) {
+                toggleBtn.classList.remove('is-open');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+            }
+            if (dropdownEl) {
+                dropdownEl.setAttribute('aria-hidden', 'true');
+            }
+        };
+    }
+
+    if (typeof window.toggleWorksGalleryMenu !== 'function') {
+        window.toggleWorksGalleryMenu = function(buttonEl) {
+            if (typeof window.initWorksGalleryDropdown === 'function') {
+                window.initWorksGalleryDropdown();
+            }
+
+            var navEl = document.querySelector('.main-navigation');
+            var toggleBtn = buttonEl || document.getElementById('gallery-tab');
+            var dropdownEl = document.getElementById('worksGalleryDropdown');
+            if (!navEl || !toggleBtn || !dropdownEl) return false;
+
+            var willOpen = !navEl.classList.contains('gallery-menu-open');
+            window.closeWorksGalleryMenu();
+
+            if (willOpen) {
+                navEl.classList.add('gallery-menu-open');
+                toggleBtn.classList.add('is-open');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+                dropdownEl.setAttribute('aria-hidden', 'false');
+            }
+
+            return false;
+        };
+    }
+
+    if (typeof window.openGallerySection !== 'function') {
+        window.openGallerySection = function(sectionId) {
+            if (!sectionId) return false;
+
+            var galleryTab = document.getElementById('gallery-tab');
+            if (typeof window.switchTab === 'function') {
+                window.switchTab(sectionId, galleryTab);
+            }
+
+            return false;
         };
     }
 
@@ -5156,10 +5383,81 @@ function initFooterVisitCounter() {
         function getNavButtonForSection(sectionId) {
             const tabs = Array.from(document.querySelectorAll('.main-navigation .nav-tab'));
             return tabs.find(function(btn) {
-                const onclick = btn.getAttribute('onclick') || '';
-                return onclick.indexOf("'" + sectionId + "'") !== -1 || onclick.indexOf('"' + sectionId + '"') !== -1;
+                return __navTabMatchesSection(btn, sectionId);
             }) || null;
         }
+
+        function initWorksGalleryDropdown() {
+            const gridEl = document.getElementById('worksGalleryGrid');
+            const toggleBtn = document.getElementById('gallery-tab');
+            if (!gridEl || !toggleBtn || gridEl.dataset.ready === '1') return;
+
+            const sourceCards = Array.from(document.querySelectorAll('#home-section .quick-services .qs-item'));
+            if (!sourceCards.length) return;
+
+            gridEl.innerHTML = '';
+
+            const groupedSections = [];
+
+            sourceCards.forEach(function(card) {
+                const onclick = card.getAttribute('onclick') || '';
+                const match = onclick.match(/switchTab\((['"])([^'"]+)\1/);
+                const sectionId = match ? match[2] : '';
+                const labelEl = card.querySelector('.qs-label');
+                const iconEl = card.querySelector('.qs-icon');
+                const label = labelEl ? (labelEl.textContent || '').trim() : '';
+
+                if (!sectionId || !label) return;
+
+                groupedSections.push(sectionId);
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'works-gallery-link';
+                btn.setAttribute('data-target', sectionId);
+
+                const iconWrap = document.createElement('span');
+                iconWrap.className = 'works-gallery-icon';
+                iconWrap.innerHTML = iconEl ? iconEl.innerHTML : '<i class="fas fa-folder-open"></i>';
+
+                const textWrap = document.createElement('span');
+                textWrap.className = 'works-gallery-text';
+                textWrap.textContent = label;
+
+                btn.appendChild(iconWrap);
+                btn.appendChild(textWrap);
+                btn.addEventListener('click', function() {
+                    window.openGallerySection(sectionId);
+                });
+
+                gridEl.appendChild(btn);
+            });
+
+            if (groupedSections.length) {
+                toggleBtn.setAttribute('data-section-group', groupedSections.join(','));
+            }
+
+            if (!window.__worksGalleryEventsBound) {
+                window.__worksGalleryEventsBound = true;
+
+                document.addEventListener('click', function(event) {
+                    if (event.target.closest('#gallery-tab') || event.target.closest('#worksGalleryDropdown')) {
+                        return;
+                    }
+                    window.closeWorksGalleryMenu();
+                });
+
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'Escape') {
+                        window.closeWorksGalleryMenu();
+                    }
+                });
+            }
+
+            gridEl.dataset.ready = '1';
+        }
+
+        window.initWorksGalleryDropdown = initWorksGalleryDropdown;
 
         function extractSnippet(fullText, queryRaw) {
             const text = collapseText(fullText);
@@ -5445,6 +5743,7 @@ function initFooterVisitCounter() {
         safeRun(function(){ if(typeof initMagneticIcons==='function') initMagneticIcons(); });
         safeRun(function(){ if(typeof renderPoems==='function') renderPoems(); });
         safeRun(function(){ if(typeof initGlobalSearch==='function') initGlobalSearch(); });
+        safeRun(function(){ if(typeof initWorksGalleryDropdown==='function') initWorksGalleryDropdown(); });
         safeRun(function(){ if(typeof initReveal==='function') initReveal(); });
         safeRun(function(){ if(typeof initStickyHeaders==='function') initStickyHeaders(); }); // تفعيل الهيدر الثابت
         safeRun(function(){ if(typeof initFooterVisitCounter==='function') initFooterVisitCounter(); });
