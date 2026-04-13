@@ -5374,7 +5374,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
 <div class="contact-form-panel reveal searchable-item">
 <div class="contact-form-head">
 <h3 class="contact-panel-title">أرسل لنا رسالة</h3>
-<p class="contact-panel-intro">املأ ما يناسبك من البيانات، وسنفتح لك رسالة جاهزة مباشرة إلى واتساب اليمن. جميع الحقول هنا اختيارية.</p>
+<p class="contact-panel-intro">اختر الخدمة المطلوبة ووجهة الإرسال، ثم املأ ما يناسبك من البيانات وسنفتح لك رسالة جاهزة مباشرة إلى الواتساب الذي تحدده.</p>
 </div>
 <form class="contact-form-shell" id="atheerContactForm" novalidate="" onsubmit="return submitContactForm(event);">
 <div class="contact-grid-two">
@@ -5399,9 +5399,9 @@ body.dark-mode .testibg.targeted-audio-card > i {
 </div>
 <div class="contact-grid-two">
 <label class="contact-field">
-<span>الخدمة المطلوبة (اختياري)</span>
-<select id="contactService" name="service">
-<option value="">اختر الخدمة المطلوبة إن رغبت</option>
+<span>الخدمة المطلوبة *</span>
+<select id="contactService" name="service" required="">
+<option value="">اختر الخدمة المطلوبة</option>
 <option>زفات بالأسماء</option>
 <option>شيلات بالأسماء</option>
 <option>مناسبات بالأسماء</option>
@@ -5419,7 +5419,10 @@ body.dark-mode .testibg.targeted-audio-card > i {
 </label>
 <label class="contact-field">
 <span>جهة الإرسال</span>
-<input id="contactChannel" name="channel_label" readonly="" type="text" value="واتساب اليمن"/>
+<select id="contactChannel" name="channel" required="">
+<option value="ye">واتساب اليمن</option>
+<option value="sa">واتساب السعودية</option>
+</select>
 </label>
 </div>
 <label class="contact-field">
@@ -5427,13 +5430,12 @@ body.dark-mode .testibg.targeted-audio-card > i {
 <input autocomplete="organization" id="contactEntity" name="entity" placeholder="مثال: زفاف نورة - مؤسسة ..." type="text"/>
 </label>
 <label class="contact-field">
-<span>تفاصيل الطلب (اختياري)</span>
-<textarea id="contactMessage" name="message" placeholder="اكتب ما تريد إرساله عبر واتساب اليمن، مثل نوع الخدمة أو الأسماء المطلوبة أو أي ملاحظات أخرى..."></textarea>
+<span>تفاصيل الطلب *</span>
+<textarea id="contactMessage" name="message" placeholder="اكتب تفاصيل الطلب، مثل نوع الخدمة أو الأسماء المطلوبة أو أي ملاحظات أخرى..." required=""></textarea>
 </label>
-<div class="contact-hint">يمكنك ترك كل الحقول فارغة إن أردت، وسيتم فتح واتساب اليمن برسالة تواصل افتراضية. وإذا كتبت أي بيانات فستُضاف تلقائيًا إلى الرسالة.</div>
+<div class="contact-hint">الخدمة المطلوبة وتفاصيل الطلب مطلوبتان، أما بقية الحقول فهي اختيارية. سيتم الإرسال افتراضيًا إلى واتساب اليمن ما لم يختَر العميل واتساب السعودية.</div>
 <div class="contact-form-actions">
-<button class="contact-submit-btn" type="submit"><i class="fab fa-whatsapp"></i>إرسال إلى واتساب اليمن</button>
-<a class="contact-inline-link" href="https://wa.me/967770080131" rel="noopener" target="_blank"><i class="fab fa-whatsapp"></i>واتساب اليمن مباشر</a>
+<button class="contact-submit-btn" type="submit"><i class="fab fa-whatsapp"></i>إرسال</button>
 </div>
 <div class="contact-form-feedback" id="contactFormFeedback" aria-live="polite"></div>
 </form>
@@ -5863,23 +5865,37 @@ body.dark-mode .testibg.targeted-audio-card > i {
                 feedback.classList.remove('is-success', 'is-error');
             }
 
+            if (typeof form.reportValidity === 'function' && !form.reportValidity()) {
+                if (feedback) {
+                    feedback.textContent = 'يرجى اختيار الخدمة المطلوبة وكتابة تفاصيل الطلب قبل المتابعة.';
+                    feedback.classList.add('is-error');
+                }
+                return false;
+            }
+
             var firstName = ((document.getElementById('contactFirstName') || {}).value || '').trim();
             var lastName = ((document.getElementById('contactLastName') || {}).value || '').trim();
             var email = ((document.getElementById('contactEmail') || {}).value || '').trim();
             var phone = ((document.getElementById('contactPhone') || {}).value || '').trim();
             var serviceEl = document.getElementById('contactService');
+            var channelEl = document.getElementById('contactChannel');
             var entity = ((document.getElementById('contactEntity') || {}).value || '').trim();
             var message = ((document.getElementById('contactMessage') || {}).value || '').trim();
 
             var service = serviceEl && serviceEl.options && serviceEl.selectedIndex >= 0
                 ? (serviceEl.options[serviceEl.selectedIndex].text || '').trim()
                 : '';
+            var channel = channelEl ? (channelEl.value || '').trim() : 'ye';
+            var channelLabel = channelEl && channelEl.options && channelEl.selectedIndex >= 0
+                ? (channelEl.options[channelEl.selectedIndex].text || '').trim()
+                : 'واتساب اليمن';
             var fullName = (firstName + ' ' + lastName).replace(/\s+/g, ' ').trim();
             var formattedMessageParts = [
                 'السلام عليكم،',
-                'لدي طلب عبر نموذج موقع أثير ساوند.'
+                'لدي طلب عبر نموذج موقع أثير ساوند.',
+                'الخدمة المطلوبة: ' + service,
+                'وجهة الإرسال: ' + channelLabel
             ];
-            if (service) formattedMessageParts.push('الخدمة المطلوبة: ' + service);
             if (fullName) formattedMessageParts.push('الاسم: ' + fullName);
             if (email) formattedMessageParts.push('البريد الإلكتروني: ' + email);
             if (phone) formattedMessageParts.push('رقم الهاتف: ' + phone);
@@ -5888,12 +5904,13 @@ body.dark-mode .testibg.targeted-audio-card > i {
                 formattedMessageParts.push('تفاصيل الطلب:');
                 formattedMessageParts.push(message);
             }
-            if (!service && !fullName && !email && !phone && !entity && !message) {
-                formattedMessageParts.push('أرغب بالتواصل والاستفسار عن خدماتكم.');
+            if (!fullName && !email && !phone && !entity && !message) {
+                formattedMessageParts.push('أرغب بالتواصل والاستفسار عن هذه الخدمة.');
             }
             var formattedMessage = formattedMessageParts.join('\n');
 
-            var whatsappUrl = 'https://wa.me/967770080131?text=' + encodeURIComponent(formattedMessage);
+            var targetPhone = channel === 'sa' ? '966560049754' : '967770080131';
+            var whatsappUrl = 'https://wa.me/' + targetPhone + '?text=' + encodeURIComponent(formattedMessage);
             var popup = window.open(whatsappUrl, '_blank', 'noopener');
 
             form.dataset.sending = '1';
@@ -5903,7 +5920,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
             }
 
             if (feedback) {
-                feedback.textContent = 'يجري فتح واتساب اليمن الآن بالرسالة الجاهزة...';
+                feedback.textContent = 'يجري فتح ' + channelLabel + ' الآن بالرسالة الجاهزة...';
                 feedback.classList.add('is-success');
             }
 
@@ -5915,8 +5932,8 @@ body.dark-mode .testibg.targeted-audio-card > i {
                 }
                 if (feedback) {
                     feedback.textContent = !popup
-                        ? 'تعذر فتح واتساب تلقائيًا. استخدم زر واتساب اليمن المباشر أسفل النموذج.'
-                        : 'تم تجهيز الرسالة على واتساب اليمن.';
+                        ? 'تعذر فتح الواتساب تلقائيًا. استخدم أزرار الواتساب المباشرة أسفل النموذج.'
+                        : 'تم تجهيز الرسالة على ' + channelLabel + '.';
                     feedback.classList.remove('is-error');
                     feedback.classList.add(popup ? 'is-success' : 'is-error');
                 }
