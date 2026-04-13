@@ -52,13 +52,13 @@
             --primary-blue: #005DB2;
             --primary-red: #E60000; 
             --primary-yellow: #FFCC00; 
-            --bg-light: #e4edf6;
-            --bg-white: #f0f6fc;
-            --text-dark: #222222;
-            --border-color: #cddceb;
+            --bg-light: #d6e1eb;
+            --bg-white: #e7eef5;
+            --text-dark: #1f2429;
+            --border-color: #b9cada;
             --card-shadow: rgba(0,0,0,0.04);
-            --badge-bg: #e2edf8;
-            --badge-border: #bdd4e7;
+            --badge-bg: #d5e2ee;
+            --badge-border: #afc3d6;
         }
 
                 body.dark-mode {
@@ -101,6 +101,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         .featured-works-card::after {
             content: "";
@@ -557,16 +558,35 @@
             }
         }
 
+        html {
+            min-height: 100%;
+        }
+
         body {
-            margin: 0; padding: 0; background-color: #2c3e50; 
-            display: flex; justify-content: center; align-items: center; min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow: hidden;
             transition: background-color 0.3s ease;
         }
 
         .youtube-canvas {
-            aspect-ratio: 16 / 9; width: 100%; max-width: 1920px; max-height: 100vh;
-            background-color: var(--bg-light); position: relative; overflow-y: auto;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5); display: flex; flex-direction: column;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            min-height: 100vh;
+            background-color: var(--bg-light);
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
             scroll-behavior: smooth;
         }
 
@@ -608,7 +628,7 @@
 
         /* ================= الشريط الإعلاني (Ticker) ================= */
         .announcement-bar {
-            background-color: var(--primary-blue);
+            background: linear-gradient(90deg, var(--primary-blue), #1c6ebd);
             color: #fff;
             display: flex;
             align-items: center;
@@ -658,8 +678,19 @@
             gap: 8px;
             padding: 0 40px;
         }
+        .ticker-link {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        .ticker-link:hover {
+            opacity: 0.9;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
         .ticker-item::before {
-            content: "â‌–";
+            content: "•";
             color: var(--primary-yellow);
             font-size: 12px;
         }
@@ -672,7 +703,7 @@
         /* التنسيق الجديد للملاحة الرئيسية والتبويبات */
 .main-navigation { 
     position: sticky; top: 0; z-index: 1000;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(231, 238, 245, 0.94);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     border-bottom: 3px solid var(--primary-blue);
     padding: 6px 30px;
@@ -1295,7 +1326,7 @@ body.dark-mode .works-gallery-icon {
         /* 1. Header (الزجاجي) */
         .main-navigation {
             position: sticky; top: 0; z-index: 1000;
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(231, 238, 245, 0.96);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border-bottom: 3px solid var(--primary-blue); transition: background 0.3s;
             box-shadow: 0 4px 20px rgba(0, 93, 178, 0.08);
@@ -1932,6 +1963,490 @@ body.dark-mode .floating-audio-mini-btn:hover {
                 padding: 16px 14px;
             }
         }
+
+        .contact-showcase {
+            max-width: 1180px;
+            margin: 0 auto 50px;
+        }
+        .contact-hero {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 24px;
+            padding: 28px;
+            border-radius: 28px;
+            border: 1px solid rgba(0, 93, 178, 0.15);
+            background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(228,237,246,0.92) 55%, rgba(255,204,0,0.12) 100%);
+            box-shadow: 0 18px 40px rgba(14, 36, 64, 0.08);
+        }
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            inset: auto auto -80px -60px;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(230,0,0,0.14) 0%, rgba(230,0,0,0) 70%);
+            pointer-events: none;
+        }
+        .contact-hero::after {
+            content: '';
+            position: absolute;
+            inset: -60px -40px auto auto;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,93,178,0.18) 0%, rgba(0,93,178,0) 70%);
+            pointer-events: none;
+        }
+        .contact-hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.9fr);
+            gap: 20px;
+            align-items: stretch;
+        }
+        .contact-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.72);
+            border: 1px solid rgba(0, 93, 178, 0.16);
+            color: var(--primary-blue);
+            font-size: 13px;
+            font-weight: 900;
+            margin-bottom: 14px;
+        }
+        .contact-hero-copy h3 {
+            margin: 0;
+            font-size: 34px;
+            line-height: 1.28;
+            color: var(--primary-blue);
+        }
+        .contact-hero-copy p {
+            margin: 14px 0 0;
+            font-size: 17px;
+            line-height: 1.95;
+            color: var(--text-dark);
+            opacity: 0.92;
+            max-width: 720px;
+        }
+        .contact-badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .contact-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.78);
+            border: 1px solid rgba(0, 93, 178, 0.12);
+            box-shadow: 0 8px 20px rgba(14, 36, 64, 0.06);
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+        .contact-badge i {
+            color: var(--primary-red);
+        }
+        .contact-stats {
+            display: grid;
+            gap: 12px;
+        }
+        .contact-stat-card {
+            padding: 18px 18px 16px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.86);
+            border: 1px solid rgba(0, 93, 178, 0.12);
+            box-shadow: 0 10px 24px rgba(14, 36, 64, 0.08);
+            text-align: center;
+        }
+        .contact-stat-number {
+            display: block;
+            font-size: 30px;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+        .contact-stat-label {
+            display: block;
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-dark);
+            opacity: 0.84;
+        }
+        .contact-layout {
+            display: grid;
+            grid-template-columns: minmax(290px, 0.92fr) minmax(0, 1.28fr);
+            gap: 24px;
+            align-items: start;
+        }
+        .contact-info-panel,
+        .contact-form-panel {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 26px;
+            padding: 26px;
+            box-shadow: 0 12px 28px rgba(14, 36, 64, 0.08);
+        }
+        .contact-panel-title {
+            margin: 0;
+            color: var(--primary-blue);
+            font-size: 26px;
+            font-weight: 900;
+            line-height: 1.3;
+        }
+        .contact-panel-intro {
+            margin: 10px 0 0;
+            color: var(--text-dark);
+            line-height: 1.9;
+            opacity: 0.86;
+            font-size: 15px;
+        }
+        .contact-info-stack {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+        .contact-info-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 17px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: inherit;
+            background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(228,237,246,0.72));
+            border: 1px solid rgba(0, 93, 178, 0.12);
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+        }
+        .contact-info-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 93, 178, 0.28);
+            box-shadow: 0 14px 28px rgba(14, 36, 64, 0.1);
+        }
+        .contact-info-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 18px;
+            border: 1px solid transparent;
+        }
+        .contact-info-card.is-whatsapp-sa .contact-info-icon,
+        .contact-info-card.is-whatsapp-ye .contact-info-icon {
+            background: rgba(37, 211, 102, 0.14);
+            border-color: rgba(37, 211, 102, 0.2);
+            color: #128C7E;
+        }
+        .contact-info-card.is-email .contact-info-icon {
+            background: rgba(0, 93, 178, 0.12);
+            border-color: rgba(0, 93, 178, 0.16);
+            color: var(--primary-blue);
+        }
+        .contact-info-card.is-social .contact-info-icon {
+            background: rgba(255, 204, 0, 0.16);
+            border-color: rgba(255, 204, 0, 0.2);
+            color: #9a6b00;
+        }
+        .contact-info-label {
+            font-size: 12px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            opacity: 0.78;
+        }
+        .contact-info-value {
+            display: block;
+            margin-top: 4px;
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--text-dark);
+        }
+        .contact-info-meta {
+            display: block;
+            margin-top: 5px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+        .contact-guidance {
+            margin-top: 18px;
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, rgba(0, 93, 178, 0.06), rgba(255,255,255,0.7));
+            border: 1px solid rgba(0, 93, 178, 0.1);
+            border-right: 4px solid var(--primary-blue);
+            color: var(--text-dark);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+        .contact-guidance strong {
+            color: var(--primary-blue);
+        }
+        .contact-social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .contact-social-links a {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(14, 36, 64, 0.12);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .contact-social-links a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 24px rgba(14, 36, 64, 0.16);
+        }
+        .contact-form-head {
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(0, 93, 178, 0.08);
+        }
+        .contact-form-shell {
+            display: grid;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .contact-grid-two {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+        .contact-field {
+            display: grid;
+            gap: 8px;
+        }
+        .contact-field span {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+        .contact-field input,
+        .contact-field select,
+        .contact-field textarea,
+        .contact-form-shell button {
+            font-family: 'Cairo', sans-serif;
+        }
+        .contact-field input,
+        .contact-field select,
+        .contact-field textarea {
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(228,237,246,0.88));
+            color: var(--text-dark);
+            padding: 14px 16px;
+            font-size: 15px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease;
+            outline: none;
+        }
+        .contact-field input:focus,
+        .contact-field select:focus,
+        .contact-field textarea:focus {
+            border-color: rgba(0, 93, 178, 0.45);
+            box-shadow: 0 0 0 4px rgba(0, 93, 178, 0.09);
+            background: var(--bg-white);
+        }
+        .contact-field textarea {
+            min-height: 150px;
+            resize: vertical;
+            line-height: 1.9;
+        }
+        .contact-hint {
+            margin-top: -2px;
+            font-size: 12px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+        .contact-consent {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 13px 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 93, 178, 0.1);
+            background: rgba(0, 93, 178, 0.04);
+            font-size: 13px;
+            line-height: 1.85;
+            color: var(--text-dark);
+        }
+        .contact-consent input {
+            accent-color: var(--primary-blue);
+            margin-top: 4px;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+        .contact-form-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+        }
+        .contact-submit-btn {
+            border: 0;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 24px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--primary-blue), #2a78c7);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 900;
+            box-shadow: 0 14px 26px rgba(0, 93, 178, 0.22);
+            transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+        }
+        .contact-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(0, 93, 178, 0.28);
+            filter: brightness(1.03);
+        }
+        .contact-inline-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 18px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 93, 178, 0.12);
+            background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(228,237,246,0.86));
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 800;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .contact-inline-link:hover {
+            transform: translateY(-2px);
+            border-color: rgba(0, 93, 178, 0.25);
+            box-shadow: 0 14px 26px rgba(14, 36, 64, 0.08);
+        }
+        .contact-form-feedback {
+            min-height: 22px;
+            font-size: 13px;
+            font-weight: 800;
+            line-height: 1.7;
+        }
+        .contact-form-feedback.is-success {
+            color: #0f8a50;
+        }
+        .contact-form-feedback.is-error {
+            color: #c0392b;
+        }
+
+        body.dark-mode .contact-hero {
+            background: linear-gradient(135deg, rgba(33,24,15,0.98) 0%, rgba(21,17,9,0.96) 58%, rgba(111,83,28,0.26) 100%);
+            border-color: rgba(198,154,58,0.2);
+            box-shadow: 0 20px 42px rgba(0,0,0,0.28);
+        }
+        body.dark-mode .contact-kicker,
+        body.dark-mode .contact-stat-card,
+        body.dark-mode .contact-info-card,
+        body.dark-mode .contact-inline-link {
+            background: linear-gradient(145deg, rgba(42,31,19,0.95), rgba(29,21,13,0.95));
+            border-color: rgba(198,154,58,0.16);
+        }
+        body.dark-mode .contact-info-panel,
+        body.dark-mode .contact-form-panel {
+            background: rgba(33,24,15,0.98);
+            border-color: #4f3b20;
+            box-shadow: 0 16px 30px rgba(0,0,0,0.25);
+        }
+        body.dark-mode .contact-panel-title,
+        body.dark-mode .contact-hero-copy h3,
+        body.dark-mode .contact-guidance strong {
+            color: var(--primary-yellow);
+        }
+        body.dark-mode .contact-field input,
+        body.dark-mode .contact-field select,
+        body.dark-mode .contact-field textarea {
+            background: linear-gradient(145deg, #2a1f13, #1b140c);
+            border-color: #4f3b20;
+            color: var(--text-dark);
+        }
+        body.dark-mode .contact-field input:focus,
+        body.dark-mode .contact-field select:focus,
+        body.dark-mode .contact-field textarea:focus {
+            border-color: rgba(198,154,58,0.4);
+            box-shadow: 0 0 0 4px rgba(198,154,58,0.08);
+            background: #24190f;
+        }
+        body.dark-mode .contact-guidance,
+        body.dark-mode .contact-consent {
+            background: rgba(198,154,58,0.06);
+            border-color: rgba(198,154,58,0.16);
+        }
+        body.dark-mode .contact-submit-btn {
+            background: linear-gradient(135deg, #8f6a24, #c69a3a);
+            box-shadow: 0 14px 26px rgba(143, 106, 36, 0.24);
+        }
+        body.dark-mode .contact-form-head {
+            border-bottom-color: rgba(198,154,58,0.12);
+        }
+        body.dark-mode .contact-form-feedback.is-success {
+            color: #9fe6b2;
+        }
+        body.dark-mode .contact-form-feedback.is-error {
+            color: #ffaaaa;
+        }
+
+        @media (max-width: 1024px) {
+            .contact-hero-grid,
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+            .contact-stats {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+        @media (max-width: 700px) {
+            .contact-hero,
+            .contact-info-panel,
+            .contact-form-panel {
+                padding: 20px 16px;
+                border-radius: 22px;
+            }
+            .contact-hero-copy h3,
+            .contact-panel-title {
+                font-size: 24px;
+            }
+            .contact-hero-copy p {
+                font-size: 15px;
+            }
+            .contact-grid-two,
+            .contact-stats {
+                grid-template-columns: 1fr;
+            }
+            .contact-form-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .contact-submit-btn,
+            .contact-inline-link {
+                width: 100%;
+            }
+        }
 /* ================= إصلاح تداخل الأيقونات مع التبويبات في الجوال ================= */
         @media (max-width: 1024px) {
             .nav-tabs-container::after {
@@ -2244,6 +2759,17 @@ body.dark-mode .testibg.targeted-audio-card > i {
     to { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
 }
 </style>
+<div class="announcement-bar">
+    <div class="ticker-label"><i class="fas fa-bullhorn"></i>إعلانات</div>
+    <div class="ticker-track">
+        <div class="ticker-content">
+            <span class="ticker-item">مرحبا بكم في الموقع الرسمي لمؤسسة أثير ساوند للإنتاج الفني</span>
+            <a class="ticker-item ticker-link" href="#most-requested-zaffat-entrance-40-minutes" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffat-entrance-40-minutes');">أضفنا زفة دخول العروسة 40 دقيقة للطلب بالأسماء</a>
+            <span class="ticker-item">مرحبا بكم في الموقع الرسمي لمؤسسة أثير ساوند للإنتاج الفني</span>
+            <a class="ticker-item ticker-link" href="#most-requested-zaffat-entrance-40-minutes" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffat-entrance-40-minutes');">أضفنا زفة دخول العروسة 40 دقيقة للطلب بالأسماء</a>
+        </div>
+    </div>
+</div>
 <nav class="main-navigation">
     <div class="nav-tabs-container">
         <button class="nav-tab active" id="home-tab" onclick="switchTab('home-section', this)">
@@ -2304,11 +2830,13 @@ body.dark-mode .testibg.targeted-audio-card > i {
 <div class="home-side-block">
 <h3 class="home-side-title"><i class="fas fa-tags"></i>العروض الحالية</h3>
 <a class="home-side-action" href="#" onclick="switchTab('offers-section', null); return false;">شاهد كل العروض</a>
+<a class="home-side-alt" href="#most-requested-zaffat-entrance-40-minutes" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffat-entrance-40-minutes');">زفة دخول العروسة</a>
 <a class="home-side-alt" href="#most-requested-zaffat-half-hour" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffat-half-hour');">عرض زفة نصف ساعة</a>
 </div>
 <div class="home-side-block">
 <h3 class="home-side-title"><i class="fas fa-clock"></i>آخر الإضافات</h3>
 <ul class="home-side-mini-list">
+<li><a href="#most-requested-zaffat-entrance-40-minutes" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffat-entrance-40-minutes');"><i class="fas fa-music"></i>زفة دخول العروسة 40 دقيقة</a></li>
 <li><a href="#most-requested-alf-mabrook-ya-mohammed" onclick="return openMostRequestedAudio('events-works', 'most-requested-alf-mabrook-ya-mohammed');"><i class="fas fa-music"></i>ألف مبروك يا محمد</a></li>
 <li><a href="#most-requested-tolli-wanshri-besmtech" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-tolli-wanshri-besmtech');"><i class="fas fa-music"></i>طلي وانشري بسمتش</a></li>
 <li><a href="#most-requested-iyad-noor-alfalah" onclick="return openMostRequestedAudio('nomusic-works', 'most-requested-iyad-noor-alfalah');"><i class="fas fa-music"></i>إياد يا نور الفلاح</a></li>
@@ -2343,6 +2871,12 @@ body.dark-mode .testibg.targeted-audio-card > i {
         الأكثر طلباً:
       </h3>
 <ul class="most-requested-list">
+<li>
+<a class="most-requested-link" href="#most-requested-zaffat-entrance-40-minutes" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffat-entrance-40-minutes');">
+<i class="fas fa-music"></i>
+            زفة دخول العروسة 40 دقيقة
+          </a>
+</li>
 <li>
 <a class="most-requested-link" href="#most-requested-tolli-wanshri-besmtech" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-tolli-wanshri-besmtech');">
 <i class="fas fa-music"></i>
@@ -3224,6 +3758,17 @@ body.dark-mode .testibg.targeted-audio-card > i {
 </div>
 </div>
 </section><section class="content-section" id="zaffat-works"><h2 class="section-title">زفات بالأسماء</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+<div class="work-card audio-item audio-zaffa" id="most-requested-zaffat-entrance-40-minutes">
+    <div class="testibg">
+        <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;"></i>
+        <h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
+            زفة دخول العروسة 40 دقيقة
+        </h3>
+        <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
+            <source src="https://www.dropbox.com/scl/fi/8kqenypyl9r90c66vj224/zaffa_atheer.mp3?rlkey=zozp7ku9t5p0in0nkj4i0pmcp&amp;st=zadvnutp&amp;raw=1" type="audio/mpeg"/>
+        </audio>
+    </div>
+</div>
 <div class="work-card audio-item audio-zaffa" id="most-requested-tolli-wanshri-besmtech">
     <div class="testibg">
         <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;"></i>
@@ -4756,11 +5301,143 @@ body.dark-mode .testibg.targeted-audio-card > i {
 </section>
 <section class="content-section" id="contact-section">
 <h2 class="section-title">تواصل معنا</h2>
-<div style="text-align: center; max-width: 600px; margin: 0 auto; padding: 20px 20px 60px;">
-<p style="font-size: 18px; margin-bottom: 30px;">يسعدنا تواصلكم لطلب خدماتنا أو للاستفسار عبر قنواتنا الرسمية:</p>
-<div style="display:flex; flex-direction: column; gap: 15px;">
-<a href="https://wa.me/967770080131" target="_blank" style="padding:15px 30px; background:#128C7E; color:#fff; border-radius:10px; text-decoration:none; font-weight:bold; font-size: 18px; transition: transform 0.2s;"><i class="fab fa-whatsapp"></i> واتساب (اليمن)</a>
-<a href="https://wa.me/966560049754" target="_blank" style="padding:15px 30px; background:#25D366; color:#fff; border-radius:10px; text-decoration:none; font-weight:bold; font-size: 18px; transition: transform 0.2s;"><i class="fab fa-whatsapp"></i> واتساب (السعودية)</a>
+<div class="contact-showcase">
+<div class="contact-hero reveal">
+<div class="contact-hero-grid">
+<div class="contact-hero-copy">
+<h3>نستقبل طلبك ونحوّله إلى تجربة فنية واضحة من أول رسالة</h3>
+<p>يسعدنا في أثير ساوند استقبال طلبات الزفات والشيلات والمناسبات والتعليق الصوتي والمونتاج وبقية الأعمال الفنية. أرسل تفاصيلك عبر النموذج التالي أو تواصل مباشرة من خلال قنواتنا الرسمية، وسنرتب معك الخطوات الأنسب للتنفيذ.</p>
+<div class="contact-badge-list">
+<span class="contact-badge"><i class="fas fa-bolt"></i>رد سريع عبر القناة المختارة</span>
+<span class="contact-badge"><i class="fas fa-music"></i>خدمات للأفراد والمؤسسات والمناسبات</span>
+<span class="contact-badge"><i class="fas fa-shield-heart"></i>تعامل واضح وسرية في البيانات</span>
+</div>
+</div>
+<div class="contact-stats">
+<div class="contact-stat-card">
+<span class="contact-stat-number" style="color:var(--primary-blue);">+300</span>
+<span class="contact-stat-label">عمل فني منتج</span>
+</div>
+<div class="contact-stat-card">
+<span class="contact-stat-number" style="color:var(--primary-red);">+100</span>
+<span class="contact-stat-label">مؤسسة وأفراد</span>
+</div>
+<div class="contact-stat-card">
+<span class="contact-stat-number" style="color:var(--primary-yellow);">+20</span>
+<span class="contact-stat-label">سنوات تميز</span>
+</div>
+</div>
+</div>
+</div>
+<div class="contact-layout">
+<aside class="contact-info-panel reveal-left searchable-item">
+<h3 class="contact-panel-title">معلومات التواصل</h3>
+<p class="contact-panel-intro">يمكنك التواصل معنا مباشرة عبر واتساب اليمن أو واتساب السعودية أو البريد الإلكتروني، أو تعبئة النموذج ليصل الطلب إلى البريد الإلكتروني مع فتح رسالة واتساب جاهزة إلى الرقم الذي تختاره.</p>
+<div class="contact-info-stack">
+<a class="contact-info-card is-whatsapp-ye" href="https://wa.me/967770080131" rel="noopener" target="_blank">
+<span class="contact-info-icon"><i class="fab fa-whatsapp"></i></span>
+<span>
+<span class="contact-info-label">واتساب اليمن</span>
+<span class="contact-info-value" dir="ltr">+967 770080131</span>
+<span class="contact-info-meta">للطلبات المباشرة والمتابعة السريعة عبر الرقم اليمني.</span>
+</span>
+</a>
+<a class="contact-info-card is-whatsapp-sa" href="https://wa.me/966560049754" rel="noopener" target="_blank">
+<span class="contact-info-icon"><i class="fab fa-whatsapp"></i></span>
+<span>
+<span class="contact-info-label">واتساب السعودية</span>
+<span class="contact-info-value" dir="ltr">+966 560049754</span>
+<span class="contact-info-meta">للطلبات والاستفسارات داخل السعودية أو لمن يفضّل التواصل عبر الرقم السعودي.</span>
+</span>
+</a>
+<a class="contact-info-card is-email" href="mailto:atheersound@gmail.com">
+<span class="contact-info-icon"><i class="fas fa-envelope"></i></span>
+<span>
+<span class="contact-info-label">البريد الإلكتروني</span>
+<span class="contact-info-value" dir="ltr">atheersound@gmail.com</span>
+<span class="contact-info-meta">مناسب لطلبات المؤسسات أو الرسائل التي تحتاج تفاصيل وروابط ومرفقات لاحقًا.</span>
+</span>
+</a>
+</div>
+<div class="contact-guidance">
+<strong>لرسالة فعّالة:</strong>
+اذكر نوع الخدمة، اسم المناسبة أو الجهة، المطلوب بالضبط، المدة المتوقعة للتنفيذ، وأي أسماء أو روابط أو أمثلة تساعدنا على فهم طلبك بسرعة.
+</div>
+<div class="contact-social-links">
+<a class="bg-facebook" href="https://facebook.com/atheersound" rel="noopener" target="_blank" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+<a class="bg-youtube" href="https://www.youtube.com/@atheersound" rel="noopener" target="_blank" title="يوتيوب"><i class="fab fa-youtube"></i></a>
+<a class="bg-telegram" href="https://t.me/atheersound" rel="noopener" target="_blank" title="تيليجرام"><i class="fab fa-telegram-plane"></i></a>
+<a class="bg-whatsapp" href="https://www.whatsapp.com/channel/0029VbCEIAaAO7RMULArou0R" rel="noopener" target="_blank" title="قناة الواتساب"><i class="fab fa-whatsapp"></i></a>
+<a class="bg-email" href="mailto:atheersound@gmail.com" title="البريد الإلكتروني"><i class="fas fa-envelope"></i></a>
+</div>
+</aside>
+<div class="contact-form-panel reveal searchable-item">
+<div class="contact-form-head">
+<h3 class="contact-panel-title">أرسل لنا رسالة</h3>
+<p class="contact-panel-intro">املأ ما يناسبك من البيانات، وسنفتح لك رسالة جاهزة مباشرة إلى واتساب اليمن. جميع الحقول هنا اختيارية.</p>
+</div>
+<form class="contact-form-shell" id="atheerContactForm" novalidate="" onsubmit="return submitContactForm(event);">
+<div class="contact-grid-two">
+<label class="contact-field">
+<span>الاسم الأول (اختياري)</span>
+<input autocomplete="given-name" id="contactFirstName" name="first_name" placeholder="مثال: محمد" type="text"/>
+</label>
+<label class="contact-field">
+<span>الاسم الأخير (اختياري)</span>
+<input autocomplete="family-name" id="contactLastName" name="last_name" placeholder="مثال: أحمد" type="text"/>
+</label>
+</div>
+<div class="contact-grid-two">
+<label class="contact-field">
+<span>البريد الإلكتروني (اختياري)</span>
+<input autocomplete="email" id="contactEmail" name="email" placeholder="name@example.com" type="email"/>
+</label>
+<label class="contact-field">
+<span>رقم الهاتف (اختياري)</span>
+<input autocomplete="tel" id="contactPhone" name="phone" placeholder="05xxxxxxxx أو +966..." type="tel"/>
+</label>
+</div>
+<div class="contact-grid-two">
+<label class="contact-field">
+<span>الخدمة المطلوبة (اختياري)</span>
+<select id="contactService" name="service">
+<option value="">اختر الخدمة المطلوبة إن رغبت</option>
+<option>زفات بالأسماء</option>
+<option>شيلات بالأسماء</option>
+<option>مناسبات بالأسماء</option>
+<option>أعمال للمدارس</option>
+<option>تعليق صوتي</option>
+<option>إلقاء قصائد</option>
+<option>تلحين قصائد</option>
+<option>أعمال بموسيقا</option>
+<option>أعمال بدون موسيقا</option>
+<option>مونتاج فيديو</option>
+<option>بودكاست</option>
+<option>التحرير الصوتي</option>
+<option>أخرى</option>
+</select>
+</label>
+<label class="contact-field">
+<span>جهة الإرسال</span>
+<input id="contactChannel" name="channel_label" readonly="" type="text" value="واتساب اليمن"/>
+</label>
+</div>
+<label class="contact-field">
+<span>اسم المناسبة أو الجهة</span>
+<input autocomplete="organization" id="contactEntity" name="entity" placeholder="مثال: زفاف نورة - مؤسسة ..." type="text"/>
+</label>
+<label class="contact-field">
+<span>تفاصيل الطلب (اختياري)</span>
+<textarea id="contactMessage" name="message" placeholder="اكتب ما تريد إرساله عبر واتساب اليمن، مثل نوع الخدمة أو الأسماء المطلوبة أو أي ملاحظات أخرى..."></textarea>
+</label>
+<div class="contact-hint">يمكنك ترك كل الحقول فارغة إن أردت، وسيتم فتح واتساب اليمن برسالة تواصل افتراضية. وإذا كتبت أي بيانات فستُضاف تلقائيًا إلى الرسالة.</div>
+<div class="contact-form-actions">
+<button class="contact-submit-btn" type="submit"><i class="fab fa-whatsapp"></i>إرسال إلى واتساب اليمن</button>
+<a class="contact-inline-link" href="https://wa.me/967770080131" rel="noopener" target="_blank"><i class="fab fa-whatsapp"></i>واتساب اليمن مباشر</a>
+</div>
+<div class="contact-form-feedback" id="contactFormFeedback" aria-live="polite"></div>
+</form>
+</div>
 </div>
 </div>
 </section>
@@ -5164,6 +5841,89 @@ body.dark-mode .testibg.targeted-audio-card > i {
                 icon.classList.toggle('fa-moon', !isDark);
                 icon.classList.toggle('fa-sun', isDark);
             }
+        };
+    }
+
+    if (typeof window.submitContactForm !== 'function') {
+        window.submitContactForm = function(event) {
+            if (event && typeof event.preventDefault === 'function') {
+                event.preventDefault();
+            }
+
+            var form = document.getElementById('atheerContactForm');
+            var feedback = document.getElementById('contactFormFeedback');
+            if (!form) return false;
+            if (form.dataset.sending === '1') return false;
+
+            var submitBtn = form.querySelector('.contact-submit-btn');
+            var defaultBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+
+            if (feedback) {
+                feedback.textContent = '';
+                feedback.classList.remove('is-success', 'is-error');
+            }
+
+            var firstName = ((document.getElementById('contactFirstName') || {}).value || '').trim();
+            var lastName = ((document.getElementById('contactLastName') || {}).value || '').trim();
+            var email = ((document.getElementById('contactEmail') || {}).value || '').trim();
+            var phone = ((document.getElementById('contactPhone') || {}).value || '').trim();
+            var serviceEl = document.getElementById('contactService');
+            var entity = ((document.getElementById('contactEntity') || {}).value || '').trim();
+            var message = ((document.getElementById('contactMessage') || {}).value || '').trim();
+
+            var service = serviceEl && serviceEl.options && serviceEl.selectedIndex >= 0
+                ? (serviceEl.options[serviceEl.selectedIndex].text || '').trim()
+                : '';
+            var fullName = (firstName + ' ' + lastName).replace(/\s+/g, ' ').trim();
+            var formattedMessageParts = [
+                'السلام عليكم،',
+                'لدي طلب عبر نموذج موقع أثير ساوند.'
+            ];
+            if (service) formattedMessageParts.push('الخدمة المطلوبة: ' + service);
+            if (fullName) formattedMessageParts.push('الاسم: ' + fullName);
+            if (email) formattedMessageParts.push('البريد الإلكتروني: ' + email);
+            if (phone) formattedMessageParts.push('رقم الهاتف: ' + phone);
+            if (entity) formattedMessageParts.push('اسم المناسبة أو الجهة: ' + entity);
+            if (message) {
+                formattedMessageParts.push('تفاصيل الطلب:');
+                formattedMessageParts.push(message);
+            }
+            if (!service && !fullName && !email && !phone && !entity && !message) {
+                formattedMessageParts.push('أرغب بالتواصل والاستفسار عن خدماتكم.');
+            }
+            var formattedMessage = formattedMessageParts.join('\n');
+
+            var whatsappUrl = 'https://wa.me/967770080131?text=' + encodeURIComponent(formattedMessage);
+            var popup = window.open(whatsappUrl, '_blank', 'noopener');
+
+            form.dataset.sending = '1';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>جارٍ تجهيز الإرسال...';
+            }
+
+            if (feedback) {
+                feedback.textContent = 'يجري فتح واتساب اليمن الآن بالرسالة الجاهزة...';
+                feedback.classList.add('is-success');
+            }
+
+            setTimeout(function() {
+                delete form.dataset.sending;
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = defaultBtnHtml;
+                }
+                if (feedback) {
+                    feedback.textContent = !popup
+                        ? 'تعذر فتح واتساب تلقائيًا. استخدم زر واتساب اليمن المباشر أسفل النموذج.'
+                        : 'تم تجهيز الرسالة على واتساب اليمن.';
+                    feedback.classList.remove('is-error');
+                    feedback.classList.add(popup ? 'is-success' : 'is-error');
+                }
+                try { form.reset(); } catch (e) {}
+            }, 350);
+
+            return false;
         };
     }
 
