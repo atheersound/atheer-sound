@@ -352,6 +352,42 @@
         #home-section .home-hero-point i {
             color: var(--primary-red);
         }
+
+        @media (min-width: 769px) {
+            #home-section .home-hero-actions {
+                display: grid;
+                grid-template-columns: max-content max-content;
+                gap: 12px;
+                align-items: stretch;
+                width: max-content;
+                max-width: 100%;
+                margin-inline: auto;
+            }
+
+            #home-section .home-hero-actions > * {
+                width: auto;
+            }
+
+            #home-section .home-hero-actions > :last-child {
+                grid-column: 1 / -1;
+                width: max-content;
+                max-width: 100%;
+                justify-self: center;
+                margin-inline: 0;
+            }
+
+            #home-section .home-hero-points::after {
+                content: '';
+                flex-basis: 100%;
+                order: 2;
+            }
+
+            #home-section .home-hero-points > :last-child {
+                order: 3;
+                margin-inline: auto;
+            }
+        }
+
         #home-section .home-hero-side {
             display: grid;
             gap: 12px;
