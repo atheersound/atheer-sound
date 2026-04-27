@@ -972,6 +972,37 @@
         .bg-telegram { background-color: #229ED9; } 
         .bg-whatsapp { background-color: #25D366; } 
         .bg-email { background-color: #EA4335; }
+        .icon-svg-sprite {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+        .ui-icon {
+            width: 1em;
+            height: 1em;
+            display: inline-block;
+            vertical-align: -0.125em;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+        a .ui-icon,
+        button .ui-icon {
+            pointer-events: none;
+        }
+        .social-icons a .ui-icon,
+        .contact-social-links a .ui-icon {
+            width: 16px;
+            height: 16px;
+        }
+        .contact-info-icon .ui-icon {
+            width: 22px;
+            height: 22px;
+        }
+        #backToTop .ui-icon {
+            width: 20px;
+            height: 20px;
+        }
 
         /* ================= الشريط الإعلاني (Ticker) ================= */
         .announcement-bar {
@@ -2290,6 +2321,167 @@ body.dark-mode .floating-audio-widget.expanded .main-expand-btn {
 
 body.dark-mode .floating-audio-mini-btn:hover {
     color: var(--primary-yellow);
+}
+.floating-audio-mini-btn {
+    background: var(--bg-white);
+    color: var(--primary-blue);
+    border: 1px solid rgba(0, 93, 178, 0.14);
+    box-shadow: 0 10px 22px rgba(14, 36, 64, 0.16);
+}
+
+.floating-audio-mini-btn.main-expand-btn {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary-blue), #287dd0);
+    color: #fff;
+    box-shadow: 0 14px 30px rgba(0, 93, 178, 0.3);
+}
+
+.floating-audio-mini-btn .ui-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.floating-audio-mini-btn.main-expand-btn .ui-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.floating-audio-mini-btn:hover {
+    background: var(--bg-white);
+}
+
+.floating-audio-mini-btn.main-expand-btn:hover {
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary-red), #e64b55);
+}
+
+.spinning-disc {
+    animation: floatingAudioDiscSpin 3s linear infinite;
+    transform-origin: center;
+}
+
+.floating-audio-widget.paused .main-expand-btn .spinning-disc {
+    animation-play-state: paused;
+}
+
+@keyframes floatingAudioDiscSpin {
+    to { transform: rotate(360deg); }
+}
+
+body.dark-mode .floating-audio-mini-btn {
+    background: #1f2933;
+    color: var(--primary-yellow);
+    border-color: rgba(255, 204, 0, 0.24);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.32);
+}
+
+body.dark-mode .floating-audio-mini-btn.main-expand-btn {
+    background: linear-gradient(135deg, var(--primary-yellow), #d9a900);
+    color: #1d1d1d;
+}
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid rgba(0, 93, 178, 0.1);
+    box-shadow: 0 6px 14px rgba(14, 36, 64, 0.08);
+}
+.theme-toggle-btn .ui-icon {
+    width: 18px;
+    height: 18px;
+    color: currentColor;
+}
+body.dark-mode .theme-toggle-btn {
+    background: rgba(255, 204, 0, 0.08);
+    border-color: rgba(255, 204, 0, 0.22);
+    color: var(--primary-yellow);
+}
+.sticky-back-btn .ui-icon {
+    width: 17px;
+    height: 17px;
+}
+.floating-audio-widget .floating-audio-mini-btn,
+.floating-audio-widget .floating-audio-mini-btn.main-expand-btn,
+body.dark-mode .floating-audio-widget .floating-audio-mini-btn,
+body.dark-mode .floating-audio-widget .floating-audio-mini-btn.main-expand-btn {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+.floating-audio-widget .floating-audio-mini-btn.main-expand-btn {
+    color: var(--primary-blue);
+}
+.floating-audio-widget .floating-audio-mini-btn.main-expand-btn:hover {
+    background: transparent;
+    color: var(--primary-red);
+}
+body.dark-mode .floating-audio-widget .floating-audio-mini-btn.main-expand-btn {
+    color: var(--primary-yellow);
+}
+body.dark-mode .floating-audio-widget .floating-audio-mini-btn.main-expand-btn:hover {
+    color: #fff;
+}
+.compact-audio-card .audio-item__sequence-btn {
+    order: 3;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 93, 178, 0.18);
+    background: rgba(0, 93, 178, 0.08);
+    color: var(--primary-blue);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.compact-audio-card .audio-item__sequence-btn .ui-icon {
+    width: 15px;
+    height: 15px;
+}
+.compact-audio-card .audio-item__sequence-btn:hover,
+.compact-audio-card .audio-item__sequence-btn.is-active {
+    background: var(--primary-blue);
+    color: #fff;
+    border-color: var(--primary-blue);
+    transform: translateY(-1px);
+}
+body.dark-mode .compact-audio-card .audio-item__sequence-btn {
+    background: rgba(255, 204, 0, 0.08);
+    border-color: rgba(255, 204, 0, 0.24);
+    color: var(--primary-yellow);
+}
+body.dark-mode .compact-audio-card .audio-item__sequence-btn:hover,
+body.dark-mode .compact-audio-card .audio-item__sequence-btn.is-active {
+    background: var(--primary-yellow);
+    color: #1d1d1d;
+    border-color: var(--primary-yellow);
+}
+@media (max-width: 768px) {
+    .compact-audio-card .audio-item__sequence-btn {
+        height: 32px;
+        padding: 0 8px;
+        font-size: 11.5px;
+    }
+}
+@media (max-width: 520px) {
+    .compact-audio-card .testibg {
+        flex-wrap: wrap;
+    }
+    .compact-audio-card .audio-item__title {
+        flex-basis: calc(100% - 132px);
+    }
+    .compact-audio-card .audio-item__sequence-btn {
+        margin-inline-start: auto;
+    }
 }        /* ================= Global Search Results ================= */
 
         .cards-grid {
@@ -2495,6 +2687,10 @@ body.dark-mode .floating-audio-mini-btn:hover {
             .floating-audio-mini-btn {
                 width: 31px;
                 height: 31px;
+            }
+            .floating-audio-mini-btn.main-expand-btn {
+                width: 40px;
+                height: 40px;
             }
             .modern-footer {
                 padding: 12px 14px;
@@ -3046,6 +3242,54 @@ body.dark-mode .floating-audio-mini-btn:hover {
 </style>
 </head>
 <body>
+<svg class="icon-svg-sprite" aria-hidden="true" focusable="false" width="0" height="0">
+    <symbol id="icon-search" viewBox="0 0 24 24">
+        <path d="M10.8 4a6.8 6.8 0 0 1 5.4 10.9l4.1 4.1-1.7 1.7-4.1-4.1A6.8 6.8 0 1 1 10.8 4Zm0 2.4a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8Z"/>
+    </symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24">
+        <path d="M20.2 15.5A8.2 8.2 0 0 1 8.5 3.8 9.4 9.4 0 1 0 20.2 15.5Z"/>
+    </symbol>
+    <symbol id="icon-sun" viewBox="0 0 24 24">
+        <path d="M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0-5 1.2 3h-2.4L12 2Zm0 20-1.2-3h2.4L12 22ZM2 12l3-1.2v2.4L2 12Zm20 0-3 1.2v-2.4l3 1.2ZM4.2 4.2l3 1.3-1.7 1.7-1.3-3Zm15.6 15.6-3-1.3 1.7-1.7 1.3 3Zm0-15.6-1.3 3-1.7-1.7 3-1.3ZM4.2 19.8l1.3-3 1.7 1.7-3 1.3Z"/>
+    </symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+        <path d="M13.8 5.2 20.6 12l-6.8 6.8-2.1-2.1 3.2-3.2H3.4v-3h11.5l-3.2-3.2 2.1-2.1Z"/>
+    </symbol>
+    <symbol id="icon-sequence" viewBox="0 0 24 24">
+        <path d="M4 6h8v2.4H4V6Zm0 4.8h8v2.4H4v-2.4Zm0 4.8h8V18H4v-2.4Zm11-10 6 3.4-6 3.4V5.6Zm0 8 6 3.4-6 3.4v-6.8Z"/>
+    </symbol>    <symbol id="icon-facebook" viewBox="0 0 24 24">
+        <path d="M14.2 8.8h2.6V5.1h-3.2c-3.4 0-5.3 2-5.3 5.5v2H5.5v3.8h2.8V23h4.1v-6.6h3.4l.6-3.8h-4v-1.7c0-1.4.5-2.1 1.8-2.1Z"/>
+    </symbol>
+    <symbol id="icon-youtube" viewBox="0 0 24 24">
+        <path d="M10 8.3v7.4l6.4-3.7L10 8.3Z"/>
+    </symbol>
+    <symbol id="icon-telegram" viewBox="0 0 24 24">
+        <path d="M21.8 3.8 3 11.1c-1.1.4-1.1 1.1-.2 1.4l4.8 1.5 1.8 5.8c.2.6.5.8.9.8.3 0 .6-.1.9-.4l2.6-2.5 4.9 3.6c.9.5 1.5.3 1.7-.9l3-14.4c.3-1.4-.5-2-1.6-1.5Zm-3.4 4.1-8.8 7.9-.3 3-1.2-4.2 10.3-6.7Z"/>
+    </symbol>
+    <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+        <path d="M12 2.3A9.5 9.5 0 0 0 3.8 16.6L3 21.7l5.2-1.4A9.5 9.5 0 1 0 12 2.3Zm0 17.1c-1.3 0-2.5-.3-3.6-.9l-.4-.2-3 .8.8-2.9-.2-.5A7.6 7.6 0 1 1 12 19.4Zm4.2-5.7c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.1.2-.3.2-.5.1a6.2 6.2 0 0 1-3.1-2.7c-.2-.3 0-.4.1-.6l.4-.5c.1-.2.1-.3.2-.5.1-.2 0-.4 0-.5L9.5 6.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.8 2.9 4.5 4 .6.3 1.1.4 1.5.5.6.2 1.2.1 1.6.1.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1-.1-.2-.3-.2-.5-.3Z"/>
+    </symbol>
+    <symbol id="icon-email" viewBox="0 0 24 24">
+        <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm8 8.2L4.3 7.3V17h15.4V7.3L12 13.2Zm0-2.3L18.5 7h-13L12 10.9Z"/>
+    </symbol>
+    <symbol id="icon-arrow-up" viewBox="0 0 24 24">
+        <path d="M12 4 4.5 11.5l2.1 2.1 3.9-3.9V20h3V9.7l3.9 3.9 2.1-2.1L12 4Z"/>
+    </symbol>
+    <symbol id="icon-disc" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="12" cy="12" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 3.5a8.5 8.5 0 0 1 8.5 8.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" opacity=".55"/>
+    </symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7L8 5Z"/>
+    </symbol>
+    <symbol id="icon-pause" viewBox="0 0 24 24">
+        <path d="M7 5h4v14H7V5Zm6 0h4v14h-4V5Z"/>
+    </symbol>
+    <symbol id="icon-xmark" viewBox="0 0 24 24">
+        <path d="M6.4 4.9 4.9 6.4l5.6 5.6-5.6 5.6 1.5 1.5 5.6-5.6 5.6 5.6 1.5-1.5-5.6-5.6 5.6-5.6-1.5-1.5-5.6 5.6-5.6-5.6Z"/>
+    </symbol>
+</svg>
 <script>
     if (localStorage.getItem('atheer_theme') === 'dark') {
         document.body.classList.add('dark-mode');
@@ -3120,12 +3364,12 @@ body.dark-mode .floating-audio-mini-btn:hover {
 
     <div class="intro-contact">
         <div class="intro-contact-item">
-            <i class="fab fa-whatsapp" style="color: #25D366; font-size: 18px;"></i>
+            <svg class="ui-icon" style="color: #25D366; font-size: 18px;" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
             <span>+967 770080131</span>
             <span style="color: var(--primary-red); font-size: 11px;">YE</span>
         </div>
         <div class="intro-contact-item">
-            <i class="fab fa-whatsapp" style="color: #25D366; font-size: 18px;"></i>
+            <svg class="ui-icon" style="color: #25D366; font-size: 18px;" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
             <span>+966 560049754</span>
             <span style="color: var(--primary-blue); font-size: 11px;">SA</span>
         </div>
@@ -3214,8 +3458,7 @@ body.dark-mode .floating-audio-mini-btn:hover {
 <div class="action-section">
 <div class="contact-info">
 <a class="contact-item" href="https://wa.me/967770080131" target="_blank">
-<i class="fab fa-whatsapp icon-whatsapp">
-</i>
+<svg class="ui-icon icon-whatsapp" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
 <span dir="ltr">
         +967 770080131
        </span>
@@ -3226,8 +3469,7 @@ body.dark-mode .floating-audio-mini-btn:hover {
        </span>
 </a>
 <a class="contact-item" href="https://wa.me/966560049754" target="_blank">
-<i class="fab fa-whatsapp icon-whatsapp">
-</i>
+<svg class="ui-icon icon-whatsapp" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
 <span dir="ltr">
         +966 560049754
        </span>
@@ -3240,24 +3482,19 @@ body.dark-mode .floating-audio-mini-btn:hover {
 </div>
 <div class="social-icons">
 <a class="bg-facebook" href="https://facebook.com/atheersound" target="_blank" title="فيسبوك">
-<i class="fab fa-facebook-f">
-</i>
+<svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-facebook"></use></svg>
 </a>
 <a class="bg-youtube" href="https://www.youtube.com/@atheersound" target="_blank" title="يوتيوب">
-<i class="fab fa-youtube">
-</i>
+<svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-youtube"></use></svg>
 </a>
 <a class="bg-telegram" href="https://t.me/atheersound" target="_blank" title="تيليجرام">
-<i class="fab fa-telegram-plane">
-</i>
+<svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-telegram"></use></svg>
 </a>
 <a class="bg-whatsapp" href="https://www.whatsapp.com/channel/0029VbCEIAaAO7RMULArou0R" target="_blank" title="قناة الواتساب">
-<i class="fab fa-whatsapp">
-</i>
+<svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
 </a>
 <a class="bg-email" href="mailto:atheersound@gmail.com" title="البريد الإلكتروني">
-<i class="fas fa-envelope">
-</i>
+<svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-email"></use></svg>
 </a>
 </div>
 </div>
@@ -3374,15 +3611,15 @@ body.dark-mode .testibg.targeted-audio-card > i {
             الإعلانات والعروض
         </button>
         <button class="nav-tab" onclick="switchTab('contact-section', this)">
-            <i class="fab fa-whatsapp" style="color:#25D366;"></i> تواصل معنا
+            <svg class="ui-icon" style="color:#25D366;" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg> تواصل معنا
         </button>
         
         <div class="nav-tools">
-            <button class="theme-toggle-btn" onclick="switchTab('search-section',null); setTimeout(()=>document.getElementById('globalSearchInput').focus(),80);" title="بحث">
-                <i class="fas fa-search"></i>
+            <button class="theme-toggle-btn" onclick="switchTab('search-section',null); setTimeout(()=>document.getElementById('globalSearchInput').focus(),80);" title="بحث" aria-label="بحث">
+                <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-search"></use></svg>
             </button>
-            <button class="theme-toggle-btn" id="theme-btn" onclick="toggleDarkMode()">
-                <i class="fas fa-moon"></i>
+            <button class="theme-toggle-btn" id="theme-btn" onclick="toggleDarkMode()" title="تغيير الوضع" aria-label="تغيير الوضع">
+                <svg class="ui-icon" data-theme-icon aria-hidden="true" focusable="false"><use href="#icon-moon"></use></svg>
             </button>
         </div>
     </div>
@@ -3405,8 +3642,8 @@ body.dark-mode .testibg.targeted-audio-card > i {
 <h3 class="home-hero-title">نحوّل الاسم والمناسبة والفكرة إلى عمل يُسمع ويُحفظ</h3>
 <p class="home-hero-lead">من الزفات بالأسماء والشيلات والمناسبات الخاصة، إلى التترات المؤسسية والتعليق الصوتي والبودكاست والمونتاج، نقدم أعمالاً تجمع الذوق الفني والدقة اللغوية والإخراج الذي يليق بالأفراد والمؤسسات.</p>
 <div class="home-hero-actions">
-<a class="home-hero-primary" href="https://wa.me/967770080131" rel="noopener" target="_blank"><i class="fab fa-whatsapp"></i>واتساب اليمن</a>
-<a class="home-hero-secondary home-hero-whatsapp-alt" href="https://wa.me/966560049754" rel="noopener" target="_blank"><i class="fab fa-whatsapp"></i>واتساب السعودية</a>
+<a class="home-hero-primary" href="https://wa.me/967770080131" rel="noopener" target="_blank"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>واتساب اليمن</a>
+<a class="home-hero-secondary home-hero-whatsapp-alt" href="https://wa.me/966560049754" rel="noopener" target="_blank"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>واتساب السعودية</a>
 <a class="home-hero-secondary" href="#" onclick="switchTab('contact-section', null); return false;"><i class="fas fa-file-alt"></i>أرسل تفاصيلك</a>
 </div>
 <div class="home-hero-points">
@@ -5528,7 +5765,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
                 <span class="offer-badge">10% عمولة</span>
             </div>
             <p class="offer-text">إذا كنت مسوقًا أو صاحب شبكة علاقات، يمكنك العمل معنا كشريك إحالة والحصول على عمولة واضحة على الطلبات المكتملة.</p>
-            <a class="offer-card-cta" href="https://wa.me/967770080131?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%B9%D8%B1%D8%B6%20%D8%A7%D9%84%D8%B4%D8%B1%D8%A7%D9%83%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B3%D9%88%D9%8A%D9%82%D9%8A%D8%A9" rel="noopener" target="_blank"><i class="fab fa-whatsapp"></i>اسأل عن الشراكة</a>
+            <a class="offer-card-cta" href="https://wa.me/967770080131?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%B9%D8%B1%D8%B6%20%D8%A7%D9%84%D8%B4%D8%B1%D8%A7%D9%83%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B3%D9%88%D9%8A%D9%82%D9%8A%D8%A9" rel="noopener" target="_blank"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>اسأل عن الشراكة</a>
         </article>
 
         <article class="offer-card searchable-item">
@@ -5537,7 +5774,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
                 <span class="offer-badge">خصم 50%</span>
             </div>
             <p class="offer-text">أرسل قصيدتك وسنساعدك في تحويلها إلى عمل فني ملحن ومنتج بإخراج احترافي مع خصم خاص للشعراء وأصحاب النصوص المميزة.</p>
-            <a class="offer-card-cta" href="https://wa.me/967770080131?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%B9%D8%B1%D8%B6%20%D8%A7%D9%84%D8%B4%D8%B9%D8%B1%D8%A7%D8%A1" rel="noopener" target="_blank"><i class="fab fa-whatsapp"></i>أرسل قصيدتك الآن</a>
+            <a class="offer-card-cta" href="https://wa.me/967770080131?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%B9%D8%B1%D8%B6%20%D8%A7%D9%84%D8%B4%D8%B9%D8%B1%D8%A7%D8%A1" rel="noopener" target="_blank"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>أرسل قصيدتك الآن</a>
         </article>
 
         <article class="offer-card searchable-item">
@@ -5546,7 +5783,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
                 <span class="offer-badge">الثالث مجانا</span>
             </div>
             <p class="offer-text">إذا طلبت عملين مرتبطين بمناسبة واحدة أو حملة واحدة، ستحصل على العمل الثالث مجانًا ضمن تنسيق يضمن وحدة الفكرة والإخراج.</p>
-            <a class="offer-card-cta" href="https://wa.me/967770080131?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D9%85%D9%86%D8%A7%D8%B3%D8%A8%D8%A9" rel="noopener" target="_blank"><i class="fab fa-whatsapp"></i>اختر هذه الباقة</a>
+            <a class="offer-card-cta" href="https://wa.me/967770080131?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D9%85%D9%86%D8%A7%D8%B3%D8%A8%D8%A9" rel="noopener" target="_blank"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>اختر هذه الباقة</a>
         </article>
 </div>
 
@@ -6074,7 +6311,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
 <p class="contact-panel-intro">يمكنك التواصل معنا مباشرة عبر واتساب اليمن أو واتساب السعودية أو البريد الإلكتروني، أو تعبئة النموذج لتهيئة رسالة واتساب مرتبة وفق الخدمة المطلوبة.</p>
 <div class="contact-info-stack">
 <a class="contact-info-card is-whatsapp-ye" href="https://wa.me/967770080131" rel="noopener" target="_blank">
-<span class="contact-info-icon"><i class="fab fa-whatsapp"></i></span>
+<span class="contact-info-icon"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg></span>
 <span>
 <span class="contact-info-label">واتساب اليمن</span>
 <span class="contact-info-value" dir="ltr">+967 770080131</span>
@@ -6082,7 +6319,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
 </span>
 </a>
 <a class="contact-info-card is-whatsapp-sa" href="https://wa.me/966560049754" rel="noopener" target="_blank">
-<span class="contact-info-icon"><i class="fab fa-whatsapp"></i></span>
+<span class="contact-info-icon"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg></span>
 <span>
 <span class="contact-info-label">واتساب السعودية</span>
 <span class="contact-info-value" dir="ltr">+966 560049754</span>
@@ -6090,7 +6327,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
 </span>
 </a>
 <a class="contact-info-card is-email" href="mailto:atheersound@gmail.com">
-<span class="contact-info-icon"><i class="fas fa-envelope"></i></span>
+<span class="contact-info-icon"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-email"></use></svg></span>
 <span>
 <span class="contact-info-label">البريد الإلكتروني</span>
 <span class="contact-info-value" dir="ltr">atheersound@gmail.com</span>
@@ -6103,11 +6340,11 @@ body.dark-mode .testibg.targeted-audio-card > i {
 اذكر نوع الخدمة، اسم المناسبة أو الجهة، المطلوب بالضبط، المدة المتوقعة للتنفيذ، وأي أسماء أو روابط أو أمثلة تساعدنا على فهم طلبك بسرعة.
 </div>
 <div class="contact-social-links">
-<a class="bg-facebook" href="https://facebook.com/atheersound" rel="noopener" target="_blank" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
-<a class="bg-youtube" href="https://www.youtube.com/@atheersound" rel="noopener" target="_blank" title="يوتيوب"><i class="fab fa-youtube"></i></a>
-<a class="bg-telegram" href="https://t.me/atheersound" rel="noopener" target="_blank" title="تيليجرام"><i class="fab fa-telegram-plane"></i></a>
-<a class="bg-whatsapp" href="https://www.whatsapp.com/channel/0029VbCEIAaAO7RMULArou0R" rel="noopener" target="_blank" title="قناة الواتساب"><i class="fab fa-whatsapp"></i></a>
-<a class="bg-email" href="mailto:atheersound@gmail.com" title="البريد الإلكتروني"><i class="fas fa-envelope"></i></a>
+<a class="bg-facebook" href="https://facebook.com/atheersound" rel="noopener" target="_blank" title="فيسبوك"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-facebook"></use></svg></a>
+<a class="bg-youtube" href="https://www.youtube.com/@atheersound" rel="noopener" target="_blank" title="يوتيوب"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-youtube"></use></svg></a>
+<a class="bg-telegram" href="https://t.me/atheersound" rel="noopener" target="_blank" title="تيليجرام"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-telegram"></use></svg></a>
+<a class="bg-whatsapp" href="https://www.whatsapp.com/channel/0029VbCEIAaAO7RMULArou0R" rel="noopener" target="_blank" title="قناة الواتساب"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg></a>
+<a class="bg-email" href="mailto:atheersound@gmail.com" title="البريد الإلكتروني"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-email"></use></svg></a>
 </div>
 </aside>
 <div class="contact-form-panel reveal searchable-item">
@@ -6174,7 +6411,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
 </label>
 <div class="contact-hint">الخدمة المطلوبة وتفاصيل الطلب مطلوبتان، أما بقية الحقول فهي اختيارية. سيتم الإرسال افتراضيًا إلى واتساب اليمن ما لم يختَر العميل واتساب السعودية.</div>
 <div class="contact-form-actions">
-<button class="contact-submit-btn" type="submit"><i class="fab fa-whatsapp"></i>إرسال</button>
+<button class="contact-submit-btn" type="submit"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>إرسال</button>
 </div>
 <div class="contact-form-feedback" id="contactFormFeedback" aria-live="polite"></div>
 </form>
@@ -6209,19 +6446,19 @@ body.dark-mode .testibg.targeted-audio-card > i {
 </footer>
 <div id="floatingAudioWidget" class="floating-audio-widget" aria-live="polite">
     <button type="button" id="floatingAudioExpand" class="floating-audio-mini-btn main-expand-btn" title="التحكم بالصوت">
-        <i class="fas fa-compact-disc fa-spin" style="animation-duration: 3s;"></i>
+        <svg class="ui-icon spinning-disc" aria-hidden="true" focusable="false"><use href="#icon-disc"></use></svg>
     </button>
     
     <div id="floatingAudioControls" class="floating-audio-controls">
         <button type="button" id="floatingAudioToggle" class="floating-audio-mini-btn" title="إيقاف مؤقت / متابعة">
-            <i class="fas fa-pause"></i>
+            <svg class="ui-icon" data-floating-audio-toggle-icon aria-hidden="true" focusable="false"><use href="#icon-pause"></use></svg>
         </button>
         <button type="button" id="floatingAudioClose" class="floating-audio-mini-btn close" title="إغلاق المشغل">
-            <i class="fas fa-xmark"></i>
+            <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-xmark"></use></svg>
         </button>
     </div>
 </div><button id="backToTop" onclick="document.querySelector('.youtube-canvas').scrollTo({top:0, behavior:'smooth'})" title="العودة للأعلى">
-    <i class="fas fa-arrow-up"></i>
+    <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-up"></use></svg>
 </button>
 <script>
 /* ===== Independent Init + Critical Functions Script ===== */
@@ -6571,17 +6808,21 @@ body.dark-mode .testibg.targeted-audio-card > i {
             item.classList.toggle('active');
         };
     }
+    window.updateThemeButtonIcon = function() {
+        var iconUse = document.querySelector('#theme-btn [data-theme-icon] use');
+        if (!iconUse) return;
+        var isDark = document.body.classList.contains('dark-mode');
+        var iconId = isDark ? '#icon-sun' : '#icon-moon';
+        iconUse.setAttribute('href', iconId);
+        iconUse.setAttribute('xlink:href', iconId);
+    };
 
     if(typeof window.toggleDarkMode !== 'function') {
         window.toggleDarkMode = function() {
             document.body.classList.toggle('dark-mode');
             var isDark = document.body.classList.contains('dark-mode');
             localStorage.setItem('atheer_theme', isDark ? 'dark' : 'light');
-            var icon = document.querySelector('#theme-btn i');
-            if(icon) {
-                icon.classList.toggle('fa-moon', !isDark);
-                icon.classList.toggle('fa-sun', isDark);
-            }
+            window.updateThemeButtonIcon();
         };
     }
 
@@ -6699,7 +6940,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
                     
                     const backBtn = document.createElement('button');
                     backBtn.className = 'sticky-back-btn';
-                    backBtn.innerHTML = '<i class="fas fa-arrow-right"></i>';
+                    backBtn.innerHTML = '<svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-right"></use></svg>';
                     backBtn.title = 'العودة للرئيسية';
                     backBtn.onclick = function() {
                         switchTab('home-section', document.getElementById('home-tab'));
@@ -6796,8 +7037,31 @@ function initCompactAudioCards() {
             titleEl.appendChild(viewport);
         }
 
+        var sequenceBtn = inner.querySelector('.audio-item__sequence-btn');
+        if (!sequenceBtn) {
+            sequenceBtn = document.createElement('button');
+            sequenceBtn.type = 'button';
+            sequenceBtn.className = 'audio-item__sequence-btn';
+            sequenceBtn.title = 'استماع متسلسل من هذا الملف';
+            sequenceBtn.setAttribute('aria-label', 'استماع متسلسل');
+            sequenceBtn.setAttribute('aria-pressed', 'false');
+            sequenceBtn.innerHTML = '<svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-sequence"></use></svg><span>استماع متسلسل</span>';
+            inner.appendChild(sequenceBtn);
+        }
+
+        if (!sequenceBtn.dataset.sequenceBound) {
+            sequenceBtn.dataset.sequenceBound = '1';
+            sequenceBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (typeof window.startSequentialAudioFrom === 'function') {
+                    window.startSequentialAudioFrom(audioEl);
+                }
+            });
+        }
+
         Array.prototype.forEach.call(inner.children, function(child) {
-            if (child === audioEl || child === titleEl) return;
+            if (child === audioEl || child === titleEl || child === sequenceBtn) return;
             if (child.tagName === 'I' || child.tagName === 'P' || child.tagName === 'H3' || child.tagName === 'H4' || child.tagName === 'SMALL') {
                 child.classList.add('audio-item__secondary');
             }
@@ -6851,6 +7115,121 @@ function initCustomAudioPlayers() {
             }
         });
     }
+}
+
+
+function initSequentialAudioPlayback() {
+    if (window.__atheerSequentialAudioBound) return;
+    window.__atheerSequentialAudioBound = true;
+
+    var state = {
+        active: false,
+        audios: [],
+        index: -1,
+        current: null
+    };
+
+    function getPlaylist(startAudio) {
+        var section = startAudio.closest && startAudio.closest('.content-section');
+        var root = section || document;
+        var audios = Array.prototype.filter.call(root.querySelectorAll('audio'), function(audioEl) {
+            return !!(audioEl.querySelector('source') || audioEl.currentSrc || audioEl.src);
+        });
+        var index = audios.indexOf(startAudio);
+        if (index < 0) {
+            audios = Array.prototype.slice.call(document.querySelectorAll('audio'));
+            index = audios.indexOf(startAudio);
+        }
+        return { audios: audios, index: Math.max(0, index) };
+    }
+
+    function updateSequenceButtons() {
+        document.querySelectorAll('.audio-item__sequence-btn').forEach(function(btn) {
+            btn.classList.remove('is-active');
+            btn.setAttribute('aria-pressed', 'false');
+        });
+        if (!state.active || !state.current) return;
+        var card = state.current.closest && state.current.closest('.audio-item');
+        var activeBtn = card && card.querySelector('.audio-item__sequence-btn');
+        if (activeBtn) {
+            activeBtn.classList.add('is-active');
+            activeBtn.setAttribute('aria-pressed', 'true');
+        }
+    }
+
+    function stopSequence(shouldPause) {
+        var current = state.current;
+        state.active = false;
+        state.audios = [];
+        state.index = -1;
+        state.current = null;
+        updateSequenceButtons();
+        if (shouldPause && current && !current.paused) {
+            current.pause();
+        }
+    }
+
+    function playAt(index) {
+        if (!state.active) return;
+        if (index >= state.audios.length) {
+            stopSequence(false);
+            return;
+        }
+
+        var nextAudio = state.audios[index];
+        if (!nextAudio) {
+            stopSequence(false);
+            return;
+        }
+
+        state.index = index;
+        state.current = nextAudio;
+        updateSequenceButtons();
+        try { nextAudio.currentTime = 0; } catch (e) {}
+        var playResult = nextAudio.play();
+        if (playResult && typeof playResult.catch === 'function') {
+            playResult.catch(function() { stopSequence(false); });
+        }
+    }
+
+    window.startSequentialAudioFrom = function(startAudio) {
+        if (!(startAudio instanceof HTMLAudioElement)) return;
+        if (state.active && state.current === startAudio) {
+            stopSequence(true);
+            return;
+        }
+
+        var playlist = getPlaylist(startAudio);
+        if (!playlist.audios.length) return;
+
+        state.active = true;
+        state.audios = playlist.audios;
+        state.index = playlist.index;
+        state.current = null;
+        playAt(state.index);
+    };
+
+    document.addEventListener('ended', function(e) {
+        var endedAudio = e.target;
+        if (!(endedAudio instanceof HTMLAudioElement)) return;
+        if (!state.active || endedAudio !== state.current) return;
+        playAt(state.index + 1);
+    }, true);
+
+    document.addEventListener('pause', function(e) {
+        var pausedAudio = e.target;
+        if (!(pausedAudio instanceof HTMLAudioElement)) return;
+        if (!state.active || pausedAudio !== state.current || pausedAudio.ended) return;
+        stopSequence(false);
+    }, true);
+
+    document.addEventListener('play', function(e) {
+        var playedAudio = e.target;
+        if (!(playedAudio instanceof HTMLAudioElement)) return;
+        if (state.active && state.current && playedAudio !== state.current) {
+            stopSequence(false);
+        }
+    }, true);
 }
 
 function initFooterVisitCounter() {
@@ -7266,21 +7645,25 @@ function initFooterVisitCounter() {
         const controlsContainer = document.getElementById('floatingAudioControls');
         
         if (!widgetEl || !expandBtn || !toggleBtn || !closeBtn) return;
-
-        const toggleIcon = toggleBtn.querySelector('i');
+        const toggleIconUse = toggleBtn.querySelector('[data-floating-audio-toggle-icon] use');
         let currentAudio = null;
 
+        function setToggleIcon(iconId) {
+            if (!toggleIconUse) return;
+            toggleIconUse.setAttribute('href', iconId);
+            toggleIconUse.setAttribute('xlink:href', iconId);
+        }
+
         function updateToggleState() {
-            if (!toggleIcon || !currentAudio) return;
+            if (!currentAudio) return;
             if (currentAudio.paused) {
-                toggleIcon.className = 'fas fa-play';
+                setToggleIcon('#icon-play');
                 widgetEl.classList.add('paused');
             } else {
-                toggleIcon.className = 'fas fa-pause';
+                setToggleIcon('#icon-pause');
                 widgetEl.classList.remove('paused');
             }
         }
-
         function showWidgetFor(audioEl) {
             currentAudio = audioEl;
             widgetEl.classList.add('show');
@@ -7343,9 +7726,11 @@ function initFooterVisitCounter() {
             }
         });
         safeRun(function(){ if(typeof initObserver==='function') initObserver(); });
+        safeRun(function(){ if(typeof updateThemeButtonIcon==='function') updateThemeButtonIcon(); });
         safeRun(function(){ animateCounters(); }); 
         safeRun(function(){ initScrollToTop(); });        
         safeRun(function(){ if(typeof initCompactAudioCards==='function') initCompactAudioCards(); });
+        safeRun(function(){ if(typeof initSequentialAudioPlayback==='function') initSequentialAudioPlayback(); });
         safeRun(function(){ if(typeof initCustomAudioPlayers==='function') initCustomAudioPlayers(); });
         safeRun(function(){ if(typeof initGlobalAudioExclusivity==='function') initGlobalAudioExclusivity(); });
         safeRun(function(){ if(typeof initFloatingAudioWidget==='function') initFloatingAudioWidget(); });
