@@ -1304,6 +1304,25 @@ body.dark-mode .works-gallery-link:hover {
     background: rgba(31, 127, 201, 0.12);
     border: 1px solid rgba(31, 127, 201, 0.18);
 }
+.works-gallery-icon i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    font-size: 17px;
+    line-height: 1;
+}
+.works-gallery-icon svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
 body.dark-mode .works-gallery-icon {
     background: rgba(240, 165, 93, 0.12);
     border-color: rgba(240, 165, 93, 0.22);
@@ -1337,6 +1356,7 @@ body.dark-mode .works-gallery-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
             width: max-content;
             max-width: calc(100% - 16px);
             margin: 0 auto 18px auto;
@@ -1352,6 +1372,33 @@ body.dark-mode .works-gallery-icon {
             background: rgba(42, 31, 19, 0.58);
             border-color: rgba(217, 120, 25, 0.48);
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+        }
+
+        .section-heading-icon {
+            flex: 0 0 auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(31, 127, 201, 0.12);
+            border: 1px solid rgba(31, 127, 201, 0.18);
+            color: var(--primary-blue);
+            font-size: 15px;
+            line-height: 1;
+        }
+
+        .section-heading-text {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        body.dark-mode .section-heading-icon {
+            background: rgba(240, 165, 93, 0.12);
+            border-color: rgba(240, 165, 93, 0.22);
+            color: var(--primary-yellow);
         }
 
         .work-card { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 15px; padding: 25px; text-align: center; box-shadow: 0 5px 15px var(--card-shadow); transition: 0.3s; }
@@ -1720,10 +1767,11 @@ body.dark-mode .works-gallery-icon {
         }
 
         .compact-audio-card .testibg {
-            display: flex;
+            display: grid;
+            grid-template-columns: 36px minmax(0, 1fr) 36px;
             align-items: center;
-            gap: 10px;
-            padding: 4px 0;
+            gap: 7px 10px;
+            padding: 8px 0 10px;
             text-align: right;
             min-width: 0;
             background: transparent !important;
@@ -1737,14 +1785,33 @@ body.dark-mode .works-gallery-icon {
             box-shadow: none !important;
         }
 
-        .compact-audio-card .testibg > i,
+        .compact-audio-card .testibg > i {
+            grid-column: 1;
+            grid-row: 1;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            margin: 0 !important;
+            border-radius: 50%;
+            background: rgba(31, 127, 201, 0.12);
+            border: 1px solid rgba(31, 127, 201, 0.18);
+            font-size: 16px !important;
+            line-height: 1;
+        }
+
+        :is(#audio-works, #schools-works, #zaffat-works, #shilat-works, #events-works, #music-works, #corporate-identities-works, #voiceover-works, #poems-composing-works, #nomusic-works, #podcast-works, #poetry-recitation-works, #editing-works) .compact-audio-card .testibg > i.audio-file-icon {
+            color: var(--primary-blue) !important;
+        }
+
         .compact-audio-card .audio-item__secondary {
             display: none !important;
         }
 
         .compact-audio-card .audio-item__title {
-            order: 2;
-            flex: 1 1 auto;
+            grid-column: 2;
+            grid-row: 1;
             min-width: 0;
             margin: 0 !important;
             font-size: 15px !important;
@@ -1777,13 +1844,13 @@ body.dark-mode .works-gallery-icon {
         }
 
         .compact-audio-card audio.audio-item__player {
-            order: 1;
-            flex: 0 0 clamp(125px, 16vw, 170px);
-            width: clamp(125px, 16vw, 170px) !important;
+            grid-column: 1 / -1;
+            grid-row: 2;
+            width: 100% !important;
             max-width: 100%;
             min-width: 0;
             margin: 0 !important;
-            height: 34px;
+            height: 38px;
             border-radius: 999px;
         }
 
@@ -1800,6 +1867,15 @@ body.dark-mode .works-gallery-icon {
 
         body.dark-mode .compact-audio-card .audio-item__title {
             color: #ffffff !important;
+        }
+
+        body.dark-mode .compact-audio-card .testibg > i {
+            background: rgba(240, 165, 93, 0.12);
+            border-color: rgba(240, 165, 93, 0.22);
+        }
+
+        body.dark-mode :is(#audio-works, #schools-works, #zaffat-works, #shilat-works, #events-works, #music-works, #corporate-identities-works, #voiceover-works, #poems-composing-works, #nomusic-works, #podcast-works, #poetry-recitation-works, #editing-works) .compact-audio-card .testibg > i.audio-file-icon {
+            color: var(--primary-yellow) !important;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -2034,14 +2110,14 @@ body.dark-mode .works-gallery-icon {
             }
             .compact-audio-card .testibg {
                 gap: 8px;
-                padding: 2px 0;
+                padding: 6px 0 8px;
             }
             .compact-audio-card .audio-item__title {
                 font-size: 14px !important;
             }
             .compact-audio-card audio.audio-item__player {
-                flex-basis: 118px;
-                width: 118px !important;
+                width: 100% !important;
+                height: 38px;
             }
         }
 /* Styling for Sub-Cards (Audio Editing) */
@@ -2191,6 +2267,10 @@ body.dark-mode .works-gallery-icon {
         }
 
         :is(#audio-works, #schools-works, #zaffat-works, #shilat-works, #events-works, #music-works, #corporate-identities-works, #voiceover-works, #poems-composing-works, #nomusic-works, #podcast-works, #poetry-recitation-works, #editing-works) > .sticky-section-header h2 {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             margin: 0;
             line-height: 1.2;
             white-space: nowrap;
@@ -2424,28 +2504,34 @@ body.dark-mode .floating-audio-widget .floating-audio-mini-btn.main-expand-btn:h
     color: #fff;
 }
 .compact-audio-card .audio-item__sequence-btn {
-    order: 3;
-    flex: 0 0 auto;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    width: 34px;
     height: 34px;
-    padding: 0 10px;
-    border-radius: 999px;
+    padding: 0;
+    border-radius: 50%;
     border: 1px solid rgba(0, 93, 178, 0.18);
     background: rgba(0, 93, 178, 0.08);
     color: var(--primary-blue);
-    font-size: 12px;
-    font-weight: 900;
     line-height: 1;
-    white-space: nowrap;
     cursor: pointer;
     transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 .compact-audio-card .audio-item__sequence-btn .ui-icon {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
+}
+.compact-audio-card .audio-item__sequence-btn span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
 }
 .compact-audio-card .audio-item__sequence-btn:hover,
 .compact-audio-card .audio-item__sequence-btn.is-active {
@@ -2468,19 +2554,23 @@ body.dark-mode .compact-audio-card .audio-item__sequence-btn.is-active {
 @media (max-width: 768px) {
     .compact-audio-card .audio-item__sequence-btn {
         height: 32px;
-        padding: 0 8px;
-        font-size: 11.5px;
+        width: 32px;
     }
 }
 @media (max-width: 520px) {
     .compact-audio-card .testibg {
-        flex-wrap: wrap;
+        grid-template-columns: 34px minmax(0, 1fr) 34px;
+    }
+    .compact-audio-card .testibg > i {
+        width: 32px;
+        height: 32px;
+        font-size: 15px !important;
     }
     .compact-audio-card .audio-item__title {
-        flex-basis: calc(100% - 132px);
+        grid-column: 2;
     }
     .compact-audio-card .audio-item__sequence-btn {
-        margin-inline-start: auto;
+        justify-self: end;
     }
 }        /* ================= Global Search Results ================= */
 
@@ -3588,7 +3678,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
     <div class="ticker-track">
         <div class="ticker-content">
             <span class="ticker-item">مرحبا بكم في الموقع الرسمي لمؤسسة أثير ساوند للإنتاج الفني</span>
-            <a class="ticker-item ticker-link" href="#most-requested-zaffat-entrance-40-minutes" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffat-entrance-40-minutes');">أضفنا زفة دخول العروسة 40 دقيقة للطلب بالأسماء</a>
+            <a class="ticker-item ticker-link" href="#most-requested-zaffa-shaabia-arous" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffa-shaabia-arous');">أضفنا زفة شعبية للعريس والعروس بالأسماء</a>
         </div>
     </div>
 </div>
@@ -3709,6 +3799,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
 <h3 class="home-side-title"><i class="fas fa-clock"></i>آخر الإضافات</h3>
 
 <ul class="home-side-mini-list">
+<li><a href="#most-requested-zaffa-shaabia-arous" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffa-shaabia-arous');"><i class="fas fa-music"></i>زفة شعبية للعريس والعروس بالأسماء</a></li>
 <li><a href="#most-requested-aghniyat-ers-amr-saba" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-aghniyat-ers-amr-saba');"><i class="fas fa-music"></i>أغنية عرس لعمرو  و سبأ</a></li>
 <li><a href="#most-requested-rajea-ala-safi-ana" onclick="return openMostRequestedAudio('schools-works', 'most-requested-rajea-ala-safi-ana');"><i class="fas fa-music"></i>راجع على صفي أنا ..</a></li>
 <li><a href="#most-requested-zaffat-entrance-40-minutes" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffat-entrance-40-minutes');"><i class="fas fa-music"></i>زفة دخول العروسة 40 دقيقة</a></li>
@@ -3745,6 +3836,12 @@ body.dark-mode .testibg.targeted-audio-card > i {
         الأكثر طلباً:
       </h3>
 <ul class="most-requested-list">
+<li>
+<a class="most-requested-link" href="#most-requested-zaffa-shaabia-arous" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffa-shaabia-arous');">
+<i class="fas fa-music"></i>
+            زفة شعبية للعريس والعروس بالأسماء
+          </a>
+</li>
 <li>
 <a class="most-requested-link" href="#most-requested-aghniyat-ers-amr-saba" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-aghniyat-ers-amr-saba');">
 <i class="fas fa-music"></i>
@@ -4118,7 +4215,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
 <div class="work-card audio-item">
 <div class="testibg">
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" onplay="var current=this; document.querySelectorAll('#poetry-recitation-works audio').forEach(function(a){ if(a!==current){ a.pause(); } });" style="width:100%;">
-<source src="https://www.dropbox.com/scl/fi/hclldh0s9ryn4i0l14hfl/layan-1.mp3?rlkey=6mxbg1vtyc84dmbozzjfwa1q8&amp;st=bshtwk8y&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/hclldh0s9ryn4i0l14hfl/layan-1.mp3?rlkey=6mxbg1vtyc84dmbozzjfwa1q8&amp;st=bshtwk8y&amp;raw=1" type="audio/mpeg"/>
 </audio>
 <p style="margin:8px 0 0; font-size:14px; color:var(--text-dark); font-weight:700; text-align:center;">هلا بالي حلاها.. العروسة ليان</p>
 </div>
@@ -4126,7 +4223,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
 <div class="work-card audio-item">
 <div class="testibg">
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" onplay="var current=this; document.querySelectorAll('#poetry-recitation-works audio').forEach(function(a){ if(a!==current){ a.pause(); } });" style="width:100%;">
-<source src="https://www.dropbox.com/scl/fi/884k56p1cyndn2tfocwlo/hanan_voice.mp3?rlkey=3wl8djhfx3c6hpzwoexg2o5iw&amp;st=2223bzqo&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/884k56p1cyndn2tfocwlo/hanan_voice.mp3?rlkey=3wl8djhfx3c6hpzwoexg2o5iw&amp;st=2223bzqo&amp;raw=1" type="audio/mpeg"/>
 </audio>
 <p style="margin:8px 0 0; font-size:14px; color:var(--text-dark); font-weight:700; text-align:center;">ألا بسم الله الرحمن.. العروسة حنان</p>
 </div>
@@ -4134,7 +4231,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
 <div class="work-card audio-item">
 <div class="testibg">
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" onplay="var current=this; document.querySelectorAll('#poetry-recitation-works audio').forEach(function(a){ if(a!==current){ a.pause(); } });" style="width:100%;">
-<source src="https://www.dropbox.com/scl/fi/rce8wo07pwbakg6o8lu0v/hanoof.mp3?rlkey=0hzb22x1arqxpy87fef1s9ov3&amp;st=k5wbxnwk&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/rce8wo07pwbakg6o8lu0v/hanoof.mp3?rlkey=0hzb22x1arqxpy87fef1s9ov3&amp;st=k5wbxnwk&amp;raw=1" type="audio/mpeg"/>
 </audio>
 <p style="margin:8px 0 0; font-size:14px; color:var(--text-dark); font-weight:700; text-align:center;">اقبلي يا هنوف</p>
 </div>
@@ -4163,7 +4260,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/4sxgzxv5eqylbmp2bxvar/somod_ghazza.mp3?rlkey=4cuiqx40x2au2kw5wvgz5ro2j&amp;st=2krp35m2&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/4sxgzxv5eqylbmp2bxvar/somod_ghazza.mp3?rlkey=4cuiqx40x2au2kw5wvgz5ro2j&amp;st=2krp35m2&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4177,7 +4274,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/9dtwmtarlsf5wr442wk15/zoffo.mp3?rlkey=yc3f9z6u7ypo1tg1rv755m20q&amp;st=hkl0sfyc&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/9dtwmtarlsf5wr442wk15/zoffo.mp3?rlkey=yc3f9z6u7ypo1tg1rv755m20q&amp;st=hkl0sfyc&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4190,7 +4287,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/fi7cqanedp5w4szhuiyhs/yahala.mp3?rlkey=hqttk9tvl6ci3ca646wt1x1ao&amp;st=kp79jfpb&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/fi7cqanedp5w4szhuiyhs/yahala.mp3?rlkey=hqttk9tvl6ci3ca646wt1x1ao&amp;st=kp79jfpb&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4203,7 +4300,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="  https://www.dropbox.com/scl/fi/teqx3gok9yv0yauhixwg9/drb_alnaja7_tasneem.mp3?rlkey=ebf4rmt2hvgsmsz5zyami6c1q&amp;st=27u8l61p&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="  https://www.dropbox.com/scl/fi/teqx3gok9yv0yauhixwg9/drb_alnaja7_tasneem.mp3?rlkey=ebf4rmt2hvgsmsz5zyami6c1q&amp;st=27u8l61p&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4216,7 +4313,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/aphascyh1q1nlmdsbfxkl/miss_yemen_alsomod.mp3?rlkey=4q1edynm4yhy49gbhr0x1oojm&amp;st=cignw3an&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/aphascyh1q1nlmdsbfxkl/miss_yemen_alsomod.mp3?rlkey=4q1edynm4yhy49gbhr0x1oojm&amp;st=cignw3an&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4229,7 +4326,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/klkjgrc7le0833bm8iu17/school_schools.mp3?rlkey=qa6hpsbmv6jqs1mb6gyrtvutz&amp;st=z5auywg8&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/klkjgrc7le0833bm8iu17/school_schools.mp3?rlkey=qa6hpsbmv6jqs1mb6gyrtvutz&amp;st=z5auywg8&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4242,7 +4339,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="  https://www.dropbox.com/scl/fi/42mq8xjt3zc0242cpjf5t/odna_rawabi_haddah.mp3?rlkey=6ssledyp4ep3450ia0ldn9a3k&amp;st=1hdczprb&amp;raw=1 " type="audio/mpeg"/>
+<source data-protected-src="  https://www.dropbox.com/scl/fi/42mq8xjt3zc0242cpjf5t/odna_rawabi_haddah.mp3?rlkey=6ssledyp4ep3450ia0ldn9a3k&amp;st=1hdczprb&amp;raw=1 " type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4255,7 +4352,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/pomz3wswm31h458w8tqdb/alqiyam_schools.mp3?rlkey=to29x3ksa31kxc90h3i1ipbw9&amp;st=2e13aaus&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/pomz3wswm31h458w8tqdb/alqiyam_schools.mp3?rlkey=to29x3ksa31kxc90h3i1ipbw9&amp;st=2e13aaus&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4268,7 +4365,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/2u4dbv6ccne8s6n97bief/zin_qadah.mp3?rlkey=tmick1o3r2j5bgrw8suvozasm&amp;st=t50zp1w0&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/2u4dbv6ccne8s6n97bief/zin_qadah.mp3?rlkey=tmick1o3r2j5bgrw8suvozasm&amp;st=t50zp1w0&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4281,7 +4378,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/ruj6p6em1xfz4p6dkqpaf/yemen-alsomod.mp3?rlkey=sxwaosnmpu5r1esv8pdqoh9i1&amp;st=amm8bgnz&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/ruj6p6em1xfz4p6dkqpaf/yemen-alsomod.mp3?rlkey=sxwaosnmpu5r1esv8pdqoh9i1&amp;st=amm8bgnz&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4294,7 +4391,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/vicrw0yl4kjbsjjcr4m0n/sports.mp3?rlkey=ofgzan3clcoz8mpe7s6yvhf2u&amp;st=iotqbluf&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/vicrw0yl4kjbsjjcr4m0n/sports.mp3?rlkey=ofgzan3clcoz8mpe7s6yvhf2u&amp;st=iotqbluf&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4307,7 +4404,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/1pnsj6a7vg24iwfsrvwgi/shido.mp3?rlkey=mgyqpt9c78de12m4ty5wfr5v9&amp;st=0v0mkk50&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/1pnsj6a7vg24iwfsrvwgi/shido.mp3?rlkey=mgyqpt9c78de12m4ty5wfr5v9&amp;st=0v0mkk50&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4320,7 +4417,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/huszpxifv45z9e46gqiss/rowad_tofan_with.mp3?rlkey=y8byp0owsssfae1y7qzn73r1m&amp;st=ztwx3qir&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/huszpxifv45z9e46gqiss/rowad_tofan_with.mp3?rlkey=y8byp0owsssfae1y7qzn73r1m&amp;st=ztwx3qir&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4333,7 +4430,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/p24n4932un4na928g6hvn/qadah.mp3?rlkey=0wvr2nocq5w6859sgv417xat4&amp;st=xxvhbszm&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/p24n4932un4na928g6hvn/qadah.mp3?rlkey=0wvr2nocq5w6859sgv417xat4&amp;st=xxvhbszm&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4346,7 +4443,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/xnx466hk3qcyctabthjtb/opreet_manar.mp3?rlkey=r41059gju5jlxzda7asvvpa0y&amp;st=1t6f7utg&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/xnx466hk3qcyctabthjtb/opreet_manar.mp3?rlkey=r41059gju5jlxzda7asvvpa0y&amp;st=1t6f7utg&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4359,7 +4456,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/j1p8kmv2snm143a4r4fpc/Ofoq_jahiz.mp3?rlkey=2f9zwab7l1du1p1mte5u8esnl&amp;st=19p7x2ui&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/j1p8kmv2snm143a4r4fpc/Ofoq_jahiz.mp3?rlkey=2f9zwab7l1du1p1mte5u8esnl&amp;st=19p7x2ui&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4372,7 +4469,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/7b4kmcr7o94oqyap3vwa4/nahjo_schools.mp3?rlkey=ma26twwubrww9dirc17hz6sdi&amp;st=9y4nllby&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/7b4kmcr7o94oqyap3vwa4/nahjo_schools.mp3?rlkey=ma26twwubrww9dirc17hz6sdi&amp;st=9y4nllby&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4385,7 +4482,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/nkprwlusiuoj81zxf0cde/motahidon_school.mp3?rlkey=fs0cntcavt4r57bo4zsm9mte4&amp;st=hi6rlr7g&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/nkprwlusiuoj81zxf0cde/motahidon_school.mp3?rlkey=fs0cntcavt4r57bo4zsm9mte4&amp;st=hi6rlr7g&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4398,7 +4495,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/8uc0y0i1qfw5r2z97pvpg/maryam_nokhba_hatolful_jahiz.mp3?rlkey=wxakweejxefqinztc9ps46r9v&amp;st=t0jt5msh&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/8uc0y0i1qfw5r2z97pvpg/maryam_nokhba_hatolful_jahiz.mp3?rlkey=wxakweejxefqinztc9ps46r9v&amp;st=t0jt5msh&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4411,7 +4508,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/h5vys7jkycnxogkxsp8kd/marsh_majdo.mp3?rlkey=9b78013lqd525ssaefg80dq72&amp;st=0emiawyi&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/h5vys7jkycnxogkxsp8kd/marsh_majdo.mp3?rlkey=9b78013lqd525ssaefg80dq72&amp;st=0emiawyi&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4424,7 +4521,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/j5l9zzmuldis6c2hkqbtb/marhaba.mp3?rlkey=chn76sagj7wdcnlqjtf8kr12b&amp;st=kr6bgvu4&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/j5l9zzmuldis6c2hkqbtb/marhaba.mp3?rlkey=chn76sagj7wdcnlqjtf8kr12b&amp;st=kr6bgvu4&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4437,7 +4534,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/iyi90c81n88mckprhn7r8/lel3ola.mp3?rlkey=u279girgro66lu5tdgoneiqyb&amp;st=1806znch&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/iyi90c81n88mckprhn7r8/lel3ola.mp3?rlkey=u279girgro66lu5tdgoneiqyb&amp;st=1806znch&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4450,7 +4547,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/a4qdvtntrkgc00so4oig3/kathar.mp3?rlkey=zrmq7h0fecsb4scsw4m9cvyr0&amp;st=gxkjopvo&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/a4qdvtntrkgc00so4oig3/kathar.mp3?rlkey=zrmq7h0fecsb4scsw4m9cvyr0&amp;st=gxkjopvo&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4463,7 +4560,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/oytn7jyy3q7o718bo9gef/hikma.mp3?rlkey=4myjgq9aojf35cq653wt7n3v7&amp;st=qjbfjafc&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/oytn7jyy3q7o718bo9gef/hikma.mp3?rlkey=4myjgq9aojf35cq653wt7n3v7&amp;st=qjbfjafc&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4476,7 +4573,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/lqgu4cnfclqghvqnoi1i6/goodmorning_nokhba.mp3?rlkey=jywj7ydcp00lmhmij6wkgx6gp&amp;st=wiglbj6z&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/lqgu4cnfclqghvqnoi1i6/goodmorning_nokhba.mp3?rlkey=jywj7ydcp00lmhmij6wkgx6gp&amp;st=wiglbj6z&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4489,7 +4586,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/bedtq8ushqtfpchy1u7qq/ghurbani.mp3?rlkey=ndh6mz37mseevp17ii79enrwl&amp;st=okgsifa6&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/bedtq8ushqtfpchy1u7qq/ghurbani.mp3?rlkey=ndh6mz37mseevp17ii79enrwl&amp;st=okgsifa6&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4502,7 +4599,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/li1giuidd414g3uyycsut/domti_majd.mp3?rlkey=uaiovmxhm3ms1g9nb3q582q76&amp;st=83xvkf79&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/li1giuidd414g3uyycsut/domti_majd.mp3?rlkey=uaiovmxhm3ms1g9nb3q582q76&amp;st=83xvkf79&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4515,7 +4612,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/s75pxtj2self71iylbjf4/damifalastini.mp3?rlkey=29jzyjdjxxd6p55dog5tcoaxl&amp;st=v7mpiqqe&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/s75pxtj2self71iylbjf4/damifalastini.mp3?rlkey=29jzyjdjxxd6p55dog5tcoaxl&amp;st=v7mpiqqe&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4528,7 +4625,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="  https://www.dropbox.com/scl/fi/mypsmjh1001heqy5hsymw/dar-al-arqam.mp3?rlkey=0soxj1qp3pe4iqy7lxn57qigf&amp;st=zsfmx9dc&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="  https://www.dropbox.com/scl/fi/mypsmjh1001heqy5hsymw/dar-al-arqam.mp3?rlkey=0soxj1qp3pe4iqy7lxn57qigf&amp;st=zsfmx9dc&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4541,7 +4638,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/rnyimeghyp8kje68qzy1f/skyray.mp3?rlkey=7c6etlyozvy1e279qjsqbv6r9&amp;st=lqsitc8i&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/rnyimeghyp8kje68qzy1f/skyray.mp3?rlkey=7c6etlyozvy1e279qjsqbv6r9&amp;st=lqsitc8i&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4554,7 +4651,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/br8ju0uqil77foz1scal4/azzaman._Tayba.mp3?rlkey=dqjfkn1a5fci7rsrcswiyazn6&amp;st=lz22uann&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/br8ju0uqil77foz1scal4/azzaman._Tayba.mp3?rlkey=dqjfkn1a5fci7rsrcswiyazn6&amp;st=lz22uann&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4567,7 +4664,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/vaj0d5k2ktgtqhg6551mp/albonyan.mp3?rlkey=905l5b60uts2m6xpsc0qn5uom&amp;st=k83sgq38&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/vaj0d5k2ktgtqhg6551mp/albonyan.mp3?rlkey=905l5b60uts2m6xpsc0qn5uom&amp;st=k83sgq38&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4581,7 +4678,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/c0qigwq2vsdck8g4udddn/.mp3?rlkey=xgiljwb3wqeempmzesri0y0qz&amp;st=p8ygb3gt&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/c0qigwq2vsdck8g4udddn/.mp3?rlkey=xgiljwb3wqeempmzesri0y0qz&amp;st=p8ygb3gt&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4594,7 +4691,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/gk8q3co2jse3desuwcfnl/yasamawat.mp3?rlkey=lrhug5v42slvrpns80ousxglu&amp;st=3jxkbe1r&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/gk8q3co2jse3desuwcfnl/yasamawat.mp3?rlkey=lrhug5v42slvrpns80ousxglu&amp;st=3jxkbe1r&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4607,7 +4704,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/xuvzztdkup0n68nxhsiur/mota3.mp3?rlkey=0ukb5qrqo3y2a04866kr5kj8d&amp;st=dabxzlyv&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/xuvzztdkup0n68nxhsiur/mota3.mp3?rlkey=0ukb5qrqo3y2a04866kr5kj8d&amp;st=dabxzlyv&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4620,7 +4717,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/azkg6vano5c31t8y016b3/abjad.mp3?rlkey=8pxfaauryu2k4stmnl794smpv&amp;st=mgi1cfxf&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/azkg6vano5c31t8y016b3/abjad.mp3?rlkey=8pxfaauryu2k4stmnl794smpv&amp;st=mgi1cfxf&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4633,7 +4730,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/igbtcrsdhmwbnatu30itk/hahonajeel.mp3?rlkey=mz11aa6mtx85mrksdxoyzdi15&amp;st=reubk1lz&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/igbtcrsdhmwbnatu30itk/hahonajeel.mp3?rlkey=mz11aa6mtx85mrksdxoyzdi15&amp;st=reubk1lz&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
@@ -4646,12 +4743,23 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/jwf5y5mfukllx335j4h70/dorobparty.mp3?rlkey=6ar40g5cyshrax25guprlmatx&amp;st=o2mewsw2&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/jwf5y5mfukllx335j4h70/dorobparty.mp3?rlkey=6ar40g5cyshrax25guprlmatx&amp;st=o2mewsw2&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div>
 </div>
 </section><section class="content-section" id="zaffat-works"><h2 class="section-title">زفات بالأسماء</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+<div class="work-card audio-item audio-zaffa" id="most-requested-zaffa-shaabia-arous">
+    <div class="testibg">
+        <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;"></i>
+        <h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
+            زفة شعبية للعريس والعروس بالأسماء
+        </h3>
+        <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
+            <source data-protected-src="https://www.dropbox.com/scl/fi/2ac99wxg3i65np952ae78/mabrokamr_jahiz.mp3?rlkey=2q62xvuuz1z3bjt1owu3t4z1i&amp;st=q1n6rksd&amp;raw=1" type="audio/mpeg"/>
+        </audio>
+    </div>
+</div>
 <div class="work-card audio-item audio-zaffa" id="most-requested-aghniyat-ers-amr-saba">
     <div class="testibg">
         <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;"></i>
@@ -4659,7 +4767,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
             أغنية عرس لعمرو  و سبأ
         </h3>
         <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-            <source src="https://www.dropbox.com/scl/fi/tvrj48h2nmw9qjfxaoptl/mabrokamr.mp3?rlkey=cczbfxl52whns63q4l2e8a9zs&amp;st=odd5bop5&amp;raw=1" type="audio/mpeg"/>
+            <source data-protected-src="https://www.dropbox.com/scl/fi/tvrj48h2nmw9qjfxaoptl/mabrokamr.mp3?rlkey=cczbfxl52whns63q4l2e8a9zs&amp;st=odd5bop5&amp;raw=1" type="audio/mpeg"/>
         </audio>
     </div>
 </div>
@@ -4670,7 +4778,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
             زفة دخول العروسة 40 دقيقة
         </h3>
         <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-            <source src="https://www.dropbox.com/scl/fi/8kqenypyl9r90c66vj224/zaffa_atheer.mp3?rlkey=zozp7ku9t5p0in0nkj4i0pmcp&amp;st=zadvnutp&amp;raw=1" type="audio/mpeg"/>
+            <source data-protected-src="https://www.dropbox.com/scl/fi/8kqenypyl9r90c66vj224/zaffa_atheer.mp3?rlkey=zozp7ku9t5p0in0nkj4i0pmcp&amp;st=zadvnutp&amp;raw=1" type="audio/mpeg"/>
         </audio>
     </div>
 </div>
@@ -4681,7 +4789,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
             طلي وانشري بسمتش
         </h3>
         <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-            <source src="https://www.dropbox.com/scl/fi/gifj5nu1fhvht3996d201/tolli.mp3?rlkey=ievini6pyrqpc9oz0tva7w51h&st=yx9tuhd3&raw=1" type="audio/mpeg"/>
+            <source data-protected-src="https://www.dropbox.com/scl/fi/gifj5nu1fhvht3996d201/tolli.mp3?rlkey=ievini6pyrqpc9oz0tva7w51h&st=yx9tuhd3&raw=1" type="audio/mpeg"/>
         </audio>
     </div>
 </div><div class="work-card audio-item audio-zaffa" id="most-requested-zaffat-half-hour">
@@ -4691,7 +4799,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
             نصف ساعة : زفة العروس
         </h3>
         <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-            <source src="https://www.dropbox.com/scl/fi/gjltija0zu5zhhl655bs7/zaffa.mp3?rlkey=n9y2vnqwlvyh7q4qe0c3stt63&st=03qhpetc&raw=1" type="audio/mpeg"/>
+            <source data-protected-src="https://www.dropbox.com/scl/fi/gjltija0zu5zhhl655bs7/zaffa.mp3?rlkey=n9y2vnqwlvyh7q4qe0c3stt63&st=03qhpetc&raw=1" type="audio/mpeg"/>
         </audio>
     </div>
 </div>
@@ -4702,7 +4810,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
             يا ليلة النور
         </h3>
         <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-            <source src="https://www.dropbox.com/scl/fi/aav5bqunygazxi2tesgam/yalailat_annoor.mp3?rlkey=7rymvppvocessw8ojdffseapf&st=vti5xeer&raw=1" type="audio/mpeg"/>
+            <source data-protected-src="https://www.dropbox.com/scl/fi/aav5bqunygazxi2tesgam/yalailat_annoor.mp3?rlkey=7rymvppvocessw8ojdffseapf&st=vti5xeer&raw=1" type="audio/mpeg"/>
         </audio>
     </div>
 </div>
@@ -4715,7 +4823,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/0oetvbznaq6jmhmtznlb3/ghazalin.mp3?rlkey=70s7e99xlpud8ydojkf36ddgp&amp;st=ej4lrkhp&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/0oetvbznaq6jmhmtznlb3/ghazalin.mp3?rlkey=70s7e99xlpud8ydojkf36ddgp&amp;st=ej4lrkhp&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-zaffa" id="most-requested-arsna-ghair-alradhmi">
@@ -4727,7 +4835,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/50i9yvp7uiobae6bl7t6q/yassir.mp3?rlkey=aku6p0rmkklqsc97emmjfkguz&amp;st=r8da4dz8&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/50i9yvp7uiobae6bl7t6q/yassir.mp3?rlkey=aku6p0rmkklqsc97emmjfkguz&amp;st=r8da4dz8&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-zaffa">
@@ -4739,7 +4847,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/307rcwhkl4iqmarrqk493/sara_wed_song.mp3?rlkey=x8qw7izs00bs8j6ckf3fa7c2a&amp;st=yc3b13e1&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/307rcwhkl4iqmarrqk493/sara_wed_song.mp3?rlkey=x8qw7izs00bs8j6ckf3fa7c2a&amp;st=yc3b13e1&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-zaffa">
@@ -4751,7 +4859,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/36dnb75i7abi6gedqrd2p/hanof.mp3?rlkey=dzn3c8ndnb31gog2c9qzsi2p4&amp;st=nhxl29iq&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/36dnb75i7abi6gedqrd2p/hanof.mp3?rlkey=dzn3c8ndnb31gog2c9qzsi2p4&amp;st=nhxl29iq&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-zaffa">
@@ -4763,7 +4871,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/p8fd6m9x0sap0ac85ewpk/opreet_3arees._?rlkey=b7jrjasbmply6fbz2x4xao4vq&amp;st=xtj6obyo&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/p8fd6m9x0sap0ac85ewpk/opreet_3arees._?rlkey=b7jrjasbmply6fbz2x4xao4vq&amp;st=xtj6obyo&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-zaffa">
@@ -4775,7 +4883,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/xh2bx9lxdoad3otgadq19/alayatieeeeer.mp3?rlkey=vy3twa2cdf692e024l7lth1is&amp;st=7sqxazt4&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/xh2bx9lxdoad3otgadq19/alayatieeeeer.mp3?rlkey=vy3twa2cdf692e024l7lth1is&amp;st=7sqxazt4&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-zaffa">
@@ -4787,7 +4895,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/etf59h76f51g3hrjmk3sl/igbili.mp3?rlkey=h32xi47v96bfrcb3oiie67u75&amp;st=rf6r5w4m&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/etf59h76f51g3hrjmk3sl/igbili.mp3?rlkey=h32xi47v96bfrcb3oiie67u75&amp;st=rf6r5w4m&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-zaffa">
@@ -4799,7 +4907,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/t4ab5pd7klzkjm3vdx0vs/zaffawada3_basma.mp3?rlkey=4z3bbwyxvi8zgj0asuflhjz6q&amp;st=lgp1d90i&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/t4ab5pd7klzkjm3vdx0vs/zaffawada3_basma.mp3?rlkey=4z3bbwyxvi8zgj0asuflhjz6q&amp;st=lgp1d90i&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-zaffa">
@@ -4811,7 +4919,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/zmb8a1lruy3xl2d0skdjd/abrar_Zaffah.mp3?rlkey=3n9do42m5fah60f2eyolkfdtj&amp;st=jt2331p8&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/zmb8a1lruy3xl2d0skdjd/abrar_Zaffah.mp3?rlkey=3n9do42m5fah60f2eyolkfdtj&amp;st=jt2331p8&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-zaffa">
@@ -4823,7 +4931,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/qr06ma51qowj0qqhatdae/akramwedding.mp3?rlkey=80d58su71r270svc3jrl2wg2w&amp;st=mhge4hlq&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/qr06ma51qowj0qqhatdae/akramwedding.mp3?rlkey=80d58su71r270svc3jrl2wg2w&amp;st=mhge4hlq&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-zaffa">
@@ -4835,7 +4943,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="  https://www.dropbox.com/scl/fi/kqkjpasup6ip5zkuzx536/latofakker_yal3arees.mp3?rlkey=e1130qd9wxoqiqxvqw5xfiytc&amp;st=lujd6esw&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="  https://www.dropbox.com/scl/fi/kqkjpasup6ip5zkuzx536/latofakker_yal3arees.mp3?rlkey=e1130qd9wxoqiqxvqw5xfiytc&amp;st=lujd6esw&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-zaffa">
@@ -4847,7 +4955,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/t9evg8ogiw6roh6is5pzy/qom_ahilani.mp3?rlkey=ex65nswe7ydzftnfxyi2l5sxl&amp;st=23vrt05l&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/t9evg8ogiw6roh6is5pzy/qom_ahilani.mp3?rlkey=ex65nswe7ydzftnfxyi2l5sxl&amp;st=23vrt05l&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div></div></section><section class="content-section" id="shilat-works"><h2 class="section-title">شيلات بالأسماء</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
@@ -4860,7 +4968,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/lgx3aekrkdryv3k5heciq/shila.mp3?rlkey=e57dr4bwd8yg5n6f2ywn43g5k&amp;st=oxuxg2ba&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/lgx3aekrkdryv3k5heciq/shila.mp3?rlkey=e57dr4bwd8yg5n6f2ywn43g5k&amp;st=oxuxg2ba&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-shila" id="most-requested-shila-ashoul">
@@ -4872,7 +4980,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/zb6ksj6r3mum7l81bo4t0/shila_mad7.mp3?rlkey=5dwpw43o622v5ise5zyim2vzp&amp;st=sgcut0on&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/zb6ksj6r3mum7l81bo4t0/shila_mad7.mp3?rlkey=5dwpw43o622v5ise5zyim2vzp&amp;st=sgcut0on&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-shila" id="most-requested-cover-rouida">
@@ -4884,7 +4992,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/cfp3n9s8fqxroyk9d1zil/roro.mp3?rlkey=j29wo2el9lpvj9tc2393uybq5&amp;st=gecfgbze&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/cfp3n9s8fqxroyk9d1zil/roro.mp3?rlkey=j29wo2el9lpvj9tc2393uybq5&amp;st=gecfgbze&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-shila">
@@ -4896,7 +5004,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/a1yxi3ypppj31o0m9gg4q/shia_bin-obaid.mp3?rlkey=r6pk47nn9e69fsdu931nlsido&amp;st=0ctv13at&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/a1yxi3ypppj31o0m9gg4q/shia_bin-obaid.mp3?rlkey=r6pk47nn9e69fsdu931nlsido&amp;st=0ctv13at&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-shila">
@@ -4908,7 +5016,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/1rmhobvux6xlsiow7050r/shilamanandwomen.mp3?rlkey=m0lvzuygfk5ca48wrgkqglfxr&amp;st=xk1f58r9&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/1rmhobvux6xlsiow7050r/shilamanandwomen.mp3?rlkey=m0lvzuygfk5ca48wrgkqglfxr&amp;st=xk1f58r9&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-shila">
@@ -4920,7 +5028,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/pn8s3h0eid1zu9huv3f4i/retha_aldobaili._?rlkey=e6pfzyjsnxe34959wwe0npl4e&amp;st=4e7o877x&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/pn8s3h0eid1zu9huv3f4i/retha_aldobaili._?rlkey=e6pfzyjsnxe34959wwe0npl4e&amp;st=4e7o877x&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-shila">
@@ -4932,7 +5040,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/ab7s5y2ve1kbablq0gc2n/lillah_ya_watanan.mp3?rlkey=vhlknfhvn0lny0zahf94z0cy1&amp;st=1rdscru4&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/ab7s5y2ve1kbablq0gc2n/lillah_ya_watanan.mp3?rlkey=vhlknfhvn0lny0zahf94z0cy1&amp;st=1rdscru4&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-shila">
@@ -4944,7 +5052,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="  https://www.dropbox.com/scl/fi/x2sc3m7a5z86r381eozyc/borhan.mp3?rlkey=2uy5geahjoabmaqwmnqrql4ll&amp;st=etjj6i1r&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="  https://www.dropbox.com/scl/fi/x2sc3m7a5z86r381eozyc/borhan.mp3?rlkey=2uy5geahjoabmaqwmnqrql4ll&amp;st=etjj6i1r&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-shila">
@@ -4956,7 +5064,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/pho9et2ujesba75qn37eh/ghaith.mp3?rlkey=goumd0l7mop4re8d2sl8xfamt&amp;st=70ey541n&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/pho9et2ujesba75qn37eh/ghaith.mp3?rlkey=goumd0l7mop4re8d2sl8xfamt&amp;st=70ey541n&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-shila">
@@ -4968,7 +5076,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/bcd1htna2q5zo12fc59l7/mahma.mp3?rlkey=rfwz99gz6453b70jgo07uzy6k&amp;st=sk8o1bjt&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/bcd1htna2q5zo12fc59l7/mahma.mp3?rlkey=rfwz99gz6453b70jgo07uzy6k&amp;st=sk8o1bjt&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-shila">
@@ -4980,7 +5088,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/rtmfu2djibbiaq0f98cz8/hamedTest.mp3?rlkey=f4l3ph2ts6km8k8krjysommfx&amp;st=y5s5cc10&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/rtmfu2djibbiaq0f98cz8/hamedTest.mp3?rlkey=f4l3ph2ts6km8k8krjysommfx&amp;st=y5s5cc10&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div></div></section><section class="content-section" id="events-works"><h2 class="section-title">مناسبات بالأسماء</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;"><div class="work-card audio-item audio-event" id="most-requested-alf-mabrook-ya-mohammed">
@@ -4992,7 +5100,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/xqgv775flxags9gd69u7r/1000.mp3?rlkey=ga96xvzsv128ly6upv8mwl6v6&amp;st=pl40adqp&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/xqgv775flxags9gd69u7r/1000.mp3?rlkey=ga96xvzsv128ly6upv8mwl6v6&amp;st=pl40adqp&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-event">
@@ -5004,7 +5112,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/0nkalhykv66r7gq287o83/nabi_rabee1.mp3?rlkey=za797jq2y6yush5dst79i7sch&amp;st=4cle8i8p&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/0nkalhykv66r7gq287o83/nabi_rabee1.mp3?rlkey=za797jq2y6yush5dst79i7sch&amp;st=4cle8i8p&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-event">
@@ -5016,7 +5124,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/it1s0oo4myomfbtvdg42o/mabrook-Cover.wav?rlkey=c0qot2gygfdz8trrtil3b8u7h&amp;st=7mab4oci&amp;raw=1" type="audio/wav"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/it1s0oo4myomfbtvdg42o/mabrook-Cover.wav?rlkey=c0qot2gygfdz8trrtil3b8u7h&amp;st=7mab4oci&amp;raw=1" type="audio/wav"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-event">
@@ -5028,7 +5136,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/6t6tholk7nf9yvqoocumw/layona.mp3?rlkey=b387i7franhn65nufzfvljynl&amp;st=kun2ndr4&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/6t6tholk7nf9yvqoocumw/layona.mp3?rlkey=b387i7franhn65nufzfvljynl&amp;st=kun2ndr4&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-event">
@@ -5040,7 +5148,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/g4688hjkflkph5qp7medr/ifrahimajd.mp3?rlkey=15d2engyyond9mlkuu8yehx3p&amp;st=x7jxv6lg&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/g4688hjkflkph5qp7medr/ifrahimajd.mp3?rlkey=15d2engyyond9mlkuu8yehx3p&amp;st=x7jxv6lg&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-event">
@@ -5052,7 +5160,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/76rybe7hj5fiwed5bo33o/ritagoooo.mp3?rlkey=dkjrwi95dy6bv304p2p3ggzim&amp;st=qj2s53r7&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/76rybe7hj5fiwed5bo33o/ritagoooo.mp3?rlkey=dkjrwi95dy6bv304p2p3ggzim&amp;st=qj2s53r7&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-event">
@@ -5064,7 +5172,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/icsi2fqdxaga1ljynbsku/huroof.mp3?rlkey=ynmprxtd4re945efxdf5i0tjn&amp;st=cmt0i93x&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/icsi2fqdxaga1ljynbsku/huroof.mp3?rlkey=ynmprxtd4re945efxdf5i0tjn&amp;st=cmt0i93x&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-event">
@@ -5076,7 +5184,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/p3scmodpnz3b0iluxroe9/mi7rab.weba?rlkey=aq7jbbaf0xuvk9frab1qpt8tn&amp;st=gm5cwckc&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/p3scmodpnz3b0iluxroe9/mi7rab.weba?rlkey=aq7jbbaf0xuvk9frab1qpt8tn&amp;st=gm5cwckc&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-event">
@@ -5088,7 +5196,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/wkgvofe29ktsa5mp68x13/yabahjat.mp3?rlkey=tgb4c3afvsjq5jibhen6kjx66&amp;st=y7rp10e4&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/wkgvofe29ktsa5mp68x13/yabahjat.mp3?rlkey=tgb4c3afvsjq5jibhen6kjx66&amp;st=y7rp10e4&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-schools audio-event">
@@ -5100,7 +5208,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/qs3trr2kk50rkmqzq422u/tair_alnokhba.mp3?rlkey=9hvudct390vjln2o5iqy5db0r&amp;st=ftcpfx9o&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/qs3trr2kk50rkmqzq422u/tair_alnokhba.mp3?rlkey=9hvudct390vjln2o5iqy5db0r&amp;st=ftcpfx9o&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-schools audio-event">
@@ -5112,7 +5220,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/hsxok2iky7coqdpygi7i8/shukran.mp3?rlkey=0e4bgofou3ufb5135nvco317u&amp;st=jz0uo4b0&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/hsxok2iky7coqdpygi7i8/shukran.mp3?rlkey=0e4bgofou3ufb5135nvco317u&amp;st=jz0uo4b0&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div></div></section><section class="content-section" id="music-works"><h2 class="section-title">أعمال بموسيقا</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;"><div class="work-card audio-item audio-music">
@@ -5124,7 +5232,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/hsn3n0tua4pqzlo1iro2k/yatayi3.mp3?rlkey=4bdxb0csbi6zbe6piysm7zvzt&amp;st=ly5cgtcz&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/hsn3n0tua4pqzlo1iro2k/yatayi3.mp3?rlkey=4bdxb0csbi6zbe6piysm7zvzt&amp;st=ly5cgtcz&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5136,7 +5244,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/mcsg5h6vld20pv4tnaz47/gamarayamani.mp3?rlkey=w1bdfwn78wbvbeax7xow3tte2&amp;st=it9a0av4&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/mcsg5h6vld20pv4tnaz47/gamarayamani.mp3?rlkey=w1bdfwn78wbvbeax7xow3tte2&amp;st=it9a0av4&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5148,7 +5256,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/lafzs6oum762k3vduelxq/nor-Cover.mp3?rlkey=llbsoc6f6zugfenh3gza51iv9&amp;st=2q0ipzh6&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/lafzs6oum762k3vduelxq/nor-Cover.mp3?rlkey=llbsoc6f6zugfenh3gza51iv9&amp;st=2q0ipzh6&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5160,7 +5268,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/kmsgvlmmfs5e871dq2qbi/manPalmohyee.mp3?rlkey=z681zt5qrc0gdj0od7rnqapjx&amp;st=xm86ede2&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/kmsgvlmmfs5e871dq2qbi/manPalmohyee.mp3?rlkey=z681zt5qrc0gdj0od7rnqapjx&amp;st=xm86ede2&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5172,7 +5280,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/8wq4spirkksplxxjebjnq/issam-Cover.mp3?rlkey=u7olxqqtgcrv4ydsdg50rbr5r&amp;st=hgp4x76f&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/8wq4spirkksplxxjebjnq/issam-Cover.mp3?rlkey=u7olxqqtgcrv4ydsdg50rbr5r&amp;st=hgp4x76f&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5184,7 +5292,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/smmchu4thomy9527tz8i3/bari-Cover.mp3?rlkey=ailvicaj22juugcvo4lamf3z3&amp;st=n4t1372a&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/smmchu4thomy9527tz8i3/bari-Cover.mp3?rlkey=ailvicaj22juugcvo4lamf3z3&amp;st=n4t1372a&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5196,7 +5304,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/p3rjsgcsxedr51fo22zh1/assalah.mp3?rlkey=mp8xtuse1zwsoehni9mo7rgij&amp;st=ty92csse&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/p3rjsgcsxedr51fo22zh1/assalah.mp3?rlkey=mp8xtuse1zwsoehni9mo7rgij&amp;st=ty92csse&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music" id="most-requested-yommah-maghlash-cover">
@@ -5208,7 +5316,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/of762oa7384wb4d9ir6q4/...mp3?rlkey=c47xin6vov1dusp2agcrnog54&amp;st=boviqqys&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/of762oa7384wb4d9ir6q4/...mp3?rlkey=c47xin6vov1dusp2agcrnog54&amp;st=boviqqys&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5220,7 +5328,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/p1gt1klmfly0d0bek2chb/islami-yaquds.mp3?rlkey=16cgcnqq26nv3b756nphuf1j7&amp;st=oedr6pf9&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/p1gt1klmfly0d0bek2chb/islami-yaquds.mp3?rlkey=16cgcnqq26nv3b756nphuf1j7&amp;st=oedr6pf9&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5232,7 +5340,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/ccm7t581iy8m7ae6byxhm/zaffahindi-Cover.mp3?rlkey=x7z7wzzsi8q4ojn740rsn0bnq&amp;st=w8u9tkur&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/ccm7t581iy8m7ae6byxhm/zaffahindi-Cover.mp3?rlkey=x7z7wzzsi8q4ojn740rsn0bnq&amp;st=w8u9tkur&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div></div></section><section class="content-section" id="corporate-identities-works"><h2 class="section-title">إعلانات لشركات ومؤسسات، وتترات برامج</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;"><div class="work-card audio-item audio-voiceover">
@@ -5244,7 +5352,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/6lj81zizngstfkrhc963q/safariyat.mp3?rlkey=ftdpra5syv1aked8qfww8fgkz&amp;st=2kc5cv4q&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/6lj81zizngstfkrhc963q/safariyat.mp3?rlkey=ftdpra5syv1aked8qfww8fgkz&amp;st=2kc5cv4q&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-voiceover">
@@ -5256,7 +5364,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/hber232smb4c7x6ul76bd/najaz.mp3?rlkey=bc7ailxqfhojf02gkxcooqpgh&amp;st=jl7etpg0&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/hber232smb4c7x6ul76bd/najaz.mp3?rlkey=bc7ailxqfhojf02gkxcooqpgh&amp;st=jl7etpg0&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-voiceover">
@@ -5268,7 +5376,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/6uuqis4zoobjrpnguq2eo/atheer.mp3?rlkey=zriy7bhgqurd2wh8e6f8p7p15&amp;st=7k9xul04&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/6uuqis4zoobjrpnguq2eo/atheer.mp3?rlkey=zriy7bhgqurd2wh8e6f8p7p15&amp;st=7k9xul04&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-voiceover">
@@ -5280,7 +5388,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/o9jq0p15oaecjghs1qcqy/tarahamo.mp3?rlkey=z9mcaqigh6b3brkt1dk4lr8kh&amp;st=2nis7lqp&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/o9jq0p15oaecjghs1qcqy/tarahamo.mp3?rlkey=z9mcaqigh6b3brkt1dk4lr8kh&amp;st=2nis7lqp&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-voiceover">
@@ -5292,7 +5400,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/lzzcete905v92k4645wak/idraak.mp3?rlkey=y865xytc0pftk2w2qf6ksafpj&amp;st=k0h9xn8h&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/lzzcete905v92k4645wak/idraak.mp3?rlkey=y865xytc0pftk2w2qf6ksafpj&amp;st=k0h9xn8h&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-voiceover">
@@ -5304,7 +5412,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/ts7opck6nn0u6ifya1vvn/birr.mp3?rlkey=juyimeu3mwdyppm84sh4se6po&amp;st=hagn3ujg&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/ts7opck6nn0u6ifya1vvn/birr.mp3?rlkey=juyimeu3mwdyppm84sh4se6po&amp;st=hagn3ujg&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div></div></section><section class="content-section" id="voiceover-works"><h2 class="section-title">التعليق الصوتي</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;"><div class="work-card audio-item audio-voiceover">
@@ -5316,7 +5424,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/3z9x08hssdxets15lp6pf/WhatsApp-Audio-2025-12-24-at-1.25.38-PM.mpeg.mp3?rlkey=qeuwl9s31l1hlchyrp4yg8y8j&amp;st=wrs0ndwi&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/3z9x08hssdxets15lp6pf/WhatsApp-Audio-2025-12-24-at-1.25.38-PM.mpeg.mp3?rlkey=qeuwl9s31l1hlchyrp4yg8y8j&amp;st=wrs0ndwi&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-voiceover">
@@ -5328,7 +5436,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/cu09p75ntghadypy84nsv/.mp3?rlkey=8bat02bxexb3n8pnw7mxiqk2e&amp;st=krwo4iva&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/cu09p75ntghadypy84nsv/.mp3?rlkey=8bat02bxexb3n8pnw7mxiqk2e&amp;st=krwo4iva&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-voiceover">
@@ -5340,7 +5448,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/ir24pkufd22ezdaxijon0/.mp3?rlkey=a6m37tcuvgc2wgdl935b9p1hp&amp;st=8lqy6d5t&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/ir24pkufd22ezdaxijon0/.mp3?rlkey=a6m37tcuvgc2wgdl935b9p1hp&amp;st=8lqy6d5t&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-voiceover">
@@ -5352,7 +5460,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/0q5xxo4k0i5t9b67i9nc7/.mp3?rlkey=tfl4cj5zgdrnng6dira5h55is&amp;st=ncpqgx56&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/0q5xxo4k0i5t9b67i9nc7/.mp3?rlkey=tfl4cj5zgdrnng6dira5h55is&amp;st=ncpqgx56&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div></div></section><section class="content-section" id="poems-composing-works"><h2 class="section-title">تلحين قصائد</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;"><div class="work-card audio-item audio-music">
@@ -5364,7 +5472,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/mxyvvq7coum8t0zuz7qm7/hath_yaman.mp3?rlkey=4mht1oppijrry01umpj859a52&amp;st=ajgusrq6&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/mxyvvq7coum8t0zuz7qm7/hath_yaman.mp3?rlkey=4mht1oppijrry01umpj859a52&amp;st=ajgusrq6&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5376,7 +5484,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/x9o6udmg13ypl0bo53i8o/hamatl-shawqi.mp3?rlkey=2e5ez8vxl0w9woa290kpfrh9o&amp;st=qhxwhfs2&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/x9o6udmg13ypl0bo53i8o/hamatl-shawqi.mp3?rlkey=2e5ez8vxl0w9woa290kpfrh9o&amp;st=qhxwhfs2&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5388,7 +5496,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/8u1up715zg3navof99hrk/eltageena.mp3?rlkey=pme2taig9zixjhnrbz86bnmjb&amp;st=lrrl1qxd&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/8u1up715zg3navof99hrk/eltageena.mp3?rlkey=pme2taig9zixjhnrbz86bnmjb&amp;st=lrrl1qxd&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5400,7 +5508,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/kul8lb5s12lgn3z5fem0n/ra7_al3omer.mp3?rlkey=sa20ml26at51bdjksyb132m18&amp;st=1i6vowgt&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/kul8lb5s12lgn3z5fem0n/ra7_al3omer.mp3?rlkey=sa20ml26at51bdjksyb132m18&amp;st=1i6vowgt&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5412,7 +5520,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/uui3aro8wfk34f9fl8m0w/yalateef_alro7.mp3?rlkey=gnepbxekvjlnbpt9cemdcs06c&amp;st=6157z9vc&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/uui3aro8wfk34f9fl8m0w/yalateef_alro7.mp3?rlkey=gnepbxekvjlnbpt9cemdcs06c&amp;st=6157z9vc&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5424,7 +5532,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/mji13h5lkiqyp3mlawu85/yahawa.mp3?rlkey=ewmlopg5g598zeevdbzb0s3bh&amp;st=glbssu06&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/mji13h5lkiqyp3mlawu85/yahawa.mp3?rlkey=ewmlopg5g598zeevdbzb0s3bh&amp;st=glbssu06&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5436,7 +5544,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/obm2rcr3rfbontqce2jeq/kanalhasha.mp3?rlkey=rt9onvcfaiigivqu76slr6mfe&amp;st=6r9bpsxc&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/obm2rcr3rfbontqce2jeq/kanalhasha.mp3?rlkey=rt9onvcfaiigivqu76slr6mfe&amp;st=6r9bpsxc&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5448,7 +5556,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/fdnjgld4z4iv6trp4vqeh/kifah2.mp3?rlkey=ncb4pwxusw0kw6l1fmg7unsq0&amp;st=q9uduhub&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/fdnjgld4z4iv6trp4vqeh/kifah2.mp3?rlkey=ncb4pwxusw0kw6l1fmg7unsq0&amp;st=q9uduhub&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-music">
@@ -5460,7 +5568,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="  https://www.dropbox.com/scl/fi/31zipe9d4kfb9p0zttlor/ayodfan.mp3?rlkey=82rzesy4int2ibklnbl9xu6e6&amp;st=adt56v8y&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="  https://www.dropbox.com/scl/fi/31zipe9d4kfb9p0zttlor/ayodfan.mp3?rlkey=82rzesy4int2ibklnbl9xu6e6&amp;st=adt56v8y&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div></div></section><section class="content-section" id="nomusic-works"><h2 class="section-title">أعمال بدون موسيقا</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
@@ -5469,7 +5577,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;"></i>
         <h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">إياد يا نور الفلاح..تكريم الطفل الحافظ إياد الحوري</h3>
         <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-            <source src="https://www.dropbox.com/scl/fi/1ltcrybvpna9wt9oic5m3/iyad.mp3?rlkey=vaxummudhs79bucpmlax85sfo&st=go1o72l9&raw=1" type="audio/mpeg"/>
+            <source data-protected-src="https://www.dropbox.com/scl/fi/1ltcrybvpna9wt9oic5m3/iyad.mp3?rlkey=vaxummudhs79bucpmlax85sfo&st=go1o72l9&raw=1" type="audio/mpeg"/>
         </audio>
     </div>
 </div>
@@ -5482,7 +5590,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/q2kdxmr1bxf1q9ducphvj/ommi.mp3?rlkey=220dd0oc4skqpimcbk8rcac52&amp;st=osytbimi&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/q2kdxmr1bxf1q9ducphvj/ommi.mp3?rlkey=220dd0oc4skqpimcbk8rcac52&amp;st=osytbimi&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-nomusic">
@@ -5494,7 +5602,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/rdfkpd46oiybe5y6hk0xu/ahaat.mp3?rlkey=22e19cgivsqemm0qot5n7zxah&amp;st=mfhvz4sd&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/rdfkpd46oiybe5y6hk0xu/ahaat.mp3?rlkey=22e19cgivsqemm0qot5n7zxah&amp;st=mfhvz4sd&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-nomusic">
@@ -5506,7 +5614,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/fs8uciiwwyyvowsoteqlv/ya3aleeman.mp3?rlkey=w736y52muphhc3zxn934tqwhq&amp;st=9kcbdhx3&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/fs8uciiwwyyvowsoteqlv/ya3aleeman.mp3?rlkey=w736y52muphhc3zxn934tqwhq&amp;st=9kcbdhx3&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-nomusic">
@@ -5518,7 +5626,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/ocmrw4gv79u1c2j2ek01z/onaji.mp3?rlkey=fw7wb0xldqosqg3w8dpiphbjh&amp;st=ypf20xjc&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/ocmrw4gv79u1c2j2ek01z/onaji.mp3?rlkey=fw7wb0xldqosqg3w8dpiphbjh&amp;st=ypf20xjc&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-nomusic">
@@ -5530,7 +5638,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/3qvutlz1cjsahs69rsmqj/hayyaNhafad.mp3?rlkey=9hiosswv4fvz2sfrbefwv2p57&amp;st=0mg837w0&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/3qvutlz1cjsahs69rsmqj/hayyaNhafad.mp3?rlkey=9hiosswv4fvz2sfrbefwv2p57&amp;st=0mg837w0&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-nomusic">
@@ -5542,7 +5650,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/lirsj6ky0tct24cit0ktx/annas.mp3?rlkey=xrwt28uhfmov23h76qg4xan46&amp;st=6q0fw0g6&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/lirsj6ky0tct24cit0ktx/annas.mp3?rlkey=xrwt28uhfmov23h76qg4xan46&amp;st=6q0fw0g6&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-nomusic">
@@ -5554,7 +5662,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/2ft3c38yalj7gpjwjget0/mosem.mp3?rlkey=s4qekkl3g8m956l7azo0wqhy2&amp;st=wzw51n3u&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/2ft3c38yalj7gpjwjget0/mosem.mp3?rlkey=s4qekkl3g8m956l7azo0wqhy2&amp;st=wzw51n3u&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-nomusic">
@@ -5566,7 +5674,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/pbgiy8e4leil6zi5m9d6f/ramadan3_acap.mp3?rlkey=fggd922o2h08oe7miwi0fuzxp&amp;st=lrry05cz&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/pbgiy8e4leil6zi5m9d6f/ramadan3_acap.mp3?rlkey=fggd922o2h08oe7miwi0fuzxp&amp;st=lrry05cz&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-nomusic">
@@ -5578,7 +5686,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/uv1ald9jpz82jec3d937l/yahailal.mp3?rlkey=evazlsm4ing67u5htw40aft7p&amp;st=q06mnskb&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/uv1ald9jpz82jec3d937l/yahailal.mp3?rlkey=evazlsm4ing67u5htw40aft7p&amp;st=q06mnskb&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-nomusic">
@@ -5590,7 +5698,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/8xstawqg12srlta8j20su/allaho.mp3?rlkey=rwyu5qeob4lqs64hbz57oq935&amp;st=qscjzbty&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/8xstawqg12srlta8j20su/allaho.mp3?rlkey=rwyu5qeob4lqs64hbz57oq935&amp;st=qscjzbty&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-nomusic">
@@ -5602,7 +5710,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/b7r8oyw3ffbusw82atub3/antihikayato.mp3?rlkey=kt6jaqa7pr5bdo9v0yg2dc1ty&amp;st=vlpgv9u2&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/b7r8oyw3ffbusw82atub3/antihikayato.mp3?rlkey=kt6jaqa7pr5bdo9v0yg2dc1ty&amp;st=vlpgv9u2&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-nomusic">
@@ -5614,7 +5722,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/h4zcr9bw22dff8i5qvto4/fiduja.mp3?rlkey=uf5b4ufmf3egvqypvlbdevhhw&amp;st=6dz61elv&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/h4zcr9bw22dff8i5qvto4/fiduja.mp3?rlkey=uf5b4ufmf3egvqypvlbdevhhw&amp;st=6dz61elv&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-nomusic">
@@ -5626,7 +5734,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src=" https://www.dropbox.com/scl/fi/8n34l95zqd14snje889mx/wahabto.mp3?rlkey=9rarr655fgm92ej9piilqm2kn&amp;st=opge5knn&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src=" https://www.dropbox.com/scl/fi/8n34l95zqd14snje889mx/wahabto.mp3?rlkey=9rarr655fgm92ej9piilqm2kn&amp;st=opge5knn&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div></div></section>
@@ -5644,7 +5752,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/lnw6j47cq0lzoj3j5twud/moniba_A.mp3?rlkey=kvoki2s85qfhtkh0m88inbfsp&amp;st=l8ifstjp&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/lnw6j47cq0lzoj3j5twud/moniba_A.mp3?rlkey=kvoki2s85qfhtkh0m88inbfsp&amp;st=l8ifstjp&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-podcast">
@@ -5656,7 +5764,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/l9o95kjcvaz4sao1wpyvt/khaldon.mp3?rlkey=0bdhuauzi5ppu6bpjzs79ik7u&amp;st=80s6blwl&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/l9o95kjcvaz4sao1wpyvt/khaldon.mp3?rlkey=0bdhuauzi5ppu6bpjzs79ik7u&amp;st=80s6blwl&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div><div class="work-card audio-item audio-podcast">
@@ -5668,7 +5776,7 @@ body.dark-mode .testibg.targeted-audio-card > i {
         </h3>
 
 <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
-<source src="https://www.dropbox.com/scl/fi/7qhhumhilk6zjvrt1c21l/reda.mp3?rlkey=pyg3wsmdw8tk7sf17f4p5aocv&amp;st=ztbo1jlt&amp;raw=1" type="audio/mpeg"/>
+<source data-protected-src="https://www.dropbox.com/scl/fi/7qhhumhilk6zjvrt1c21l/reda.mp3?rlkey=pyg3wsmdw8tk7sf17f4p5aocv&amp;st=ztbo1jlt&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
 </div></div></section>
@@ -5694,13 +5802,13 @@ body.dark-mode .testibg.targeted-audio-card > i {
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:14px;">
                         <div>
                             <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" onplay="var current=this; var card=current.closest('.sub-service-card'); if(card){ card.querySelectorAll('audio').forEach(function(a){ if(a!==current){ a.pause(); } }); }" style="width:100%;">
-                                <source src="https://www.dropbox.com/scl/fi/4z0ixzqi9unj6aqbfg9fi/oyon.mp3?rlkey=tmijnwysg91jcbdhu33bf1c7c&amp;st=e32w6251&amp;raw=1" type="audio/mpeg"/>
+                                <source data-protected-src="https://www.dropbox.com/scl/fi/4z0ixzqi9unj6aqbfg9fi/oyon.mp3?rlkey=tmijnwysg91jcbdhu33bf1c7c&amp;st=e32w6251&amp;raw=1" type="audio/mpeg"/>
                             </audio>
                             <p style="margin:8px 0 0; font-size:14px; color:var(--text-dark); font-weight:700; text-align:center;">قبل الفصل</p>
                         </div>
                         <div>
                             <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" onplay="var current=this; var card=current.closest('.sub-service-card'); if(card){ card.querySelectorAll('audio').forEach(function(a){ if(a!==current){ a.pause(); } }); }" style="width:100%;">
-                                <source src="https://www.dropbox.com/scl/fi/ia8fs0vmi46bor1slljcj/oyon_stem.mp3?rlkey=0jz4bjydd4sw3p2kyb8a2f321&amp;st=522j4lcb&amp;raw=1" type="audio/mpeg"/>
+                                <source data-protected-src="https://www.dropbox.com/scl/fi/ia8fs0vmi46bor1slljcj/oyon_stem.mp3?rlkey=0jz4bjydd4sw3p2kyb8a2f321&amp;st=522j4lcb&amp;raw=1" type="audio/mpeg"/>
                             </audio>
                             <p style="margin:8px 0 0; font-size:14px; color:var(--text-dark); font-weight:700; text-align:center;">بعد الفصل</p>
                         </div>
@@ -5718,13 +5826,13 @@ body.dark-mode .testibg.targeted-audio-card > i {
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:14px;">
                         <div>
                             <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" onplay="var current=this; var card=current.closest('.sub-service-card'); if(card){ card.querySelectorAll('audio').forEach(function(a){ if(a!==current){ a.pause(); } }); }" style="width:100%;">
-                                <source src="https://www.dropbox.com/scl/fi/01z5agv457tdb64rje5sm/wrj3.mp3?rlkey=1bf3j72tf12mpiwe2ulepzxmn&amp;st=0tgiacjs&amp;raw=1" type="audio/mpeg"/>
+                                <source data-protected-src="https://www.dropbox.com/scl/fi/01z5agv457tdb64rje5sm/wrj3.mp3?rlkey=1bf3j72tf12mpiwe2ulepzxmn&amp;st=0tgiacjs&amp;raw=1" type="audio/mpeg"/>
                             </audio>
                             <p style="margin:8px 0 0; font-size:14px; color:var(--text-dark); font-weight:700; text-align:center;">ورجع رمضان توزيع موسيقي</p>
                         </div>
                         <div>
                             <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" onplay="var current=this; var card=current.closest('.sub-service-card'); if(card){ card.querySelectorAll('audio').forEach(function(a){ if(a!==current){ a.pause(); } }); }" style="width:100%;">
-                                <source src="https://www.dropbox.com/scl/fi/pbgiy8e4leil6zi5m9d6f/ramadan3_acap.mp3?rlkey=fggd922o2h08oe7miwi0fuzxp&amp;st=lrry05cz&amp;raw=1" type="audio/mpeg"/>
+                                <source data-protected-src="https://www.dropbox.com/scl/fi/pbgiy8e4leil6zi5m9d6f/ramadan3_acap.mp3?rlkey=fggd922o2h08oe7miwi0fuzxp&amp;st=lrry05cz&amp;raw=1" type="audio/mpeg"/>
                             </audio>
                             <p style="margin:8px 0 0; font-size:14px; color:var(--text-dark); font-weight:700; text-align:center;">ورجع رمضان توزيع بشري</p>
                         </div>
@@ -6927,6 +7035,22 @@ body.dark-mode .testibg.targeted-audio-card > i {
     /* --- دالة تحويل العناوين إلى ثابتة مع زر الرجوع --- */
     function initStickyHeaders() {
         const workSections = ['audio-works', 'schools-works', 'zaffat-works', 'shilat-works', 'events-works', 'music-works', 'voiceover-works', 'corporate-identities-works', 'poems-composing-works', 'nomusic-works', 'video-works', 'podcast-works', 'poetry-recitation-works', 'editing-works'];
+        const sectionIcons = {
+            'audio-works': 'fas fa-music',
+            'schools-works': 'fas fa-school',
+            'zaffat-works': 'fas fa-heart',
+            'shilat-works': 'fas fa-music',
+            'events-works': 'fas fa-gift',
+            'music-works': 'fas fa-headphones',
+            'voiceover-works': 'fas fa-microphone-alt',
+            'corporate-identities-works': 'fas fa-building',
+            'poems-composing-works': 'fas fa-guitar',
+            'nomusic-works': 'fas fa-users',
+            'video-works': 'fas fa-film',
+            'podcast-works': 'fas fa-podcast',
+            'poetry-recitation-works': 'fas fa-scroll',
+            'editing-works': 'fas fa-sliders-h'
+        };
         
         workSections.forEach(id => {
             const section = document.getElementById(id);
@@ -6951,7 +7075,8 @@ body.dark-mode .testibg.targeted-audio-card > i {
                     };
                     
                     const newTitle = document.createElement('h2');
-                    newTitle.innerHTML = titleHTML;
+                    const iconClass = sectionIcons[id] || 'fas fa-folder-open';
+                    newTitle.innerHTML = '<span class="section-heading-icon" aria-hidden="true"><i class="' + iconClass + '"></i></span><span class="section-heading-text">' + titleHTML + '</span>';
                     
                     stickyHeader.appendChild(backBtn);
                     stickyHeader.appendChild(newTitle);
@@ -6995,6 +7120,21 @@ function initCompactAudioCards() {
         if (card.parentElement) {
             card.parentElement.classList.add('compact-audio-list');
         }
+
+        var visualIcon = null;
+        Array.prototype.some.call(inner.children, function(child) {
+            if (child.tagName === 'I') {
+                visualIcon = child;
+                return true;
+            }
+            return false;
+        });
+        if (!visualIcon) {
+            visualIcon = document.createElement('i');
+            inner.insertBefore(visualIcon, inner.firstChild);
+        }
+        visualIcon.className = 'fas fa-music audio-file-icon';
+        visualIcon.setAttribute('aria-hidden', 'true');
 
         var titleEl = inner.querySelector('h3');
         if (!titleEl) {
@@ -7045,7 +7185,7 @@ function initCompactAudioCards() {
             sequenceBtn.title = 'استماع متسلسل من هذا الملف';
             sequenceBtn.setAttribute('aria-label', 'استماع متسلسل');
             sequenceBtn.setAttribute('aria-pressed', 'false');
-            sequenceBtn.innerHTML = '<svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-sequence"></use></svg><span>استماع متسلسل</span>';
+            sequenceBtn.innerHTML = '<svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-sequence"></use></svg>';
             inner.appendChild(sequenceBtn);
         }
 
@@ -7055,13 +7195,15 @@ function initCompactAudioCards() {
                 e.preventDefault();
                 e.stopPropagation();
                 if (typeof window.startSequentialAudioFrom === 'function') {
-                    window.startSequentialAudioFrom(audioEl);
+                    var currentAudio = window.__atheerCurrentAudio;
+                    var startAudio = currentAudio instanceof HTMLAudioElement && !currentAudio.paused && currentAudio.closest('.audio-item') === card ? currentAudio : audioEl;
+                    window.startSequentialAudioFrom(startAudio);
                 }
             });
         }
 
         Array.prototype.forEach.call(inner.children, function(child) {
-            if (child === audioEl || child === titleEl || child === sequenceBtn) return;
+            if (child === audioEl || child === titleEl || child === sequenceBtn || child === visualIcon) return;
             if (child.tagName === 'I' || child.tagName === 'P' || child.tagName === 'H3' || child.tagName === 'H4' || child.tagName === 'SMALL') {
                 child.classList.add('audio-item__secondary');
             }
@@ -7083,13 +7225,91 @@ function initCustomAudioPlayers() {
     if (window.__atheerAudioProtectionBound) return;
     window.__atheerAudioProtectionBound = true;
 
+    function prepareProtectedAudio(audioEl) {
+        if (!(audioEl instanceof HTMLAudioElement)) return false;
+
+        var changed = false;
+        var directSrc = (audioEl.getAttribute('data-protected-src') || audioEl.dataset.protectedSrc || '').trim();
+        if (directSrc && audioEl.getAttribute('src') !== directSrc) {
+            audioEl.setAttribute('src', directSrc);
+            changed = true;
+        }
+
+        audioEl.querySelectorAll('source').forEach(function(sourceEl) {
+            var protectedSrc = (sourceEl.getAttribute('data-protected-src') || sourceEl.dataset.protectedSrc || '').trim();
+            if (protectedSrc && sourceEl.getAttribute('src') !== protectedSrc) {
+                sourceEl.setAttribute('src', protectedSrc);
+                changed = true;
+            }
+        });
+
+        if (changed) {
+            try { audioEl.load(); } catch (e) {}
+        }
+
+        return true;
+    }
+
+    function stripProtectedAudioSource(audioEl) {
+        if (!(audioEl instanceof HTMLAudioElement)) return;
+        var changed = false;
+        if (audioEl.getAttribute('src')) {
+            audioEl.removeAttribute('src');
+            changed = true;
+        }
+        audioEl.querySelectorAll('source').forEach(function(sourceEl) {
+            if (sourceEl.getAttribute('data-protected-src') && sourceEl.getAttribute('src')) {
+                sourceEl.removeAttribute('src');
+                changed = true;
+            }
+        });
+        if (changed) {
+            try { audioEl.load(); } catch (e) {}
+        }
+    }
+
+    window.prepareProtectedAudio = prepareProtectedAudio;
+    window.stripProtectedAudioSource = stripProtectedAudioSource;
+
     document.querySelectorAll('audio').forEach(function(audioEl) {
-        audioEl.setAttribute('controlslist', 'nodownload noplaybackrate');
+        var existingSrc = (audioEl.getAttribute('src') || '').trim();
+        if (existingSrc) {
+            audioEl.setAttribute('data-protected-src', existingSrc);
+            audioEl.removeAttribute('src');
+        }
+
+        audioEl.querySelectorAll('source').forEach(function(sourceEl) {
+            var sourceSrc = (sourceEl.getAttribute('src') || '').trim();
+            if (sourceSrc) {
+                sourceEl.setAttribute('data-protected-src', sourceSrc);
+                sourceEl.removeAttribute('src');
+            }
+        });
+
+        audioEl.setAttribute('controlslist', 'nodownload noplaybackrate noremoteplayback');
         audioEl.setAttribute('disablepictureinpicture', '');
         audioEl.setAttribute('disableremoteplayback', '');
+        audioEl.setAttribute('data-idm', 'false');
+        audioEl.setAttribute('data-no-download', 'true');
         audioEl.setAttribute('oncontextmenu', 'return false;');
         audioEl.setAttribute('preload', 'none');
 
+        audioEl.addEventListener('pointerdown', function() { prepareProtectedAudio(audioEl); }, true);
+        audioEl.addEventListener('mousedown', function() { prepareProtectedAudio(audioEl); }, true);
+        audioEl.addEventListener('click', function() { prepareProtectedAudio(audioEl); }, true);
+        audioEl.addEventListener('touchstart', function() { prepareProtectedAudio(audioEl); }, true);
+        audioEl.addEventListener('keydown', function(e) {
+            if (e.key === ' ' || e.key === 'Enter' || e.key === 'Spacebar') {
+                prepareProtectedAudio(audioEl);
+            }
+        }, true);
+        audioEl.addEventListener('play', function() {
+            window.__atheerCurrentAudio = audioEl;
+            prepareProtectedAudio(audioEl);
+        }, true);
+        audioEl.addEventListener('ended', function() {
+            setTimeout(function() { stripProtectedAudioSource(audioEl); }, 250);
+        }, true);
         audioEl.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         audioEl.addEventListener('dragstart', function(e) { e.preventDefault(); });
     });
@@ -7133,7 +7353,12 @@ function initSequentialAudioPlayback() {
         var section = startAudio.closest && startAudio.closest('.content-section');
         var root = section || document;
         var audios = Array.prototype.filter.call(root.querySelectorAll('audio'), function(audioEl) {
-            return !!(audioEl.querySelector('source') || audioEl.currentSrc || audioEl.src);
+            return !!(
+                audioEl.querySelector('source[src], source[data-protected-src]') ||
+                audioEl.getAttribute('data-protected-src') ||
+                audioEl.currentSrc ||
+                audioEl.src
+            );
         });
         var index = audios.indexOf(startAudio);
         if (index < 0) {
@@ -7185,6 +7410,9 @@ function initSequentialAudioPlayback() {
         state.index = index;
         state.current = nextAudio;
         updateSequenceButtons();
+        if (typeof window.prepareProtectedAudio === 'function') {
+            window.prepareProtectedAudio(nextAudio);
+        }
         try { nextAudio.currentTime = 0; } catch (e) {}
         var playResult = nextAudio.play();
         if (playResult && typeof playResult.catch === 'function') {
@@ -7283,7 +7511,12 @@ function initFooterVisitCounter() {
 
             // 1. إيقاف باقي الملفات
             document.querySelectorAll('audio').forEach(function(a) {
-                if (a !== current && !a.paused) a.pause();
+                if (a !== current) {
+                    if (!a.paused) a.pause();
+                    if (typeof window.stripProtectedAudioSource === 'function') {
+                        window.stripProtectedAudioSource(a);
+                    }
+                }
             });
 
             // 2. إزالة تأثير التشغيل من كل الكروت
@@ -7380,6 +7613,61 @@ function initFooterVisitCounter() {
             const toggleBtn = document.getElementById('gallery-tab');
             if (!gridEl || !toggleBtn || gridEl.dataset.ready === '1') return;
 
+            function gallerySvg(paths) {
+                return '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">' + paths + '</svg>';
+            }
+
+            const sectionIcons = {
+                'zaffat-works': {
+                    color: 'var(--primary-blue)',
+                    svg: gallerySvg('<path d="M20.8 5.8c-1.5-1.7-4-1.8-5.6-.2L12 8.7 8.8 5.6c-1.6-1.6-4.1-1.5-5.6.2-1.5 1.8-1.3 4.5.4 6.1L12 20l8.4-8.1c1.7-1.6 1.9-4.3.4-6.1z"/>')
+                },
+                'shilat-works': {
+                    color: 'var(--primary-red)',
+                    svg: gallerySvg('<path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/>')
+                },
+                'events-works': {
+                    color: 'var(--primary-yellow)',
+                    svg: gallerySvg('<path d="M20 12v8H4v-8"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5A2.5 2.5 0 1 1 10 4.5c0 1.5 2 2.5 2 2.5z"/><path d="M12 7h4.5A2.5 2.5 0 1 0 14 4.5c0 1.5-2 2.5-2 2.5z"/>')
+                },
+                'schools-works': {
+                    color: 'var(--primary-blue)',
+                    svg: gallerySvg('<path d="M3 10l9-5 9 5-9 5-9-5z"/><path d="M7 12v5c3 2 7 2 10 0v-5"/><path d="M21 10v6"/>')
+                },
+                'voiceover-works': {
+                    color: 'var(--primary-red)',
+                    svg: gallerySvg('<path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/><path d="M8 22h8"/>')
+                },
+                'poetry-recitation-works': {
+                    color: 'var(--primary-yellow)',
+                    svg: gallerySvg('<path d="M6 3h10a2 2 0 0 1 2 2v15H8a2 2 0 0 1-2-2V3z"/><path d="M8 7h7"/><path d="M8 11h7"/><path d="M8 15h5"/>')
+                },
+                'poems-composing-works': {
+                    color: 'var(--primary-blue)',
+                    svg: gallerySvg('<path d="M14 4l6 6-9 9H5v-6l9-9z"/><path d="M13 5l6 6"/><path d="M5 19l4-1"/>')
+                },
+                'music-works': {
+                    color: 'var(--primary-red)',
+                    svg: gallerySvg('<path d="M4 13a8 8 0 0 1 16 0"/><path d="M4 13v4a3 3 0 0 0 3 3h1v-7H7a3 3 0 0 0-3 3"/><path d="M20 13v4a3 3 0 0 1-3 3h-1v-7h1a3 3 0 0 1 3 3"/>')
+                },
+                'nomusic-works': {
+                    color: 'var(--primary-yellow)',
+                    svg: gallerySvg('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/>')
+                },
+                'video-works': {
+                    color: 'var(--primary-blue)',
+                    svg: gallerySvg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 5v14"/><path d="M16 5v14"/><path d="M3 10h18"/><path d="M3 14h18"/>')
+                },
+                'podcast-works': {
+                    color: 'var(--primary-yellow)',
+                    svg: gallerySvg('<circle cx="12" cy="11" r="3"/><path d="M17 11a5 5 0 1 0-10 0"/><path d="M19.5 11a7.5 7.5 0 1 0-15 0"/><path d="M10 16h4l1 5H9l1-5z"/>')
+                },
+                'editing-works': {
+                    color: 'var(--primary-red)',
+                    svg: gallerySvg('<path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M2 14h4"/><path d="M10 8h4"/><path d="M18 16h4"/>')
+                }
+            };
+
             const sourceCards = Array.from(document.querySelectorAll('#home-section .quick-services .qs-item'));
             if (!sourceCards.length) return;
 
@@ -7406,7 +7694,13 @@ function initFooterVisitCounter() {
 
                 const iconWrap = document.createElement('span');
                 iconWrap.className = 'works-gallery-icon';
-                iconWrap.innerHTML = iconEl ? iconEl.innerHTML : '<i class="fas fa-folder-open"></i>';
+                const iconData = sectionIcons[sectionId];
+                if (iconData) {
+                    iconWrap.style.color = iconData.color;
+                    iconWrap.innerHTML = iconData.svg;
+                } else {
+                    iconWrap.innerHTML = iconEl ? iconEl.innerHTML : gallerySvg('<path d="M3 6h7l2 2h9v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/>');
+                }
 
                 const textWrap = document.createElement('span');
                 textWrap.className = 'works-gallery-text';
@@ -7688,6 +7982,9 @@ function initFooterVisitCounter() {
         toggleBtn.addEventListener('click', function() {
             if (!currentAudio) return;
             if (currentAudio.paused) {
+                if (typeof window.prepareProtectedAudio === 'function') {
+                    window.prepareProtectedAudio(currentAudio);
+                }
                 currentAudio.play().catch(function(){});
             } else {
                 currentAudio.pause();
