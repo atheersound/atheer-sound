@@ -1243,6 +1243,397 @@ body:not(.dark-mode) .announcement-bar .ticker-label{
     background: linear-gradient(135deg, #1E40AF, #B91C1C) !important;
 }
 </style>
+<style id="atheer-stats-beautify">
+/* ===== بطاقات الإحصائيات الديناميكية ===== */
+.atheer-stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:16px;
+    margin:24px 0 10px;
+}
+.atheer-stat-card{
+    background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(248,250,252,.96));
+    border:1px solid rgba(30,64,175,.10);
+    border-radius:18px;
+    padding:20px 16px;
+    box-shadow:0 10px 26px rgba(15,23,42,.08);
+    position:relative;
+    overflow:hidden;
+    transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    text-align:center;
+}
+.atheer-stat-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background: radial-gradient(circle at top right, rgba(30,64,175,.10), transparent 38%);
+    pointer-events:none;
+}
+.atheer-stat-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 16px 34px rgba(15,23,42,.12);
+    border-color:rgba(30,64,175,.22);
+}
+.atheer-stat-icon{
+    width:50px;
+    height:50px;
+    margin:0 auto 12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    background:linear-gradient(135deg,#1E40AF,#2563EB);
+    color:#fff;
+    box-shadow:0 10px 20px rgba(30,64,175,.22);
+    font-size:22px;
+    position:relative;
+    z-index:1;
+}
+.atheer-stat-card:nth-child(2) .atheer-stat-icon{
+    background:linear-gradient(135deg,#B91C1C,#DC2626);
+    box-shadow:0 10px 20px rgba(185,28,28,.22);
+}
+.atheer-stat-card:nth-child(3) .atheer-stat-icon{
+    background:linear-gradient(135deg,#D97706,#F59E0B);
+    box-shadow:0 10px 20px rgba(217,119,6,.22);
+}
+.atheer-stat-card:nth-child(4) .atheer-stat-icon{
+    background:linear-gradient(135deg,#0F766E,#14B8A6);
+    box-shadow:0 10px 20px rgba(15,118,110,.22);
+}
+.atheer-stat-value{
+    font-size:34px;
+    font-weight:900;
+    line-height:1.1;
+    margin-bottom:8px;
+    letter-spacing:-0.02em;
+    background:linear-gradient(135deg,#0F172A,#1E40AF);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.atheer-stat-card:nth-child(2) .atheer-stat-value{
+    background:linear-gradient(135deg,#7F1D1D,#B91C1C);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.atheer-stat-card:nth-child(3) .atheer-stat-value{
+    background:linear-gradient(135deg,#92400E,#D97706);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.atheer-stat-card:nth-child(4) .atheer-stat-value{
+    background:linear-gradient(135deg,#115E59,#0F766E);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.atheer-stat-label{
+    font-size:14px;
+    font-weight:800;
+    color:#334155;
+    line-height:1.7;
+}
+.atheer-stat-sub{
+    margin-top:6px;
+    font-size:12px;
+    color:#64748B;
+    font-weight:700;
+}
+.atheer-stat-pulse{
+    position:absolute;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(30,64,175,.10), transparent 65%);
+    top:-45px;
+    left:-35px;
+    animation:atheerStatFloat 5.5s ease-in-out infinite;
+    pointer-events:none;
+}
+.atheer-stat-card:nth-child(2) .atheer-stat-pulse{
+    background:radial-gradient(circle, rgba(185,28,28,.10), transparent 65%);
+}
+.atheer-stat-card:nth-child(3) .atheer-stat-pulse{
+    background:radial-gradient(circle, rgba(217,119,6,.12), transparent 65%);
+}
+.atheer-stat-card:nth-child(4) .atheer-stat-pulse{
+    background:radial-gradient(circle, rgba(20,184,166,.12), transparent 65%);
+}
+@keyframes atheerStatFloat{
+    0%,100%{ transform:translateY(0) scale(1); opacity:.9; }
+    50%{ transform:translateY(8px) scale(1.06); opacity:1; }
+}
+body.dark-mode .atheer-stat-card{
+    background:linear-gradient(180deg, rgba(30,41,59,.96), rgba(15,23,42,.96));
+    border-color:rgba(148,163,184,.18);
+}
+body.dark-mode .atheer-stat-label{ color:#E2E8F0; }
+body.dark-mode .atheer-stat-sub{ color:#94A3B8; }
+
+@media (max-width:768px){
+    .atheer-stats-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:12px;
+    }
+    .atheer-stat-card{
+        padding:16px 12px;
+        border-radius:16px;
+    }
+    .atheer-stat-icon{
+        width:42px;
+        height:42px;
+        font-size:18px;
+        border-radius:14px;
+    }
+    .atheer-stat-value{
+        font-size:28px;
+    }
+    .atheer-stat-label{
+        font-size:13px;
+    }
+}
+</style>
+<style id="atheer-stats-inline-final">
+/* ============================================
+   Atheer Sound — Final Inline Stats Layout
+   الإحصائيات بجوار بعض + أرقام مضبوطة
+   ============================================ */
+
+.atheer-final-stats-grid{
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    width: 100% !important;
+    margin: 28px auto 24px !important;
+    direction: rtl;
+}
+
+.atheer-final-stat-card{
+    position: relative;
+    overflow: hidden;
+    min-height: 150px;
+    padding: 22px 16px;
+    border-radius: 20px;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,250,252,.96));
+    border: 1px solid rgba(30,64,175,.14);
+    box-shadow:
+        0 10px 26px rgba(15,23,42,.08),
+        inset 0 1px 0 rgba(255,255,255,.8);
+    text-align: center;
+    transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease;
+}
+
+.atheer-final-stat-card:hover{
+    transform: translateY(-5px);
+    box-shadow:
+        0 18px 40px rgba(15,23,42,.13),
+        inset 0 1px 0 rgba(255,255,255,.9);
+    border-color: rgba(30,64,175,.28);
+}
+
+.atheer-final-stat-card::before{
+    content: '';
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    top: -55px;
+    left: -45px;
+    background: radial-gradient(circle, rgba(30,64,175,.13), transparent 68%);
+    animation: atheerFinalStatOrb 5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.atheer-final-stat-card:nth-child(2)::before{
+    background: radial-gradient(circle, rgba(185,28,28,.13), transparent 68%);
+}
+
+.atheer-final-stat-card:nth-child(3)::before{
+    background: radial-gradient(circle, rgba(217,119,6,.16), transparent 68%);
+}
+
+.atheer-final-stat-card:nth-child(4)::before{
+    background: radial-gradient(circle, rgba(15,118,110,.15), transparent 68%);
+}
+
+@keyframes atheerFinalStatOrb{
+    0%,100%{
+        transform: translateY(0) scale(1);
+        opacity: .85;
+    }
+    50%{
+        transform: translateY(10px) scale(1.08);
+        opacity: 1;
+    }
+}
+
+.atheer-final-stat-icon{
+    position: relative;
+    z-index: 1;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #1E40AF, #2563EB);
+    box-shadow: 0 10px 22px rgba(30,64,175,.24);
+}
+
+.atheer-final-stat-card:nth-child(2) .atheer-final-stat-icon{
+    background: linear-gradient(135deg, #B91C1C, #DC2626);
+    box-shadow: 0 10px 22px rgba(185,28,28,.24);
+}
+
+.atheer-final-stat-card:nth-child(3)) .atheer-final-stat-icon{
+    background: linear-gradient(135deg, #D97706, #F59E0B);
+    box-shadow: 0 10px 22px rgba(217,119,6,.24);
+}
+
+.atheer-final-stat-card:nth-child(4) .atheer-final-stat-icon{
+    background: linear-gradient(135deg, #0F766E, #14B8A6);
+    box-shadow: 0 10px 22px rgba(15,118,110,.24);
+}
+
+.atheer-final-stat-value{
+    position: relative;
+    z-index: 1;
+    display: block;
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: 10px;
+    direction: ltr;
+    background: linear-gradient(135deg, #0F172A, #1E40AF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-variant-numeric: tabular-nums;
+}
+
+.atheer-final-stat-card:nth-child(2) .atheer-final-stat-value{
+    background: linear-gradient(135deg, #7F1D1D, #B91C1C);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.atheer-final-stat-card:nth-child(3) .atheer-final-stat-value{
+    background: linear-gradient(135deg, #92400E, #D97706);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.atheer-final-stat-card:nth-child(4) .atheer-final-stat-value{
+    background: linear-gradient(135deg, #115E59, #0F766E);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.atheer-final-stat-label{
+    position: relative;
+    z-index: 1;
+    display: block;
+    color: #334155;
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 900;
+}
+
+.atheer-final-stat-note{
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: 5px;
+    color: #64748B;
+    font-size: 12px;
+    line-height: 1.6;
+    font-weight: 700;
+}
+
+/* إخفاء الإحصائيات القديمة إذا بقيت ظاهرة */
+.atheer-old-stats-hidden{
+    display: none !important;
+}
+
+/* دارك مود */
+body.dark-mode .atheer-final-stat-card{
+    background:
+        linear-gradient(180deg, rgba(30,41,59,.98), rgba(15,23,42,.96));
+    border-color: rgba(148,163,184,.18);
+    box-shadow:
+        0 10px 26px rgba(0,0,0,.22),
+        inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+body.dark-mode .atheer-final-stat-label{
+    color: #E2E8F0;
+}
+
+body.dark-mode .atheer-final-stat-note{
+    color: #94A3B8;
+}
+
+/* الجوال: بطاقتان بجوار بعض */
+@media (max-width: 768px){
+    .atheer-final-stats-grid{
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+        margin: 22px auto 18px !important;
+    }
+
+    .atheer-final-stat-card{
+        min-height: 135px;
+        padding: 18px 12px;
+        border-radius: 18px;
+    }
+
+    .atheer-final-stat-icon{
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+        border-radius: 14px;
+        margin-bottom: 10px;
+    }
+
+    .atheer-final-stat-value{
+        font-size: 30px;
+    }
+
+    .atheer-final-stat-label{
+        font-size: 13px;
+    }
+
+    .atheer-final-stat-note{
+        font-size: 11px;
+    }
+}
+
+/* الشاشات الصغيرة جداً */
+@media (max-width: 420px){
+    .atheer-final-stats-grid{
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .atheer-final-stat-value{
+        font-size: 27px;
+    }
+}
+</style>
 
 </head>
 <body>
@@ -1742,7 +2133,7 @@ body:not(.dark-mode) .announcement-bar .ticker-label{
          +25
         </span>
 <span class="stat-label">
-         سنوات خبرة وتميز
+         سنوات تميز
         </span>
 </div>
 </div>
@@ -4125,7 +4516,7 @@ body:not(.dark-mode) .announcement-bar .ticker-label{
 <span class="contact-stat-label">مؤسسة وأفراد</span>
 </div>
 <div class="contact-stat-card">
-<span class="contact-stat-number" style="color:var(--primary-yellow);">+20</span>
+<span class="contact-stat-number" style="color:var(--primary-yellow);">+25</span>
 <span class="contact-stat-label">سنوات تميز</span>
 </div>
 </div>
@@ -4602,8 +4993,401 @@ body:not(.dark-mode) .announcement-bar .ticker-label{
 
     setPreviousNumber('عمل فني منتج', '+300');
     setPreviousNumber('مؤسسة وأفراد', '+100');
-    setPreviousNumber('سنوات تميز', '+25');
     setPreviousNumber('سنوات خبرة وتميز', '+25');
+    setPreviousNumber('رضا العملاء', '+96%'); 
+})();
+</script>
+<script id="atheer-stats-final-render">
+(function(){
+    'use strict';
+
+    var statsData = [
+        { value: 300, prefix: '+', suffix: '', label: 'عمل فني منتج', sub: 'أعمال صوتية ومرئية بجودة احترافية', icon: '♫' },
+        { value: 100, prefix: '+', suffix: '', label: 'مؤسسة وأفراد', sub: 'شركاء نجاح من جهات وأشخاص', icon: '◈' },
+        { value: 25, prefix: '+', suffix: '', label: 'سنة تميز وخبرة', sub: 'تراكم معرفي وإبداعي ممتد', icon: '✦' },
+        { value: 96, prefix: '+', suffix: '%', label: 'رضا العملاء', sub: 'مؤشر ثقة ورضا مرتفع', icon: '♥' }
+    ];
+
+    function createStatsGrid(){
+        var grid = document.createElement('div');
+        grid.className = 'atheer-stats-grid';
+        grid.setAttribute('data-atheer-stats-grid', '1');
+
+        statsData.forEach(function(item){
+            var card = document.createElement('div');
+            card.className = 'atheer-stat-card reveal';
+
+            card.innerHTML =
+                '<div class="atheer-stat-pulse"></div>' +
+                '<div class="atheer-stat-icon">' + item.icon + '</div>' +
+                '<div class="atheer-stat-value" data-target="' + item.value + '" data-prefix="' + item.prefix + '" data-suffix="' + item.suffix + '">0</div>' +
+                '<div class="atheer-stat-label">' + item.label + '</div>' +
+                '<div class="atheer-stat-sub">' + item.sub + '</div>';
+
+            grid.appendChild(card);
+        });
+
+        return grid;
+    }
+
+    function findBestStatsArea(){
+        var selectors = [
+            '.home-section .stats-grid',
+            '.home-section .stats-wrapper',
+            '.home-section .home-stats',
+            '.home-section [class*="stats"]',
+            '#home-section [class*="stats"]',
+            '#home-section .content-grid',
+            '#home-section .home-hero-shell',
+            '#home-section'
+        ];
+
+        for(var i = 0; i < selectors.length; i++){
+            var el = document.querySelector(selectors[i]);
+            if(el) return el;
+        }
+        return null;
+    }
+
+    function removeOldBrokenStats(scope){
+        if(!scope) return;
+        var texts = ['عمل فني منتج','مؤسسة وأفراد','سنوات تميز','سنوات خبرة وتميز','سنوات تميز وخبرة'];
+        Array.from(scope.querySelectorAll('*')).forEach(function(el){
+            var txt = (el.textContent || '').replace(/\s+/g,' ').trim();
+            if(txt === '+0' || txt === '+20' || txt === '+25' || txt === '+100' || txt === '+300'){
+                var parentText = ((el.parentElement && el.parentElement.textContent) || '').replace(/\s+/g,' ');
+                if(texts.some(function(t){ return parentText.indexOf(t) !== -1; })){
+                    if(el.parentElement && !el.parentElement.hasAttribute('data-atheer-stats-grid')){
+                        el.parentElement.style.display = 'none';
+                    } else {
+                        el.style.display = 'none';
+                    }
+                }
+            }
+        });
+    }
+
+    function mountStats(){
+        if(document.querySelector('[data-atheer-stats-grid="1"]')) return;
+
+        var area = findBestStatsArea();
+        if(!area) return;
+
+        removeOldBrokenStats(area);
+
+        var grid = createStatsGrid();
+
+        if(area.matches && area.matches('#home-section, .home-section')){
+            var firstTitle = area.querySelector('.section-title, .home-hero-shell, .home-hero-panel');
+            if(firstTitle && firstTitle.parentNode){
+                firstTitle.parentNode.insertBefore(grid, firstTitle.nextSibling);
+            } else {
+                area.insertBefore(grid, area.firstChild);
+            }
+        } else {
+            area.appendChild(grid);
+        }
+
+        animateStats(grid);
+    }
+
+    function animateValue(el){
+        var target = parseInt(el.getAttribute('data-target') || '0', 10);
+        var prefix = el.getAttribute('data-prefix') || '';
+        var suffix = el.getAttribute('data-suffix') || '';
+        var duration = 1800;
+        var start = null;
+
+        function step(ts){
+            if(!start) start = ts;
+            var progress = Math.min((ts - start) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var current = Math.floor(target * eased);
+            el.textContent = prefix + current + suffix;
+            if(progress < 1){
+                requestAnimationFrame(step);
+            } else {
+                el.textContent = prefix + target + suffix;
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    function animateStats(grid){
+        var values = grid.querySelectorAll('.atheer-stat-value');
+        if('IntersectionObserver' in window){
+            var obs = new IntersectionObserver(function(entries){
+                entries.forEach(function(entry){
+                    if(entry.isIntersecting){
+                        var card = entry.target;
+                        var val = card.querySelector('.atheer-stat-value');
+                        if(val && !val.dataset.done){
+                            val.dataset.done = '1';
+                            animateValue(val);
+                        }
+                        obs.unobserve(card);
+                    }
+                });
+            }, { threshold: 0.35 });
+
+            grid.querySelectorAll('.atheer-stat-card').forEach(function(card){
+                obs.observe(card);
+            });
+        } else {
+            values.forEach(function(v){ animateValue(v); });
+        }
+    }
+
+    function run(){
+        mountStats();
+    }
+
+    document.addEventListener('DOMContentLoaded', run);
+    window.addEventListener('load', run);
+    setTimeout(run, 300);
+    setTimeout(run, 900);
+})();
+</script>
+<script id="atheer-stats-inline-final-render">
+(function(){
+    'use strict';
+
+    /*
+      إحصائيات أثير ساوند النهائية
+      لا يلمس أي روابط أو ملفات صوت أو فيديو
+    */
+
+    var FINAL_STATS = [
+        {
+            number: 300,
+            display: '+300',
+            label: 'عمل فني منتج',
+            note: 'أعمال صوتية ومرئية باحترافية',
+            icon: '♫'
+        },
+        {
+            number: 100,
+            display: '+100',
+            label: 'مؤسسة وأفراد',
+            note: 'شركاء نجاح من جهات وأشخاص',
+            icon: '◈'
+        },
+        {
+            number: 25,
+            display: '+25',
+            label: 'سنوات تميز وخبرة',
+            note: 'تراكم إبداعي ومعرفي ممتد',
+            icon: '✦'
+        },
+        {
+            number: 96,
+            display: '+96%',
+            label: 'رضا العملاء',
+            note: 'ثقة عالية وتجارب موفقة',
+            icon: '♥'
+        }
+    ];
+
+    function cleanText(text){
+        return (text || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function createStatsGrid(){
+        var grid = document.createElement('div');
+        grid.className = 'atheer-final-stats-grid';
+        grid.setAttribute('data-atheer-final-stats', '1');
+
+        FINAL_STATS.forEach(function(item){
+            var card = document.createElement('div');
+            card.className = 'atheer-final-stat-card';
+
+            card.innerHTML =
+                '<div class="atheer-final-stat-icon">' + item.icon + '</div>' +
+                '<span class="atheer-final-stat-value" data-final-display="' + item.display + '" data-target="' + item.number + '">0</span>' +
+                '<span class="atheer-final-stat-label">' + item.label + '</span>' +
+                '<span class="atheer-final-stat-note">' + item.note + '</span>';
+
+            grid.appendChild(card);
+        });
+
+        return grid;
+    }
+
+    function hideOldStats(){
+        var oldLabels = [
+            'عمل فني منتج',
+            'مؤسسة وأفراد',
+            'سنوات تميز',
+            'سنوات خبرة وتميز',
+            'سنوات تميز وخبرة',
+            'رضا العملاء'
+        ];
+
+        Array.from(document.body.querySelectorAll('*')).forEach(function(el){
+            if(el.closest('[data-atheer-final-stats="1"]')) return;
+
+            var text = cleanText(el.textContent);
+            if(!text) return;
+
+            var hasOldLabel = oldLabels.some(function(label){
+                return text === label || text.indexOf(label) !== -1;
+            });
+
+            if(!hasOldLabel) return;
+
+            /*
+              لا نخفي الأقسام الكبيرة حتى لا يتضرر الموقع.
+              نخفي فقط الحاويات الصغيرة التي تبدو كإحصائية.
+            */
+            var container = el.closest(
+                '.stat-card, .stats-card, .home-stat, .contact-stat, .counter-card, .stat-item, .stats-item, [class*="stat"], [class*="counter"]'
+            );
+
+            if(container && !container.closest('[data-atheer-final-stats="1"]')){
+                var containerText = cleanText(container.textContent);
+
+                if(containerText.length < 180){
+                    container.classList.add('atheer-old-stats-hidden');
+                }
+            }
+
+            /*
+              في حال كانت الإحصائيات القديمة عبارة عن رقم وسطر نص فقط داخل أب صغير
+            */
+            var parent = el.parentElement;
+            if(parent && !parent.closest('[data-atheer-final-stats="1"]')){
+                var parentText = cleanText(parent.textContent);
+                var hasNumber = /(\+?\s*(0|20|25|96|100|300)\s*%?)/.test(parentText);
+
+                if(hasNumber && parentText.length < 180){
+                    parent.classList.add('atheer-old-stats-hidden');
+                }
+            }
+        });
+    }
+
+    function findInsertPlace(){
+        /*
+          نفضّل وضع الإحصائيات بعد الهيرو مباشرة في الصفحة الرئيسية.
+        */
+        var preferred = [
+            '#home-section .home-hero-shell',
+            '#home-section .home-hero-panel',
+            '#home-section .section-title',
+            '#home-section',
+            '.home-section .home-hero-shell',
+            '.home-section'
+        ];
+
+        for(var i = 0; i < preferred.length; i++){
+            var el = document.querySelector(preferred[i]);
+            if(el) return el;
+        }
+
+        return null;
+    }
+
+    function mountFinalStats(){
+        /*
+          إذا كان هناك نسخة قديمة من نفس الشبكة، نحذفها وننشئ النسخة المضبوطة.
+        */
+        document.querySelectorAll('[data-atheer-final-stats="1"]').forEach(function(oldGrid){
+            oldGrid.remove();
+        });
+
+        hideOldStats();
+
+        var place = findInsertPlace();
+        if(!place) return;
+
+        var grid = createStatsGrid();
+
+        /*
+          إذا وجدنا الهيرو، نضع الشبكة بعده مباشرة.
+          إذا وجدنا القسم الرئيسي فقط، نضعها في بدايته.
+        */
+        if(place.parentNode && place.id !== 'home-section'){
+            place.parentNode.insertBefore(grid, place.nextSibling);
+        } else {
+            place.insertBefore(grid, place.firstChild);
+        }
+
+        animateStats(grid);
+    }
+
+    function animateNumber(el){
+        var target = parseInt(el.getAttribute('data-target') || '0', 10);
+        var finalDisplay = el.getAttribute('data-final-display') || '';
+        var duration = 1700;
+        var start = null;
+
+        function formatValue(value){
+            if(finalDisplay.indexOf('%') !== -1){
+                return '+' + value + '%';
+            }
+            return '+' + value;
+        }
+
+        function step(timestamp){
+            if(!start) start = timestamp;
+
+            var progress = Math.min((timestamp - start) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var current = Math.floor(target * eased);
+
+            el.textContent = formatValue(current);
+
+            if(progress < 1){
+                requestAnimationFrame(step);
+            } else {
+                el.textContent = finalDisplay;
+            }
+        }
+
+        requestAnimationFrame(step);
+    }
+
+    function animateStats(grid){
+        var values = grid.querySelectorAll('.atheer-final-stat-value');
+
+        if('IntersectionObserver' in window){
+            var observer = new IntersectionObserver(function(entries){
+                entries.forEach(function(entry){
+                    if(entry.isIntersecting){
+                        var value = entry.target.querySelector('.atheer-final-stat-value');
+
+                        if(value && !value.dataset.animated){
+                            value.dataset.animated = '1';
+                            animateNumber(value);
+                        }
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.35 });
+
+            grid.querySelectorAll('.atheer-final-stat-card').forEach(function(card){
+                observer.observe(card);
+            });
+        } else {
+            values.forEach(function(value){
+                animateNumber(value);
+            });
+        }
+    }
+
+    function run(){
+        mountFinalStats();
+    }
+
+    document.addEventListener('DOMContentLoaded', run);
+
+    window.addEventListener('load', function(){
+        run();
+        setTimeout(run, 400);
+        setTimeout(run, 1200);
+    });
+
 })();
 </script>
 
