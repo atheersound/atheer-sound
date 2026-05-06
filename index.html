@@ -1934,6 +1934,39 @@ body.dark-mode .quick-services .qs-item:hover .qs-label{
 }
 </style>
 
+<style id="atheer-success-partners-hero">
+.partners-hero{position:relative;margin:34px auto 28px;padding:28px 22px 24px;overflow:hidden;border:1px solid var(--border);border-radius:20px;background:radial-gradient(circle at 18% 18%, rgba(217,119,6,.12), transparent 28%),radial-gradient(circle at 82% 12%, rgba(30,64,175,.11), transparent 30%),linear-gradient(135deg, var(--bg-white), var(--bg-soft));box-shadow:var(--shadow-md);}
+.partners-hero::before{content:'';position:absolute;inset:12px;border:1px solid rgba(148,163,184,.18);border-radius:16px;pointer-events:none;}
+.partners-hero-head{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:20px;}
+.partners-hero-kicker{display:inline-flex;align-items:center;gap:8px;color:var(--primary-blue);font-weight:900;font-size:14px;}
+.partners-hero-title{margin:6px 0 0;color:var(--text-dark);font-size:clamp(22px, 3vw, 34px);font-weight:900;}
+.partners-hero-count{min-width:82px;padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.72);color:var(--text-muted);font-size:13px;font-weight:800;text-align:center;}
+body.dark-mode .partners-hero-count{background:rgba(15,23,42,.45);}
+.partners-slider{position:relative;z-index:2;min-height:390px;display:grid;place-items:center;}
+.partner-slide{position:absolute;inset:0;display:grid;align-items:center;opacity:0;transform:translateX(-34px) scale(.97);pointer-events:none;transition:opacity .65s ease, transform .65s cubic-bezier(.22,1,.36,1), filter .65s ease;filter:blur(4px);}
+.partner-slide.is-active{opacity:1;transform:translateX(0) scale(1);pointer-events:auto;filter:blur(0);}
+.partner-slide.is-exiting{transform:translateX(34px) scale(.97);}
+.partner-logo-grid{display:grid;grid-template-columns:repeat(4, minmax(120px, 1fr));gap:18px;width:100%;}
+.partner-logo-card{position:relative;min-height:270px;display:flex;align-items:center;justify-content:center;padding:18px;border:1px solid rgba(148,163,184,.22);border-radius:18px;background:rgba(255,255,255,.72);box-shadow:0 14px 32px rgba(15,23,42,.10);overflow:hidden;transform:translateY(18px);opacity:0;transition:transform .58s cubic-bezier(.22,1,.36,1), opacity .58s ease, box-shadow .25s ease;}
+body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
+.partner-logo-card::before{content:'';position:absolute;inset:16%;border-radius:50%;background:linear-gradient(135deg, rgba(30,64,175,.12), rgba(217,119,6,.15));transform:scale(.84);opacity:.75;transition:transform .58s ease, opacity .58s ease;}
+.partner-slide.is-active .partner-logo-card{opacity:1;transform:translateY(0);}
+.partner-slide.is-active .partner-logo-card:nth-child(2){transition-delay:.08s;}
+.partner-slide.is-active .partner-logo-card:nth-child(3){transition-delay:.16s;}
+.partner-slide.is-active .partner-logo-card:nth-child(4){transition-delay:.24s;}
+.partner-logo-card:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(15,23,42,.16);}
+.partner-slide.is-active .partner-logo-card::before{transform:scale(1);opacity:1;animation:partnerHalo 4s ease-in-out infinite;}
+.partner-logo{position:relative;z-index:1;width:100%;height:220px;object-fit:contain;border-radius:14px;padding:10px;background:rgba(255,255,255,.82);animation:partnerFloat 5.5s ease-in-out infinite;}
+.partner-logo-card:nth-child(2) .partner-logo{animation-delay:.35s;}.partner-logo-card:nth-child(3) .partner-logo{animation-delay:.7s;}.partner-logo-card:nth-child(4) .partner-logo{animation-delay:1.05s;}
+.partner-dots{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:18px;}
+.partner-dot{width:11px;height:11px;padding:0;border:0;border-radius:999px;background:#CBD5E1;cursor:pointer;transition:width .28s ease, transform .28s ease, background .28s ease;}
+.partner-dot:hover{transform:translateY(-2px);background:var(--primary-yellow);}.partner-dot.is-active{width:34px;background:linear-gradient(90deg,var(--primary-blue),var(--primary-yellow));}
+@keyframes partnerFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-8px) rotate(1deg);}}
+@keyframes partnerHalo{0%,100%{opacity:.72;transform:scale(1);}50%{opacity:1;transform:scale(1.05);}}
+@media (max-width:980px){.partners-slider{min-height:620px;}.partner-logo-grid{grid-template-columns:repeat(2, minmax(130px, 1fr));}.partner-logo-card{min-height:260px;}}
+@media (max-width:560px){.partners-hero{padding:22px 14px 20px;border-radius:16px;}.partners-hero-head{align-items:flex-start;flex-direction:column;}.partners-slider{min-height:760px;}.partner-logo-grid{grid-template-columns:1fr;gap:14px;}.partner-logo-card{min-height:170px;padding:12px;}.partner-logo{height:142px;}}
+@media (prefers-reduced-motion:reduce){.partner-slide,.partner-logo-card,.partner-logo-card::before,.partner-logo,.partner-dot{transition:none;animation:none !important;}}
+</style>
 </head>
 <body>
 <svg class="icon-svg-sprite" aria-hidden="true" focusable="false" width="0" height="0">
@@ -2436,62 +2469,20 @@ body.dark-mode .quick-services .qs-item:hover .qs-label{
         </span>
 </div>
 </div>
-<div class="testimonials-wrapper reveal">
-<h2 class="section-title" style="display: block; text-align: center; border-bottom: none;">
-<i class="fas fa-star" style="color: var(--primary-yellow); margin-left: 0;">
-</i>
-        آراء شركاء النجاح
-       </h2>
-<div class="testimonials-grid">
-<div class="testimonial-card searchable-item">
-<i class="fas fa-quote-left testimonial-icon">
-</i>
-<p class="testimonial-quote">
-          "أوبريت وطني في قمة الفخامة تميز في الأداء وسرعة في التسليم."
-         </p>
-<h4 class="testimonial-author">
-<i class="fas fa-user-circle">
-</i>
-          مدارس يمن الصمود
-         </h4>
-</div>
-<div class="testimonial-card searchable-item">
-<i class="fas fa-quote-left testimonial-icon">
-</i>
-<p class="testimonial-quote">
-          "الأنشودة المدرسية كانت لوحة فنية تميز في الألحان وحسن تعامل."
-         </p>
-<h4 class="testimonial-author">
-<i class="fas fa-user-circle">
-</i>
-          مدارس روابي حدة
-         </h4>
-</div>
-<div class="testimonial-card searchable-item">
-<i class="fas fa-quote-left testimonial-icon">
-</i>
-<p class="testimonial-quote">
-          "الأنشودة تعكس ذوقاً رفيعاً واحترافية تليق بمؤسسة أثير ساوند."
-         </p>
-<h4 class="testimonial-author">
-<i class="fas fa-user-circle">
-</i>
-             مدارس تنمية الأجيال 
-         </h4>
-</div>
-<div class="testimonial-card searchable-item">
-<i class="fas fa-quote-left testimonial-icon">
-</i>
-<p class="testimonial-quote">
-          "شكرا على جهدكم المبارك في مراجعة الكتاب وتنسيقه وإعداده للنشر."
-         </p>
-<h4 class="testimonial-author">
-<i class="fas fa-user-circle">
-</i>
-        البروفيسور أحمد الدغشي
-         </h4>
-</div>
-</div>
+<div class="partners-hero reveal" id="successPartnersHero" aria-label="شركاء النجاح">
+    <div class="partners-hero-head">
+        <div>
+            <span class="partners-hero-kicker"><i class="fas fa-handshake"></i> شركاء نفخر بهم</span>
+            <h2 class="partners-hero-title">شركاء النجاح</h2>
+        </div>
+        <div class="partners-hero-count"><span id="partnerCurrent">1</span> / <span id="partnerTotal">3</span></div>
+    </div>
+    <div class="partners-slider" id="partnersSlider">
+        <div class="partner-slide is-active" data-partner="المجموعة الأولى"><div class="partner-logo-grid"><div class="partner-logo-card"><img class="partner-logo" src="majd.webp" alt="مدارس مجد الحضارة" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="manar.webp" alt="مدارس المنار النموذجية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="nokhba.webp" alt="مدارس النخبة الأهلية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="samaa.webp" alt="سماء التميز" loading="lazy"></div></div></div>
+        <div class="partner-slide" data-partner="المجموعة الثانية"><div class="partner-logo-grid"><div class="partner-logo-card"><img class="partner-logo" src="tabh.webp" alt="مدارس طيبة التربوية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="tamn.webp" alt="مدارس تنمية الأجيال الأهلية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="yemen.webp" alt="مدارس يمن الصمود النموذجية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="anhar.webp" alt="مدرسة أنهار المعرفة" loading="lazy"></div></div></div>
+        <div class="partner-slide" data-partner="المجموعة الثالثة"><div class="partner-logo-grid"><div class="partner-logo-card"><img class="partner-logo" src="arasheed.webp" alt="مدارس الرشيد الحديثة" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="azhar.webp" alt="مدارس أزهار العلا" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="dar.webp" alt="دار الأرقم النموذجية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="drob.webp" alt="مدارس دروب المتميزين الأهلية" loading="lazy"></div></div></div>
+    </div>
+    <div class="partner-dots" id="partnerDots" aria-label="تنقل شركاء النجاح"></div>
 </div>
 </div>
 </section>
@@ -5690,8 +5681,64 @@ body.dark-mode .quick-services .qs-item:hover .qs-label{
 })();
 </script>
 
+<script id="atheer-success-partners-slider">
+(function(){
+    'use strict';
+    var hero = document.getElementById('successPartnersHero');
+    if(!hero || hero.dataset.ready === '1') return;
+    hero.dataset.ready = '1';
+    var slides = Array.prototype.slice.call(hero.querySelectorAll('.partner-slide'));
+    var dotsWrap = document.getElementById('partnerDots');
+    var currentLabel = document.getElementById('partnerCurrent');
+    var totalLabel = document.getElementById('partnerTotal');
+    if(!slides.length || !dotsWrap) return;
+    var index = 0;
+    var timer = null;
+    totalLabel.textContent = String(slides.length);
+    var dots = slides.map(function(slide, i){
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'partner-dot' + (i === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'عرض ' + (slide.dataset.partner || ('الشريك ' + (i + 1))));
+        dot.addEventListener('click', function(){ goTo(i, true); });
+        dotsWrap.appendChild(dot);
+        return dot;
+    });
+    function goTo(next, manual){
+        if(next === index) return;
+        slides[index].classList.remove('is-active');
+        slides[index].classList.add('is-exiting');
+        dots[index].classList.remove('is-active');
+        index = (next + slides.length) % slides.length;
+        slides[index].classList.remove('is-exiting');
+        slides[index].classList.add('is-active');
+        dots[index].classList.add('is-active');
+        currentLabel.textContent = String(index + 1);
+        window.setTimeout(function(){
+            slides.forEach(function(slide){ slide.classList.remove('is-exiting'); });
+        }, 680);
+        if(manual) restart();
+    }
+    function start(){
+        if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        timer = window.setInterval(function(){ goTo(index + 1, false); }, 3600);
+    }
+    function stop(){
+        if(timer){ window.clearInterval(timer); timer = null; }
+    }
+    function restart(){ stop(); start(); }
+    hero.addEventListener('mouseenter', stop);
+    hero.addEventListener('mouseleave', start);
+    hero.addEventListener('focusin', stop);
+    hero.addEventListener('focusout', start);
+    start();
+})();
+</script>
 </body>
 </html>
+
+
+
 
 
 
