@@ -1935,36 +1935,34 @@ body.dark-mode .quick-services .qs-item:hover .qs-label{
 </style>
 
 <style id="atheer-success-partners-hero">
-.partners-hero{position:relative;margin:34px auto 28px;padding:28px 22px 24px;overflow:hidden;border:1px solid var(--border);border-radius:20px;background:radial-gradient(circle at 18% 18%, rgba(217,119,6,.12), transparent 28%),radial-gradient(circle at 82% 12%, rgba(30,64,175,.11), transparent 30%),linear-gradient(135deg, var(--bg-white), var(--bg-soft));box-shadow:var(--shadow-md);}
+.partners-hero{position:relative;margin:34px auto 28px;padding:28px 22px 24px;overflow:hidden;border:1px solid var(--border);border-radius:20px;background:radial-gradient(circle at 18% 18%, rgba(217,119,6,.10), transparent 30%),radial-gradient(circle at 82% 12%, rgba(30,64,175,.10), transparent 32%),linear-gradient(135deg, var(--bg-white), var(--bg-soft));box-shadow:var(--shadow-md);}
 .partners-hero::before{content:'';position:absolute;inset:12px;border:1px solid rgba(148,163,184,.18);border-radius:16px;pointer-events:none;}
 .partners-hero-head{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:20px;}
 .partners-hero-kicker{display:inline-flex;align-items:center;gap:8px;color:var(--primary-blue);font-weight:900;font-size:14px;}
 .partners-hero-title{margin:6px 0 0;color:var(--text-dark);font-size:clamp(22px, 3vw, 34px);font-weight:900;}
 .partners-hero-count{min-width:82px;padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.72);color:var(--text-muted);font-size:13px;font-weight:800;text-align:center;}
 body.dark-mode .partners-hero-count{background:rgba(15,23,42,.45);}
-.partners-slider{position:relative;z-index:2;min-height:390px;display:grid;place-items:center;}
-.partner-slide{position:absolute;inset:0;display:grid;align-items:center;opacity:0;transform:translateX(-34px) scale(.97);pointer-events:none;transition:opacity .65s ease, transform .65s cubic-bezier(.22,1,.36,1), filter .65s ease;filter:blur(4px);}
+.partners-slider{position:relative;z-index:2;min-height:260px;display:grid;place-items:center;}
+.partner-slide{position:absolute;inset:0;display:grid;align-items:center;opacity:0;transform:translateX(-18px) scale(.985);pointer-events:none;transition:opacity 1.15s ease, transform 1.15s cubic-bezier(.16,1,.3,1), filter 1.15s ease;filter:blur(1.5px);}
 .partner-slide.is-active{opacity:1;transform:translateX(0) scale(1);pointer-events:auto;filter:blur(0);}
-.partner-slide.is-exiting{transform:translateX(34px) scale(.97);}
-.partner-logo-grid{display:grid;grid-template-columns:repeat(4, minmax(120px, 1fr));gap:18px;width:100%;}
-.partner-logo-card{position:relative;min-height:270px;display:flex;align-items:center;justify-content:center;padding:18px;border:1px solid rgba(148,163,184,.22);border-radius:18px;background:rgba(255,255,255,.72);box-shadow:0 14px 32px rgba(15,23,42,.10);overflow:hidden;transform:translateY(18px);opacity:0;transition:transform .58s cubic-bezier(.22,1,.36,1), opacity .58s ease, box-shadow .25s ease;}
+.partner-slide.is-exiting{transform:translateX(18px) scale(.985);}
+.partner-logo-grid{display:grid;grid-template-columns:repeat(6, minmax(110px, 1fr));gap:14px;width:100%;}
+.partner-logo-card{position:relative;min-height:210px;display:flex;align-items:center;justify-content:center;padding:18px;border:1px solid rgba(148,163,184,.22);border-radius:18px;background:rgba(255,255,255,.72);box-shadow:0 14px 32px rgba(15,23,42,.09);overflow:hidden;transform:translateY(10px);opacity:0;transition:transform .95s cubic-bezier(.16,1,.3,1), opacity .95s ease, box-shadow .35s ease;}
 body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
-.partner-logo-card::before{content:'';position:absolute;inset:16%;border-radius:50%;background:linear-gradient(135deg, rgba(30,64,175,.12), rgba(217,119,6,.15));transform:scale(.84);opacity:.75;transition:transform .58s ease, opacity .58s ease;}
+.partner-logo-card::before{content:'';position:absolute;inset:18%;border-radius:50%;background:linear-gradient(135deg, rgba(30,64,175,.10), rgba(217,119,6,.13));transform:scale(.9);opacity:.72;transition:transform .95s ease, opacity .95s ease;}
 .partner-slide.is-active .partner-logo-card{opacity:1;transform:translateY(0);}
-.partner-slide.is-active .partner-logo-card:nth-child(2){transition-delay:.08s;}
-.partner-slide.is-active .partner-logo-card:nth-child(3){transition-delay:.16s;}
-.partner-slide.is-active .partner-logo-card:nth-child(4){transition-delay:.24s;}
-.partner-logo-card:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(15,23,42,.16);}
-.partner-slide.is-active .partner-logo-card::before{transform:scale(1);opacity:1;animation:partnerHalo 4s ease-in-out infinite;}
-.partner-logo{position:relative;z-index:1;width:100%;height:220px;object-fit:contain;border-radius:14px;padding:10px;background:rgba(255,255,255,.82);animation:partnerFloat 5.5s ease-in-out infinite;}
-.partner-logo-card:nth-child(2) .partner-logo{animation-delay:.35s;}.partner-logo-card:nth-child(3) .partner-logo{animation-delay:.7s;}.partner-logo-card:nth-child(4) .partner-logo{animation-delay:1.05s;}
-.partner-dots{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:18px;}
-.partner-dot{width:11px;height:11px;padding:0;border:0;border-radius:999px;background:#CBD5E1;cursor:pointer;transition:width .28s ease, transform .28s ease, background .28s ease;}
-.partner-dot:hover{transform:translateY(-2px);background:var(--primary-yellow);}.partner-dot.is-active{width:34px;background:linear-gradient(90deg,var(--primary-blue),var(--primary-yellow));}
-@keyframes partnerFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-8px) rotate(1deg);}}
-@keyframes partnerHalo{0%,100%{opacity:.72;transform:scale(1);}50%{opacity:1;transform:scale(1.05);}}
-@media (max-width:980px){.partners-slider{min-height:620px;}.partner-logo-grid{grid-template-columns:repeat(2, minmax(130px, 1fr));}.partner-logo-card{min-height:260px;}}
-@media (max-width:560px){.partners-hero{padding:22px 14px 20px;border-radius:16px;}.partners-hero-head{align-items:flex-start;flex-direction:column;}.partners-slider{min-height:760px;}.partner-logo-grid{grid-template-columns:1fr;gap:14px;}.partner-logo-card{min-height:170px;padding:12px;}.partner-logo{height:142px;}}
+.partner-slide.is-active .partner-logo-card:nth-child(2){transition-delay:.06s;}.partner-slide.is-active .partner-logo-card:nth-child(3){transition-delay:.12s;}.partner-slide.is-active .partner-logo-card:nth-child(4){transition-delay:.18s;}.partner-slide.is-active .partner-logo-card:nth-child(5){transition-delay:.24s;}.partner-slide.is-active .partner-logo-card:nth-child(6){transition-delay:.30s;}
+.partner-logo-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(15,23,42,.14);}
+.partner-slide.is-active .partner-logo-card::before{transform:scale(1);opacity:.95;animation:partnerHalo 6.5s ease-in-out infinite;}
+.partner-logo{position:relative;z-index:1;width:100%;height:160px;object-fit:contain;border-radius:14px;padding:10px;background:rgba(255,255,255,.82);animation:partnerFloat 8s ease-in-out infinite;}
+.partner-logo-card:nth-child(2) .partner-logo{animation-delay:.45s;}.partner-logo-card:nth-child(3) .partner-logo{animation-delay:.9s;}.partner-logo-card:nth-child(4) .partner-logo{animation-delay:1.35s;}.partner-logo-card:nth-child(5) .partner-logo{animation-delay:1.8s;}.partner-logo-card:nth-child(6) .partner-logo{animation-delay:2.25s;}
+.partner-dots{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:12px;margin-top:18px;}
+.partner-dot{width:12px;height:12px;padding:0;border:0;border-radius:999px;background:#CBD5E1;cursor:pointer;transition:width .35s ease, transform .35s ease, background .35s ease;}
+.partner-dot:hover{transform:translateY(-2px);background:var(--primary-yellow);}.partner-dot.is-active{width:38px;background:linear-gradient(90deg,var(--primary-blue),var(--primary-yellow));}
+@keyframes partnerFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+@keyframes partnerHalo{0%,100%{opacity:.70;transform:scale(1);}50%{opacity:.95;transform:scale(1.035);}}
+@media (max-width:980px){.partners-slider{min-height:500px;}.partner-logo-grid{grid-template-columns:repeat(3, minmax(130px, 1fr));}.partner-logo-card{min-height:210px;}}
+@media (max-width:560px){.partners-hero{padding:22px 14px 20px;border-radius:16px;}.partners-hero-head{align-items:flex-start;flex-direction:column;}.partners-slider{min-height:650px;}.partner-logo-grid{grid-template-columns:repeat(2, minmax(120px, 1fr));gap:12px;}.partner-logo-card{min-height:150px;padding:10px;}.partner-logo{height:120px;}}
 @media (prefers-reduced-motion:reduce){.partner-slide,.partner-logo-card,.partner-logo-card::before,.partner-logo,.partner-dot{transition:none;animation:none !important;}}
 </style>
 </head>
@@ -2277,6 +2275,69 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
 </div>
 </div>
 </div>
+<div class="featured-works-card reveal" role="button" tabindex="0" onclick="switchTab('corporate-identities-works', null)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); switchTab('corporate-identities-works', null);}" style="margin-bottom: 20px;">
+<span class="featured-works-icon"><i class="fas fa-building"></i></span>
+<div class="featured-works-text" style="text-align: center; width: 100%;">
+<h3 style="text-align: center;">هويات صوتية وإعلانات للمؤسسات والبرامج</h3>
+<p style="text-align: center;">تترات، إعلانات، ورسائل تعريفية تصنع انطباعاً احترافياً من أول ثانية.</p>
+</div>
+</div>
+
+<div class="quick-services reveal">
+    <div class="qs-item bd-blue" onclick="switchTab('zaffat-works', null)">
+        <span class="qs-icon"><i class="fas fa-ring" style="color: var(--primary-blue);"></i></span>
+        <span class="qs-label">زفات بالأسماء</span>
+    </div>
+    <div class="qs-item bd-red" onclick="switchTab('shilat-works', null)">
+        <span class="qs-icon"><i class="fas fa-music" style="color: var(--primary-red);"></i></span>
+        <span class="qs-label">شيلات بالأسماء</span>
+    </div>
+    <div class="qs-item bd-yellow" onclick="switchTab('events-works', null)">
+        <span class="qs-icon"><i class="fas fa-gift" style="color: var(--primary-yellow);"></i></span>
+        <span class="qs-label">مناسبات بالأسماء</span>
+    </div>
+    
+    <div class="qs-item bd-blue" onclick="switchTab('schools-works', null)">
+        <span class="qs-icon"><i class="fas fa-school" style="color: var(--primary-blue);"></i></span>
+        <span class="qs-label">أعمال للمدارس</span>
+    </div>
+    <div class="qs-item bd-red" onclick="switchTab('voiceover-works', null)">
+        <span class="qs-icon"><i class="fas fa-microphone-alt" style="color: var(--primary-red);"></i></span>
+        <span class="qs-label">تعليق صوتي</span>
+    </div>
+    
+    <div class="qs-item bd-yellow" onclick="switchTab('poetry-recitation-works', null)">
+        <span class="qs-icon"><i class="fas fa-scroll" style="color: var(--primary-yellow);"></i></span>
+        <span class="qs-label">إلقاء قصائد</span>
+    </div>
+    <div class="qs-item bd-blue" onclick="switchTab('poems-composing-works', null)">
+        <span class="qs-icon"><i class="fas fa-guitar" style="color: var(--primary-blue);"></i></span>
+        <span class="qs-label">تلحين قصائد</span>
+    </div>
+    
+    <div class="qs-item bd-red" onclick="switchTab('music-works', null)">
+        <span class="qs-icon"><i class="fas fa-headphones" style="color: var(--primary-red);"></i></span>
+        <span class="qs-label">أعمال بموسيقا</span>
+    </div>
+    <div class="qs-item bd-yellow" onclick="switchTab('nomusic-works', null)">
+        <span class="qs-icon"><i class="fas fa-users" style="color: var(--primary-yellow);"></i></span>
+        <span class="qs-label">أعمال بدون موسيقا</span>
+    </div>
+    <div class="qs-item bd-blue" onclick="switchTab('video-works', null)">
+        <span class="qs-icon"><i class="fas fa-film" style="color: var(--primary-blue);"></i></span>
+        <span class="qs-label">مونتاج فيديو</span>
+    </div>
+    
+    <div class="qs-item bd-yellow" onclick="switchTab('podcast-works', null)">
+        <span class="qs-icon"><i class="fas fa-podcast" style="color: var(--primary-yellow);"></i></span>
+        <span class="qs-label">البودكاست</span>
+    </div>
+    <div class="qs-item bd-red" onclick="switchTab('editing-works', null)">
+        <span class="qs-icon"><i class="fas fa-sliders-h" style="color: var(--primary-red);"></i></span>
+        <span class="qs-label">التحرير الصوتي</span>
+    </div>
+</div>
+
 <div class="home-process-strip reveal">
 <div class="home-process-card">
 <span class="home-process-number">1</span>
@@ -2295,6 +2356,33 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
 </div>
 </div>
 
+
+<div class="stats-grid reveal">
+<div class="stat-card">
+<span class="stat-number" data-target="300" style="color:var(--primary-blue);">
+         +300
+        </span>
+<span class="stat-label">
+         عمل فني منتج
+        </span>
+</div>
+<div class="stat-card">
+<span class="stat-number" data-target="100" style="color:var(--primary-red);">
+         +100
+        </span>
+<span class="stat-label">
+         مؤسسة وأفراد
+        </span>
+</div>
+<div class="stat-card">
+<span class="stat-number" data-target="20" style="color:var(--primary-yellow);">
+         +25
+        </span>
+<span class="stat-label">
+         سنوات تميز
+        </span>
+</div>
+</div>
 <aside class="home-left-panel reveal">
 <div class="home-side-block">
 <h3 class="home-side-title"><i class="fas fa-bolt"></i>طلب سريع</h3>
@@ -2361,68 +2449,7 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
 </div>
 </div>
 </div></aside>
-<div class="featured-works-card reveal" role="button" tabindex="0" onclick="switchTab('corporate-identities-works', null)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); switchTab('corporate-identities-works', null);}" style="margin-bottom: 20px;">
-<span class="featured-works-icon"><i class="fas fa-building"></i></span>
-<div class="featured-works-text" style="text-align: center; width: 100%;">
-<h3 style="text-align: center;">هويات صوتية وإعلانات للمؤسسات والبرامج</h3>
-<p style="text-align: center;">تترات، إعلانات، ورسائل تعريفية تصنع انطباعاً احترافياً من أول ثانية.</p>
-</div>
-</div>
-
-<div class="quick-services reveal">
-    <div class="qs-item bd-blue" onclick="switchTab('zaffat-works', null)">
-        <span class="qs-icon"><i class="fas fa-ring" style="color: var(--primary-blue);"></i></span>
-        <span class="qs-label">زفات بالأسماء</span>
-    </div>
-    <div class="qs-item bd-red" onclick="switchTab('shilat-works', null)">
-        <span class="qs-icon"><i class="fas fa-music" style="color: var(--primary-red);"></i></span>
-        <span class="qs-label">شيلات بالأسماء</span>
-    </div>
-    <div class="qs-item bd-yellow" onclick="switchTab('events-works', null)">
-        <span class="qs-icon"><i class="fas fa-gift" style="color: var(--primary-yellow);"></i></span>
-        <span class="qs-label">مناسبات بالأسماء</span>
-    </div>
-    
-    <div class="qs-item bd-blue" onclick="switchTab('schools-works', null)">
-        <span class="qs-icon"><i class="fas fa-school" style="color: var(--primary-blue);"></i></span>
-        <span class="qs-label">أعمال للمدارس</span>
-    </div>
-    <div class="qs-item bd-red" onclick="switchTab('voiceover-works', null)">
-        <span class="qs-icon"><i class="fas fa-microphone-alt" style="color: var(--primary-red);"></i></span>
-        <span class="qs-label">تعليق صوتي</span>
-    </div>
-    
-    <div class="qs-item bd-yellow" onclick="switchTab('poetry-recitation-works', null)">
-        <span class="qs-icon"><i class="fas fa-scroll" style="color: var(--primary-yellow);"></i></span>
-        <span class="qs-label">إلقاء قصائد</span>
-    </div>
-    <div class="qs-item bd-blue" onclick="switchTab('poems-composing-works', null)">
-        <span class="qs-icon"><i class="fas fa-guitar" style="color: var(--primary-blue);"></i></span>
-        <span class="qs-label">تلحين قصائد</span>
-    </div>
-    
-    <div class="qs-item bd-red" onclick="switchTab('music-works', null)">
-        <span class="qs-icon"><i class="fas fa-headphones" style="color: var(--primary-red);"></i></span>
-        <span class="qs-label">أعمال بموسيقا</span>
-    </div>
-    <div class="qs-item bd-yellow" onclick="switchTab('nomusic-works', null)">
-        <span class="qs-icon"><i class="fas fa-users" style="color: var(--primary-yellow);"></i></span>
-        <span class="qs-label">أعمال بدون موسيقا</span>
-    </div>
-    <div class="qs-item bd-blue" onclick="switchTab('video-works', null)">
-        <span class="qs-icon"><i class="fas fa-film" style="color: var(--primary-blue);"></i></span>
-        <span class="qs-label">مونتاج فيديو</span>
-    </div>
-    
-    <div class="qs-item bd-yellow" onclick="switchTab('podcast-works', null)">
-        <span class="qs-icon"><i class="fas fa-podcast" style="color: var(--primary-yellow);"></i></span>
-        <span class="qs-label">البودكاست</span>
-    </div>
-    <div class="qs-item bd-red" onclick="switchTab('editing-works', null)">
-        <span class="qs-icon"><i class="fas fa-sliders-h" style="color: var(--primary-red);"></i></span>
-        <span class="qs-label">التحرير الصوتي</span>
-    </div>
-</div><div class="header-trust-strip reveal" style="margin: 24px auto 8px; max-width: 700px; padding: 10px 12px; background: var(--bg-white); border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--card-shadow); flex-wrap: wrap; justify-content: space-around;">
+<div class="header-trust-strip reveal" style="margin: 24px auto 8px; max-width: 700px; padding: 10px 12px; background: var(--bg-white); border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--card-shadow); flex-wrap: wrap; justify-content: space-around;">
     <div class="header-trust-item">
         <div class="header-trust-icon">
             <i class="fas fa-medal" style="color:var(--primary-blue);"></i>
@@ -2443,44 +2470,17 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
     </div>
 </div>
 <p class="home-trust-note reveal">تحديث الأعمال باستمرار • تسليم حسب الاتفاق</p>
-<div class="stats-grid reveal">
-<div class="stat-card">
-<span class="stat-number" data-target="300" style="color:var(--primary-blue);">
-         +300
-        </span>
-<span class="stat-label">
-         عمل فني منتج
-        </span>
-</div>
-<div class="stat-card">
-<span class="stat-number" data-target="100" style="color:var(--primary-red);">
-         +100
-        </span>
-<span class="stat-label">
-         مؤسسة وأفراد
-        </span>
-</div>
-<div class="stat-card">
-<span class="stat-number" data-target="20" style="color:var(--primary-yellow);">
-         +25
-        </span>
-<span class="stat-label">
-         سنوات تميز
-        </span>
-</div>
-</div>
 <div class="partners-hero reveal" id="successPartnersHero" aria-label="شركاء النجاح">
     <div class="partners-hero-head">
         <div>
             <span class="partners-hero-kicker"><i class="fas fa-handshake"></i> شركاء نفخر بهم</span>
             <h2 class="partners-hero-title">شركاء النجاح</h2>
         </div>
-        <div class="partners-hero-count"><span id="partnerCurrent">1</span> / <span id="partnerTotal">3</span></div>
+        <div class="partners-hero-count"><span id="partnerCurrent">1</span> / <span id="partnerTotal">2</span></div>
     </div>
     <div class="partners-slider" id="partnersSlider">
-        <div class="partner-slide is-active" data-partner="المجموعة الأولى"><div class="partner-logo-grid"><div class="partner-logo-card"><img class="partner-logo" src="majd.webp" alt="مدارس مجد الحضارة" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="manar.webp" alt="مدارس المنار النموذجية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="nokhba.webp" alt="مدارس النخبة الأهلية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="samaa.webp" alt="سماء التميز" loading="lazy"></div></div></div>
-        <div class="partner-slide" data-partner="المجموعة الثانية"><div class="partner-logo-grid"><div class="partner-logo-card"><img class="partner-logo" src="tabh.webp" alt="مدارس طيبة التربوية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="tamn.webp" alt="مدارس تنمية الأجيال الأهلية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="yemen.webp" alt="مدارس يمن الصمود النموذجية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="anhar.webp" alt="مدرسة أنهار المعرفة" loading="lazy"></div></div></div>
-        <div class="partner-slide" data-partner="المجموعة الثالثة"><div class="partner-logo-grid"><div class="partner-logo-card"><img class="partner-logo" src="arasheed.webp" alt="مدارس الرشيد الحديثة" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="azhar.webp" alt="مدارس أزهار العلا" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="dar.webp" alt="دار الأرقم النموذجية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="drob.webp" alt="مدارس دروب المتميزين الأهلية" loading="lazy"></div></div></div>
+        <div class="partner-slide is-active" data-partner="المجموعة الأولى"><div class="partner-logo-grid"><div class="partner-logo-card"><img class="partner-logo" src="majd.webp" alt="مدارس مجد الحضارة" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="manar.webp" alt="مدارس المنار النموذجية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="nokhba.webp" alt="مدارس النخبة الأهلية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="samaa.webp" alt="سماء التميز" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="tabh.webp" alt="مدارس طيبة التربوية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="tamn.webp" alt="مدارس تنمية الأجيال الأهلية" loading="lazy"></div></div></div>
+        <div class="partner-slide" data-partner="المجموعة الثانية"><div class="partner-logo-grid"><div class="partner-logo-card"><img class="partner-logo" src="yemen.webp" alt="مدارس يمن الصمود النموذجية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="anhar.webp" alt="مدرسة أنهار المعرفة" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="arasheed.webp" alt="مدارس الرشيد الحديثة" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="azhar.webp" alt="مدارس أزهار العلا" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="dar.webp" alt="دار الأرقم النموذجية" loading="lazy"></div><div class="partner-logo-card"><img class="partner-logo" src="drob.webp" alt="مدارس دروب المتميزين الأهلية" loading="lazy"></div></div></div>
     </div>
     <div class="partner-dots" id="partnerDots" aria-label="تنقل شركاء النجاح"></div>
 </div>
@@ -5558,15 +5558,13 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
 
     function findInsertPlace(){
         /*
-          نفضّل وضع الإحصائيات بعد الهيرو مباشرة في الصفحة الرئيسية.
+          نفضّل وضع الإحصائيات بعد خطوات العمل الثلاث مباشرة في الصفحة الرئيسية.
         */
         var preferred = [
+            '#home-section .home-process-strip',
+            '.home-section .home-process-strip',
             '#home-section .home-hero-shell',
-            '#home-section .home-hero-panel',
-            '#home-section .section-title',
-            '#home-section',
-            '.home-section .home-hero-shell',
-            '.home-section'
+            '#home-section'
         ];
 
         for(var i = 0; i < preferred.length; i++){
@@ -5593,7 +5591,7 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
         var grid = createStatsGrid();
 
         /*
-          إذا وجدنا الهيرو، نضع الشبكة بعده مباشرة.
+          إذا وجدنا كتلة الخطوات، نضع الشبكة بعدها مباشرة.
           إذا وجدنا القسم الرئيسي فقط، نضعها في بدايته.
         */
         if(place.parentNode && place.id !== 'home-section'){
@@ -5716,12 +5714,12 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
         currentLabel.textContent = String(index + 1);
         window.setTimeout(function(){
             slides.forEach(function(slide){ slide.classList.remove('is-exiting'); });
-        }, 680);
+        }, 1200);
         if(manual) restart();
     }
     function start(){
         if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        timer = window.setInterval(function(){ goTo(index + 1, false); }, 3600);
+        timer = window.setInterval(function(){ goTo(index + 1, false); }, 6500);
     }
     function stop(){
         if(timer){ window.clearInterval(timer); timer = null; }
@@ -5736,6 +5734,12 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
 </script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 
