@@ -1634,6 +1634,305 @@ body.dark-mode .atheer-final-stat-note{
     }
 }
 </style>
+<style id="atheer-hero-cards-premium-motion">
+/* ============================================
+   Atheer Sound — Hero 12 Cards Premium Style
+   تغيير خلفية بطاقات الهيرو + أنيميشن جذاب
+   لا يلمس أي روابط أو ملفات
+   ============================================ */
+
+/* حاوية بطاقات الخدمات السريعة */
+.quick-services{
+    perspective: 1200px;
+}
+
+/* بطاقات الهيرو الـ 12 */
+.quick-services .qs-item{
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    /* خلفية رمادية أنيقة في اللايت مود */
+    background:
+        linear-gradient(145deg, rgba(241,245,249,.98), rgba(226,232,240,.92)) !important;
+
+    border: 1px solid rgba(100,116,139,.22) !important;
+    border-radius: 18px !important;
+
+    box-shadow:
+        0 8px 20px rgba(15,23,42,.08),
+        inset 0 1px 0 rgba(255,255,255,.75) !important;
+
+    transform: translateY(0) scale(1);
+    transition:
+        transform .38s cubic-bezier(.34,1.56,.64,1),
+        box-shadow .38s ease,
+        border-color .38s ease,
+        background .38s ease,
+        filter .38s ease !important;
+
+    animation: atheerHeroCardIn .7s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+/* ظهور متتابع للبطاقات */
+.quick-services .qs-item:nth-child(1){ animation-delay: .03s; }
+.quick-services .qs-item:nth-child(2){ animation-delay: .06s; }
+.quick-services .qs-item:nth-child(3){ animation-delay: .09s; }
+.quick-services .qs-item:nth-child(4){ animation-delay: .12s; }
+.quick-services .qs-item:nth-child(5){ animation-delay: .15s; }
+.quick-services .qs-item:nth-child(6){ animation-delay: .18s; }
+.quick-services .qs-item:nth-child(7){ animation-delay: .21s; }
+.quick-services .qs-item:nth-child(8){ animation-delay: .24s; }
+.quick-services .qs-item:nth-child(9){ animation-delay: .27s; }
+.quick-services .qs-item:nth-child(10){ animation-delay: .30s; }
+.quick-services .qs-item:nth-child(11){ animation-delay: .33s; }
+.quick-services .qs-item:nth-child(12){ animation-delay: .36s; }
+
+@keyframes atheerHeroCardIn{
+    from{
+        opacity: 0;
+        transform: translateY(24px) scale(.94) rotateX(10deg);
+        filter: blur(4px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0);
+        filter: blur(0);
+    }
+}
+
+/* إطار متدرج يظهر عند المرور */
+.quick-services .qs-item::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1.5px;
+    border-radius: inherit;
+    background: linear-gradient(135deg,
+        rgba(30,64,175,.65),
+        rgba(185,28,28,.55),
+        rgba(217,119,6,.60)
+    );
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity .35s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* لمعة تمر فوق البطاقة */
+.quick-services .qs-item::after{
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -80%;
+    width: 55%;
+    height: 180%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255,255,255,.45),
+        transparent
+    );
+    transform: rotate(25deg);
+    opacity: 0;
+    transition:
+        right .75s ease,
+        opacity .35s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* حركة البطاقة عند المرور */
+.quick-services .qs-item:hover{
+    background:
+        linear-gradient(145deg, rgba(248,250,252,1), rgba(226,232,240,.98)) !important;
+
+    transform: translateY(-8px) scale(1.035) rotateX(2deg);
+    border-color: rgba(30,64,175,.35) !important;
+
+    box-shadow:
+        0 18px 38px rgba(15,23,42,.16),
+        0 8px 18px rgba(30,64,175,.10),
+        inset 0 1px 0 rgba(255,255,255,.9) !important;
+}
+
+.quick-services .qs-item:hover::before{
+    opacity: 1;
+}
+
+.quick-services .qs-item:hover::after{
+    right: 130%;
+    opacity: 1;
+}
+
+/* تحسين شكل الأيقونة داخل البطاقة */
+.quick-services .qs-icon{
+    position: relative;
+    z-index: 3;
+    background:
+        linear-gradient(145deg, rgba(255,255,255,.95), rgba(241,245,249,.9)) !important;
+
+    border: 1px solid rgba(148,163,184,.22);
+    box-shadow:
+        0 8px 18px rgba(15,23,42,.08),
+        inset 0 1px 0 rgba(255,255,255,.85) !important;
+
+    transition:
+        transform .45s cubic-bezier(.34,1.56,.64,1),
+        box-shadow .35s ease,
+        background .35s ease !important;
+}
+
+/* حركة الأيقونة عند المرور */
+.quick-services .qs-item:hover .qs-icon{
+    transform: translateY(-4px) scale(1.12) rotate(-4deg);
+    background:
+        linear-gradient(145deg, #ffffff, #f8fafc) !important;
+
+    box-shadow:
+        0 12px 26px rgba(30,64,175,.18),
+        inset 0 1px 0 rgba(255,255,255,.95) !important;
+}
+
+/* النص داخل البطاقة */
+.quick-services .qs-label{
+    position: relative;
+    z-index: 3;
+    color: #1E293B !important;
+    font-weight: 900 !important;
+    transition:
+        color .3s ease,
+        transform .3s ease,
+        letter-spacing .3s ease;
+}
+
+/* حركة النص */
+.quick-services .qs-item:hover .qs-label{
+    color: #1E40AF !important;
+    transform: translateY(-2px);
+    letter-spacing: .015em;
+}
+
+/* شريط علوي صغير متحرك يعطي إحساساً صوتياً */
+.quick-services .qs-item .qs-label::after{
+    content: '';
+    display: block;
+    width: 28px;
+    height: 3px;
+    margin: 8px auto 0;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #1E40AF, #B91C1C, #D97706);
+    transform: scaleX(.45);
+    opacity: .45;
+    transition:
+        transform .35s ease,
+        opacity .35s ease;
+}
+
+.quick-services .qs-item:hover .qs-label::after{
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+/* نبضة خفيفة متتابعة للأيقونات */
+.quick-services .qs-item:nth-child(3n+1):hover .qs-icon{
+    animation: atheerCardIconBounce .75s ease;
+}
+
+.quick-services .qs-item:nth-child(3n+2):hover .qs-icon{
+    animation: atheerCardIconTilt .75s ease;
+}
+
+.quick-services .qs-item:nth-child(3n+3):hover .qs-icon{
+    animation: atheerCardIconPulse .75s ease;
+}
+
+@keyframes atheerCardIconBounce{
+    0%,100%{ transform: translateY(-4px) scale(1.12) rotate(-4deg); }
+    45%{ transform: translateY(-12px) scale(1.16) rotate(3deg); }
+}
+
+@keyframes atheerCardIconTilt{
+    0%,100%{ transform: translateY(-4px) scale(1.12) rotate(-4deg); }
+    35%{ transform: translateY(-4px) scale(1.14) rotate(7deg); }
+    70%{ transform: translateY(-4px) scale(1.14) rotate(-7deg); }
+}
+
+@keyframes atheerCardIconPulse{
+    0%,100%{ transform: translateY(-4px) scale(1.12) rotate(-4deg); }
+    50%{ transform: translateY(-4px) scale(1.22) rotate(0); }
+}
+
+/* خلفية داكنة قليلاً في الدارك مود */
+body.dark-mode .quick-services .qs-item{
+    background:
+        linear-gradient(145deg, rgba(30,41,59,.98), rgba(15,23,42,.96)) !important;
+
+    border-color: rgba(148,163,184,.18) !important;
+
+    box-shadow:
+        0 10px 26px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+body.dark-mode .quick-services .qs-item:hover{
+    background:
+        linear-gradient(145deg, rgba(51,65,85,.98), rgba(30,41,59,.98)) !important;
+
+    border-color: rgba(96,165,250,.32) !important;
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.35),
+        0 8px 18px rgba(96,165,250,.10) !important;
+}
+
+body.dark-mode .quick-services .qs-icon{
+    background:
+        linear-gradient(145deg, rgba(51,65,85,.95), rgba(15,23,42,.95)) !important;
+
+    border-color: rgba(148,163,184,.16);
+}
+
+body.dark-mode .quick-services .qs-label{
+    color: #E2E8F0 !important;
+}
+
+body.dark-mode .quick-services .qs-item:hover .qs-label{
+    color: #93C5FD !important;
+}
+
+/* الجوال: حركة أخف حتى لا يتعب الجهاز */
+@media (max-width: 768px){
+    .quick-services .qs-item{
+        border-radius: 16px !important;
+        animation-duration: .55s;
+    }
+
+    .quick-services .qs-item:hover{
+        transform: translateY(-4px) scale(1.02);
+    }
+
+    .quick-services .qs-icon{
+        width: 52px !important;
+        height: 52px !important;
+    }
+}
+
+/* احترام من يفضّل تقليل الحركة */
+@media (prefers-reduced-motion: reduce){
+    .quick-services .qs-item,
+    .quick-services .qs-icon,
+    .quick-services .qs-label,
+    .quick-services .qs-item::before,
+    .quick-services .qs-item::after{
+        animation: none !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
 
 </head>
 <body>
@@ -5004,7 +5303,7 @@ body.dark-mode .atheer-final-stat-note{
     var statsData = [
         { value: 300, prefix: '+', suffix: '', label: 'عمل فني منتج', sub: 'أعمال صوتية ومرئية بجودة احترافية', icon: '♫' },
         { value: 100, prefix: '+', suffix: '', label: 'مؤسسة وأفراد', sub: 'شركاء نجاح من جهات وأشخاص', icon: '◈' },
-        { value: 25, prefix: '+', suffix: '', label: 'سنة تميز وخبرة', sub: 'تراكم معرفي وإبداعي ممتد', icon: '✦' },
+        { value: 25, prefix: '+', suffix: '', label: 'سنوات تميز وخبرة', sub: 'تراكم معرفي وإبداعي ممتد', icon: '✦' },
         { value: 96, prefix: '+', suffix: '%', label: 'رضا العملاء', sub: 'مؤشر ثقة ورضا مرتفع', icon: '♥' }
     ];
 
