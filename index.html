@@ -251,6 +251,996 @@ audio::-webkit-media-controls-panel{
 a:focus-visible,button:focus-visible,.nav-tab:focus-visible{
     outline:3px solid var(--primary-blue); outline-offset:3px;
     border-radius:var(--radius-sm);
+
+
+/* ============================================
+   Atheer Sound — Premium Visual Layer v2.0
+   تحسينات بصرية متقدمة + بصمة صوتية مميزة
+   ============================================ */
+
+/* === 1) Pill Tabs الأنيقة === */
+.nav-tabs-container{
+    background: var(--bg-soft);
+    border-radius: 50px;
+    padding: 6px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    box-shadow: inset 0 2px 4px rgba(15,23,42,.06);
+    margin: 12px auto;
+}
+.nav-tab{
+    border-radius: 50px !important;
+    padding: 10px 22px !important;
+    border: none !important;
+    background: transparent !important;
+    font-weight: 700;
+    color: var(--text-muted);
+    transition: color .3s ease, background .3s ease, transform .2s ease;
+    position: relative;
+    z-index: 1;
+}
+.nav-tab::after{ display: none !important; }
+.nav-tab:hover{
+    color: var(--primary-blue);
+    transform: translateY(-1px);
+}
+.nav-tab.active{
+    background: var(--bg-white) !important;
+    color: var(--primary-blue) !important;
+    box-shadow:
+        0 2px 8px rgba(15,23,42,.08),
+        0 1px 2px rgba(15,23,42,.04) !important;
+}
+.nav-tab.active::before{
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--primary-red);
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 6px;
+    vertical-align: middle;
+    animation: atheerPulseDot 2s ease-in-out infinite;
+}
+@keyframes atheerPulseDot{
+    0%,100%{ transform: scale(1); opacity: 1; }
+    50%{ transform: scale(1.4); opacity: .6; }
+}
+
+/* === 2) أيقونات Neumorphic مع حركات متنوعة === */
+.qs-icon{
+    position: relative;
+    width: 64px !important;
+    height: 64px !important;
+    border-radius: 18px !important;
+    background: linear-gradient(135deg, var(--bg-soft), #fff) !important;
+    box-shadow:
+        5px 5px 10px rgba(15,23,42,.06),
+        -5px -5px 10px rgba(255,255,255,.9) !important;
+    overflow: visible !important;
+    transition: transform .35s ease, box-shadow .35s ease !important;
+}
+.qs-icon::before{
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 21px;
+    background: linear-gradient(135deg,
+        var(--primary-blue),
+        var(--primary-red),
+        var(--primary-yellow));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity .4s ease;
+}
+.qs-item:hover .qs-icon::before{ opacity: .7; }
+.qs-item:hover .qs-icon{
+    transform: scale(1.08);
+    box-shadow: 0 8px 24px rgba(30,64,175,.15) !important;
+}
+body.dark-mode .qs-icon{
+    background: linear-gradient(135deg, #1e293b, #0f172a) !important;
+    box-shadow:
+        5px 5px 10px rgba(0,0,0,.3),
+        -5px -5px 10px rgba(51,65,85,.3) !important;
+}
+.qs-item:nth-child(3n+1):hover .qs-icon i,
+.qs-item:nth-child(3n+1):hover .qs-icon svg{
+    animation: atheerIconBounce .6s ease;
+}
+.qs-item:nth-child(3n+2):hover .qs-icon i,
+.qs-item:nth-child(3n+2):hover .qs-icon svg{
+    animation: atheerIconSpin .8s ease;
+}
+.qs-item:nth-child(3n+3):hover .qs-icon i,
+.qs-item:nth-child(3n+3):hover .qs-icon svg{
+    animation: atheerIconWiggle .5s ease;
+}
+@keyframes atheerIconBounce{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-8px); }
+}
+@keyframes atheerIconSpin{
+    from{ transform: rotate(0); }
+    to{ transform: rotate(360deg); }
+}
+@keyframes atheerIconWiggle{
+    0%,100%{ transform: rotate(0); }
+    25%{ transform: rotate(-15deg); }
+    75%{ transform: rotate(15deg); }
+}
+
+/* === 3) زوايا غير متماثلة على بطاقات الأعمال === */
+.work-card,
+.featured-works-card{
+    border-radius: 4px 20px 20px 20px !important;
+    transition:
+        border-radius .4s ease,
+        transform .4s cubic-bezier(.4,0,.2,1),
+        box-shadow .3s ease,
+        border-color .3s ease !important;
+    will-change: transform;
+}
+.work-card:nth-child(even){
+    border-radius: 20px 4px 20px 20px !important;
+}
+.work-card:hover,
+.featured-works-card:hover{
+    border-radius: 20px 20px 20px 20px !important;
+}
+
+/* === 4) أيقونات السوشيال — حلقة نابضة === */
+.social-icons a{
+    position: relative;
+}
+.social-icons a::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    opacity: 0;
+    transition: opacity .3s ease, transform .6s ease;
+    pointer-events: none;
+}
+.social-icons a:hover::before{
+    opacity: .35;
+    transform: scale(1.5);
+}
+
+/* === 5) عناوين الأقسام — تأثير لمعان متدفق === */
+.section-title{
+    background: linear-gradient(90deg,
+        var(--text-dark) 0%,
+        var(--primary-blue) 40%,
+        var(--primary-red) 60%,
+        var(--text-dark) 100%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: atheerShineText 6s linear infinite;
+}
+@keyframes atheerShineText{
+    to{ background-position: -200% center; }
+}
+
+/* === 6) موجات صوتية متحركة خلف الهيرو === */
+.home-hero-shell{
+    position: relative;
+    overflow: hidden;
+}
+.home-hero-shell::after{
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background-image:
+        repeating-linear-gradient(90deg,
+            transparent 0,
+            transparent 8px,
+            rgba(30,64,175,.08) 8px,
+            rgba(30,64,175,.08) 10px),
+        repeating-linear-gradient(90deg,
+            transparent 0,
+            transparent 14px,
+            rgba(185,28,28,.06) 14px,
+            rgba(185,28,28,.06) 16px);
+    mask-image: linear-gradient(to top, black, transparent);
+    -webkit-mask-image: linear-gradient(to top, black, transparent);
+    animation: atheerWaves 8s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+.home-hero-shell > *{ position: relative; z-index: 1; }
+@keyframes atheerWaves{
+    from{ background-position: 0 0, 0 0; }
+    to{ background-position: 60px 0, -80px 0; }
+}
+
+/* === 7) شريط تقدم القراءة (للسكربت) === */
+#atheer-read-progress{
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg,
+        var(--primary-blue),
+        var(--primary-red),
+        var(--primary-yellow));
+    z-index: 99999;
+    transition: width .12s linear;
+    border-radius: 0 3px 3px 0;
+    box-shadow: 0 1px 4px rgba(15,23,42,.15);
+}
+
+/* === 8) عدّاد الأرقام — تحضير بصري === */
+.counter-number,
+[class*="stat-number"],
+.home-stat-number{
+    font-variant-numeric: tabular-nums;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+/* === 9) تأثير ripple على الأزرار الرئيسية === */
+.home-hero-primary,
+.home-side-action,
+.intro-btn{
+    position: relative;
+    overflow: hidden;
+}
+.home-hero-primary::after,
+.home-side-action::after,
+.intro-btn::after{
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: rgba(255,255,255,.25);
+    border-radius: 50%;
+    transform: translate(-50%,-50%);
+    transition: width .6s ease, height .6s ease;
+    pointer-events: none;
+}
+.home-hero-primary:hover::after,
+.home-side-action:hover::after,
+.intro-btn:hover::after{
+    width: 500px; height: 500px;
+}
+
+/* === 10) كروت الإصدارات (الكتب) — تأثير ثلاثي الأبعاد === */
+.home-side-book-cover,
+[class*="book-cover"]{
+    perspective: 1200px;
+    display: inline-block;
+}
+.home-side-book-cover img,
+[class*="book-cover"] img{
+    transition: transform .5s cubic-bezier(.4,0,.2,1),
+                box-shadow .4s ease !important;
+    box-shadow:
+        -2px 0 0 #f1f5f9,
+        -4px 0 0 #e2e8f0,
+        -6px 4px 16px rgba(15,23,42,.18) !important;
+    border-radius: 4px;
+}
+.home-side-book-cover:hover img,
+[class*="book-cover"]:hover img{
+    transform: rotateY(-12deg) translateX(-3px) scale(1.02);
+    box-shadow:
+        -4px 0 0 #f1f5f9,
+        -8px 0 0 #e2e8f0,
+        -14px 8px 28px rgba(15,23,42,.25) !important;
+}
+
+/* === 11) شارة "إعلانات" المتحركة === */
+.ticker-label{
+    position: relative;
+    overflow: hidden;
+}
+.ticker-label::before{
+    content: '';
+    position: absolute;
+    top: 0; right: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255,255,255,.3),
+        transparent);
+    animation: atheerSweep 3s ease-in-out infinite;
+}
+@keyframes atheerSweep{
+    to{ right: 100%; }
+}
+
+/* === 12) Tilt effect على البطاقات (للسكربت) === */
+.work-card,
+.featured-works-card{
+    transform-style: preserve-3d;
+}
+
+/* === 13) تحسين عناصر النموذج (Contact Form) === */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select{
+    transition: border-color .3s ease, box-shadow .3s ease, transform .2s ease;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus{
+    border-color: var(--primary-blue) !important;
+    box-shadow: 0 0 0 4px rgba(30,64,175,.12) !important;
+    outline: none !important;
+    transform: translateY(-1px);
+}
+
+/* === 14) زر "للأعلى" عائم === */
+#atheer-back-to-top{
+    position: fixed;
+    bottom: 24px; left: 24px;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-blue), #2563EB);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 8px 24px rgba(30,64,175,.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity .3s ease, visibility .3s ease, transform .3s ease;
+    z-index: 9998;
+}
+#atheer-back-to-top.visible{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+#atheer-back-to-top:hover{
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 12px 32px rgba(30,64,175,.4);
+}
+
+/* === 15) Responsive — ضبط على الجوال === */
+@media (max-width: 768px){
+    .nav-tabs-container{
+        border-radius: 20px;
+        padding: 4px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        max-width: 100%;
+    }
+    .nav-tab{
+        padding: 8px 16px !important;
+        font-size: 13px !important;
+        white-space: nowrap;
+    }
+    .qs-icon{
+        width: 52px !important;
+        height: 52px !important;
+    }
+    #atheer-back-to-top{
+        bottom: 16px; left: 16px;
+        width: 42px; height: 42px;
+    }
+    .home-hero-shell::after{ height: 40px; }
+}
+
+/* ============================================
+   Atheer Sound — Refinement Layer v3.0
+   تحسينات على المناطق غير المُغطاة سابقاً
+   ============================================ */
+
+/* === 16) مشغّلات الصوت — إطار متوهّج وحركات ذكية === */
+audio{
+    width: 100%;
+    border-radius: 12px !important;
+    outline: none;
+    margin-top: 14px;
+    box-shadow:
+        0 2px 8px rgba(15,23,42,.06),
+        inset 0 1px 0 rgba(255,255,255,.5);
+    transition: box-shadow .4s ease, transform .3s ease;
+}
+audio:hover{
+    box-shadow:
+        0 6px 20px rgba(30,64,175,.12),
+        inset 0 1px 0 rgba(255,255,255,.5);
+    transform: translateY(-1px);
+}
+/* حاوية المشغّل تحصل على شريط ملوّن جانبي */
+.work-card audio,
+.featured-works-card audio{
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+}
+/* مؤشر تشغيل نابض على البطاقة عندما يكون الصوت يعمل */
+.work-card.is-playing,
+.featured-works-card.is-playing{
+    border-color: var(--primary-blue) !important;
+    box-shadow:
+        0 0 0 3px rgba(30,64,175,.12),
+        0 8px 24px rgba(30,64,175,.18) !important;
+}
+.work-card.is-playing::after,
+.featured-works-card.is-playing::after{
+    content: '';
+    position: absolute;
+    top: 12px; left: 12px;
+    width: 10px; height: 10px;
+    background: var(--primary-red);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(185,28,28,.6);
+    animation: atheerPlayPulse 1.5s ease-in-out infinite;
+    z-index: 6;
+}
+@keyframes atheerPlayPulse{
+    0%,100%{
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(185,28,28,.5);
+    }
+    50%{
+        transform: scale(1.2);
+        box-shadow: 0 0 0 8px rgba(185,28,28,0);
+    }
+}
+
+/* === 17) النموذج (Contact Form) — حقول عائمة فاخرة === */
+.contact-form-wrapper,
+form{
+    --field-bg: var(--bg-white);
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select{
+    background: var(--field-bg) !important;
+    border: 1.5px solid var(--border) !important;
+    border-radius: 12px !important;
+    padding: 14px 16px !important;
+    font-family: inherit !important;
+    font-size: 14px !important;
+    width: 100%;
+    transition:
+        border-color .3s ease,
+        box-shadow .3s ease,
+        background .3s ease,
+        transform .2s ease !important;
+}
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="tel"]:hover,
+textarea:hover,
+select:hover{
+    border-color: rgba(30,64,175,.4) !important;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus{
+    border-color: var(--primary-blue) !important;
+    box-shadow:
+        0 0 0 4px rgba(30,64,175,.12),
+        0 4px 12px rgba(30,64,175,.08) !important;
+    transform: translateY(-1px);
+}
+textarea{
+    min-height: 120px !important;
+    resize: vertical;
+}
+/* زر الإرسال — تأثير شحن متوهّج */
+button[type="submit"],
+.submit-btn,
+.contact-submit{
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #2563EB 50%, var(--primary-red) 100%) !important;
+    background-size: 200% auto !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 14px 36px !important;
+    border-radius: 12px !important;
+    font-weight: 800 !important;
+    letter-spacing: .03em !important;
+    cursor: pointer !important;
+    box-shadow: 0 8px 24px rgba(30,64,175,.25) !important;
+    transition:
+        background-position .6s ease,
+        transform .25s ease,
+        box-shadow .25s ease !important;
+}
+button[type="submit"]:hover,
+.submit-btn:hover,
+.contact-submit:hover{
+    background-position: right center !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 32px rgba(30,64,175,.35) !important;
+}
+
+/* === 18) الفوتر — خلفية مزخرفة وروابط حية === */
+footer,
+.site-footer,
+[class*="footer"]{
+    position: relative;
+    overflow: hidden;
+}
+footer::before,
+.site-footer::before{
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+        var(--primary-blue),
+        var(--primary-red),
+        var(--primary-yellow),
+        var(--primary-blue));
+    background-size: 300% 100%;
+    animation: atheerFooterGradient 8s linear infinite;
+}
+@keyframes atheerFooterGradient{
+    to{ background-position: -300% 0; }
+}
+footer a,
+.site-footer a{
+    position: relative;
+    transition: color .3s ease, padding .3s ease;
+}
+footer a::before,
+.site-footer a::before{
+    content: '←';
+    position: absolute;
+    right: -18px;
+    opacity: 0;
+    transition: opacity .3s ease, right .3s ease;
+    color: var(--primary-yellow);
+}
+footer a:hover::before,
+.site-footer a:hover::before{
+    opacity: 1;
+    right: -22px;
+}
+footer a:hover,
+.site-footer a:hover{
+    color: var(--primary-blue);
+    padding-right: 4px;
+}
+
+/* === 19) الشاشة الترحيبية (Intro) — دخول مسرحي === */
+#intro-screen .intro-logo{
+    animation:
+        gentleFloat 3s ease-in-out infinite,
+        atheerIntroLogoIn 1s cubic-bezier(.34,1.56,.64,1) backwards;
+}
+#intro-screen .intro-title{
+    animation: atheerIntroFadeUp .8s ease .2s backwards;
+}
+#intro-screen .intro-text-main{
+    animation: atheerIntroFadeUp .8s ease .4s backwards;
+}
+#intro-screen .intro-text-sub{
+    animation: atheerIntroFadeUp .8s ease .6s backwards;
+}
+#intro-screen .intro-btn{
+    animation: atheerIntroFadeUp .8s ease .8s backwards;
+}
+#intro-screen .intro-contact{
+    animation: atheerIntroFadeUp .8s ease 1s backwards;
+}
+@keyframes atheerIntroLogoIn{
+    from{
+        opacity: 0;
+        transform: scale(.5) rotate(-15deg);
+    }
+    to{
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+@keyframes atheerIntroFadeUp{
+    from{
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === 20) كروت العروض — شريط زاوية وارتفاع === */
+.offer-card,
+[class*="offer"][class*="card"],
+[class*="offer-item"]{
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform .4s cubic-bezier(.4,0,.2,1),
+        box-shadow .3s ease !important;
+}
+.offer-card:hover,
+[class*="offer"][class*="card"]:hover,
+[class*="offer-item"]:hover{
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(15,23,42,.12) !important;
+}
+/* شريط زاوية مع نسبة الخصم */
+.offer-card[data-discount]::after,
+.offer-card.has-ribbon::after{
+    content: attr(data-discount);
+    position: absolute;
+    top: 18px; right: -42px;
+    background: linear-gradient(135deg, var(--primary-red), #DC2626);
+    color: #fff;
+    padding: 6px 50px;
+    transform: rotate(38deg);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(185,28,28,.35);
+    z-index: 5;
+    text-align: center;
+}
+
+/* === 21) قسم القصائد — تنسيق مخطوطة أدبية === */
+.poems-section,
+#poems-section,
+[id*="poems"]{
+    position: relative;
+}
+.poem-item,
+.poem-card,
+[class*="poem-"]{
+    background:
+        linear-gradient(180deg,
+            rgba(217,119,6,.03) 0%,
+            transparent 100%),
+        var(--bg-white);
+    border: 1px solid var(--border);
+    border-right: 4px solid var(--primary-yellow);
+    border-radius: 4px 14px 14px 4px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    position: relative;
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-right-color .3s ease;
+    font-family: 'Cairo', 'Amiri', serif;
+    line-height: 2;
+}
+.poem-item::before,
+.poem-card::before,
+[class*="poem-"]::before{
+    content: '﴾';
+    position: absolute;
+    top: 12px;
+    left: 18px;
+    font-size: 32px;
+    color: var(--primary-yellow);
+    opacity: .25;
+    font-family: 'Amiri', 'Traditional Arabic', serif;
+    line-height: 1;
+}
+.poem-item:hover,
+.poem-card:hover,
+[class*="poem-"]:hover{
+    transform: translateX(-4px);
+    box-shadow: 0 8px 24px rgba(217,119,6,.12);
+    border-right-color: var(--primary-red);
+}
+
+/* === 22) شريط الإعلانات — تحريك أنعم === */
+.ticker-track{
+    mask-image: linear-gradient(90deg,
+        transparent 0,
+        black 40px,
+        black calc(100% - 40px),
+        transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg,
+        transparent 0,
+        black 40px,
+        black calc(100% - 40px),
+        transparent 100%);
+}
+.ticker-item{
+    transition: color .25s ease, transform .25s ease;
+}
+.ticker-item:hover{
+    color: var(--primary-red) !important;
+    transform: scale(1.04);
+}
+
+/* === 23) شارات النوع (Badges) — تصميم أنيق === */
+.badge,
+.tag,
+[class*="badge"],
+.location-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    background: linear-gradient(135deg,
+        rgba(30,64,175,.08),
+        rgba(185,28,28,.08));
+    border: 1px solid rgba(30,64,175,.15);
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--primary-blue);
+    letter-spacing: .03em;
+    transition: transform .25s ease, background .3s ease;
+}
+.badge:hover,
+.tag:hover,
+.location-badge:hover{
+    transform: scale(1.06);
+    background: linear-gradient(135deg,
+        rgba(30,64,175,.15),
+        rgba(185,28,28,.15));
+}
+
+/* === 24) أرقام التواصل — تصميم بطاقة === */
+.contact-item{
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        background .3s ease !important;
+    border-radius: 10px;
+    padding: 8px 12px;
+}
+.contact-item:hover{
+    background: rgba(37,211,102,.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37,211,102,.15);
+}
+
+/* === 25) قسم "من نحن" — أيقونات نسب الإتقان متحركة === */
+.skill-bar,
+.progress-bar,
+[class*="skill-progress"],
+[class*="proficiency"]{
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-soft);
+    border-radius: 100px;
+    height: 10px;
+}
+.skill-bar > *,
+.progress-bar > *,
+[class*="skill-progress"] > *,
+[class*="proficiency"] > *{
+    background: linear-gradient(90deg,
+        var(--primary-blue),
+        var(--primary-red),
+        var(--primary-yellow)) !important;
+    background-size: 200% 100% !important;
+    border-radius: 100px;
+    box-shadow: 0 0 12px rgba(30,64,175,.3);
+    animation: atheerSkillShimmer 3s ease-in-out infinite;
+}
+@keyframes atheerSkillShimmer{
+    0%,100%{ background-position: 0 0; }
+    50%{ background-position: -200% 0; }
+}
+
+/* === 26) FAQ — توسيع أنيق === */
+details,
+.faq-item,
+[class*="faq"]{
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    background: var(--bg-white);
+    transition: border-color .3s ease, box-shadow .3s ease;
+}
+details:hover,
+.faq-item:hover{
+    border-color: rgba(30,64,175,.3);
+    box-shadow: 0 4px 12px rgba(15,23,42,.06);
+}
+details[open]{
+    border-color: var(--primary-blue);
+    box-shadow: 0 8px 24px rgba(30,64,175,.1);
+}
+details summary{
+    cursor: pointer;
+    font-weight: 800;
+    color: var(--text-dark);
+    list-style: none;
+    position: relative;
+    padding-left: 30px;
+}
+details summary::after{
+    content: '+';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--bg-soft);
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 900;
+    transition: transform .3s ease, background .3s ease;
+}
+details[open] summary::after{
+    content: '−';
+    background: var(--primary-blue);
+    color: #fff;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* === 27) أيقونات Font Awesome — توهّج ذكي === */
+.fa, .fas, .far, .fab,
+i[class*="fa-"]{
+    transition: transform .3s ease, color .3s ease, filter .3s ease;
+}
+a:hover .fa,
+a:hover .fas,
+a:hover .far,
+a:hover .fab,
+button:hover i[class*="fa-"]{
+    filter: drop-shadow(0 2px 6px rgba(30,64,175,.4));
+    transform: scale(1.1);
+}
+
+/* === 28) تحسين العنوان الرئيسي للهيرو === */
+.home-hero-title{
+    background: linear-gradient(135deg,
+        var(--text-dark) 0%,
+        var(--primary-blue) 50%,
+        var(--text-dark) 100%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: atheerHeroShine 5s ease-in-out infinite;
+}
+@keyframes atheerHeroShine{
+    0%,100%{ background-position: 0 0; }
+    50%{ background-position: -200% 0; }
+}
+
+/* === 29) Selection — لون التحديد المخصص === */
+::selection{
+    background: var(--primary-blue);
+    color: #fff;
+}
+::-moz-selection{
+    background: var(--primary-blue);
+    color: #fff;
+}
+
+/* === 30) Responsive نهائي === */
+@media (max-width: 768px){
+    .poem-item, .poem-card{
+        padding: 18px 20px;
+    }
+    .offer-card[data-discount]::after,
+    .offer-card.has-ribbon::after{
+        font-size: 10px;
+        padding: 4px 36px;
+        top: 12px;
+        right: -32px;
+    }
+    button[type="submit"],
+    .submit-btn,
+    .contact-submit{
+        padding: 12px 28px !important;
+        width: 100%;
+    }
+}
+/* ============================================
+   تعديل لون نصوص شريط الإعلانات في اللايت مود
+   ============================================ */
+
+/* لون نصوص الإعلانات المتحركة في الوضع الفاتح */
+body:not(.dark-mode) .announcement-bar .ticker-item{
+    color: #1E293B !important;
+    font-weight: 800;
+}
+
+/* لون روابط الإعلانات داخل الشريط */
+body:not(.dark-mode) .announcement-bar .ticker-link{
+    color: #1E40AF !important;
+    font-weight: 900;
+}
+
+/* عند مرور المؤشر */
+body:not(.dark-mode) .announcement-bar .ticker-link:hover,
+body:not(.dark-mode) .announcement-bar .ticker-item:hover{
+    color: #B91C1C !important;
+}
+
+/* تحسين خلفية شريط الإعلانات في اللايت مود حتى تظهر النصوص بوضوح */
+body:not(.dark-mode) .announcement-bar{
+    background: linear-gradient(
+        90deg,
+        rgba(30,64,175,.06),
+        rgba(217,119,6,.07),
+        rgba(185,28,28,.05)
+    ) !important;
+    border-top: 1px solid rgba(30,64,175,.12);
+    border-bottom: 1px solid rgba(30,64,175,.12);
+}
+
+/* إبقاء بطاقة كلمة "إعلانات" واضحة ومميزة */
+body:not(.dark-mode) .ticker-label{
+    color: #FFFFFF !important;
+    background: linear-gradient(135deg, #1E40AF, #B91C1C) !important;
+}
+
+</style>
+<style id="atheer-fix-announcement-colors">
+/* ============================================
+   إصلاح لون نصوص الإعلانات المتحركة في اللايت مود
+   يوضع قبل </head> مباشرة
+   ============================================ */
+
+/* لون شريط الإعلانات نفسه في الوضع الفاتح */
+body:not(.dark-mode) .announcement-bar{
+    background: linear-gradient(
+        90deg,
+        rgba(30,64,175,.07),
+        rgba(217,119,6,.08),
+        rgba(185,28,28,.06)
+    ) !important;
+    border-top: 1px solid rgba(30,64,175,.14) !important;
+    border-bottom: 1px solid rgba(30,64,175,.14) !important;
+}
+
+/* تغيير لون النصوص المتحركة العادية بشكل دائم */
+body:not(.dark-mode) .announcement-bar .ticker-track,
+body:not(.dark-mode) .announcement-bar .ticker-content,
+body:not(.dark-mode) .announcement-bar .ticker-item,
+body:not(.dark-mode) .announcement-bar span.ticker-item{
+    color: #1E293B !important;
+}
+
+/* تغيير لون روابط الإعلانات المتحركة بشكل دائم */
+body:not(.dark-mode) .announcement-bar a.ticker-item,
+body:not(.dark-mode) .announcement-bar .ticker-link,
+body:not(.dark-mode) .announcement-bar .ticker-content a{
+    color: #1E40AF !important;
+    font-weight: 900 !important;
+}
+
+/* تأكيد إضافي: أي عنصر داخل شريط الإعلانات لا يبقى أبيض */
+body:not(.dark-mode) .announcement-bar .ticker-content span{
+    color: #334155 !important;
+    font-weight: 800 !important;
+}
+
+/* لون الروابط عند المرور فقط */
+body:not(.dark-mode) .announcement-bar a.ticker-item:hover,
+body:not(.dark-mode) .announcement-bar .ticker-link:hover,
+body:not(.dark-mode) .announcement-bar .ticker-content a:hover{
+    color: #B91C1C !important;
+}
+
+/* إبقاء كلمة "إعلانات" نفسها بيضاء لأنها على خلفية ملونة */
+body:not(.dark-mode) .announcement-bar .ticker-label{
+    color: #FFFFFF !important;
+    background: linear-gradient(135deg, #1E40AF, #B91C1C) !important;
 }
 </style>
 
@@ -733,7 +1723,7 @@ a:focus-visible,button:focus-visible,.nav-tab:focus-visible{
 <div class="stats-grid reveal">
 <div class="stat-card">
 <span class="stat-number" data-target="300" style="color:var(--primary-blue);">
-         +0
+         +300
         </span>
 <span class="stat-label">
          عمل فني منتج
@@ -741,7 +1731,7 @@ a:focus-visible,button:focus-visible,.nav-tab:focus-visible{
 </div>
 <div class="stat-card">
 <span class="stat-number" data-target="100" style="color:var(--primary-red);">
-         +0
+         +100
         </span>
 <span class="stat-label">
          مؤسسة وأفراد
@@ -749,7 +1739,7 @@ a:focus-visible,button:focus-visible,.nav-tab:focus-visible{
 </div>
 <div class="stat-card">
 <span class="stat-number" data-target="20" style="color:var(--primary-yellow);">
-         +0
+         +25
         </span>
 <span class="stat-label">
          سنوات تميز
@@ -3323,6 +4313,300 @@ a:focus-visible,button:focus-visible,.nav-tab:focus-visible{
     document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
 })();
 </script>
+<script id="atheer-premium-motion">
+(function(){
+    'use strict';
+
+    // 1) Magnetic Hover على الأزرار الرئيسية
+    var magneticBtns = document.querySelectorAll(
+        '.home-hero-primary, .home-side-action, .intro-btn, .home-hero-secondary'
+    );
+    magneticBtns.forEach(function(btn){
+        btn.addEventListener('mousemove', function(e){
+            var rect = btn.getBoundingClientRect();
+            var x = e.clientX - rect.left - rect.width / 2;
+            var y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = 'translate(' + (x * 0.18) + 'px,' + (y * 0.18) + 'px)';
+        });
+        btn.addEventListener('mouseleave', function(){
+            btn.style.transform = 'translate(0,0)';
+        });
+    });
+
+    // 2) Tilt 3D خفيف على البطاقات
+    var tiltCards = document.querySelectorAll('.work-card, .featured-works-card');
+    tiltCards.forEach(function(card){
+        card.addEventListener('mousemove', function(e){
+            var rect = card.getBoundingClientRect();
+            var x = (e.clientX - rect.left) / rect.width;
+            var y = (e.clientY - rect.top) / rect.height;
+            var rotX = (y - 0.5) * 5;
+            var rotY = (x - 0.5) * -5;
+            card.style.transform =
+                'perspective(1000px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) translateY(-4px)';
+        });
+        card.addEventListener('mouseleave', function(){
+            card.style.transform = '';
+        });
+    });
+
+    // 3) شريط تقدم القراءة
+    var progressBar = document.createElement('div');
+    progressBar.id = 'atheer-read-progress';
+    document.body.appendChild(progressBar);
+    window.addEventListener('scroll', function(){
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var scrolled = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+        progressBar.style.width = scrolled + '%';
+    }, { passive: true });
+
+    // 4) زر "للأعلى" العائم
+    var backTop = document.createElement('button');
+    backTop.id = 'atheer-back-to-top';
+    backTop.setAttribute('aria-label', 'العودة للأعلى');
+    backTop.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4 4.5 11.5l2.1 2.1 3.9-3.9V20h3V9.7l3.9 3.9 2.1-2.1L12 4Z"/></svg>';
+    document.body.appendChild(backTop);
+    window.addEventListener('scroll', function(){
+        if(window.scrollY > 400){
+            backTop.classList.add('visible');
+        } else {
+            backTop.classList.remove('visible');
+        }
+    }, { passive: true });
+    backTop.addEventListener('click', function(){
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 5) عدّاد الأرقام المتحرك
+    function animateCounter(el){
+        var raw = el.textContent.trim();
+        var match = raw.match(/(\d+)/);
+        if(!match) return;
+        var target = parseInt(match[1], 10);
+        if(target <= 0) return;
+        var prefix = raw.substring(0, raw.indexOf(match[1]));
+        var suffix = raw.substring(raw.indexOf(match[1]) + match[1].length);
+        var duration = 1800;
+        var start = performance.now();
+        function step(now){
+            var progress = Math.min((now - start) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var current = Math.floor(target * eased);
+            el.textContent = prefix + current + suffix;
+            if(progress < 1) requestAnimationFrame(step);
+            else el.textContent = prefix + target + suffix;
+        }
+        requestAnimationFrame(step);
+    }
+    if('IntersectionObserver' in window){
+        var counterObs = new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if(entry.isIntersecting){
+                    animateCounter(entry.target);
+                    counterObs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        var counterSelectors = [
+            '.counter-number',
+            '.home-stat-number',
+            '[class*="stat-number"]',
+            '[data-counter]'
+        ];
+        document.querySelectorAll(counterSelectors.join(',')).forEach(function(el){
+            counterObs.observe(el);
+        });
+    }
+
+    // 6) Parallax خفيف جداً على الشعار
+    var logo = document.querySelector('.brand-logo');
+    if(logo){
+        window.addEventListener('scroll', function(){
+            var y = Math.min(window.scrollY, 300);
+            logo.style.transform = 'translateY(' + (y * 0.04) + 'px)';
+        }, { passive: true });
+    }
+
+    // 7) إيقاف التأثيرات على اللمس (موبايل) لتجنب المشاكل
+    if('ontouchstart' in window){
+        tiltCards.forEach(function(c){
+            c.style.transform = '';
+        });
+        magneticBtns.forEach(function(b){
+            b.style.transform = '';
+        });
+    }
+})();
+</script>
+<script id="atheer-refinement-motion">
+(function(){
+    'use strict';
+
+    // 1) رصد تشغيل الصوت لإضافة class is-playing على البطاقة
+    function bindAudioPlayState(){
+        document.querySelectorAll('audio').forEach(function(audio){
+            if(audio.dataset.atheerBound) return;
+            audio.dataset.atheerBound = '1';
+            var card = audio.closest('.work-card, .featured-works-card');
+            if(!card) return;
+            audio.addEventListener('play', function(){
+                // إيقاف class is-playing عن باقي البطاقات
+                document.querySelectorAll('.is-playing').forEach(function(el){
+                    if(el !== card) el.classList.remove('is-playing');
+                });
+                card.classList.add('is-playing');
+            });
+            audio.addEventListener('pause', function(){
+                card.classList.remove('is-playing');
+            });
+            audio.addEventListener('ended', function(){
+                card.classList.remove('is-playing');
+            });
+        });
+    }
+    bindAudioPlayState();
+    // إعادة الربط دورياً للعناصر الجديدة (مثل الأقسام التي تُحمّل عند التبديل)
+    var rebindObs = new MutationObserver(function(){
+        bindAudioPlayState();
+    });
+    rebindObs.observe(document.body, { childList: true, subtree: true });
+
+    // 2) تأثير "كتابة" تدريجي على عنوان الهيرو (مرة واحدة)
+    var heroTitle = document.querySelector('.home-hero-title');
+    if(heroTitle && !heroTitle.dataset.atheerTyped){
+        heroTitle.dataset.atheerTyped = '1';
+        var originalText = heroTitle.textContent;
+        if(originalText.length < 100){ // فقط للعناوين المعقولة
+            heroTitle.textContent = '';
+            heroTitle.style.minHeight = '1.4em';
+            var i = 0;
+            var typing = setInterval(function(){
+                heroTitle.textContent += originalText.charAt(i);
+                i++;
+                if(i >= originalText.length){
+                    clearInterval(typing);
+                    heroTitle.style.minHeight = '';
+                }
+            }, 35);
+        }
+    }
+
+    // 3) إضافة data-discount تلقائياً لكروت العروض إذا وُجد نص نسبي
+    document.querySelectorAll('[class*="offer"]').forEach(function(card){
+        var text = card.textContent || '';
+        var discountMatch = text.match(/(\d{1,3})\s*%/);
+        var freeMatch = text.match(/مجان[يا]ً?/);
+        if(discountMatch && !card.dataset.discount){
+            card.dataset.discount = discountMatch[1] + '%';
+            card.classList.add('has-ribbon');
+        } else if(freeMatch && !card.dataset.discount){
+            card.dataset.discount = 'مجاناً';
+            card.classList.add('has-ribbon');
+        }
+    });
+
+    // 4) Smooth Scroll للروابط الداخلية (#anchor)
+    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(function(link){
+        if(link.dataset.atheerSmooth) return;
+        link.dataset.atheerSmooth = '1';
+        link.addEventListener('click', function(e){
+            var target = link.getAttribute('href');
+            if(target.length < 2) return;
+            var el = document.querySelector(target);
+            if(el){
+                // لا نتدخل إذا كان للرابط onclick خاص (مثل openMostRequestedAudio)
+                if(link.hasAttribute('onclick')) return;
+                e.preventDefault();
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // 5) تأثير "موجة عند النقر" على الأزرار الرئيسية
+    function createRipple(e){
+        var btn = e.currentTarget;
+        var rect = btn.getBoundingClientRect();
+        var ripple = document.createElement('span');
+        var size = Math.max(rect.width, rect.height) * 2;
+        ripple.style.cssText =
+            'position:absolute;border-radius:50%;' +
+            'background:rgba(255,255,255,.5);pointer-events:none;' +
+            'width:' + size + 'px;height:' + size + 'px;' +
+            'left:' + (e.clientX - rect.left - size/2) + 'px;' +
+            'top:' + (e.clientY - rect.top - size/2) + 'px;' +
+            'transform:scale(0);opacity:1;' +
+            'transition:transform .6s ease-out,opacity .6s ease-out;';
+        btn.appendChild(ripple);
+        requestAnimationFrame(function(){
+            ripple.style.transform = 'scale(1)';
+            ripple.style.opacity = '0';
+        });
+        setTimeout(function(){
+            if(ripple.parentNode) ripple.parentNode.removeChild(ripple);
+        }, 650);
+    }
+    document.querySelectorAll(
+        '.home-hero-primary, .home-side-action, .intro-btn, button[type="submit"]'
+    ).forEach(function(btn){
+        if(btn.dataset.atheerRipple) return;
+        btn.dataset.atheerRipple = '1';
+        var computed = window.getComputedStyle(btn);
+        if(computed.position === 'static'){
+            btn.style.position = 'relative';
+        }
+        btn.style.overflow = 'hidden';
+        btn.addEventListener('click', createRipple);
+    });
+
+    // 6) كشف أن الجهاز يدعم hover (لتجنب hover ثابت على اللمس)
+    if(matchMedia('(hover: none)').matches){
+        document.body.classList.add('no-hover');
+    }
+
+    // 7) معالجة لطيفة لخطأ تحميل الصور
+    document.querySelectorAll('img').forEach(function(img){
+        img.addEventListener('error', function(){
+            img.style.opacity = '.3';
+            img.style.filter = 'grayscale(1)';
+        }, { once: true });
+    });
+})();
+</script>
+<script id="atheer-fix-real-stats">
+(function(){
+    'use strict';
+
+    function normalizeText(text){
+        return (text || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function setPreviousNumber(labelText, value){
+        var all = Array.from(document.body.querySelectorAll('*'));
+
+        all.forEach(function(el){
+            var text = normalizeText(el.textContent);
+
+            if(text === labelText){
+                var prev = el.previousElementSibling;
+
+                while(prev && !/\+?\d+/.test(normalizeText(prev.textContent))){
+                    prev = prev.previousElementSibling;
+                }
+
+                if(prev){
+                    prev.textContent = value;
+                }
+            }
+        });
+    }
+
+    setPreviousNumber('عمل فني منتج', '+300');
+    setPreviousNumber('مؤسسة وأفراد', '+100');
+    setPreviousNumber('سنوات تميز', '+25');
+    setPreviousNumber('سنوات خبرة وتميز', '+25');
+})();
+</script>
+
 </body>
 </html>
 
