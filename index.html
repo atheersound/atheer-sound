@@ -1965,6 +1965,87 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
 @media (max-width:560px){.partners-hero{padding:22px 14px 20px;border-radius:16px;}.partners-hero-head{align-items:flex-start;flex-direction:column;}.partners-slider{min-height:650px;}.partner-logo-grid{grid-template-columns:repeat(2, minmax(120px, 1fr));gap:12px;}.partner-logo-card{min-height:150px;padding:10px;}.partner-logo{height:120px;}}
 @media (prefers-reduced-motion:reduce){.partner-slide,.partner-logo-card,.partner-logo-card::before,.partner-logo,.partner-dot{transition:none;animation:none !important;}}
 </style>
+<!-- ════════════════════════════════════════════════════ -->
+<!-- ★ تعديلات أثير ساوند (شفافية الصوت + منع التحميل + تكبير الأيقونة) ★ -->
+<!-- ════════════════════════════════════════════════════ -->
+
+<!-- (1) تكبير أيقونة الموقع في شريط العناوين -->
+<link rel="icon" type="image/png" sizes="32x32"  href="as.png">
+<link rel="icon" type="image/png" sizes="48x48"  href="as.png">
+<link rel="icon" type="image/png" sizes="64x64"  href="as.png">
+<link rel="icon" type="image/png" sizes="96x96"  href="as.png">
+<link rel="icon" type="image/png" sizes="128x128" href="as.png">
+<link rel="icon" type="image/png" sizes="192x192" href="as.png">
+<link rel="icon" type="image/png" sizes="256x256" href="as.png">
+<link rel="icon" type="image/png" sizes="512x512" href="as.png">
+<link rel="icon" type="image/png" sizes="any" href="as.png">
+<link rel="shortcut icon" href="as.png">
+<link rel="apple-touch-icon" sizes="180x180" href="as.png">
+
+<!-- (2) جعل مشغّل الصوت شفافاً (إخفاء المستطيل وإبقاء الأيقونات فقط) -->
+<style>
+  audio,
+  audio:focus {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+  }
+  audio::-webkit-media-controls-enclosure,
+  audio::-webkit-media-controls-panel {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  audio::-webkit-media-controls-timeline,
+  audio::-webkit-media-controls-current-time-display,
+  audio::-webkit-media-controls-time-remaining-display,
+  audio::-webkit-media-controls-volume-slider-container,
+  audio::-webkit-media-controls-volume-slider,
+  audio::-webkit-media-controls-mute-button {
+    display: none !important;
+  }
+</style>
+
+<!-- (3) منع تحميل الملفات الصوتية من البرامج الخارجية مثل IDM -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('audio').forEach(function (a) {
+      a.setAttribute('controlsList', 'nodownload noplaybackrate noremoteplayback');
+      a.setAttribute('disableRemotePlayback', '');
+      a.disableRemotePlayback = true;
+      a.setAttribute('data-idm', 'false');
+      a.setAttribute('data-idm-ignore', 'true');
+      a.setAttribute('data-idm-ignore-player', 'true');
+      a.setAttribute('data-no-download', 'true');
+      a.setAttribute('oncontextmenu', 'return false;');
+      a.removeAttribute('download');
+      a.querySelectorAll('source').forEach(function (s) {
+        s.setAttribute('data-idm', 'false');
+        s.setAttribute('data-idm-ignore', 'true');
+        s.setAttribute('data-idm-ignore-player', 'true');
+        s.setAttribute('data-no-download', 'true');
+        s.removeAttribute('download');
+      });
+    });
+    document.addEventListener('contextmenu', function (e) {
+      var t = e.target;
+      var isAudioLink = t && t.tagName === 'A' && t.href &&
+                        /\.(mp3|wav|ogg|m4a|aac)(\?|$)/i.test(t.href);
+      if (t && (t.tagName === 'AUDIO' || isAudioLink)) e.preventDefault();
+    });
+    document.addEventListener('keydown', function (e) {
+      if ((e.ctrlKey || e.metaKey) &&
+          ['s','u'].indexOf(e.key.toLowerCase()) !== -1) e.preventDefault();
+    });
+  });
+</script>
+<!-- ════════════════════════════════════════════════════ -->
+<!-- ★ نهاية التعديلات ★ -->
+<!-- ════════════════════════════════════════════════════ -->
+
 </head>
 <body>
 <svg class="icon-svg-sprite" aria-hidden="true" focusable="false" width="0" height="0">
