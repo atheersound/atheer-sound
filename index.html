@@ -46,7 +46,7 @@
 }
 </script>
 <script src="poems-data.js?v=2.0" type="text/javascript"></script>
-<link rel="stylesheet" href="style.css?v=2.0" type="text/css"/>
+<link rel="stylesheet" href="style.css?v=2.2" type="text/css"/>
 <style id="atheer-enhance-layer">
 /* ============================================
    Atheer Sound — UI Enhancement Layer v1.0
@@ -161,6 +161,181 @@ p,.home-hero-lead,.home-side-text{ line-height:1.85; }
 audio{ width:100%; border-radius:var(--radius-sm); outline:none; margin-top:12px; }
 audio::-webkit-media-controls-panel{
     background:var(--bg-soft); border-radius:var(--radius-sm);
+}
+.corporate-media-shell{
+    display:grid;
+    gap:22px;
+}
+.corporate-choice-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;
+}
+.corporate-choice-card{
+    position:relative;
+    min-height:170px;
+    padding:22px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    background:
+        linear-gradient(135deg,rgba(30,64,175,.06),rgba(217,119,6,.05)),
+        var(--bg-white);
+    color:var(--text-dark);
+    text-align:right;
+    cursor:pointer;
+    overflow:hidden;
+    box-shadow:var(--shadow-sm);
+    transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition),background var(--transition);
+}
+.corporate-choice-card::before{
+    content:'';
+    position:absolute;
+    inset:auto -20% -45% -20%;
+    height:90px;
+    background:radial-gradient(circle,rgba(30,64,175,.14),transparent 65%);
+    opacity:.8;
+    transition:transform var(--transition),opacity var(--transition);
+}
+.corporate-choice-card:hover,
+.corporate-choice-card.is-active{
+    transform:translateY(-4px);
+    border-color:rgba(30,64,175,.28);
+    box-shadow:var(--shadow-lg);
+}
+.corporate-choice-card:hover::before,
+.corporate-choice-card.is-active::before{
+    transform:translateY(-12px) scale(1.08);
+    opacity:1;
+}
+.corporate-choice-icon{
+    width:62px;
+    height:62px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    margin-bottom:14px;
+    color:var(--primary-blue);
+    background:var(--bg-soft);
+    border:1px solid var(--border);
+    position:relative;
+    z-index:1;
+}
+.corporate-choice-icon::before,
+.corporate-choice-icon::after{
+    content:'';
+    position:absolute;
+    inset:-7px;
+    border:1px solid currentColor;
+    border-radius:50%;
+    opacity:.18;
+    animation:corporateIconPulse 2.4s ease-in-out infinite;
+}
+.corporate-choice-icon::after{
+    inset:-13px;
+    animation-delay:.45s;
+}
+.corporate-choice-icon i{
+    font-size:28px;
+    animation:corporateIconFloat 2.8s ease-in-out infinite;
+}
+.corporate-choice-card[data-corporate-open="video"] .corporate-choice-icon{
+    color:var(--primary-red);
+}
+.corporate-choice-title{
+    display:block;
+    font-size:22px;
+    font-weight:900;
+    margin-bottom:8px;
+    position:relative;
+    z-index:1;
+}
+.corporate-choice-copy,
+.corporate-choice-action{
+    display:block;
+    color:var(--text-muted);
+    font-size:14px;
+    line-height:1.7;
+    position:relative;
+    z-index:1;
+}
+.corporate-choice-action{
+    margin-top:14px;
+    font-weight:900;
+    color:var(--primary-blue);
+}
+.corporate-choice-card[data-corporate-open="video"] .corporate-choice-action{
+    color:var(--primary-red);
+}
+.corporate-panel{
+    background:var(--bg-white);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    box-shadow:var(--shadow-sm);
+    padding:22px;
+    overflow:hidden;
+    animation:corporatePanelIn .32s ease both;
+}
+.corporate-panel[hidden]{ display:none !important; }
+.corporate-panel-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+}
+.corporate-panel-head i{
+    width:40px;
+    height:40px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:var(--bg-soft);
+}
+.corporate-panel-head h3{
+    margin:0;
+    color:var(--text-dark);
+    font-size:20px;
+    font-weight:900;
+}
+.corporate-audio-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px;
+}
+.corporate-video-frame{
+    width:100%;
+    aspect-ratio:16/9;
+    border:0;
+    border-radius:14px;
+    margin-top:4px;
+    box-shadow:var(--shadow-sm);
+}
+.corporate-video-work.targeted-audio-card{
+    border-color:var(--primary-yellow) !important;
+    box-shadow:0 0 0 0 rgba(217,119,6,.32) !important;
+    animation:target-audio-pulse 1.2s ease-out 4;
+}
+@keyframes corporateIconPulse{
+    0%,100%{ transform:scale(.86); opacity:.12; }
+    50%{ transform:scale(1); opacity:.32; }
+}
+@keyframes corporateIconFloat{
+    0%,100%{ transform:translateY(0) rotate(0); }
+    50%{ transform:translateY(-4px) rotate(-4deg); }
+}
+@keyframes corporatePanelIn{
+    from{ opacity:0; transform:translateY(12px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+@media (max-width:900px){
+    .corporate-choice-grid{ grid-template-columns:1fr; }
+}
+@media (max-width:560px){
+    .corporate-panel,
+    .corporate-choice-card{ padding:16px; }
+    .corporate-audio-grid{ grid-template-columns:1fr; }
+    .corporate-choice-title{ font-size:20px; }
 }
 .announcement-bar{
     background:linear-gradient(90deg,rgba(185,28,28,.04),rgba(30,64,175,.04));
@@ -2013,7 +2188,9 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('audio').forEach(function (a) {
-      a.setAttribute('controlsList', 'nodownload noplaybackrate noremoteplayback');
+      a.controls = false;
+      a.removeAttribute('controls');
+      a.setAttribute('controlslist', 'nodownload noplaybackrate noremoteplayback');
       a.setAttribute('disableRemotePlayback', '');
       a.disableRemotePlayback = true;
       a.setAttribute('data-idm', 'false');
@@ -2021,12 +2198,14 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
       a.setAttribute('data-idm-ignore-player', 'true');
       a.setAttribute('data-no-download', 'true');
       a.setAttribute('oncontextmenu', 'return false;');
+      a.setAttribute('draggable', 'false');
       a.removeAttribute('download');
       a.querySelectorAll('source').forEach(function (s) {
         s.setAttribute('data-idm', 'false');
         s.setAttribute('data-idm-ignore', 'true');
         s.setAttribute('data-idm-ignore-player', 'true');
         s.setAttribute('data-no-download', 'true');
+        s.setAttribute('draggable', 'false');
         s.removeAttribute('download');
       });
     });
@@ -2036,6 +2215,18 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
                         /\.(mp3|wav|ogg|m4a|aac)(\?|$)/i.test(t.href);
       if (t && (t.tagName === 'AUDIO' || isAudioLink)) e.preventDefault();
     });
+    document.addEventListener('dragstart', function (e) {
+      var t = e.target;
+      var isAudioLink = t && t.tagName === 'A' && t.href &&
+                        /\.(mp3|wav|ogg|m4a|aac)(\?|$)/i.test(t.href);
+      if (t && (t.tagName === 'AUDIO' || t.tagName === 'SOURCE' || isAudioLink)) e.preventDefault();
+    });
+    document.addEventListener('click', function (e) {
+      var t = e.target && e.target.closest ? e.target.closest('a') : null;
+      if (t && t.href && /\.(mp3|wav|ogg|m4a|aac)(\?|$)/i.test(t.href)) {
+        e.preventDefault();
+      }
+    }, true);
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) &&
           ['s','u'].indexOf(e.key.toLowerCase()) !== -1) e.preventDefault();
@@ -2267,6 +2458,7 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
         <div class="ticker-content">
             <span class="ticker-item">مرحبا بكم في الموقع الرسمي لمؤسسة أثير ساوند للخدمات الإعلامية</span>
             <a class="ticker-item ticker-link" href="#most-requested-zaffa-shaabia-arous" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffa-shaabia-arous');">أضفنا زفة شعبية للعريس والعروس بالأسماء</a>
+            <a class="ticker-item ticker-link" href="#corporate-morani-honey-video-card" onclick="return openCorporateMediaPanel('video', 'corporate-morani-honey-video-card');">أضفنا إعلاناً تلفزيونياً ترويجياً لمؤسسة المراني للعسل البلدي - اضغط لمشاهدة الإعلان المرئي</a>
             <a class="ticker-item ticker-link" href="#" onclick="switchTab('offers-section', null); return false;">عرض حصري: باقات الزفات والعروض الخاصة لفترة محدودة!</a>
             <a class="ticker-item ticker-link" href="#" onclick="switchTab('podcast-works', null); return false;">جديدنا: خدمات إنتاج وتسجيل وطباعة البودكاست باحترافية عالية</a>
         </div>
@@ -2280,7 +2472,7 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
         <button class="nav-tab" id="services-tab" onclick="switchTab('services-section', this)">
             خدماتنا
         </button>
-        <button class="nav-tab nav-dropdown-toggle" id="gallery-tab" type="button" data-section-group="zaffat-works,shilat-works,events-works,schools-works,voiceover-works,poetry-recitation-works,poems-composing-works,music-works,nomusic-works,video-works,podcast-works,editing-works" onclick="return toggleWorksGalleryMenu(this);" aria-haspopup="true" aria-controls="worksGalleryDropdown" aria-expanded="false">
+        <button class="nav-tab nav-dropdown-toggle" id="gallery-tab" type="button" data-section-group="zaffat-works,shilat-works,events-works,schools-works,voiceover-works,corporate-identities-works,poetry-recitation-works,poems-composing-works,music-works,nomusic-works,video-works,podcast-works,editing-works" onclick="return toggleWorksGalleryMenu(this);" aria-haspopup="true" aria-controls="worksGalleryDropdown" aria-expanded="false">
             معرض الأعمال
             <i class="fas fa-chevron-down nav-dropdown-caret"></i>
         </button>
@@ -2478,6 +2670,7 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
 <div class="home-side-block">
 <h3 class="home-side-title"><i class="fas fa-fire"></i>الأكثر طلباً</h3>
 <ul class="home-side-mini-list">
+<li><a href="#most-requested-aqbalat-lobna-saleh" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-aqbalat-lobna-saleh');"><i class="fas fa-music"></i>أقبلت زين العرايس للعروسة لبنى والعريس صالح</a></li>
 <li><a href="#most-requested-zaffa-shaabia-arous" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffa-shaabia-arous');"><i class="fas fa-music"></i>زفة شعبية للعريس والعروس بالأسماء</a></li>
 <li><a href="#most-requested-aghniyat-ers-amr-saba" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-aghniyat-ers-amr-saba');"><i class="fas fa-music"></i>أغنية عرس لعمرو و سبأ</a></li>
 <li><a href="#most-requested-zaffat-entrance-40-minutes" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffat-entrance-40-minutes');"><i class="fas fa-music"></i>زفة دخول العروسة 40 دقيقة</a></li>
@@ -2494,6 +2687,7 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
 <h3 class="home-side-title"><i class="fas fa-clock"></i>آخر الإضافات</h3>
 
 <ul class="home-side-mini-list">
+<li><a href="#most-requested-aqbalat-lobna-saleh" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-aqbalat-lobna-saleh');"><i class="fas fa-music"></i>أقبلت زين العرايس بصوت فؤاد عبد الواحد</a></li>
 <li><a href="#most-requested-hajat-mawajeana-ali-almorani" onclick="return openMostRequestedAudio('music-works', 'most-requested-hajat-mawajeana-ali-almorani');"><i class="fas fa-music"></i>هاجت مواجعنا للمنشد علي المراني</a></li>
 <li><a href="#most-requested-rawan-lojain-kku-graduation" onclick="return openMostRequestedAudio('events-works', 'most-requested-rawan-lojain-kku-graduation');"><i class="fas fa-music"></i>اغنية تخرج روان ولجين، جامعة الملك خالد</a></li>
 <li><a href="#most-requested-zaffa-shaabia-arous" onclick="return openMostRequestedAudio('zaffat-works', 'most-requested-zaffa-shaabia-arous');"><i class="fas fa-music"></i>زفة شعبية للعريس والعروس بالأسماء</a></li>
@@ -3202,6 +3396,17 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
 </div>
 </div>
 </section><section class="content-section" id="zaffat-works"><h2 class="section-title">زفات بالأسماء</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+<div class="work-card audio-item audio-zaffa" id="most-requested-aqbalat-lobna-saleh">
+    <div class="testibg">
+        <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;"></i>
+        <h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">
+            أقبلت زين العرايس بصوت فؤاد عبد الواحد، للعروسة لبنى والعريس صالح
+        </h3>
+        <audio controls="" controlslist="nodownload" oncontextmenu="return false;" preload="none" style="width:100%; margin-top:10px;">
+            <source data-protected-src="https://www.dropbox.com/scl/fi/bi0jd1scftrmvfptpez99/agbalat_lobna.mp3.mp3?rlkey=ntrhubx1wq2ohd7retxdmlq9o&amp;st=vr4y4n1u&amp;raw=1" type="audio/mpeg"/>
+        </audio>
+    </div>
+</div>
 <div class="work-card audio-item audio-zaffa" id="most-requested-zaffa-shaabia-arous">
     <div class="testibg">
         <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;"></i>
@@ -3820,7 +4025,26 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
 <source data-protected-src="https://www.dropbox.com/scl/fi/ccm7t581iy8m7ae6byxhm/zaffahindi-Cover.mp3?rlkey=x7z7wzzsi8q4ojn740rsn0bnq&amp;st=w8u9tkur&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
-</div></div></section><section class="content-section" id="corporate-identities-works"><h2 class="section-title">إعلانات لشركات ومؤسسات، وتترات برامج</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;"><div class="work-card audio-item audio-voiceover">
+</div></div></section><section class="content-section" id="corporate-identities-works">
+<h2 class="section-title">إعلانات لشركات ومؤسسات، وتترات برامج</h2>
+<div class="corporate-media-shell">
+<div class="corporate-choice-grid" role="tablist" aria-label="أقسام هويات المؤسسات">
+<button class="corporate-choice-card is-active" type="button" data-corporate-open="audio" aria-controls="corporateAudioPanel" aria-selected="true">
+<span class="corporate-choice-icon" aria-hidden="true"><i class="fas fa-headphones"></i></span>
+<span class="corporate-choice-title">الصوتيات</span>
+<span class="corporate-choice-copy">هويات صوتية، تترات، ورسائل تعريفية للمؤسسات والبرامج.</span>
+<span class="corporate-choice-action">عرض الأعمال الصوتية</span>
+</button>
+<button class="corporate-choice-card" type="button" data-corporate-open="video" aria-controls="corporateVideoPanel" aria-selected="false">
+<span class="corporate-choice-icon" aria-hidden="true"><i class="fas fa-film"></i></span>
+<span class="corporate-choice-title">المرئيات</span>
+<span class="corporate-choice-copy">إعلانات مرئية ومونتاج فيديو يعرض المنتج بصورة احترافية.</span>
+<span class="corporate-choice-action">عرض الإعلان المرئي</span>
+</button>
+</div>
+<div class="corporate-panel is-active" id="corporateAudioPanel" data-corporate-panel="audio" role="tabpanel">
+<div class="corporate-panel-head"><i class="fas fa-music" style="color:var(--primary-blue);"></i><h3>الأعمال الصوتية</h3></div>
+<div class="corporate-audio-grid"><div class="work-card audio-item audio-voiceover">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -3892,7 +4116,20 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
 <source data-protected-src="https://www.dropbox.com/scl/fi/ts7opck6nn0u6ifya1vvn/birr.mp3?rlkey=juyimeu3mwdyppm84sh4se6po&amp;st=hagn3ujg&amp;raw=1" type="audio/mpeg"/>
 </audio>
 </div>
-</div></div></section><section class="content-section" id="voiceover-works"><h2 class="section-title">التعليق الصوتي</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;"><div class="work-card audio-item audio-voiceover">
+</div></div>
+</div>
+<div class="corporate-panel" id="corporateVideoPanel" data-corporate-panel="video" role="tabpanel" hidden="">
+<div class="corporate-panel-head"><i class="fas fa-video" style="color:var(--primary-red);"></i><h3>الأعمال المرئية</h3></div>
+<div class="work-card corporate-video-work" id="corporate-morani-honey-video-card">
+<div class="testibg">
+<i class="fas fa-video" style="font-size:30px; color:var(--primary-red); margin-bottom:15px; display:block;"></i>
+<h3 style="margin-bottom: 5px; font-size:18px; color: var(--text-dark);">إعلان مؤسسة المراني للعسل البلدي</h3>
+<iframe class="corporate-video-frame" width="560" height="315" src="https://www.youtube.com/embed/Y-rnvf1mvCE?si=KTr7G_hrCcNo_nYm" title="إعلان مؤسسة المراني للعسل البلدي" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="" loading="lazy"></iframe>
+</div>
+</div>
+</div>
+</div>
+</section><section class="content-section" id="voiceover-works"><h2 class="section-title">التعليق الصوتي</h2><div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;"><div class="work-card audio-item audio-voiceover">
 <div class="testibg">
 <i class="fas fa-music" style="font-size:30px; color:var(--primary-blue); margin-bottom:15px; display:block;">
 </i>
@@ -5047,17 +5284,155 @@ body.dark-mode .partner-logo-card{background:rgba(15,23,42,.34);}
     </button>
     
     <div id="floatingAudioControls" class="floating-audio-controls">
-        <button type="button" id="floatingAudioToggle" class="floating-audio-mini-btn" title="إيقاف مؤقت / متابعة">
-            <svg class="ui-icon" data-floating-audio-toggle-icon aria-hidden="true" focusable="false"><use href="#icon-pause"></use></svg>
+        <button type="button" id="floatingAudioPlay" class="floating-audio-mini-btn floating-audio-command" title="تشغيل" aria-label="تشغيل">
+            <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg>
         </button>
-        <button type="button" id="floatingAudioClose" class="floating-audio-mini-btn close" title="إغلاق المشغل">
+        <button type="button" id="floatingAudioPause" class="floating-audio-mini-btn floating-audio-command" title="إيقاف مؤقت" aria-label="إيقاف مؤقت">
+            <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-pause"></use></svg>
+        </button>
+        <button type="button" id="floatingAudioClose" class="floating-audio-mini-btn floating-audio-command close" title="إنهاء التشغيل" aria-label="إنهاء التشغيل">
             <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-xmark"></use></svg>
         </button>
     </div>
 </div><button id="backToTop" onclick="document.querySelector('.youtube-canvas').scrollTo({top:0, behavior:'smooth'})" title="العودة للأعلى">
     <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-up"></use></svg>
 </button>
-<script src="app.js?v=2.0" type="text/javascript"></script>
+<script id="atheer-corporate-media-preload">
+(function(){
+    if (window.__atheerCorporateMediaPreloadReady) return;
+    window.__atheerCorporateMediaPreloadReady = true;
+
+    function activateCorporateSection(){
+        if (typeof window.switchTab === 'function') {
+            window.switchTab('corporate-identities-works', null);
+            return;
+        }
+        document.querySelectorAll('.content-section').forEach(function(section){
+            section.classList.remove('active-section');
+        });
+        var section = document.getElementById('corporate-identities-works');
+        if (section) section.classList.add('active-section');
+    }
+
+    function setCorporatePanel(panelName, shouldScroll){
+        var section = document.getElementById('corporate-identities-works');
+        if (!section) return;
+        var panel = panelName === 'video' ? 'video' : 'audio';
+        section.querySelectorAll('[data-corporate-open]').forEach(function(btn){
+            var active = btn.getAttribute('data-corporate-open') === panel;
+            btn.classList.toggle('is-active', active);
+            btn.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        section.querySelectorAll('[data-corporate-panel]').forEach(function(item){
+            var active = item.getAttribute('data-corporate-panel') === panel;
+            item.classList.toggle('is-active', active);
+            if (active) item.removeAttribute('hidden');
+            else item.setAttribute('hidden', '');
+        });
+        if (shouldScroll) {
+            var activePanel = section.querySelector('[data-corporate-panel="' + panel + '"]');
+            if (activePanel) activePanel.scrollIntoView({ behavior:'smooth', block:'start', inline:'nearest' });
+        }
+    }
+
+    window.openCorporateMediaPanel = window.openCorporateMediaPanel || function(panelName, targetId){
+        activateCorporateSection();
+        setTimeout(function(){
+            var panel = panelName === 'video' ? 'video' : 'audio';
+            setCorporatePanel(panel, false);
+            var target = targetId ? document.getElementById(targetId) : document.querySelector('[data-corporate-panel="' + panel + '"]');
+            if (!target) return;
+            target.scrollIntoView({ behavior:'smooth', block:'center', inline:'nearest' });
+            target.classList.add('targeted-audio-card');
+            setTimeout(function(){ target.classList.remove('targeted-audio-card'); }, 6500);
+        }, 180);
+        return false;
+    };
+
+    document.addEventListener('click', function(e){
+        var btn = e.target && e.target.closest ? e.target.closest('[data-corporate-open]') : null;
+        if (!btn) return;
+        e.preventDefault();
+        setCorporatePanel(btn.getAttribute('data-corporate-open'), true);
+    });
+    window.__atheerCorporateMediaPanelsBound = true;
+})();
+</script>
+<script src="app.js?v=2.2" type="text/javascript"></script>
+<script id="atheer-corporate-media-panels">
+(function(){
+    function showCorporateSection(){
+        if (typeof window.switchTab === 'function') {
+            window.switchTab('corporate-identities-works', null);
+            return;
+        }
+        document.querySelectorAll('.content-section').forEach(function(section){
+            section.classList.remove('active-section');
+        });
+        var corporateSection = document.getElementById('corporate-identities-works');
+        if (corporateSection) corporateSection.classList.add('active-section');
+    }
+
+    function setCorporatePanel(panelName, shouldScroll){
+        var section = document.getElementById('corporate-identities-works');
+        if (!section) return;
+        var normalizedPanel = panelName === 'video' ? 'video' : 'audio';
+
+        section.querySelectorAll('[data-corporate-open]').forEach(function(btn){
+            var isActive = btn.getAttribute('data-corporate-open') === normalizedPanel;
+            btn.classList.toggle('is-active', isActive);
+            btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        section.querySelectorAll('[data-corporate-panel]').forEach(function(panel){
+            var isActive = panel.getAttribute('data-corporate-panel') === normalizedPanel;
+            panel.classList.toggle('is-active', isActive);
+            if (isActive) {
+                panel.removeAttribute('hidden');
+            } else {
+                panel.setAttribute('hidden', '');
+            }
+        });
+
+        if (shouldScroll) {
+            var activePanel = section.querySelector('[data-corporate-panel="' + normalizedPanel + '"]');
+            if (activePanel) activePanel.scrollIntoView({ behavior:'smooth', block:'start', inline:'nearest' });
+        }
+    }
+
+    window.openCorporateMediaPanel = window.openCorporateMediaPanel || function(panelName, targetId){
+        showCorporateSection();
+        setTimeout(function(){
+            var normalizedPanel = panelName === 'video' ? 'video' : 'audio';
+            setCorporatePanel(normalizedPanel, false);
+            var target = targetId ? document.getElementById(targetId) : document.querySelector('[data-corporate-panel="' + normalizedPanel + '"]');
+            if (!target) return;
+            target.scrollIntoView({ behavior:'smooth', block:'center', inline:'nearest' });
+            target.classList.add('targeted-audio-card');
+            setTimeout(function(){ target.classList.remove('targeted-audio-card'); }, 6500);
+        }, 180);
+        return false;
+    };
+
+    function init(){
+        if (window.__atheerCorporateMediaPanelsBound) return;
+        window.__atheerCorporateMediaPanelsBound = true;
+        document.addEventListener('click', function(e){
+            var btn = e.target && e.target.closest ? e.target.closest('[data-corporate-open]') : null;
+            if (!btn) return;
+            e.preventDefault();
+            setCorporatePanel(btn.getAttribute('data-corporate-open'), true);
+        });
+        setCorporatePanel('audio', false);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
 <script id="atheer-reveal-observer">
 (function(){
     if(!('IntersectionObserver' in window)) return;
